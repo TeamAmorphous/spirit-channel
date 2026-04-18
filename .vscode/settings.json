@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        "**/.godot": true,
+        "**/*.tmp": true,
+        "**/*.uid": true,
+        "**/*.import": true,
+    },
+    "editor.detectIndentation": true,
+    "editor.insertSpaces": false,
+    "todo-tree.filtering.excludeGlobs": [
+        "**/addons/**",
+    ]
+}
