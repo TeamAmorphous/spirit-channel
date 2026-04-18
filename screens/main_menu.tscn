@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cxssbyg13n1lp"]
+
+[ext_resource type="Script" uid="uid://b4gowca5ktt81" path="res://screens/main_menu.gd" id="1_p3cyw"]
+[ext_resource type="Texture2D" uid="uid://kfhf0qr8mvip" path="res://screens/temp_menu_bg.png" id="2_t3bh0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_csm0v"]
+font_size = 64
+font_color = Color(0.21568628, 0.9607843, 0.4, 1)
+outline_size = 20
+outline_color = Color(0, 0.43529412, 0, 1)
+
+[node name="MainMenu" type="Control" unique_id=1150759093]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3cyw")
+game_scene_path = "uid://colhxe528q6lr"
+options_scene_path = "uid://rhs6x8t1gyyf"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=425925631]
+modulate = Color(0.42365062, 0.42365065, 0.42365062, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_t3bh0")
+expand_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1399414143]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1070119008]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1209570070]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Spirit Channel"
+label_settings = SubResource("LabelSettings_csm0v")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=56621482]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer" unique_id=1234854253]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "START"
+flat = true
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer" unique_id=290477046]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "OPTIONS"
+flat = true
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer" unique_id=1388437920]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "QUIT"
+flat = true
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

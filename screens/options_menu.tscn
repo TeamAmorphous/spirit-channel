@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://rhs6x8t1gyyf"]
+
+[ext_resource type="Script" uid="uid://dx7yq2ul3rl8p" path="res://screens/options_menu.gd" id="1_tsaat"]
+[ext_resource type="Texture2D" uid="uid://kfhf0qr8mvip" path="res://screens/temp_menu_bg.png" id="3_0jdrk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_85sc2"]
+font_size = 64
+font_color = Color(0.34282136, 0.90070415, 0.929171, 1)
+outline_size = 20
+outline_color = Color(0.17642763, 0.38680488, 0.45416057, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6t2dq"]
+font_size = 30
+font_color = Color(0.827451, 0.5137255, 0.13333334, 1)
+outline_size = 10
+outline_color = Color(0.60784316, 0.29411766, 0.16470589, 1)
+
+[node name="OptionsMenu" type="Control" unique_id=661088997]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tsaat")
+menu_scene_path = "uid://cxssbyg13n1lp"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=472264530]
+modulate = Color(0.42365062, 0.42365065, 0.42365062, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0jdrk")
+expand_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1872382636]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=567157517]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="OptionsLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1026329563]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Options"
+label_settings = SubResource("LabelSettings_85sc2")
+horizontal_alignment = 1
+
+[node name="Todo Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=261856998]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Todo"
+label_settings = SubResource("LabelSettings_6t2dq")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1531942500]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1928132593]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="BackButton" type="Button" parent="MarginContainer" unique_id=330761679]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "BACK"
+flat = true
+
+[connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://1k24q610gun0"]
+
+[ext_resource type="Script" uid="uid://x6c2xq2j40ty" path="res://entities/player/player.gd" id="1_symyc"]
+[ext_resource type="Texture2D" uid="uid://d16l4jig70dd" path="res://entities/player/idle_arm.png" id="2_sglur"]
+[ext_resource type="Texture2D" uid="uid://dawej005n5hxp" path="res://entities/player/idle_body.png" id="3_bls4j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_symyc"]
+radius = 68.0
+height = 370.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bls4j"]
+light_mode = 1
+
+[node name="Player" type="CharacterBody2D" unique_id=265899906]
+script = ExtResource("1_symyc")
+
+[node name="Sprite" type="Node2D" parent="." unique_id=655486889]
+
+[node name="Arm" type="Node2D" parent="Sprite" unique_id=1789138659]
+position = Vector2(29, -258)
+
+[node name="ArmSprite" type="Sprite2D" parent="Sprite/Arm" unique_id=4805627]
+texture = ExtResource("2_sglur")
+offset = Vector2(99, -6)
+flip_h = true
+
+[node name="Held" type="Marker2D" parent="Sprite/Arm" unique_id=1860061621]
+position = Vector2(135, -7)
+
+[node name="BodySprite" type="Sprite2D" parent="Sprite" unique_id=1260097184]
+texture = ExtResource("3_bls4j")
+offset = Vector2(-21, -195)
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2033865394]
+position = Vector2(0, -185)
+shape = SubResource("CapsuleShape2D_symyc")
+
+[node name="Reticle" type="Marker2D" parent="." unique_id=845230187]
+z_index = 100
+
+[node name="ColorRect" type="ColorRect" parent="Reticle" unique_id=1153447337]
+material = SubResource("CanvasItemMaterial_bls4j")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.38397244
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0.79672086, 0, 0.15141523, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Reticle" unique_id=1360189427]
+material = SubResource("CanvasItemMaterial_bls4j")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.38397244
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(0.9278403, 0.0003124167, 0.18518707, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=664655215]
+position = Vector2(0, -185)
+zoom = Vector2(0.5, 0.5)
+process_callback = 0
+limit_enabled = false
+position_smoothing_enabled = true
+editor_draw_drag_margin = true

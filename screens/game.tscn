@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://colhxe528q6lr"]
+
+[ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ciuf"]
+size = Vector2(958, 28)
+
+[sub_resource type="Gradient" id="Gradient_6nlyh"]
+colors = PackedColorArray(0.59424263, 0.2543897, 0.36347732, 1, 1, 0.7607843, 0.7137255, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rypym"]
+gradient = SubResource("Gradient_6nlyh")
+fill_from = Vector2(1, 1)
+
+[node name="Game" type="Node2D" unique_id=965120324]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1741707135]
+position = Vector2(0, 178.99998)
+scale = Vector2(10, 10)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1342081597]
+shape = SubResource("RectangleShape2D_3ciuf")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=322445675]
+scale = Vector2(14.96875, 0.4375)
+texture = SubResource("GradientTexture2D_rypym")
+
+[node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
