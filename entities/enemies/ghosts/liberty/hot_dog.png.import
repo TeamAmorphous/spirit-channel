@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b07fv6sm81pmf"
-path="res://.godot/imported/ghost_m.png-a4671bac2f62828dd3bd1947bf5a6cfd.ctex"
+uid="uid://c46vfnitg3jq2"
+path="res://.godot/imported/hot_dog.png-5d887a99ae7f786ea5a1d39e2e2aa201.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/ghost_m.png"
-dest_files=["res://.godot/imported/ghost_m.png-a4671bac2f62828dd3bd1947bf5a6cfd.ctex"]
+source_file="res://entities/enemies/ghosts/liberty/hot_dog.png"
+dest_files=["res://.godot/imported/hot_dog.png-5d887a99ae7f786ea5a1d39e2e2aa201.ctex"]
 
 [params]
 

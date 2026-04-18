@@ -28,7 +28,14 @@ signal health_depleted
 ## See: [method _set_health], [member max_health]
 @onready var health: int = max_health:
 	set = _set_health
-		
+
+
+var ratio: float:
+	get:
+		return float(health) / float(max_health)
+	set(r):
+		health = int(roundf(max_health * r))
+
 
 func _set_max_health(value: int) -> void:
 	value = maxi(value, 1)

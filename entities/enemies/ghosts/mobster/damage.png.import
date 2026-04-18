@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6yw1vqqmc2qf"
-path="res://.godot/imported/ghost_rat.png-6d4cf44a28b2e9b76b728e33e4df1f44.ctex"
+uid="uid://bq22kdln3vvfm"
+path="res://.godot/imported/damage.png-a2a58109adbe399bf4dbc6eae08cabcf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/ghost_rat.png"
-dest_files=["res://.godot/imported/ghost_rat.png-6d4cf44a28b2e9b76b728e33e4df1f44.ctex"]
+source_file="res://entities/enemies/ghosts/mobster/damage.png"
+dest_files=["res://.godot/imported/damage.png-a2a58109adbe399bf4dbc6eae08cabcf.ctex"]
 
 [params]
 

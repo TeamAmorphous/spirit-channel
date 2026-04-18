@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp4jaysp2lfq0"
-path="res://.godot/imported/ghost_liberty_sunglasses.png-62ae9f7b7d9db8fcc03d86cb6087a3f2.ctex"
+uid="uid://hpbgnrgwpt5l"
+path="res://.godot/imported/no_shades.png-e5207ca0ec873e351a304fb1fa10395e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/ghost_liberty_sunglasses.png"
-dest_files=["res://.godot/imported/ghost_liberty_sunglasses.png-62ae9f7b7d9db8fcc03d86cb6087a3f2.ctex"]
+source_file="res://entities/enemies/ghosts/liberty/no_shades.png"
+dest_files=["res://.godot/imported/no_shades.png-e5207ca0ec873e351a304fb1fa10395e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgrdfs8sx4qhs"
-path="res://.godot/imported/ghost_liberty.png-7019616f7fbb0f0c4f2f7a73f9e33ad1.ctex"
+uid="uid://bkwfnv61qsrqf"
+path="res://.godot/imported/idle.png-05bd5b627c4f0e1d5f3b8e8782e2e4be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/ghost_liberty.png"
-dest_files=["res://.godot/imported/ghost_liberty.png-7019616f7fbb0f0c4f2f7a73f9e33ad1.ctex"]
+source_file="res://entities/enemies/ghosts/mobster/idle.png"
+dest_files=["res://.godot/imported/idle.png-05bd5b627c4f0e1d5f3b8e8782e2e4be.ctex"]
 
 [params]
 

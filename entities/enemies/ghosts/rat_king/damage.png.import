@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn85mko6sft1m"
-path="res://.godot/imported/ghost_pizza.png-bb731a163247071a8a6147f0fe8aa9db.ctex"
+uid="uid://bb1gppuiexxvf"
+path="res://.godot/imported/damage.png-201e88688f83ff86ac333e2bd4f03cfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/ghost_pizza.png"
-dest_files=["res://.godot/imported/ghost_pizza.png-bb731a163247071a8a6147f0fe8aa9db.ctex"]
+source_file="res://entities/enemies/ghosts/rat_king/damage.png"
+dest_files=["res://.godot/imported/damage.png-201e88688f83ff86ac333e2bd4f03cfa.ctex"]
 
 [params]
 

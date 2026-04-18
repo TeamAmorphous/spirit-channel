@@ -1,5 +1,51 @@
 [gd_scene format=3 uid="uid://bko0chis672c0"]
 
 [ext_resource type="PackedScene" uid="uid://b782r3idko5t7" path="res://entities/enemies/enemy.tscn" id="1_e0x04"]
+[ext_resource type="Script" uid="uid://cxttmclbsnr74" path="res://entities/components/frequency_component.gd" id="2_1oodk"]
+[ext_resource type="Script" uid="uid://nopufwqctnnk" path="res://entities/enemies/ghosts/ghost.gd" id="2_obe3h"]
+[ext_resource type="Script" uid="uid://o6jsr3qf3je1" path="res://entities/enemies/ghosts/idle.gd" id="4_mm1xh"]
+[ext_resource type="Script" uid="uid://b70ilquk5chwn" path="res://entities/enemies/ghosts/states/chase.gd" id="5_mm1xh"]
+[ext_resource type="Script" uid="uid://3d6kysp3h16a" path="res://entities/enemies/ghosts/states/damaged.gd" id="6_ydex4"]
 
-[node name="Ghost" unique_id=1958681849 instance=ExtResource("1_e0x04")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_obe3h"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"damage",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Ghost" unique_id=1958681849 groups=["ghosts"] instance=ExtResource("1_e0x04")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_obe3h")
+
+[node name="FrequencyComponent" type="Node" parent="." index="1" unique_id=1174579891]
+script = ExtResource("2_1oodk")
+metadata/_custom_type_script = "uid://cxttmclbsnr74"
+
+[node name="StateMachine" parent="." index="2" unique_id=2135702627 node_paths=PackedStringArray("default_state")]
+default_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=896072109]
+script = ExtResource("4_mm1xh")
+metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
+
+[node name="Chase" type="Node" parent="StateMachine" index="1" unique_id=139932688]
+script = ExtResource("5_mm1xh")
+metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
+
+[node name="Damaged" type="Node" parent="StateMachine" index="2" unique_id=2077284796]
+script = ExtResource("6_ydex4")
+metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="4" unique_id=2083159277]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_obe3h")
+animation = &"idle"
+autoplay = "idle"

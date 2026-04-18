@@ -23,11 +23,11 @@ func input(_event):
 func unhandled_input(_event):
 	pass
 
-## Treat this the same as [Node._update].
+## Treat this the same as [Node._process].
 func update(_delta):
 	pass
 
-## Treat this the same as [Node._physics_update].
+## Treat this the same as [Node._physics_process].
 func physics_update(_delta):
 	pass
 

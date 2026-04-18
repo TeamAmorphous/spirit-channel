@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bvwsi0yxnfngv"]
+
+[ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_yb31w"]
+[ext_resource type="Texture2D" uid="uid://b4jwp3w44e71w" path="res://entities/enemies/ghosts/liberty/damage.png" id="2_7rvxh"]
+[ext_resource type="Texture2D" uid="uid://c3haf634petig" path="res://entities/enemies/ghosts/liberty/idle.png" id="2_iy2jy"]
+[ext_resource type="Script" uid="uid://1d1bst16c8iw" path="res://scripts/lag_behind.gd" id="4_v0g6m"]
+[ext_resource type="Texture2D" uid="uid://c46vfnitg3jq2" path="res://entities/enemies/ghosts/liberty/hot_dog.png" id="4_xhhdn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j1em3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7rvxh")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iy2jy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="LibertyGhost" unique_id=1958681849 instance=ExtResource("1_yb31w")]
+motion_mode = 1
+
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=2083159277]
+sprite_frames = SubResource("SpriteFrames_j1em3")
+frame_progress = 0.0008178486
+offset = Vector2(34, 0)
+
+[node name="LagBehind" type="Node2D" parent="AnimatedSprite2D" index="0" unique_id=2045489343]
+script = ExtResource("4_v0g6m")
+
+[node name="HotDog" type="Sprite2D" parent="AnimatedSprite2D/LagBehind" index="0" unique_id=218384993]
+position = Vector2(-120, 118.66667)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("4_xhhdn")

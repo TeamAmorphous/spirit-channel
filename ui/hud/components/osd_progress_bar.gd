@@ -29,7 +29,7 @@ var _value: int = 0
 			_label.label_settings = label_settings
 		for s in _segments:
 			s.color = label_settings.font_color
-@export var segment_enabled_size: Vector2 = Vector2(5, 15):
+@export var segment_enabled_size: Vector2 = Vector2(5, 25):
 	set(size):
 		segment_enabled_size = size
 		_set_segments()
@@ -40,6 +40,12 @@ var _value: int = 0
 @export var segment_spacing: int = 4:
 	set(spacing):
 		segment_spacing = spacing
+		_set_segments()
+
+@export var slider: bool = false:
+	set(v):
+		slider = v
+		_build_segments()
 		_set_segments()
 
 
@@ -54,12 +60,8 @@ func _ready() -> void:
 
 
 func _build() -> void:
-	if _label:
-		_label.queue_free()
-		_label = null
-	if _container:
-		_container.queue_free()
-		_container = null
+	for c in get_children():
+		c.queue_free()
 	_segments.clear()
 
 	_label = Label.new()
@@ -82,8 +84,13 @@ func _build_segments() -> void:
 	if not _container:
 		return
 	
+	var segment_count := max_value
+
+	if slider:
+		segment_count += 1
+
 	# add to max size
-	while _segments.size() < max_value:
+	while _segments.size() < segment_count:
 		var seg := ColorRect.new()
 		seg.color = label_settings.font_color
 		seg.set_anchors_preset(Control.LayoutPreset.PRESET_CENTER)
@@ -92,7 +99,7 @@ func _build_segments() -> void:
 		_segments.append(seg)
 
 	# remove extras
-	while _segments.size() > max_value:
+	while _segments.size() > segment_count:
 		_segments.pop_back().queue_free()
 		
 
@@ -104,7 +111,8 @@ func _set_segments() -> void:
 	_container.add_theme_constant_override("separation", segment_spacing)
 	for i in _segments.size():
 		var seg := _segments[i]
-		seg.custom_minimum_size = segment_enabled_size if i < value else segment_disabled_size
+		var seg_enabled: bool = i == value if slider else i < value
+		seg.custom_minimum_size = segment_enabled_size if seg_enabled else segment_disabled_size
 		seg.size = seg.custom_minimum_size
 
 
@@ -114,7 +122,7 @@ func _set_max_value(amount: int) -> void:
 		return
 	max_value = amount
 	_build()
-	value = clampi(amount, 0, max_value)
+	value = clampi(value, 0, max_value)
 
 
 func _set_value(amount: int) -> void:

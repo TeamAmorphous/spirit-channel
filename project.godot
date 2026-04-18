@@ -29,8 +29,8 @@ layout/style_directory={}
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=768
+window/size/viewport_width=1600
+window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 
 [dotnet]
@@ -40,6 +40,11 @@ project/assembly_name="Spirit Channel"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+
+[global_group]
+
+ghosts=""
+enemies=""
 
 [input]
 
@@ -117,6 +122,12 @@ aim_right={
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="ghosts"
 
 [physics]
 

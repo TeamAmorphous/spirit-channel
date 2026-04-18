@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7yglcork408"
-path="res://.godot/imported/ghost_rat_king.png-303da35c0701608a343680758d0af683.ctex"
+uid="uid://idnq20ti2uli"
+path="res://.godot/imported/body_idle.png-312703724c80f898882fb6c368d905d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/ghost_rat_king.png"
-dest_files=["res://.godot/imported/ghost_rat_king.png-303da35c0701608a343680758d0af683.ctex"]
+source_file="res://entities/player/body_idle.png"
+dest_files=["res://.godot/imported/body_idle.png-312703724c80f898882fb6c368d905d8.ctex"]
 
 [params]
 

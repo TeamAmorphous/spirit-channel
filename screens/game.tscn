@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
+[ext_resource type="PackedScene" uid="uid://bvwsi0yxnfngv" path="res://entities/enemies/ghosts/liberty/liberty_ghost.tscn" id="3_6nlyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ciuf"]
 size = Vector2(958, 28)
@@ -31,3 +32,6 @@ texture = SubResource("GradientTexture2D_rypym")
 
 [node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player") instance=ExtResource("2_6nlyh")]
 player = NodePath("../Player")
+
+[node name="LibertyGhost" parent="." unique_id=1958681849 instance=ExtResource("3_6nlyh")]
+position = Vector2(669, -352)

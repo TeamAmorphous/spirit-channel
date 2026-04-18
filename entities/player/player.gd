@@ -9,11 +9,6 @@ const STICK_AIM_DISTANCE := 1000.0
 const STICK_AIM_LAG := 20.0
 
 
-enum AimMode {
-	MOUSE,
-	STICK,
-	NONE,
-}
 
 
 @export_category("Physics")
@@ -27,29 +22,27 @@ enum AimMode {
 @export_category("Visual")
 @export var arm_min_angle: float = -60
 @export var arm_max_angle: float = 75
+@export var pupils_min_y_offset: float = -9.0
+@export var pupils_max_y_offset: float = 9.0
 
 
 @onready var camera: PlayerCamera = $PlayerCamera
 
 @onready var sprite: Node2D = $Sprite
 @onready var arm: Node2D = $Sprite/Arm
-@onready var held: Node2D = $Sprite/Arm/Held
+@onready var body: AnimatedSprite2D = $Sprite/Body
 
-@onready var aim_center: Marker2D = $AimCenter
+@onready var tv: ColorRect = $Sprite/Body/TV
+@onready var eyes: Sprite2D = $Sprite/Body/Eyes
+@onready var pupils: Sprite2D = $Sprite/Body/Eyes/Pupils
 
 @onready var health: HealthComponent = $HealthComponent
+@onready var aim: AimController = $AimController
 
 
 @onready var coyote_time_left: float = coyote_time
 
-
-var aim_mode: AimMode = AimMode.MOUSE
-## global position
-var aim_target: Vector2 = Vector2.ZERO
-var last_valid_aim_vector: Vector2 = Vector2.ZERO
-var aim_vector: Vector2 = Vector2.RIGHT
 var jump_count: int = 0
-
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -79,67 +72,30 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel * 1.5 * delta)
 
-	$Reticle.position = to_local(aim_target)
+	$Reticle.position = to_local(aim.target)
 
 	move_and_slide()
 
 
 func _process(delta: float) -> void:
-
-	$Reticle.visible = aim_mode != AimMode.NONE
+	$Reticle.visible = aim.mode != AimController.Mode.NONE
 	$Reticle.scale = Vector2.ONE * (2.0 + sin(float((Time.get_ticks_msec()) / 1000.0) * 5.0))
 
-	update_aim_target(delta)
-	camera.target = aim_target
-	process_targeting(delta)
+	camera.target = aim.target
+	update_sprites(delta)
 
 
-func update_aim_target(delta) -> void:
-	var stick_input := Input.get_vector(
-		&"aim_left", &"aim_right",
-		&"aim_up", &"aim_down"
-	)
-	var stick_strength := stick_input.length()
-	var mouse_strength := Input.get_last_mouse_velocity().length()
+func update_sprites(delta: float) -> void:
+	var facing_left := aim.direction.x < 0
 
-	match aim_mode:
-		AimMode.MOUSE:
-			if stick_strength > SWITCH_THRESHOLD:
-				aim_mode = AimMode.STICK
-				return
-			aim_target = get_global_mouse_position()
-			last_valid_aim_vector = aim_center.global_position.direction_to(aim_target)
-		AimMode.STICK:
-			if stick_strength < STICK_DEADZONE and mouse_strength > MOUSE_DEADZONE:
-				aim_mode = AimMode.MOUSE
-				return
-			var stick_target := aim_center.global_position + stick_input.normalized() * STICK_AIM_DISTANCE * lerpf(STICK_DEADZONE, 1.0, stick_strength)
-			if stick_strength > STICK_DEADZONE:
-				aim_target = aim_target.lerp(stick_target, STICK_AIM_LAG * delta)
-				last_valid_aim_vector = stick_input.normalized()
-			else:
-				aim_mode = AimMode.NONE
-		AimMode.NONE:
-			if stick_strength > STICK_DEADZONE:
-				aim_mode = AimMode.STICK
-				return
-			if mouse_strength > MOUSE_DEADZONE:
-				aim_mode = AimMode.MOUSE
-				return
-			aim_target = aim_center.global_position + (last_valid_aim_vector * STICK_AIM_DISTANCE * STICK_DEADZONE)
-
-	aim_vector = (aim_target - aim_center.global_position).normalized()
-
-
-func process_targeting(delta: float) -> void:
-	var facing_left := aim_vector.x < 0
+	## flip direction
 	sprite.scale.x = lerpf(
 		sprite.scale.x,
 		-1 if facing_left else 1,
 		10.0 * delta
 	)
 
-	var arm_dir := aim_target - arm.global_position
+	var arm_dir := aim.target - arm.global_position
 
 	if facing_left:
 		arm_dir.x *= -1
@@ -158,6 +114,11 @@ func process_targeting(delta: float) -> void:
 		arm_angle,
 		15.0 * delta
 	)
+
+	var pupil_dir := (aim.target - pupils.global_position).normalized()
+	var pupil_y_ratio = (pupil_dir.y + 1.0) / 2.0
+	pupils.position.y = lerpf(pupils_min_y_offset, pupils_max_y_offset, pupil_y_ratio)
+	
 
 #endregion
 
