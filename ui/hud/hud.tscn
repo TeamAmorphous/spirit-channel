@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://chxvgy481xpyn"]
+
+[ext_resource type="Script" uid="uid://bfteu2csm4kt3" path="res://ui/hud/components/osd_progress_bar.gd" id="1_4d6w6"]
+[ext_resource type="Script" uid="uid://k4rsvgg883i2" path="res://ui/hud/hud.gd" id="1_e0nub"]
+[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="1_xmswo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e0nub"]
+font = ExtResource("1_xmswo")
+font_size = 32
+font_color = Color(0, 1, 0, 1)
+
+[node name="HUD" type="CanvasLayer" unique_id=1783848203]
+script = ExtResource("1_e0nub")
+
+[node name="UI" type="Control" parent="." unique_id=1349016239]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=2117649756]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HealthBar" type="VBoxContainer" parent="UI/MarginContainer" unique_id=860184880]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+script = ExtResource("1_4d6w6")
+label = "- VOLUME +"
+label_settings = SubResource("LabelSettings_e0nub")
+segment_enabled_size = Vector2(5, 25)
+segment_spacing = 5
+metadata/_custom_type_script = "uid://bfteu2csm4kt3"
+
+[node name="ScreenFX" type="Node" parent="." unique_id=1107825153]

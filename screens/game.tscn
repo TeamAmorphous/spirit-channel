@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://colhxe528q6lr"]
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
+[ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ciuf"]
 size = Vector2(958, 28)
@@ -27,3 +28,6 @@ scale = Vector2(14.96875, 0.4375)
 texture = SubResource("GradientTexture2D_rypym")
 
 [node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
+
+[node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player") instance=ExtResource("2_6nlyh")]
+player = NodePath("../Player")

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://1k24q610gun0"]
 
 [ext_resource type="Script" uid="uid://x6c2xq2j40ty" path="res://entities/player/player.gd" id="1_symyc"]
+[ext_resource type="Script" uid="uid://c8p8t8cdvc218" path="res://entities/components/health_component.gd" id="2_fkugw"]
 [ext_resource type="Texture2D" uid="uid://d16l4jig70dd" path="res://entities/player/idle_arm.png" id="2_sglur"]
 [ext_resource type="Texture2D" uid="uid://dawej005n5hxp" path="res://entities/player/idle_body.png" id="3_bls4j"]
+[ext_resource type="Script" uid="uid://ce8w4o47kj8cl" path="res://entities/player/player_camera.gd" id="4_bls4j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_symyc"]
 radius = 68.0
@@ -13,6 +15,11 @@ light_mode = 1
 
 [node name="Player" type="CharacterBody2D" unique_id=265899906]
 script = ExtResource("1_symyc")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=2086328317]
+script = ExtResource("2_fkugw")
+max_health = 20
+metadata/_custom_type_script = "uid://c8p8t8cdvc218"
 
 [node name="Sprite" type="Node2D" parent="." unique_id=655486889]
 
@@ -75,10 +82,14 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 color = Color(0.9278403, 0.0003124167, 0.18518707, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=664655215]
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=664655215]
 position = Vector2(0, -185)
 zoom = Vector2(0.5, 0.5)
 process_callback = 0
 limit_enabled = false
 position_smoothing_enabled = true
 editor_draw_drag_margin = true
+script = ExtResource("4_bls4j")
+
+[connection signal="healed" from="HealthComponent" to="." method="_on_healed"]
+[connection signal="hurt" from="HealthComponent" to="." method="_on_hurt"]
