@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bmo6oee0atcln"]
+
+[ext_resource type="Script" uid="uid://bvrrllaa8eugr" path="res://screens/white_noise_animation.gd" id="1_ahs35"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ahs35"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rktxu"]
+resource_local_to_scene = true
+noise_type = 5
+frequency = 0.175
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g2qwe"]
+resource_local_to_scene = true
+width = 1152
+height = 648
+noise = SubResource("FastNoiseLite_rktxu")
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1521293547]
+script = ExtResource("1_ahs35")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1943245893]
+material = SubResource("CanvasItemMaterial_ahs35")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_g2qwe")
+stretch_mode = 2
