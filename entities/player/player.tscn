@@ -21,6 +21,9 @@ script = ExtResource("2_fkugw")
 max_health = 20
 metadata/_custom_type_script = "uid://c8p8t8cdvc218"
 
+[node name="AimCenter" type="Marker2D" parent="." unique_id=144729087]
+position = Vector2(4, -258)
+
 [node name="Sprite" type="Node2D" parent="." unique_id=655486889]
 
 [node name="Arm" type="Node2D" parent="Sprite" unique_id=1789138659]
