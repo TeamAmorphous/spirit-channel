@@ -16,6 +16,7 @@ height = 648
 noise = SubResource("FastNoiseLite_rktxu")
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1521293547]
+layer = 100
 script = ExtResource("1_ahs35")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1943245893]
