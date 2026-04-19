@@ -17,6 +17,8 @@ const STICK_AIM_LAG := 20.0
 @export var jump_velocity: float = 800.0
 @export var coyote_time: float = 0.25 ## seconds
 
+@export_category("Gameplay")
+@export var light_power_multiplier: float = 1.0
 @export var flash_cooldown_length: float = 5.0
 @export var flash_damage: int = 1
 @export var hurt_invincibility_length: float = 3.0 
@@ -43,6 +45,7 @@ const STICK_AIM_LAG := 20.0
 @onready var chase_target: Marker2D = $ChaseTarget
 
 @onready var flashlight_beam_area: Area2D = $FlashlightArea
+@onready var flashlight_beam: PointLight2D = $Sprite/Arm/FlashlightBeam
 
 @onready var health: HealthComponent = $HealthComponent
 @onready var frequency: FrequencyComponent = $FrequencyComponent
@@ -50,7 +53,6 @@ const STICK_AIM_LAG := 20.0
 @onready var state_machine: StateMachine = $StateMachine
 @onready var aim: AimController = $AimController
 
-@onready var debug_label: Label = $DebugLabel
 
 var invincibility_timer: float
 var is_invincible: bool
@@ -58,19 +60,11 @@ var flash_cooldown: float
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	debug_label.visible = OS.is_debug_build() 
 
 #region Process Functions
 
 func _process(delta: float) -> void:
 	camera.target = aim.target
-
-	if OS.is_debug_build():
-		var debug_string: String = ""
-		debug_string += "State: %s\n" % state_machine.get_state_path_name()
-		if flash_cooldown > 0:
-			debug_string += "Flash CD: %f\n" % flash_cooldown 
-		debug_label.text = debug_string
 	
 	if invincibility_timer > 0:
 		invincibility_timer -= delta
@@ -81,7 +75,7 @@ func _process(delta: float) -> void:
 		flash_cooldown -= delta
 		if flash_cooldown < 0:
 			flash_cooldown = 0
-			$Sprite/Arm/TempBeam.color.a = 0.392
+			flashlight_beam.energy = 1.0
 
 	is_invincible = invincibility_timer > 0
 
@@ -153,9 +147,8 @@ func damage(amount: int, from: Node = null) -> void:
 
 func do_flashlight_damage(delta: float) -> void:
 	for flashed in flashlight_beam_area.get_overlapping_bodies():
-		var ghost := flashed as Ghost
-		if ghost:
-			ghost.on_caught_in_flashlight(delta, flash_damage, self)
+		if flashed.has_node("LightSensitiveComponent"):
+			flashed.get_node("LightSensitiveComponent").receive_light(delta * light_power_multiplier, self)
 
 
 func flash() -> void:
@@ -166,6 +159,6 @@ func flash() -> void:
 
 	# TEMPORARY!
 	var flash_tween := get_tree().create_tween()
-	flash_tween.tween_property($Sprite/Arm/TempBeam, "color:a", 0.0, 0.25).from(1.0)
+	flash_tween.tween_property(flashlight_beam, "energy", 0.0, 0.25).from(3.0)
 
 	

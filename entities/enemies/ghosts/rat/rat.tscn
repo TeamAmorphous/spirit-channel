@@ -27,12 +27,15 @@ animations = [{
 radius = 80.0
 
 [node name="Rat" unique_id=1958681849 instance=ExtResource("1_gonct")]
-light_resist_time = 2.0
 
-[node name="AnimatedSprite2D" parent="." index="4" unique_id=2083159277]
+[node name="LightSensitiveComponent" parent="." index="2" unique_id=1395163884]
+resistance = 2.0
+recovery_rate = 2.0
+
+[node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_r87ti")
 
-[node name="PointLight2D" parent="AnimatedSprite2D" index="0" unique_id=720677011]
+[node name="PointLight2D" parent="Sprite/AnimatedSprite2D" index="0" unique_id=720677011]
 position = Vector2(0, 6.666664)
 color = Color(0, 1, 0, 1)
 texture_scale = 0.8

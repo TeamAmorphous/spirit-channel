@@ -14,10 +14,12 @@ func on_start(msg := {}) -> void:
 		var player := msg["from"] as Player
 		var recoil_dir := -ghost.global_position.direction_to(player.chase_target.global_position)
 		ghost.velocity = recoil_dir * 200
+	ghost.light_sensitivity.enabled = false
+	ghost.light_sensitivity.reset()
 
 
-func update(_delta) -> void:
-	ghost.light_resist = ghost.light_resist_time
+func on_end():
+	ghost.light_sensitivity.enabled = true
 
 
 func physics_update(delta) -> void:
@@ -26,6 +28,6 @@ func physics_update(delta) -> void:
 		state_machine.change_state(next_state)
 		return
 	
-	ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * delta)
+	ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * 2.0 * delta)
 	
 	ghost.move_and_slide()

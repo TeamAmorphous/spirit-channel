@@ -28,16 +28,17 @@ func _process(_delta: float) -> void:
 	if state_machine.current_state == self or not enabled:
 		return
 	if target and not state_machine.in_state(excluded_states):
+		ghost.show_shock()
 		state_machine.change_state(name)
 
 
 func on_start(_msg := {}) -> void:
-	ghost.anim_player.play(&"idle")
+	ghost.anim_player.play(ghost.idle_anim)
 
 
 func physics_update(delta: float) -> void:
 	if target and enabled:
-		var dir_to_target := ghost.global_position.direction_to(target.global_position).normalized()
+		var dir_to_target := ghost.global_position.direction_to(target.chase_target.global_position).normalized()
 
 		ghost.facing = dir_to_target
 		ghost.velocity = ghost.velocity.move_toward(dir_to_target * chase_speed, chase_accel * delta)

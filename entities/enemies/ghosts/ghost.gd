@@ -2,54 +2,39 @@ class_name Ghost
 extends Enemy
 
 
-@onready var debug_label: Label = $DebugLabel
-
 @onready var frequency: FrequencyComponent = $FrequencyComponent
+@onready var light_sensitivity: LightSensitiveComponent = $LightSensitiveComponent
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite_container: Node2D = $Sprite
+@onready var sprite: AnimatedSprite2D = $Sprite/AnimatedSprite2D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var contact_damage_area: Area2D = $AttackArea
 
-@export var decel: float = 200.0
+@export var decel: float = 800.0
 
-@export var light_resist_time: float = 5.0
-@export var light_resist_cooldown_time: float = 2.0
+
+var idle_anim: StringName = &"idle"
+
 
 var facing: Vector2
 
-
-@onready var light_resist: float = light_resist_time
-@onready var light_resist_cooldown: float = light_resist_cooldown_time
-@onready var original_sprite_scale: Vector2 = sprite.scale
-
-func _ready():
-	debug_label.visible = OS.is_debug_build() 
+var shake_intensity: float
 
 
 func _process(delta: float) -> void:
-	if OS.is_debug_build():
-		var debug_string: String = ""
-		debug_string += "State: %s\n" % state_machine.get_state_path_name()
-		debug_string += "LR: %f\n" % light_resist
-		debug_string += "LRCD: %f\n" % light_resist_cooldown
-		debug_label.text = debug_string
+	sprite.modulate = Color.WHITE + (Color.WHITE * 5.0 * light_sensitivity.ratio)
+	shake_intensity = 10.0 * light_sensitivity.ratio
 
-	sprite.modulate = Color.WHITE + (Color.WHITE * 5.0 * ((light_resist_time - light_resist) / light_resist_time))
-
-	if light_resist_cooldown > 0:
-		light_resist_cooldown -= delta
-		if light_resist_cooldown < 0:
-			light_resist_cooldown = 0
-	else:
-		light_resist += delta * 2
-		if light_resist >= light_resist_time:
-			light_resist = light_resist_time
+	sprite_container.position = Vector2(
+		randf_range(-shake_intensity, shake_intensity),
+		randf_range(-shake_intensity, shake_intensity)
+	)
 
 	var facing_left := facing.x < 0
 
-	sprite.scale.x = lerpf(
-		sprite.scale.x,
-		(-1 if facing_left else 1) * original_sprite_scale.x,
+	sprite_container.scale.x = lerpf(
+		sprite_container.scale.x,
+		-1 if facing_left else 1,
 		10.0 * delta
 	)
 
@@ -58,15 +43,18 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func on_caught_in_flashlight(delta: float, damage_amount: int = 1, from: Node = null) -> void:
-	light_resist -= delta
-	light_resist_cooldown = light_resist_cooldown_time
-	if light_resist <= 0:
-		light_resist = light_resist_time
-		light_resist_cooldown = 0
-		damage(damage_amount, from)
-
-
 func damage(amount: int, from: Node = null) -> void:
 	state_machine.change_state("Hurt", {"from"=from})
 	health.damage(amount)
+
+
+func show_shock() -> void:
+	$ShockPopup/AnimationPlayer.play("show")
+
+
+func _on_light_resistance_depleted(from: Node2D) -> void:
+	damage(1, from)
+
+
+func _on_health_depleted() -> void:
+	state_machine.change_state("Poof")

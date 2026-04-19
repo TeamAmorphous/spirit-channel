@@ -19,7 +19,10 @@
 [ext_resource type="Script" uid="uid://wnrloy5st5e5" path="res://entities/player/states/fall.gd" id="8_we0b7"]
 [ext_resource type="Script" uid="uid://whwq1thpmg3g" path="res://entities/player/states/hurt.gd" id="9_mtric"]
 [ext_resource type="Texture2D" uid="uid://cc3gtqnqlmy3q" path="res://entities/player/light_cone.png" id="12_mtric"]
-[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="19_we0b7"]
+[ext_resource type="Texture2D" uid="uid://bi13g8k1gmfjl" path="res://entities/point_light_neutral.webp" id="19_eyb6c"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eyb6c"]
+polygon = PackedVector2Array(5, -40, -14, -22, -17, -8, -14, 16, -9, 27, -8, 37, -40, 37, -37, -42)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8fjmc"]
 animations = [{
@@ -48,6 +51,13 @@ animations = [{
 "name": &"idle",
 "speed": 5.0
 }]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eyb6c"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_221hk"]
+blend_mode = 1
+light_mode = 1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_afbqv"]
 animations = [{
@@ -369,12 +379,8 @@ _data = {
 radius = 68.0
 height = 370.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_mtric"]
-font = ExtResource("19_we0b7")
-font_size = 32
-font_color = Color(0.16394016, 0.87882954, 1, 1)
-
 [node name="Player" type="CharacterBody2D" unique_id=265899906]
+z_index = 1
 collision_layer = 2
 script = ExtResource("1_symyc")
 
@@ -419,14 +425,12 @@ metadata/_custom_type_script = "uid://clv52am4h0a65"
 
 [node name="FlashlightArea" type="Area2D" parent="." unique_id=600995211]
 unique_name_in_owner = true
-visible = false
 position = Vector2(220, -276)
 collision_layer = 0
-collision_mask = 4
-monitorable = false
+collision_mask = 8
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlashlightArea" unique_id=1739495203]
-polygon = PackedVector2Array(0, -32, 800.00006, -272, 871.99994, 0, 800, 272, 0, 31.999985, -8, 24, -15.999985, 8, -15.999985, -8, -8, -24)
+polygon = PackedVector2Array(0, -32, 990, -328, 1075, -24, 989, 254, 0, 31.999985, -8, 24, -15.999985, 8, -15.999985, -8, -8, -24)
 
 [node name="Sprite" type="Node2D" parent="." unique_id=655486889]
 
@@ -441,20 +445,17 @@ flip_h = true
 position = Vector2(191, -18)
 remote_path = NodePath("../../../FlashlightArea")
 
-[node name="TempBeam" type="Polygon2D" parent="Sprite/Arm" unique_id=1904767784]
-visible = false
-z_index = 100
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite/Arm" unique_id=1433840950]
 position = Vector2(191, -18)
-color = Color(1, 1, 0, 0.39215687)
-antialiased = true
-polygon = PackedVector2Array(0, -32, 800.00006, -272, 871.99994, 0, 800, 272, 0, 31.999985, -8, 24, -15.999985, 8, -15.999985, -8, -8, -24)
+occluder = SubResource("OccluderPolygon2D_eyb6c")
 
-[node name="PointLight2D" type="PointLight2D" parent="Sprite/Arm" unique_id=293481272]
-position = Vector2(765, -66)
+[node name="FlashlightBeam" type="PointLight2D" parent="Sprite/Arm" unique_id=293481272]
+position = Vector2(190.54218, -18.950123)
 rotation = 3.1415927
 color = Color(1, 1, 0.42754805, 1)
 shadow_enabled = true
 texture = ExtResource("12_mtric")
+offset = Vector2(-574.4578, 47.049927)
 
 [node name="Body" type="AnimatedSprite2D" parent="Sprite" unique_id=1471779541]
 sprite_frames = SubResource("SpriteFrames_8fjmc")
@@ -464,7 +465,9 @@ offset = Vector2(-21, -203)
 flip_h = true
 
 [node name="TV" type="ColorRect" parent="Sprite/Body" unique_id=1547836141]
+light_mask = 2
 z_index = -1
+material = SubResource("CanvasItemMaterial_eyb6c")
 anchors_preset = -1
 anchor_left = 0.60400003
 anchor_top = 0.23
@@ -478,6 +481,8 @@ color = Color(0, 0.23921569, 0, 1)
 
 [node name="Eyes" type="AnimatedSprite2D" parent="Sprite/Body" unique_id=867243479]
 modulate = Color(0, 1, 0, 1)
+light_mask = 2
+material = SubResource("CanvasItemMaterial_221hk")
 position = Vector2(7, -331)
 sprite_frames = SubResource("SpriteFrames_afbqv")
 animation = &"idle"
@@ -485,8 +490,15 @@ autoplay = "idle"
 flip_h = true
 
 [node name="Pupils" type="Sprite2D" parent="Sprite/Body/Eyes" unique_id=1152065323]
+use_parent_material = true
 texture = ExtResource("7_bectd")
 flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite/Body" unique_id=1399885951]
+position = Vector2(12, -332)
+color = Color(0, 1, 0, 1)
+energy = 0.74
+texture = ExtResource("19_eyb6c")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1810858035]
 libraries/ = SubResource("AnimationLibrary_3wlsy")
@@ -509,16 +521,3 @@ script = ExtResource("4_bls4j")
 
 [node name="ChaseTarget" type="Marker2D" parent="." unique_id=146535243]
 position = Vector2(0, -258)
-
-[node name="DebugLabel" type="Label" parent="." unique_id=995103113]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -142.5
-offset_top = -535.0
-offset_right = 142.5
-offset_bottom = -418.0
-grow_horizontal = 2
-text = "[DEBUG]"
-label_settings = SubResource("LabelSettings_mtric")
-horizontal_alignment = 1

@@ -1,7 +1,8 @@
 extends GhostState
 
+
 func on_start(_msg := {}) -> void:
-	ghost.anim_player.play("idle")
+	ghost.anim_player.play(ghost.idle_anim)
 
 
 func update(_delta: float) -> void:

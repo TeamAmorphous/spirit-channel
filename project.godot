@@ -23,9 +23,9 @@ SceneTransitioner="*uid://boye3p3mtyqkv"
 
 [dialogic]
 
-directories/dch_directory={}
 directories/dtl_directory={}
 layout/style_directory={}
+directories/dch_directory={}
 
 [display]
 
@@ -128,6 +128,7 @@ aim_right={
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
 2d_physics/layer_3="ghosts"
+2d_physics/layer_4="light_sensitive"
 
 [physics]
 

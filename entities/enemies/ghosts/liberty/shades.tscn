@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cvjpyks6bw86f"]
+
+[ext_resource type="PackedScene" uid="uid://bbjtloe0sphja" path="res://entities/props/droppable/droppable.tscn" id="1_03rsr"]
+[ext_resource type="Texture2D" uid="uid://3e04mvn1svdt" path="res://entities/enemies/ghosts/liberty/shades.png" id="2_4gmcm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4qsqs"]
+radius = 21.0
+height = 166.0
+
+[node name="Droppable" unique_id=1467021310 instance=ExtResource("1_03rsr")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=1630350091]
+position = Vector2(3, 9)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_4qsqs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1" unique_id=293781837]
+texture = ExtResource("2_4gmcm")

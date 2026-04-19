@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bbjtloe0sphja"]
+
+[ext_resource type="Script" uid="uid://brmtsh4bvyjdm" path="res://entities/props/droppable/droppable.gd" id="1_xughj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ivwx"]
+radius = 80.0
+
+[node name="Droppable" type="AnimatableBody2D" unique_id=1467021310]
+collision_layer = 0
+sync_to_physics = false
+script = ExtResource("1_xughj")
+metadata/_custom_type_script = "uid://brmtsh4bvyjdm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630350091]
+shape = SubResource("CircleShape2D_5ivwx")
