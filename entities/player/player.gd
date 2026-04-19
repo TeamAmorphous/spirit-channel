@@ -12,12 +12,14 @@ const STICK_AIM_LAG := 20.0
 
 
 @export_category("Physics")
-@export var speed: float = 1200.0
+@export var speed: float = 800.0
 @export var accel: float = 1500.0
 @export var jump_velocity: float = 800.0
-@export var sensitivity: float = 0.2
 @export var coyote_time: float = 0.25 ## seconds
-@export var max_jumps: int = 1
+
+@export var flash_cooldown_length: float = 5.0
+@export var flash_damage: int = 1
+@export var hurt_invincibility_length: float = 3.0 
 
 @export_category("Visual")
 @export var arm_min_angle: float = -60
@@ -33,56 +35,64 @@ const STICK_AIM_LAG := 20.0
 @onready var body: AnimatedSprite2D = $Sprite/Body
 
 @onready var tv: ColorRect = $Sprite/Body/TV
-@onready var eyes: Sprite2D = $Sprite/Body/Eyes
+@onready var eyes: AnimatedSprite2D = $Sprite/Body/Eyes
 @onready var pupils: Sprite2D = $Sprite/Body/Eyes/Pupils
 
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
+@onready var chase_target: Marker2D = $ChaseTarget
+
+@onready var flashlight_beam_area: Area2D = $FlashlightArea
+
 @onready var health: HealthComponent = $HealthComponent
+@onready var frequency: FrequencyComponent = $FrequencyComponent
+
+@onready var state_machine: StateMachine = $StateMachine
 @onready var aim: AimController = $AimController
 
+@onready var debug_label: Label = $DebugLabel
 
-@onready var coyote_time_left: float = coyote_time
-
-var jump_count: int = 0
+var invincibility_timer: float
+var is_invincible: bool
+var flash_cooldown: float
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	debug_label.visible = OS.is_debug_build() 
 
 #region Process Functions
 
-func _physics_process(delta: float) -> void:
-	var move_speed: float = speed  
-
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-		if coyote_time_left > 0:
-			coyote_time_left = maxf(coyote_time_left - delta, 0)
-	else: # is_on_floor()
-		coyote_time_left = coyote_time
-		jump_count = 0
-	
-	if Input.is_action_just_pressed(&"jump"):
-		if (coyote_time_left > 0 and jump_count == 0) or (jump_count > 0 and jump_count < max_jumps):
-			velocity.y = -jump_velocity
-			jump_count += 1
-			coyote_time_left = 0
-
-	var direction := Input.get_axis(&"move_left", &"move_right")
-	if direction:
-		velocity.x = move_toward(velocity.x, direction * move_speed, accel * delta)
-	else:
-		velocity.x = move_toward(velocity.x, 0, accel * 1.5 * delta)
-
-	$Reticle.position = to_local(aim.target)
-
-	move_and_slide()
-
-
 func _process(delta: float) -> void:
-	$Reticle.visible = aim.mode != AimController.Mode.NONE
-	$Reticle.scale = Vector2.ONE * (2.0 + sin(float((Time.get_ticks_msec()) / 1000.0) * 5.0))
-
 	camera.target = aim.target
+
+	if OS.is_debug_build():
+		var debug_string: String = ""
+		debug_string += "State: %s\n" % state_machine.get_state_path_name()
+		if flash_cooldown > 0:
+			debug_string += "Flash CD: %f\n" % flash_cooldown 
+		debug_label.text = debug_string
+	
+	if invincibility_timer > 0:
+		invincibility_timer -= delta
+		if invincibility_timer < 0:
+			invincibility_timer = 0
+	
+	if flash_cooldown > 0:
+		flash_cooldown -= delta
+		if flash_cooldown < 0:
+			flash_cooldown = 0
+			$Sprite/Arm/TempBeam.color.a = 0.392
+
+	is_invincible = invincibility_timer > 0
+
 	update_sprites(delta)
+
+	
+	if aim.mode != AimController.Mode.DISABLED and flash_cooldown == 0:
+		do_flashlight_damage(delta)
+
+	if Input.is_action_just_pressed(&"primary_action"):
+		flash()
 
 
 func update_sprites(delta: float) -> void:
@@ -119,17 +129,43 @@ func update_sprites(delta: float) -> void:
 	var pupil_y_ratio = (pupil_dir.y + 1.0) / 2.0
 	pupils.position.y = lerpf(pupils_min_y_offset, pupils_max_y_offset, pupil_y_ratio)
 	
+	if is_invincible:
+		sprite.visible = (int(invincibility_timer * 50.0) % 2) == 0
+	else:
+		sprite.visible = true
 
 #endregion
 
-#region Singal Recievers
+func damage(amount: int, from: Node = null) -> void:
+	if is_invincible:
+		return
+	state_machine.change_state("Hurt")
+	invincibility_timer = hurt_invincibility_length
+	health.damage(amount)
 
-func _on_hurt(_amount: int) -> void:
+	var from2d := from as Node2D
+	if from2d:
+		aim.target = from2d.global_position
+
 	camera.hitstop(0.2, 0.1)
 	camera.shake(5.0, 1.0)
+
+
+func do_flashlight_damage(delta: float) -> void:
+	for flashed in flashlight_beam_area.get_overlapping_bodies():
+		var ghost := flashed as Ghost
+		if ghost:
+			ghost.on_caught_in_flashlight(delta, flash_damage, self)
+
+
+func flash() -> void:
+	if flash_cooldown > 0 or aim.mode == AimController.Mode.DISABLED:
+		# todo: bzzt
+		return
+	flash_cooldown = flash_cooldown_length
+
+	# TEMPORARY!
+	var flash_tween := get_tree().create_tween()
+	flash_tween.tween_property($Sprite/Arm/TempBeam, "color:a", 0.0, 0.25).from(1.0)
+
 	
-
-func _on_healed(_amount: int) -> void:
-	pass # Replace with function body.
-
-#endregion

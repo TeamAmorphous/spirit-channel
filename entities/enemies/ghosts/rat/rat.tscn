@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dedy8ggeocrgb"]
+
+[ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_gonct"]
+[ext_resource type="Texture2D" uid="uid://cyyd03mo6ewr6" path="res://entities/enemies/ghosts/rat/damage.png" id="2_d5bej"]
+[ext_resource type="Texture2D" uid="uid://briwee376pt26" path="res://entities/enemies/ghosts/rat/idle.png" id="3_peigk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r87ti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d5bej")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_peigk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5bej"]
+radius = 80.0
+
+[node name="Rat" unique_id=1958681849 instance=ExtResource("1_gonct")]
+light_resist_time = 2.0
+
+[node name="AnimatedSprite2D" parent="." index="4" unique_id=2083159277]
+sprite_frames = SubResource("SpriteFrames_r87ti")
+
+[node name="PointLight2D" parent="AnimatedSprite2D" index="0" unique_id=720677011]
+position = Vector2(0, 6.666664)
+color = Color(0, 1, 0, 1)
+texture_scale = 0.8
+
+[node name="CollisionShape2D" parent="AttackArea" parent_id_path=PackedInt32Array(1724781933) index="0" unique_id=874946689]
+shape = SubResource("CircleShape2D_d5bej")

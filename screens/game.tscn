@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
 [ext_resource type="PackedScene" uid="uid://bvwsi0yxnfngv" path="res://entities/enemies/ghosts/liberty/liberty_ghost.tscn" id="3_6nlyh"]
+[ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_rypym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ciuf"]
 size = Vector2(958, 28)
@@ -34,4 +35,17 @@ texture = SubResource("GradientTexture2D_rypym")
 player = NodePath("../Player")
 
 [node name="LibertyGhost" parent="." unique_id=1958681849 instance=ExtResource("3_6nlyh")]
-position = Vector2(669, -352)
+position = Vector2(3672, -433)
+decel = 200.0
+light_resist_cooldown_time = 2.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
+color = Color(0.38928655, 0.38928664, 0.38928658, 1)
+
+[node name="Rat" parent="." unique_id=1736221642 instance=ExtResource("4_rypym")]
+position = Vector2(-945, -770)
+motion_mode = 0
+decel = 200.0
+light_resist_time = 5.0
+light_resist_cooldown_time = 2.0
+contact_damage = 2

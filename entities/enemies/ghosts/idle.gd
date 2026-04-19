@@ -1,19 +1,20 @@
 extends GhostState
 
 func on_start(_msg := {}) -> void:
+	ghost.anim_player.play("idle")
+
+
+func update(_delta: float) -> void:
 	pass
 
-func on_end() -> void:
+
+func physics_update(delta: float) -> void:
+	ghost.velocity = ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * delta)
+
+
+func input(_event: InputEvent) -> void:
 	pass
 
-func update(_delta) -> void:
-	pass
 
-func physics_update(_delta) -> void:
-	pass
-
-func input(_event) -> void:
-	pass
-
-func unhandled_input(_event) -> void:
+func unhandled_input(_event: InputEvent) -> void:
 	pass

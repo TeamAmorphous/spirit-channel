@@ -3,14 +3,43 @@
 [ext_resource type="Script" uid="uid://x6c2xq2j40ty" path="res://entities/player/player.gd" id="1_symyc"]
 [ext_resource type="Script" uid="uid://c8p8t8cdvc218" path="res://entities/components/health_component.gd" id="2_fkugw"]
 [ext_resource type="Script" uid="uid://clv52am4h0a65" path="res://entities/player/aim_controller.gd" id="3_8fjmc"]
+[ext_resource type="Script" uid="uid://cxttmclbsnr74" path="res://entities/components/frequency_component.gd" id="3_a1qjk"]
 [ext_resource type="Texture2D" uid="uid://csj46wfw3wqp5" path="res://entities/player/arm_idle.png" id="4_8fjmc"]
 [ext_resource type="Script" uid="uid://ce8w4o47kj8cl" path="res://entities/player/player_camera.gd" id="4_bls4j"]
+[ext_resource type="Script" uid="uid://b2t1u51l5fj7p" path="res://scripts/types/state_machine.gd" id="4_gx6sm"]
+[ext_resource type="Texture2D" uid="uid://fr7ksgcfr0ua" path="res://entities/player/body_hurt0.png" id="5_7thud"]
 [ext_resource type="Texture2D" uid="uid://idnq20ti2uli" path="res://entities/player/body_idle.png" id="5_qiwj3"]
+[ext_resource type="Script" uid="uid://cyalwe0k0rq6d" path="res://entities/player/states/idle.gd" id="5_yqrof"]
+[ext_resource type="Script" uid="uid://c7x15xu6t0ugs" path="res://entities/player/states/walk.gd" id="6_3wlsy"]
 [ext_resource type="Texture2D" uid="uid://cdtxk4xx5vy23" path="res://entities/player/eyes.png" id="6_26q78"]
+[ext_resource type="Texture2D" uid="uid://dg73ru2udsnpb" path="res://entities/player/body_hurt1.png" id="6_a1qjk"]
+[ext_resource type="Script" uid="uid://bo2mvlqbw2srl" path="res://entities/player/states/jump.gd" id="7_b2kln"]
 [ext_resource type="Texture2D" uid="uid://c7fbl60b7l3kk" path="res://entities/player/pupils.png" id="7_bectd"]
+[ext_resource type="Texture2D" uid="uid://crskuuedqsg2n" path="res://entities/player/eyes_hurt.png" id="8_j3ovn"]
+[ext_resource type="Script" uid="uid://wnrloy5st5e5" path="res://entities/player/states/fall.gd" id="8_we0b7"]
+[ext_resource type="Script" uid="uid://whwq1thpmg3g" path="res://entities/player/states/hurt.gd" id="9_mtric"]
+[ext_resource type="Texture2D" uid="uid://cc3gtqnqlmy3q" path="res://entities/player/light_cone.png" id="12_mtric"]
+[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="19_we0b7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8fjmc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_7thud")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_a1qjk")
+}, {
+"duration": 2.0,
+"texture": ExtResource("5_7thud")
+}, {
+"duration": 0.25,
+"texture": ExtResource("6_a1qjk")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_qiwj3")
@@ -20,12 +49,330 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_afbqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_j3ovn")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_26q78")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_gx6sm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Body:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Arm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Body/Eyes:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/Body/Eyes:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/Body/Eyes/Pupils:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/Body/TV:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 56)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite/Body/TV:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-32, -358)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite/Body/Eyes:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, -331)]
+}
+
+[sub_resource type="Animation" id="Animation_j3ovn"]
+resource_name = "hurt"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Body/Eyes/Pupils:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Body/Eyes:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hurt"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Body/Eyes:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, -303)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/Body:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hurt"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/Body/TV:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(79, 43)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/Body/TV:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-52, -326)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite/Arm:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_yqrof"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Body:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Arm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Body/Eyes:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/Body/Eyes:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/Body/Eyes/Pupils:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/Body/TV:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 56)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite/Body/TV:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-32, -358)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite/Body/Eyes:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, -330)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wlsy"]
+_data = {
+&"RESET": SubResource("Animation_gx6sm"),
+&"hurt": SubResource("Animation_j3ovn"),
+&"idle": SubResource("Animation_yqrof")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_symyc"]
 radius = 68.0
 height = 370.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bls4j"]
-light_mode = 1
+[sub_resource type="LabelSettings" id="LabelSettings_mtric"]
+font = ExtResource("19_we0b7")
+font_size = 32
+font_color = Color(0.16394016, 0.87882954, 1, 1)
 
 [node name="Player" type="CharacterBody2D" unique_id=265899906]
 collision_layer = 2
@@ -36,10 +383,50 @@ script = ExtResource("2_fkugw")
 max_health = 20
 metadata/_custom_type_script = "uid://c8p8t8cdvc218"
 
+[node name="FrequencyComponent" type="Node" parent="." unique_id=253231974]
+script = ExtResource("3_a1qjk")
+metadata/_custom_type_script = "uid://cxttmclbsnr74"
+
+[node name="StateMachine" type="Node" parent="." unique_id=878413740 node_paths=PackedStringArray("default_state")]
+script = ExtResource("4_gx6sm")
+default_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://b2t1u51l5fj7p"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1820286263]
+script = ExtResource("5_yqrof")
+metadata/_custom_type_script = "uid://bha7evwrvwkjb"
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1363412380]
+script = ExtResource("6_3wlsy")
+metadata/_custom_type_script = "uid://bha7evwrvwkjb"
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=225327749]
+script = ExtResource("7_b2kln")
+metadata/_custom_type_script = "uid://bha7evwrvwkjb"
+
+[node name="Fall" type="Node" parent="StateMachine" unique_id=1571727653]
+script = ExtResource("8_we0b7")
+metadata/_custom_type_script = "uid://bha7evwrvwkjb"
+
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1538276084]
+script = ExtResource("9_mtric")
+metadata/_custom_type_script = "uid://bha7evwrvwkjb"
+
 [node name="AimController" type="Marker2D" parent="." unique_id=14312483]
 position = Vector2(4, -258)
 script = ExtResource("3_8fjmc")
 metadata/_custom_type_script = "uid://clv52am4h0a65"
+
+[node name="FlashlightArea" type="Area2D" parent="." unique_id=600995211]
+unique_name_in_owner = true
+visible = false
+position = Vector2(220, -276)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlashlightArea" unique_id=1739495203]
+polygon = PackedVector2Array(0, -32, 800.00006, -272, 871.99994, 0, 800, 272, 0, 31.999985, -8, 24, -15.999985, 8, -15.999985, -8, -8, -24)
 
 [node name="Sprite" type="Node2D" parent="." unique_id=655486889]
 
@@ -50,73 +437,65 @@ texture = ExtResource("4_8fjmc")
 offset = Vector2(99, -6)
 flip_h = true
 
+[node name="FlashlightArea" type="RemoteTransform2D" parent="Sprite/Arm" unique_id=720639430]
+position = Vector2(191, -18)
+remote_path = NodePath("../../../FlashlightArea")
+
+[node name="TempBeam" type="Polygon2D" parent="Sprite/Arm" unique_id=1904767784]
+visible = false
+z_index = 100
+position = Vector2(191, -18)
+color = Color(1, 1, 0, 0.39215687)
+antialiased = true
+polygon = PackedVector2Array(0, -32, 800.00006, -272, 871.99994, 0, 800, 272, 0, 31.999985, -8, 24, -15.999985, 8, -15.999985, -8, -8, -24)
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite/Arm" unique_id=293481272]
+position = Vector2(765, -66)
+rotation = 3.1415927
+color = Color(1, 1, 0.42754805, 1)
+shadow_enabled = true
+texture = ExtResource("12_mtric")
+
 [node name="Body" type="AnimatedSprite2D" parent="Sprite" unique_id=1471779541]
 sprite_frames = SubResource("SpriteFrames_8fjmc")
 animation = &"idle"
+autoplay = "idle"
 offset = Vector2(-21, -203)
 flip_h = true
 
 [node name="TV" type="ColorRect" parent="Sprite/Body" unique_id=1547836141]
 z_index = -1
-offset_left = -32.0
-offset_top = -358.0
-offset_right = 48.0
-offset_bottom = -302.0
+anchors_preset = -1
+anchor_left = 0.60400003
+anchor_top = 0.23
+anchor_right = 0.60400003
+anchor_bottom = 0.23
+offset_left = -201.12001
+offset_top = -466.1
+offset_right = -121.12001
+offset_bottom = -410.1
 color = Color(0, 0.23921569, 0, 1)
 
-[node name="Eyes" type="Sprite2D" parent="Sprite/Body" unique_id=556785763]
+[node name="Eyes" type="AnimatedSprite2D" parent="Sprite/Body" unique_id=867243479]
 modulate = Color(0, 1, 0, 1)
 position = Vector2(7, -331)
-texture = ExtResource("6_26q78")
+sprite_frames = SubResource("SpriteFrames_afbqv")
+animation = &"idle"
+autoplay = "idle"
 flip_h = true
 
 [node name="Pupils" type="Sprite2D" parent="Sprite/Body/Eyes" unique_id=1152065323]
 texture = ExtResource("7_bectd")
 flip_h = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1810858035]
+libraries/ = SubResource("AnimationLibrary_3wlsy")
+autoplay = &"idle"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2033865394]
 visible = false
 position = Vector2(0, -185)
 shape = SubResource("CapsuleShape2D_symyc")
-
-[node name="Reticle" type="Marker2D" parent="." unique_id=845230187]
-z_index = 100
-
-[node name="ColorRect" type="ColorRect" parent="Reticle" unique_id=1153447337]
-material = SubResource("CanvasItemMaterial_bls4j")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.38397244
-pivot_offset_ratio = Vector2(0.5, 0.5)
-color = Color(0.79672086, 0, 0.15141523, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="Reticle" unique_id=1360189427]
-material = SubResource("CanvasItemMaterial_bls4j")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.38397244
-pivot_offset_ratio = Vector2(0.5, 0.5)
-color = Color(0.9278403, 0.0003124167, 0.18518707, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=664655215]
 visible = false
@@ -128,5 +507,18 @@ position_smoothing_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource("4_bls4j")
 
-[connection signal="healed" from="HealthComponent" to="." method="_on_healed"]
-[connection signal="hurt" from="HealthComponent" to="." method="_on_hurt"]
+[node name="ChaseTarget" type="Marker2D" parent="." unique_id=146535243]
+position = Vector2(0, -258)
+
+[node name="DebugLabel" type="Label" parent="." unique_id=995103113]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -142.5
+offset_top = -535.0
+offset_right = 142.5
+offset_bottom = -418.0
+grow_horizontal = 2
+text = "[DEBUG]"
+label_settings = SubResource("LabelSettings_mtric")
+horizontal_alignment = 1

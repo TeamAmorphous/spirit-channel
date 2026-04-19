@@ -72,7 +72,7 @@ func _set_health(value: int) -> void:
 func damage(amount: int) -> int:
 	if amount <= 0:
 		return 0
-	var applied := maxi(health, amount)
+	var applied := mini(health, amount)
 	health -= applied
 	return applied
 
