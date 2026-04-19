@@ -9,8 +9,6 @@ const STICK_AIM_DISTANCE := 1000.0
 const STICK_AIM_LAG := 20.0
 
 
-
-
 @export_category("Physics")
 @export var speed: float = 800.0
 @export var accel: float = 1500.0
@@ -39,8 +37,10 @@ const STICK_AIM_LAG := 20.0
 @onready var tv: ColorRect = $Sprite/Body/TV
 @onready var eyes: AnimatedSprite2D = $Sprite/Body/Eyes
 @onready var pupils: Sprite2D = $Sprite/Body/Eyes/Pupils
+@onready var face_glow: PointLight2D = $Sprite/Body/FaceGlow
 
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var movement_anim_player: AnimationPlayer = $MovementAnimPlayer
+@onready var sfx: AudioStreamPlayer = $SFX
 
 @onready var chase_target: Marker2D = $ChaseTarget
 
@@ -48,18 +48,24 @@ const STICK_AIM_LAG := 20.0
 @onready var flashlight_beam: PointLight2D = $Sprite/Arm/FlashlightBeam
 
 @onready var health: HealthComponent = $HealthComponent
-@onready var frequency: FrequencyComponent = $FrequencyComponent
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var aim: AimController = $AimController
 
+@export var footstep_sounds: Array[AudioStream]
+
+var channel: Ghost.Channel = Ghost.Channel.NONE
+
+var color_tween: Tween
 
 var invincibility_timer: float
 var is_invincible: bool
 var flash_cooldown: float
 
 func _ready() -> void:
+	update_color()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	MusicManager.start()
 
 #region Process Functions
 
@@ -78,15 +84,58 @@ func _process(delta: float) -> void:
 			flashlight_beam.energy = 1.0
 
 	is_invincible = invincibility_timer > 0
-
-	update_sprites(delta)
-
 	
 	if aim.mode != AimController.Mode.DISABLED and flash_cooldown == 0:
 		do_flashlight_damage(delta)
 
 	if Input.is_action_just_pressed(&"primary_action"):
 		flash()
+	if Input.is_action_just_pressed(&"tune_up"):
+		tune_up()
+	elif Input.is_action_just_pressed(&"tune_down"):
+		tune_down()
+	
+	update_sprites(delta)
+
+
+func tune_up() -> void:
+	channel = wrapi(channel + 1, 0, Ghost.Channel.values().size() - 1) as Ghost.Channel
+	update_channel() 
+
+
+func tune_down() -> void:
+	channel = wrapi(channel - 1, 0, Ghost.Channel.values().size() - 1) as Ghost.Channel
+	update_channel() 
+
+
+func update_channel() -> void:
+	update_color()
+	
+	MusicManager.current_channel = channel
+	for node in get_tree().get_nodes_in_group(Ghost.GHOST_GROUP):
+		var ghost := node as Ghost
+		if ghost:
+			ghost.update_channel(channel)
+
+
+func update_color() -> void:
+	if color_tween and color_tween.is_running():
+		color_tween.kill()
+	var color := Ghost.CHANNEL_COLORS[channel]
+	color_tween = get_tree().create_tween()
+	color_tween.set_ease(Tween.EaseType.EASE_IN).set_trans(Tween.TransitionType.TRANS_ELASTIC).set_parallel(true)
+	color_tween.tween_property(eyes, "scale:y", 1.0, 0.2).from(0.0)
+	color_tween.tween_property(face_glow, "energy", 0.75, 0.2).from(0.0)
+	#color_tween.tween_property(flashlight_beam, "color", color.lightened(0.2), 0.1).from_current()
+	#color_tween.tween_property(flashlight_beam, "energy", 1.0, 0.1).from(0.0)
+	eyes.modulate = color
+	face_glow.color = color
+	tv.color = color.darkened(0.8)
+
+func play_footstep_sound() -> void:
+	var sound := footstep_sounds.pick_random() as AudioStream
+	var playback := sfx.get_stream_playback() as AudioStreamPlaybackPolyphonic
+	playback.play_stream(sound)
 
 
 func update_sprites(delta: float) -> void:
@@ -160,5 +209,9 @@ func flash() -> void:
 	# TEMPORARY!
 	var flash_tween := get_tree().create_tween()
 	flash_tween.tween_property(flashlight_beam, "energy", 0.0, 0.25).from(3.0)
+
+	for flashed in flashlight_beam_area.get_overlapping_bodies():
+		if flashed.has_node("LightSensitiveComponent"):
+			flashed.get_node("LightSensitiveComponent").receive_flash(self)
 
 	

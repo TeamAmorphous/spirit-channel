@@ -1,7 +1,7 @@
 extends PlayerState
 
 func on_start(_msg := {}) -> void:
-	player.anim_player.play(&"hurt")
+	player.movement_anim_player.play(&"hurt")
 	player.aim.mode = AimController.Mode.DISABLED
 	player.aim.target = player.aim.global_position
 	player.velocity.y = -500

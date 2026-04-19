@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://hehs74mvqk1x"]
+
+[ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_n7gw7"]
+[ext_resource type="Script" uid="uid://dggw3jfua0ppp" path="res://entities/enemies/ghosts/rat_king/states/attack.gd" id="2_ideoo"]
+[ext_resource type="Texture2D" uid="uid://c2pwi0hjwyya3" path="res://entities/enemies/ghosts/rat_king/attack0.png" id="3_hqvt0"]
+[ext_resource type="Texture2D" uid="uid://beudg86s2qvjw" path="res://entities/enemies/ghosts/rat_king/attack1.png" id="4_qgdai"]
+[ext_resource type="Texture2D" uid="uid://qyia7pu20jro" path="res://entities/enemies/ghosts/rat_king/attack2.png" id="5_utnah"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7gw7"]
+radius = 80.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_odn85"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("3_hqvt0")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_qgdai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_utnah")
+}],
+"loop": true,
+"name": &"attak",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"tele",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ideoo"]
+radius = 130.0
+
+[node name="Ghost" unique_id=1958681849 instance=ExtResource("1_n7gw7")]
+
+[node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
+can_be_flashed = false
+
+[node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
+contact_damage = 0
+excluded_states = Array[String](["Hurt", "Poof", "Attack"])
+
+[node name="Attack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=1595899198]
+script = ExtResource("2_ideoo")
+metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
+
+[node name="CollisionShape2D" parent="." index="3" unique_id=2109752796]
+shape = SubResource("CircleShape2D_n7gw7")
+
+[node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
+sprite_frames = SubResource("SpriteFrames_odn85")
+
+[node name="AttackArea" parent="." index="8" unique_id=1724781933]
+visible = false
+
+[node name="CollisionShape2D" parent="AttackArea" index="0" unique_id=874946689]
+shape = SubResource("CircleShape2D_ideoo")

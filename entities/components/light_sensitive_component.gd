@@ -4,12 +4,15 @@ extends Node
 const LIGHT_SENSITIVE_LAYER: int = 1 << 3
 
 signal light_received(amount: float, from: Node2D)
+signal flashed(from: Node2D)
 
 signal resistance_depleted(from: Node2D)
 signal resistance_restored(from: Node2D)
 
 
 @export var enabled: bool = true
+@export var can_be_damaged: bool = true
+@export var can_be_flashed: bool = true
 @export var repeatable: bool = true
 @export var resistance: float = 5.0
 @export var cooldown: float = 1.0
@@ -69,7 +72,7 @@ func _light_raycast_check(from: Vector2) -> bool:
 
 
 func receive_light(amount: float, from: Node2D) -> void:
-	if amount <= 0 or not enabled:
+	if amount <= 0 or not enabled or not can_be_damaged:
 		return
 
 	if not _light_raycast_check(from.global_position):
@@ -85,3 +88,12 @@ func receive_light(amount: float, from: Node2D) -> void:
 		current_resistance = 0
 		resistance_depleted.emit(from)
 		fired = not repeatable
+
+
+func receive_flash(from: Node2D) -> void:
+	if not enabled or not can_be_flashed:
+		return
+	if not _light_raycast_check(from.global_position):
+		return
+	
+	flashed.emit(from)

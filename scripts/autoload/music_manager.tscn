@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://g8yr033gwr1y"]
+
+[ext_resource type="Script" uid="uid://dfav0xhr1m132" path="res://scripts/autoload/music_manager.gd" id="1_74np6"]
+[ext_resource type="AudioStream" uid="uid://sa1ymnucvveu" path="res://music/haunted.ogg" id="2_uijyf"]
+[ext_resource type="AudioStream" uid="uid://c3e13ui7v3olf" path="res://music/red.ogg" id="3_oesyv"]
+[ext_resource type="AudioStream" uid="uid://frjw5webp0y8" path="res://music/green.ogg" id="4_weci2"]
+[ext_resource type="AudioStream" uid="uid://b3offadp4kk77" path="res://music/blue.ogg" id="5_k5reo"]
+[ext_resource type="AudioStream" uid="uid://ce7jx8udw2m6k" path="res://music/yellow.ogg" id="6_j1of8"]
+
+[node name="MusicManager" type="Node" unique_id=738554524]
+script = ExtResource("1_74np6")
+
+[node name="Base" type="AudioStreamPlayer" parent="." unique_id=41759303]
+stream = ExtResource("2_uijyf")
+
+[node name="Red" type="AudioStreamPlayer" parent="." unique_id=1796849834]
+stream = ExtResource("3_oesyv")
+
+[node name="Green" type="AudioStreamPlayer" parent="." unique_id=815078027]
+stream = ExtResource("4_weci2")
+
+[node name="Blue" type="AudioStreamPlayer" parent="." unique_id=687176767]
+stream = ExtResource("5_k5reo")
+
+[node name="Yellow" type="AudioStreamPlayer" parent="." unique_id=778839122]
+stream = ExtResource("6_j1of8")

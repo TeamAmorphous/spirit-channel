@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_gonct"]
 [ext_resource type="Texture2D" uid="uid://cyyd03mo6ewr6" path="res://entities/enemies/ghosts/rat/damage.png" id="2_d5bej"]
 [ext_resource type="Texture2D" uid="uid://briwee376pt26" path="res://entities/enemies/ghosts/rat/idle.png" id="3_peigk"]
+[ext_resource type="Texture2D" uid="uid://dfw6v3fpp80qm" path="res://entities/enemies/ghosts/rat/tele.png" id="4_peigk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r87ti"]
 animations = [{
@@ -21,15 +22,27 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_peigk")
+}],
+"loop": true,
+"name": &"tele",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5bej"]
 radius = 80.0
 
 [node name="Rat" unique_id=1958681849 instance=ExtResource("1_gonct")]
+channel = 1
 
-[node name="LightSensitiveComponent" parent="." index="2" unique_id=1395163884]
-resistance = 2.0
+[node name="HealthComponent" parent="." index="0" unique_id=908077137]
+max_health = 1
+
+[node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
+resistance = 0.5
 recovery_rate = 2.0
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]

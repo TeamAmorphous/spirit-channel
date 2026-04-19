@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://x6c2xq2j40ty" path="res://entities/player/player.gd" id="1_symyc"]
 [ext_resource type="Script" uid="uid://c8p8t8cdvc218" path="res://entities/components/health_component.gd" id="2_fkugw"]
 [ext_resource type="Script" uid="uid://clv52am4h0a65" path="res://entities/player/aim_controller.gd" id="3_8fjmc"]
-[ext_resource type="Script" uid="uid://cxttmclbsnr74" path="res://entities/components/frequency_component.gd" id="3_a1qjk"]
 [ext_resource type="Texture2D" uid="uid://csj46wfw3wqp5" path="res://entities/player/arm_idle.png" id="4_8fjmc"]
 [ext_resource type="Script" uid="uid://ce8w4o47kj8cl" path="res://entities/player/player_camera.gd" id="4_bls4j"]
 [ext_resource type="Script" uid="uid://b2t1u51l5fj7p" path="res://scripts/types/state_machine.gd" id="4_gx6sm"]
@@ -368,16 +367,149 @@ tracks/7/keys = {
 "values": [Vector2(6, -330)]
 }
 
+[sub_resource type="Animation" id="Animation_221hk"]
+resource_name = "walk"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3wlsy"]
 _data = {
 &"RESET": SubResource("Animation_gx6sm"),
 &"hurt": SubResource("Animation_j3ovn"),
-&"idle": SubResource("Animation_yqrof")
+&"idle": SubResource("Animation_yqrof"),
+&"walk": SubResource("Animation_221hk")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_symyc"]
 radius = 68.0
 height = 370.0
+
+[sub_resource type="Animation" id="Animation_we0b7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArrowSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -453)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArrowSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mtric"]
+resource_name = "default"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArrowSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(0, 20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArrowSprite:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(0.9, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_eyb6c"]
+resource_name = "show"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArrowSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 15), Vector2(0, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArrowSprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_221hk"]
+_data = {
+&"RESET": SubResource("Animation_we0b7"),
+&"default": SubResource("Animation_mtric"),
+&"show": SubResource("Animation_eyb6c")
+}
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_we0b7"]
 
 [node name="Player" type="CharacterBody2D" unique_id=265899906]
 z_index = 1
@@ -388,10 +520,6 @@ script = ExtResource("1_symyc")
 script = ExtResource("2_fkugw")
 max_health = 20
 metadata/_custom_type_script = "uid://c8p8t8cdvc218"
-
-[node name="FrequencyComponent" type="Node" parent="." unique_id=253231974]
-script = ExtResource("3_a1qjk")
-metadata/_custom_type_script = "uid://cxttmclbsnr74"
 
 [node name="StateMachine" type="Node" parent="." unique_id=878413740 node_paths=PackedStringArray("default_state")]
 script = ExtResource("4_gx6sm")
@@ -477,10 +605,9 @@ offset_left = -201.12001
 offset_top = -466.1
 offset_right = -121.12001
 offset_bottom = -410.1
-color = Color(0, 0.23921569, 0, 1)
+color = Color(0.21230483, 0.21230483, 0.21230483, 1)
 
 [node name="Eyes" type="AnimatedSprite2D" parent="Sprite/Body" unique_id=867243479]
-modulate = Color(0, 1, 0, 1)
 light_mask = 2
 material = SubResource("CanvasItemMaterial_221hk")
 position = Vector2(7, -331)
@@ -494,13 +621,13 @@ use_parent_material = true
 texture = ExtResource("7_bectd")
 flip_h = true
 
-[node name="PointLight2D" type="PointLight2D" parent="Sprite/Body" unique_id=1399885951]
+[node name="FaceGlow" type="PointLight2D" parent="Sprite/Body" unique_id=1399885951]
 position = Vector2(12, -332)
 color = Color(0, 1, 0, 1)
-energy = 0.74
+energy = 0.75
 texture = ExtResource("19_eyb6c")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1810858035]
+[node name="MovementAnimPlayer" type="AnimationPlayer" parent="." unique_id=1810858035]
 libraries/ = SubResource("AnimationLibrary_3wlsy")
 autoplay = &"idle"
 
@@ -521,3 +648,18 @@ script = ExtResource("4_bls4j")
 
 [node name="ChaseTarget" type="Marker2D" parent="." unique_id=146535243]
 position = Vector2(0, -258)
+
+[node name="ArrowAnimPlayer" type="AnimationPlayer" parent="." unique_id=1519600121]
+root_node = NodePath("../Arrow")
+libraries/ = SubResource("AnimationLibrary_221hk")
+
+[node name="Arrow" type="Marker2D" parent="." unique_id=2070889607]
+visible = false
+position = Vector2(0, -480)
+
+[node name="ArrowSprite" type="Sprite2D" parent="Arrow" unique_id=1087424169]
+position = Vector2(0, -453)
+scale = Vector2(1e-05, 1e-05)
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=455751787]
+stream = SubResource("AudioStreamPolyphonic_we0b7")

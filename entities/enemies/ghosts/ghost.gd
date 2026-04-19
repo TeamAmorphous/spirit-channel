@@ -2,7 +2,26 @@ class_name Ghost
 extends Enemy
 
 
-@onready var frequency: FrequencyComponent = $FrequencyComponent
+const GHOST_GROUP := &"ghosts"
+
+
+enum Channel {
+	RED,
+	GREEN,
+	YELLOW,
+	BLUE,
+	NONE = -1,
+}
+
+const CHANNEL_COLORS: Dictionary[Channel, Color] = {
+	Channel.RED: Color.RED,
+	Channel.GREEN: Color.GREEN,
+	Channel.YELLOW: Color.YELLOW,
+	Channel.BLUE: Color.BLUE,
+	Channel.NONE: Color.WHITE,
+}
+
+
 @onready var light_sensitivity: LightSensitiveComponent = $LightSensitiveComponent
 
 @onready var sprite_container: Node2D = $Sprite
@@ -12,13 +31,17 @@ extends Enemy
 
 @export var decel: float = 800.0
 
+@export var channel: Channel = Channel.NONE
+@export var max_audio_distance: float = 1000.0
+
 
 var idle_anim: StringName = &"idle"
-
 
 var facing: Vector2
 
 var shake_intensity: float
+
+var channel_synced: bool = false
 
 
 func _process(delta: float) -> void:
@@ -37,6 +60,10 @@ func _process(delta: float) -> void:
 		-1 if facing_left else 1,
 		10.0 * delta
 	)
+
+
+func update_channel(player_channel: Channel) -> void:
+	channel_synced = player_channel == channel or channel == Channel.NONE
 
 
 func _physics_process(_delta: float) -> void:

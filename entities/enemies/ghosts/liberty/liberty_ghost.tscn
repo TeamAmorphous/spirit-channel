@@ -5,19 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://b4jwp3w44e71w" path="res://entities/enemies/ghosts/liberty/damage.png" id="2_7rvxh"]
 [ext_resource type="Texture2D" uid="uid://c3haf634petig" path="res://entities/enemies/ghosts/liberty/idle.png" id="2_iy2jy"]
 [ext_resource type="PackedScene" uid="uid://cvjpyks6bw86f" path="res://entities/enemies/ghosts/liberty/shades.tscn" id="3_v0g6m"]
-[ext_resource type="Shader" uid="uid://bsudhxt3n8aid" path="res://shaders/dissolve.gdshader" id="4_olwd5"]
 [ext_resource type="Texture2D" uid="uid://c46vfnitg3jq2" path="res://entities/enemies/ghosts/liberty/hot_dog.png" id="4_xhhdn"]
 [ext_resource type="Texture2D" uid="uid://hpbgnrgwpt5l" path="res://entities/enemies/ghosts/liberty/no_shades.png" id="6_6xjem"]
+[ext_resource type="Texture2D" uid="uid://c4vokqp5iqync" path="res://entities/enemies/ghosts/liberty/tele.png" id="7_8x15v"]
+[ext_resource type="Texture2D" uid="uid://cr38sbilaujwj" path="res://entities/enemies/ghosts/liberty/throw0.png" id="7_kw5o6"]
+[ext_resource type="Texture2D" uid="uid://b513janpr15v8" path="res://entities/enemies/ghosts/liberty/throw1.png" id="8_8x15v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0g6m"]
 radius = 100.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kw5o6"]
-shader = ExtResource("4_olwd5")
-shader_parameter/edge_color = Color(1, 1, 1, 1)
-shader_parameter/scale = 2.0
-shader_parameter/edge_value = 0.2
-shader_parameter/dissolve_value = 0.5
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j1em3"]
 animations = [{
@@ -44,7 +39,30 @@ animations = [{
 "loop": true,
 "name": &"no_shades",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_8x15v")
+}],
+"loop": true,
+"name": &"tele",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_kw5o6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8x15v")
+}],
+"loop": true,
+"name": &"throw",
+"speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_f4k4q"]
+resource_name = "new_shades"
+step = 0.25
 
 [sub_resource type="Animation" id="Animation_6xjem"]
 resource_name = "float"
@@ -88,9 +106,15 @@ tracks/2/keys = {
 "values": [0.0, -0.08726646]
 }
 
+[sub_resource type="Animation" id="Animation_aloxn"]
+resource_name = "throw"
+step = 0.25
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olwd5"]
 _data = {
-&"no_shades": SubResource("Animation_6xjem")
+&"new_shades": SubResource("Animation_f4k4q"),
+&"no_shades": SubResource("Animation_6xjem"),
+&"throw": SubResource("Animation_aloxn")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhhdn"]
@@ -99,23 +123,22 @@ radius = 150.0
 [node name="LibertyGhost" unique_id=1958681849 instance=ExtResource("1_yb31w")]
 script = ExtResource("2_6xjem")
 shades_droppable = ExtResource("3_v0g6m")
+channel = 3
 
-[node name="CollisionShape2D" parent="." index="4" unique_id=2109752796]
+[node name="HealthComponent" parent="." index="0" unique_id=908077137]
+max_health = 1
+
+[node name="CollisionShape2D" parent="." index="3" unique_id=2109752796]
 shape = SubResource("CircleShape2D_v0g6m")
 
-[node name="ShockPopup" parent="." index="5" unique_id=575857656]
+[node name="ShockPopup" parent="." index="4" unique_id=575857656]
 position = Vector2(74, -130)
 
-[node name="Sprite" parent="." index="6" unique_id=2064633110]
-material = SubResource("ShaderMaterial_kw5o6")
-
-[node name="AnimatedSprite2D" parent="Sprite" index="0" unique_id=2083159277]
-use_parent_material = true
+[node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_j1em3")
 offset = Vector2(34, 0)
 
 [node name="HotDog" type="Sprite2D" parent="Sprite/AnimatedSprite2D" index="0" unique_id=218384993]
-use_parent_material = true
 position = Vector2(-120, 118.66667)
 texture = ExtResource("4_xhhdn")
 
@@ -126,16 +149,18 @@ texture_scale = 2.27
 [node name="ShadesSpawn" type="Marker2D" parent="Sprite/AnimatedSprite2D" index="2" unique_id=504499322]
 position = Vector2(4, -21)
 
-[node name="AnimationPlayer" parent="." index="7" unique_id=103237844]
+[node name="AnimationPlayer" parent="." index="6" unique_id=103237844]
 libraries/liberty = SubResource("AnimationLibrary_olwd5")
 autoplay = &"idle"
 
-[node name="DetectionArea" parent="." index="8" unique_id=482761127]
+[node name="DetectionArea" parent="." index="7" unique_id=482761127]
 input_pickable = false
 
-[node name="AttackArea" parent="." index="9" unique_id=1724781933]
+[node name="AttackArea" parent="." index="8" unique_id=1724781933]
 visible = false
 
 [node name="CollisionShape2D" parent="AttackArea" index="0" unique_id=874946689]
 shape = SubResource("CircleShape2D_xhhdn")
 debug_color = Color(0.79091656, 0.3917211, 0.4699465, 0.41960785)
+
+[connection signal="flashed" from="LightSensitiveComponent" to="." method="_on_flashed"]
