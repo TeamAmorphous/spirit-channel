@@ -1,7 +1,7 @@
 extends PlayerState
 
 func on_start(_msg := {}) -> void:
-	player.anim_player.play(&"walk")
+	player.movement_anim_player.play(&"walk")
 
 
 func physics_update(delta: float) -> void:
