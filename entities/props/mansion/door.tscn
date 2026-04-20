@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://choh73cfo4jm7"]
 
 [ext_resource type="Script" uid="uid://ctwbecx6tu076" path="res://entities/props/mansion/door.gd" id="1_nco46"]
-[ext_resource type="Texture2D" uid="uid://ss2x7jlpc57y" path="res://map/assets/DOOR_FRONT.png" id="2_lm8qd"]
-[ext_resource type="Texture2D" uid="uid://c6bvojnpjw1n7" path="res://map/assets/DOOR_SIDE.png" id="3_3u7nx"]
+[ext_resource type="Texture2D" uid="uid://b03dqiaocub3d" path="res://map/assets/DOOR_FRONT.png" id="2_lm8qd"]
+[ext_resource type="Texture2D" uid="uid://7hf52ishxg80" path="res://map/assets/DOOR_SIDE.png" id="3_3u7nx"]
 [ext_resource type="AudioStream" uid="uid://cfyqeil1gllbp" path="res://entities/props/mansion/doorOpen.ogg" id="3_ogd60"]
 [ext_resource type="AudioStream" uid="uid://cy6fdu8v7eqsl" path="res://entities/props/mansion/doorClose.ogg" id="5_3u7nx"]
 [ext_resource type="Texture2D" uid="uid://rbq4kqr5et2e" path="res://entities/props/mansion/lock_indicator.png" id="5_lm8qd"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ce44t4w7ifqs4"]
+
+[ext_resource type="PackedScene" uid="uid://c0gfo3aqggi5h" path="res://entities/props/mansion/stairs.tscn" id="1_sfwic"]
+
+[node name="Stairs" unique_id=1675593934 instance=ExtResource("1_sfwic")]
+scale = Vector2(-1, 1)

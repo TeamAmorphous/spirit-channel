@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
-[ext_resource type="PackedScene" uid="uid://bvwsi0yxnfngv" path="res://entities/enemies/ghosts/liberty/liberty_ghost.tscn" id="3_6nlyh"]
+[ext_resource type="PackedScene" uid="uid://dclbmboho1qq4" path="res://entities/enemies/ghosts/pizza/pizza.tscn" id="4_rypym"]
+[ext_resource type="PackedScene" uid="uid://bu3j8m5xgyrqc" path="res://entities/enemies/ghosts/mobster/mobster.tscn" id="5_he66p"]
 [ext_resource type="PackedScene" uid="uid://chuwtkmxhvbg" path="res://map/mansion.tscn" id="6_5kag3"]
-[ext_resource type="PackedScene" uid="uid://dclbmboho1qq4" path="res://entities/enemies/ghosts/pizza/pizza.tscn" id="7_gfkhe"]
 
 [node name="Game" type="Node2D" unique_id=965120324]
 
@@ -16,12 +16,11 @@ position = Vector2(0, -8)
 [node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player") instance=ExtResource("2_6nlyh")]
 player = NodePath("../Player")
 
-[node name="LibertyGhost" parent="." unique_id=1958681849 instance=ExtResource("3_6nlyh")]
-position = Vector2(-1232, -480)
-decel = 800.0
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
 color = Color(0.6052743, 0.6052743, 0.6052743, 1)
 
-[node name="Ghost" parent="." unique_id=2023250399 instance=ExtResource("7_gfkhe")]
-position = Vector2(2576, -432)
+[node name="Pizza" parent="." unique_id=1958681849 instance=ExtResource("4_rypym")]
+position = Vector2(1104, -600)
+
+[node name="Mobster" parent="." unique_id=179045201 instance=ExtResource("5_he66p")]
+position = Vector2(-1424, -632)

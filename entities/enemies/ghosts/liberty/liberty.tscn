@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://bvwsi0yxnfngv"]
 
 [ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_yb31w"]
-[ext_resource type="Script" uid="uid://htispgva8wof" path="res://entities/enemies/ghosts/liberty/liberty_ghost.gd" id="2_6xjem"]
+[ext_resource type="Script" uid="uid://htispgva8wof" path="res://entities/enemies/ghosts/liberty/liberty.gd" id="2_6xjem"]
 [ext_resource type="Texture2D" uid="uid://b4jwp3w44e71w" path="res://entities/enemies/ghosts/liberty/damage.png" id="2_7rvxh"]
 [ext_resource type="Texture2D" uid="uid://c3haf634petig" path="res://entities/enemies/ghosts/liberty/idle.png" id="2_iy2jy"]
 [ext_resource type="PackedScene" uid="uid://cvjpyks6bw86f" path="res://entities/enemies/ghosts/liberty/shades.tscn" id="3_v0g6m"]
+[ext_resource type="Script" uid="uid://cxxu0t8gsqx3w" path="res://entities/enemies/ghosts/states/shoot_projectile.gd" id="4_aloxn"]
+[ext_resource type="Script" uid="uid://cmiyhj2s7h4n8" path="res://entities/enemies/ghosts/liberty/states/chase.gd" id="4_s38fd"]
 [ext_resource type="Texture2D" uid="uid://c46vfnitg3jq2" path="res://entities/enemies/ghosts/liberty/hot_dog.png" id="4_xhhdn"]
+[ext_resource type="PackedScene" uid="uid://dlq3q1bggfea" path="res://entities/enemies/ghosts/liberty/hot_dog_projectile.tscn" id="5_s38fd"]
 [ext_resource type="Texture2D" uid="uid://hpbgnrgwpt5l" path="res://entities/enemies/ghosts/liberty/no_shades.png" id="6_6xjem"]
 [ext_resource type="Texture2D" uid="uid://c4vokqp5iqync" path="res://entities/enemies/ghosts/liberty/tele.png" id="7_8x15v"]
 [ext_resource type="Texture2D" uid="uid://cr38sbilaujwj" path="res://entities/enemies/ghosts/liberty/throw0.png" id="7_kw5o6"]
@@ -108,7 +111,106 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_aloxn"]
 resource_name = "throw"
+length = 2.0
 step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"throw"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/AnimatedSprite2D/HotDog:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1, 1.5, 2),
+"transitions": PackedFloat32Array(3.4822025, 0.3535534, 1, 1, 2.6390154, 1),
+"update": 0,
+"values": [Vector2(-120, 118.66667), Vector2(2.6666718, 62.66667), Vector2(55.999996, 114.666664), Vector2(-18.666672, 170.66667), Vector2(-145.33334, 116), Vector2(188.90495, 169.32358)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/AnimatedSprite2D/HotDog:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1, 1.5, 2),
+"transitions": PackedFloat32Array(3.4822025, 0.3535534, 1, 1, 2.6390154, 1),
+"update": 0,
+"values": [0.0, 0.19564782, -0.1954075, 1.0668945, 2.269669, 5.3447976]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/AnimatedSprite2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1.6817931, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(4, -16), Vector2(6, 8), Vector2(4, 12), Vector2(40.999996, -19.999998)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/AnimatedSprite2D:rotation")
+tracks/5/interp = 4
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1.6817931, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.12687366, 0.2377299, -0.13987324]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("StateMachine/HotDogThrow")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_projectile"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprite/AnimatedSprite2D/HotDog:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olwd5"]
 _data = {
@@ -120,7 +222,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhhdn"]
 radius = 150.0
 
-[node name="LibertyGhost" unique_id=1958681849 node_paths=PackedStringArray("shades_spawnpoint") instance=ExtResource("1_yb31w")]
+[node name="Liberty" unique_id=1958681849 node_paths=PackedStringArray("shades_spawnpoint") instance=ExtResource("1_yb31w")]
 script = ExtResource("2_6xjem")
 shades_droppable = ExtResource("3_v0g6m")
 shades_spawnpoint = NodePath("Sprite/AnimatedSprite2D/ShadesSpawn")
@@ -128,6 +230,19 @@ channel = 3
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 1
+
+[node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
+script = ExtResource("4_s38fd")
+excluded_states = Array[String](["Hurt", "Poof", "HotDogThrow"])
+
+[node name="HotDogThrow" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=829556152 node_paths=PackedStringArray("projectile_spawn_position", "next_state")]
+script = ExtResource("4_aloxn")
+projectile_scene = ExtResource("5_s38fd")
+projectile_damage = 5
+projectile_spawn_position = NodePath("../../Sprite/AnimatedSprite2D/HotDog")
+animation = &"liberty/throw"
+next_state = NodePath("../Chase")
+metadata/_custom_type_script = "uid://cxxu0t8gsqx3w"
 
 [node name="CollisionShape2D" parent="." index="3" unique_id=2109752796]
 shape = SubResource("CircleShape2D_v0g6m")
@@ -137,10 +252,14 @@ position = Vector2(74, -130)
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_j1em3")
+animation = &"throw"
+metadata/_edit_group_ = true
 
 [node name="HotDog" type="Sprite2D" parent="Sprite/AnimatedSprite2D" index="0" unique_id=218384993]
+unique_name_in_owner = true
 position = Vector2(-120, 118.66667)
 texture = ExtResource("4_xhhdn")
+flip_h = true
 
 [node name="PointLight2D" parent="Sprite/AnimatedSprite2D" index="1" unique_id=720677011]
 color = Color(0.3055162, 0.613057, 1, 1)

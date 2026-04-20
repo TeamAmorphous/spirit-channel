@@ -18,7 +18,6 @@ func stairs_cutscene(player: Player, reverse: bool) -> void:
 	await get_tree().create_timer(0.2).timeout
 	follower.progress_ratio = 0.0 if reverse else 1.0
 	await player.walk_to(follower.global_position)
-	print(follower.global_position)
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
 	player.process_mode = Node.PROCESS_MODE_INHERIT

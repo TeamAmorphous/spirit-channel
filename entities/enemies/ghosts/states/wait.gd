@@ -20,4 +20,5 @@ func on_start(msg := {}) -> void:
 
 func update(delta: float) -> void:
 	timer -= delta
-	state_machine.change_state(next.name)
+	if timer <= 0:
+		state_machine.change_state(next.name)

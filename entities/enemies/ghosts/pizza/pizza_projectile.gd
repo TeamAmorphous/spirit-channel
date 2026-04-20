@@ -47,5 +47,9 @@ func _on_body_entered(body: Node2D) -> void:
 		queue_free()
 		return
 
-	if body is StaticBody2D:
+	if body is PhysicsBody2D:
 		queue_free()
+
+
+func receive_flash(_from: Node2D) -> void:
+	queue_free()

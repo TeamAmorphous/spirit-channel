@@ -1,3 +1,4 @@
+class_name Chase
 extends GhostState
 
 @export var animation: StringName

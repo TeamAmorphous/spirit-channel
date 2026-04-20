@@ -4,9 +4,12 @@
 [ext_resource type="Script" uid="uid://c7lkkyhnr4un0" path="res://entities/enemies/ghosts/states/charge.gd" id="2_245fo"]
 [ext_resource type="Texture2D" uid="uid://bq22kdln3vvfm" path="res://entities/enemies/ghosts/mobster/damage.png" id="2_oullg"]
 [ext_resource type="Texture2D" uid="uid://mhw3hx2sqff0" path="res://entities/enemies/ghosts/mobster/attack0.png" id="2_si7u7"]
+[ext_resource type="Script" uid="uid://dfggrmsrchltw" path="res://entities/enemies/ghosts/mobster/states/chase.gd" id="2_wtb3a"]
 [ext_resource type="Texture2D" uid="uid://c0sdc131aix4t" path="res://entities/enemies/ghosts/mobster/attack1.png" id="3_245fo"]
 [ext_resource type="Texture2D" uid="uid://bd867rlbsrkr3" path="res://entities/enemies/ghosts/mobster/fist1.png" id="3_cvicm"]
+[ext_resource type="AudioStream" uid="uid://cgny17qo4vy55" path="res://entities/enemies/ghosts/mobster/swish.ogg" id="3_nslht"]
 [ext_resource type="Texture2D" uid="uid://bkwfnv61qsrqf" path="res://entities/enemies/ghosts/mobster/idle.png" id="3_ojsxy"]
+[ext_resource type="AudioStream" uid="uid://cml5jmiekvp2c" path="res://entities/enemies/ghosts/mobster/punch1.ogg" id="4_jcg5b"]
 [ext_resource type="Texture2D" uid="uid://tn8slj4py572" path="res://entities/enemies/ghosts/mobster/tele.png" id="4_si7u7"]
 [ext_resource type="Texture2D" uid="uid://2mqf4op5qch3" path="res://entities/enemies/ghosts/mobster/fist2.png" id="4_w16mf"]
 [ext_resource type="Texture2D" uid="uid://hqfvytln8ahq" path="res://entities/enemies/ghosts/mobster/speedlines0.png" id="10_3tmiu"]
@@ -170,12 +173,14 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_3tmiu"]
 radius = 120.0
 
-[node name="Ghost" unique_id=1958681849 instance=ExtResource("1_3ll0d")]
+[node name="Mobster" unique_id=1958681849 instance=ExtResource("1_3ll0d")]
+channel = 0
 
 [node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
 resistance = 5.0
 
 [node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
+script = ExtResource("2_wtb3a")
 chase_speed = 100.0
 contact_damage = 4
 excluded_states = Array[String](["Hurt", "Poof", "Charge"])
@@ -185,10 +190,11 @@ script = ExtResource("2_245fo")
 attack_area = NodePath("../../PunchArea")
 animation = &"mobster/attack"
 next_state = NodePath("../Idle")
+stream = ExtResource("3_nslht")
+hit_stream = ExtResource("4_jcg5b")
 
 [node name="PunchSprite" type="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=1239580772]
-visible = false
-position = Vector2(-161, 15)
+position = Vector2(-110, 15)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_eoei1")
 animation = &"attack"

@@ -5,6 +5,7 @@ extends GhostState
 @export var play_backwards: bool = false
 ## Overriden by "next" key in on_start msg
 @export var next_state: State
+@export var stream: AudioStream
 
 var next: State
 
@@ -14,8 +15,17 @@ func on_start(msg := {}) -> void:
 	else:
 		ghost.anim_player.play_backwards(animation)
 	
+	if stream:
+		var sfx := AudioStreamPlayer.new()
+		sfx.stream = stream
+		ghost.add_child(sfx)
+		sfx.volume_db = 10.0
+		sfx.play()
+		sfx.finished.connect(func(): sfx.queue_free())
+
+
 	ghost.light_sensitivity.can_be_damaged = true
-	if &"next" in msg:
+	if "next" in msg:
 		next = state_machine.get_node(msg.next)
 	else:
 		next = next_state if next_state else state_machine.default_state 

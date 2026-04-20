@@ -82,10 +82,13 @@ var channel: Ghost.Channel = Ghost.Channel.BLUE
 
 var color_tween: Tween
 
+var override_facing: bool
+var direction_override: Vector2
+
 var invincibility_timer: float
 var is_invincible: bool
 var flash_cooldown: float
-var ghosts_in_beam: Array[Ghost]
+var in_beam: Array[Node2D]
 
 const TRACK_TIMER_LENGTH := 3.0
 var track_timer: float = TRACK_TIMER_LENGTH
@@ -102,7 +105,7 @@ func _ready() -> void:
 #region Process Functions
 
 func _process(delta: float) -> void:
-	camera.target = aim.target
+	camera.target = aim.global_position if override_facing else aim.target
 	reticle.global_position = aim.target
 	
 	if invincibility_timer > 0:
@@ -208,7 +211,7 @@ func find_closest_ghost() -> void:
 
 
 func update_sprites(delta: float) -> void:
-	var facing_left := aim.direction.x < 0
+	var facing_left := aim.direction.x < 0 if not override_facing else direction_override.x < 0
 
 	## flip direction
 	sprite.scale.x = lerpf(
@@ -218,6 +221,8 @@ func update_sprites(delta: float) -> void:
 	)
 
 	var arm_dir := aim.target - arm.global_position
+	if override_facing:
+		arm_dir = arm.global_position + direction_override
 
 	if facing_left:
 		arm_dir.x *= -1
@@ -229,7 +234,7 @@ func update_sprites(delta: float) -> void:
 	)
 	
 
-	if arm_collider_ray.is_colliding():
+	if arm_collider_ray.is_colliding() and not override_facing:
 		var ray_collision_ratio := 1.0 - ((arm_collider_ray.global_position - arm_collider_ray.get_collision_point()).length_squared() / arm_collider_ray.target_position.length_squared())
 		arm_angle = lerpf(arm_angle, deg_to_rad(arm_max_angle + 10), ray_collision_ratio)
 
@@ -265,7 +270,7 @@ func update_sprites(delta: float) -> void:
 #endregion
 
 func damage(amount: int, from: Node = null) -> void:
-	if is_invincible:
+	if is_invincible or invincibility_timer > 0.0:
 		return
 	state_machine.change_state("Hurt", {"from": from})
 	invincibility_timer = hurt_invincibility_length
@@ -280,9 +285,11 @@ func damage(amount: int, from: Node = null) -> void:
 
 
 func do_flashlight_damage(delta: float) -> void:
-	for flashed in ghosts_in_beam:
+	for flashed in in_beam:
 		if flashed.has_node("LightSensitiveComponent"):
 			flashed.get_node("LightSensitiveComponent").receive_light(delta * light_power_multiplier, self)
+		elif flashed.has_method("receive_flash"):
+			flashed.receive_flash(self)
 
 
 func flash() -> void:
@@ -295,19 +302,27 @@ func flash() -> void:
 	var flash_tween := get_tree().create_tween()
 	flash_tween.tween_property(flashlight_beam, "energy", 0.0, 0.25).from(8.0)
 	play_sound_effect(flashlight_flash)
-	for flashed in ghosts_in_beam:
+	for flashed in in_beam:
 		if flashed.has_node("LightSensitiveComponent"):
 			flashed.get_node("LightSensitiveComponent").receive_flash(self)
 
 
-func _on_flashlight_area_body_entered(ghost_body: Node2D) -> void:
-	if ghost_body is Ghost:
-		ghosts_in_beam.append(ghost_body)
+func _on_flashlight_area_body_entered(new_body: Node2D) -> void:
+	in_beam.append(new_body)
 
 
-func _on_flashlight_area_body_exited(ghost_body: Node2D) -> void:
-	if ghost_body in ghosts_in_beam:
-		ghosts_in_beam.erase(ghost_body)
+func _on_flashlight_area_body_exited(new_body: Node2D) -> void:
+	if new_body in in_beam:
+		in_beam.erase(new_body)
+
+
+func _on_flashlight_area_entered(area: Area2D) -> void:
+	in_beam.append(area)
+
+
+func _on_flashlight_area_exited(area: Area2D) -> void:
+	if area in in_beam:
+		in_beam.erase(area)
 
 
 func _on_interactable_area_entered(area: Area2D) -> void:
@@ -343,10 +358,14 @@ func item_count(item: StringName) -> int:
 
 func walk_to(target: Vector2) -> void:
 	movement_anim_player.play(&"walk")
-	var left := global_position.x - target.x < 0
-	aim.direction.x = -1.0 if left else 1.0
-	var dist := (global_position - target).length()
+	override_facing = true
+	var left := target.x < global_position.x
+	aim.target = Vector2(-40 if left else 40, -200)
+	var dir := global_position.direction_to(target)
+	var dist := global_position.distance_to(target)
+	direction_override = Vector2(dir.x, 0.0)
 	var walk_tween := get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	walk_tween.tween_property(self, "global_position", target, dist / speed)
 	await walk_tween.finished
+	override_facing = false
 	movement_anim_player.play(&"idle")

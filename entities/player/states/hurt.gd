@@ -1,6 +1,12 @@
 extends PlayerState
 
+
+@export var hit_sfx: AudioStream
+
+
 func on_start(msg := {}) -> void:
+	if hit_sfx:
+		player.play_sound_effect(hit_sfx)
 	player.movement_anim_player.play(&"hurt")
 	player.aim.mode = AimController.Mode.DISABLED
 	player.aim.target = player.aim.global_position

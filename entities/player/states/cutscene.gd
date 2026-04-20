@@ -4,7 +4,6 @@ extends PlayerState
 func on_start(_msg := {}) -> void:
 	player.is_invincible = true
 	player.aim.mode = AimController.Mode.DISABLED
-	player.aim.target = player.aim.global_position
 
 
 func on_end(_msg := {}) -> void:
@@ -13,4 +12,4 @@ func on_end(_msg := {}) -> void:
 
 
 func update(_delta: float) -> void:
-	player.aim.target = player.aim.global_position
+	pass

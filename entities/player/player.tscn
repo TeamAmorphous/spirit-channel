@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://3f33wcqy0cn3" path="res://entities/player/body_walk2.png" id="17_50fht"]
 [ext_resource type="Script" uid="uid://xib7h8lpt00h" path="res://entities/player/states/cutscene.gd" id="18_13wue"]
 [ext_resource type="Texture2D" uid="uid://c0s0esf1qsrds" path="res://entities/player/body_walk3.png" id="18_wuv6x"]
+[ext_resource type="AudioStream" uid="uid://dn1ftisoh6ln7" path="res://entities/player/sounds/hit.ogg" id="18_wy7bt"]
 [ext_resource type="Texture2D" uid="uid://bi13g8k1gmfjl" path="res://entities/point_light_neutral.webp" id="19_eyb6c"]
 [ext_resource type="Texture2D" uid="uid://dtbnlyiilfm0x" path="res://entities/player/jump.png" id="25_ttr27"]
 [ext_resource type="Texture2D" uid="uid://vh38t38fdfp4" path="res://entities/player/reticle.png" id="28_wq0jh"]
@@ -998,6 +999,7 @@ metadata/_custom_type_script = "uid://bha7evwrvwkjb"
 
 [node name="Hurt" type="Node" parent="StateMachine" unique_id=1538276084]
 script = ExtResource("9_mtric")
+hit_sfx = ExtResource("18_wy7bt")
 metadata/_custom_type_script = "uid://bha7evwrvwkjb"
 
 [node name="Cutscene" type="Node" parent="StateMachine" unique_id=1920208729]
@@ -1153,6 +1155,8 @@ offset = Vector2(48, -52)
 libraries/ = SubResource("AnimationLibrary_ttr27")
 autoplay = &"default"
 
+[connection signal="area_entered" from="FlashlightArea" to="." method="_on_flashlight_area_entered"]
+[connection signal="area_exited" from="FlashlightArea" to="." method="_on_flashlight_area_exited"]
 [connection signal="body_entered" from="FlashlightArea" to="." method="_on_flashlight_area_body_entered"]
 [connection signal="body_exited" from="FlashlightArea" to="." method="_on_flashlight_area_body_exited"]
 [connection signal="area_entered" from="InteractableArea" to="." method="_on_interactable_area_entered"]

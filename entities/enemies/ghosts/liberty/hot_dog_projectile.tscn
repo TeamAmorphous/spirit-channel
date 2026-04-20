@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dlq3q1bggfea"]
+
+[ext_resource type="Script" uid="uid://c0g7h1h5pnebe" path="res://entities/enemies/ghosts/liberty/hot_dog_projectile.gd" id="1_rksjm"]
+[ext_resource type="Texture2D" uid="uid://c46vfnitg3jq2" path="res://entities/enemies/ghosts/liberty/hot_dog.png" id="2_spxkh"]
+[ext_resource type="Texture2D" uid="uid://bi13g8k1gmfjl" path="res://entities/point_light_neutral.webp" id="3_paopl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p04u3"]
+radius = 24.0
+
+[node name="HotDogProjetile" type="Area2D" unique_id=397518361]
+collision_layer = 0
+collision_mask = 11
+monitorable = false
+script = ExtResource("1_rksjm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=562557072]
+shape = SubResource("CircleShape2D_p04u3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1138919050]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_spxkh")
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1460451597]
+position = Vector2(0, 40)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("3_paopl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

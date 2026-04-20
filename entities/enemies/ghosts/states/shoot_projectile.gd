@@ -2,7 +2,6 @@ class_name ShootProjectile
 extends OneShotAnimation
 
 
-@export var attack_interval: float = 3.0
 @export var projectile_scene: PackedScene
 @export var projectile_speed: float = 700.0
 @export var min_flight_time: float = 0.45
@@ -16,6 +15,8 @@ func on_start(msg := {}):
 	if not projectile_scene or not projectile_scene.can_instantiate():
 		state_machine.revert()
 	super.on_start(msg)
+	ghost.facing = ghost.global_position.direction_to(player.chase_target.global_position)
+
 
 func _spawn_projectile() -> void:
 	if projectile_scene == null:
@@ -32,7 +33,6 @@ func _spawn_projectile() -> void:
 	var flight_time := clampf(distance / projectile_speed, min_flight_time, max_flight_time)
 
 	projectile.global_position = spawn_position
-	ghost.facing = spawn_position.direction_to(target_position)
 
 	if projectile.has_method("launch_to"):
 		projectile.call("launch_to", target_position, flight_time, projectile_damage)

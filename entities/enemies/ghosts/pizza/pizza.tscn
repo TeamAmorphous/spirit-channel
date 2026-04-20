@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b6jvwbty1cmbb" path="res://entities/enemies/ghosts/pizza/tele.png" id="4_kpwb0"]
 [ext_resource type="Script" uid="uid://b6c4lktm61k2b" path="res://entities/enemies/ghosts/pizza/states/invisible.gd" id="5_0272d"]
 [ext_resource type="PackedScene" uid="uid://b4yya56gpkjyh" path="res://entities/enemies/ghosts/pizza/pizza_projectile.tscn" id="5_nf5ks"]
+[ext_resource type="AudioStream" uid="uid://ca4s4t0kjav2s" path="res://entities/enemies/ghosts/pizza/horn.ogg" id="5_x78fb"]
 [ext_resource type="Script" uid="uid://du55rahdekmkd" path="res://entities/enemies/ghosts/states/one_shot_animation.gd" id="6_1rho0"]
 [ext_resource type="Texture2D" uid="uid://dwsv5vvyfikn0" path="res://entities/enemies/ghosts/pizza/attack_box0.png" id="6_3uu3j"]
 [ext_resource type="Script" uid="uid://dl6bu25eug6nc" path="res://entities/enemies/ghosts/states/wait.gd" id="7_1rho0"]
@@ -86,14 +87,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:visible")
+tracks/1/path = NodePath("Sprite/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [&"idle"]
 }
 
 [sub_resource type="Animation" id="Animation_ia68l"]
@@ -114,14 +115,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:visible")
+tracks/1/path = NodePath("Sprite/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [&"idle"]
 }
 
 [sub_resource type="Animation" id="Animation_c17p4"]
@@ -254,9 +255,24 @@ tracks/10/path = NodePath("StateMachine/ThrowPizza")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
+"times": PackedFloat32Array(0.53333336),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_spawn_projectile"
+}]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sprite:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ia68l"]
@@ -266,11 +282,25 @@ _data = {
 &"throw": SubResource("Animation_c17p4")
 }
 
-[node name="Ghost" unique_id=1958681849 instance=ExtResource("1_vntsv")]
+[sub_resource type="LabelSettings" id="LabelSettings_cfpjs"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_cfpjs"]
+script/source = "extends Label
+
+@export var sm: StateMachine
+
+func _process(delta: float) -> void:
+	text = sm.get_state_path_name()
+"
+
+[node name="Pizza" unique_id=1958681849 instance=ExtResource("1_vntsv")]
 channel = 2
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
-max_health = 1
+max_health = 4
 
 [node name="StateMachine" parent="." index="2" unique_id=2135702627 node_paths=PackedStringArray("default_state")]
 default_state = NodePath("Invisible")
@@ -284,29 +314,41 @@ contact_damage = 0
 
 [node name="Invisible" type="Node" parent="StateMachine" index="4" unique_id=822334671]
 script = ExtResource("5_0272d")
+teleport_cooldown = 20.0
+teleport_distance = 500.0
 teleport_radius = 100.0
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 
 [node name="Appear" type="Node" parent="StateMachine" index="5" unique_id=515971898 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_1rho0")
 animation = &"pizza/appear"
-next_state = NodePath("../ThrowPizza")
+next_state = NodePath("../WaitThrow")
 metadata/_custom_type_script = "uid://d3vcayuuutyrv"
 
-[node name="ThrowPizza" type="Node" parent="StateMachine" index="6" unique_id=1101052154 node_paths=PackedStringArray("projectile_spawn_position", "next_state")]
+[node name="WaitThrow" type="Node" parent="StateMachine" index="6" unique_id=471763831 node_paths=PackedStringArray("next_state")]
+script = ExtResource("7_1rho0")
+length = 1.0
+animaton = &"idle"
+next_state = NodePath("../ThrowPizza")
+metadata/_custom_type_script = "uid://dl6bu25eug6nc"
+
+[node name="ThrowPizza" type="Node" parent="StateMachine" index="7" unique_id=1101052154 node_paths=PackedStringArray("projectile_spawn_position", "next_state")]
 script = ExtResource("2_3uu3j")
 projectile_scene = ExtResource("5_nf5ks")
+projectile_damage = 4
 projectile_spawn_position = NodePath("../../Sprite/AnimatedSprite2D/PizzaAttack/ProjectileSpawnPosition")
 animation = &"pizza/throw"
-next_state = NodePath("../Wait")
+next_state = NodePath("../WaitDisappear")
+stream = ExtResource("5_x78fb")
 
-[node name="Wait" type="Node" parent="StateMachine" index="7" unique_id=861746237 node_paths=PackedStringArray("next_state")]
+[node name="WaitDisappear" type="Node" parent="StateMachine" index="8" unique_id=861746237 node_paths=PackedStringArray("next_state")]
 script = ExtResource("7_1rho0")
+length = 1.0
 animaton = &"idle"
 next_state = NodePath("../Disappear")
 metadata/_custom_type_script = "uid://dl6bu25eug6nc"
 
-[node name="Disappear" type="Node" parent="StateMachine" index="8" unique_id=1448086396 node_paths=PackedStringArray("next_state")]
+[node name="Disappear" type="Node" parent="StateMachine" index="9" unique_id=1448086396 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_1rho0")
 animation = &"pizza/disappear"
 next_state = NodePath("../Invisible")
@@ -316,14 +358,27 @@ metadata/_custom_type_script = "uid://d3vcayuuutyrv"
 sprite_frames = SubResource("SpriteFrames_b8kr0")
 
 [node name="PizzaAttack" type="AnimatedSprite2D" parent="Sprite/AnimatedSprite2D" index="1" unique_id=911890201]
-visible = false
-position = Vector2(77.33334, 24.000006)
-rotation = 0.0417821
+position = Vector2(69.99999, 18.874996)
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_ia68l")
 animation = &"attack"
-frame = 1
 
 [node name="ProjectileSpawnPosition" type="Marker2D" parent="Sprite/AnimatedSprite2D/PizzaAttack" index="0" unique_id=205837562]
 
 [node name="AnimationPlayer" parent="." index="6" unique_id=103237844]
 libraries/pizza = SubResource("AnimationLibrary_ia68l")
+
+[node name="AudioStreamPlayer2D" parent="." index="9" unique_id=103992851]
+volume_db = 10.0
+
+[node name="Label" type="Label" parent="." index="10" unique_id=440119829 node_paths=PackedStringArray("sm")]
+z_index = 100
+offset_top = 125.0
+offset_right = 40.0
+offset_bottom = 148.0
+text = "debub"
+label_settings = SubResource("LabelSettings_cfpjs")
+script = SubResource("GDScript_cfpjs")
+sm = NodePath("../StateMachine")
+
+[connection signal="flashed" from="LightSensitiveComponent" to="StateMachine/Invisible" method="_on_flashed"]

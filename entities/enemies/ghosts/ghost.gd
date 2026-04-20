@@ -65,8 +65,8 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func damage(amount: int, from: Node = null) -> void:
-	state_machine.change_state("Hurt", {"from"=from})
+func damage(amount: int, from: Node = null, next_state: StringName = &"") -> void:
+	state_machine.change_state("Hurt", {from=from, next=next_state})
 	health.damage(amount)
 
 
