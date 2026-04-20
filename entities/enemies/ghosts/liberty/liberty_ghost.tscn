@@ -120,9 +120,10 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhhdn"]
 radius = 150.0
 
-[node name="LibertyGhost" unique_id=1958681849 instance=ExtResource("1_yb31w")]
+[node name="LibertyGhost" unique_id=1958681849 node_paths=PackedStringArray("shades_spawnpoint") instance=ExtResource("1_yb31w")]
 script = ExtResource("2_6xjem")
 shades_droppable = ExtResource("3_v0g6m")
+shades_spawnpoint = NodePath("Sprite/AnimatedSprite2D/ShadesSpawn")
 channel = 3
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
@@ -136,7 +137,6 @@ position = Vector2(74, -130)
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_j1em3")
-offset = Vector2(34, 0)
 
 [node name="HotDog" type="Sprite2D" parent="Sprite/AnimatedSprite2D" index="0" unique_id=218384993]
 position = Vector2(-120, 118.66667)

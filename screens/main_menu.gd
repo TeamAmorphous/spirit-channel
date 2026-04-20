@@ -10,14 +10,14 @@ func _on_start_button_pressed() -> void:
 	if not game_scene_path:
 		push_error("no game_scene_path set!")
 		return
-	await SceneTransitioner.transition_to_file(game_scene_path)
+	SceneManager.change_scene(game_scene_path)
 
 
 func _on_options_button_pressed() -> void:
 	if not options_scene_path:
 		push_error("no options_scene_path set!")
 		return
-	await SceneTransitioner.transition_to_file(options_scene_path)
+	SceneManager.change_scene(options_scene_path)
 
 
 func _on_quit_button_pressed() -> void:

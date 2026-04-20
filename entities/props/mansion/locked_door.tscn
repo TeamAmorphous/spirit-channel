@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://0yho043dnls2"]
+
+[ext_resource type="PackedScene" uid="uid://choh73cfo4jm7" path="res://entities/props/mansion/door.tscn" id="1_dmrvo"]
+[ext_resource type="Texture2D" uid="uid://rbq4kqr5et2e" path="res://entities/props/mansion/lock_indicator.png" id="2_av732"]
+
+[sub_resource type="GDScript" id="GDScript_apvdj"]
+script/source = "extends Sprite2D
+
+func _ready():
+	get_parent().remove_child(self)
+	free()
+"
+
+[node name="Door" unique_id=441128494 instance=ExtResource("1_dmrvo")]
+needs_item = &"key"
+
+[node name="LockAnimPlayer" parent="." index="10" unique_id=276871032]
+autoplay = &"RESET"
+
+[node name="DebugIndicator" type="Sprite2D" parent="." index="12" unique_id=168945405]
+z_index = 15
+position = Vector2(0, -320)
+texture = ExtResource("2_av732")
+script = SubResource("GDScript_apvdj")

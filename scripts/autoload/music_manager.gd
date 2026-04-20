@@ -37,6 +37,13 @@ func _process(delta: float) -> void:
 		player.volume_db = lerp(player.volume_db, target_db, delta * 20.0)
 
 
+func snap_volume() -> void:
+	for channel in ghost_players:
+		var player := ghost_players[channel]
+		var target_db = 0.0 if channel == current_channel else -80.0
+		player.volume_db = target_db
+
+
 func start() -> void:
 	base.play()
 	for player in ghost_players.values():

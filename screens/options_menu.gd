@@ -7,7 +7,7 @@ func _on_back_button_pressed() -> void:
 	if not menu_scene_path:
 		push_error("no menu_scene_path set!")
 		return
-	await SceneTransitioner.transition_to_file(menu_scene_path)
+	SceneManager.change_scene(menu_scene_path)
 
 
 func _on_volume_slider_value_changed(value: float) -> void:

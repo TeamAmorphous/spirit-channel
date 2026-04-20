@@ -4,10 +4,21 @@ extends Area2D
 @export var damage: int = 1
 @export var lifetime: float = 2.5
 @export var gravity_scale: float = 1.0
-
+@export var angular_velocity: float = 200.0
+@export var random_angular_direction: bool = true
 
 var velocity := Vector2.ZERO
 var gravity_force: float = float(ProjectSettings.get_setting("physics/2d/default_gravity"))
+
+
+func _ready() -> void:
+	rotation = randf_range(-PI, PI)
+	if random_angular_direction:
+		angular_velocity *= 1 if randf() < 0.5 else -1
+
+
+func _process(delta: float) -> void:
+	rotation_degrees += angular_velocity * delta
 
 
 func _physics_process(delta: float) -> void:

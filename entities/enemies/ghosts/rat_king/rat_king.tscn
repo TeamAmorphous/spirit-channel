@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://c2pwi0hjwyya3" path="res://entities/enemies/ghosts/rat_king/attack0.png" id="3_hqvt0"]
 [ext_resource type="Texture2D" uid="uid://beudg86s2qvjw" path="res://entities/enemies/ghosts/rat_king/attack1.png" id="4_qgdai"]
 [ext_resource type="Texture2D" uid="uid://qyia7pu20jro" path="res://entities/enemies/ghosts/rat_king/attack2.png" id="5_utnah"]
+[ext_resource type="Texture2D" uid="uid://d4jbehpoxamj8" path="res://entities/enemies/ghosts/rat_king/idle.png" id="6_qgdai"]
+[ext_resource type="Texture2D" uid="uid://bb1gppuiexxvf" path="res://entities/enemies/ghosts/rat_king/damage.png" id="6_utnah"]
+[ext_resource type="Texture2D" uid="uid://cpqau7yivcy2f" path="res://entities/enemies/ghosts/rat_king/tele.png" id="8_odn85"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7gw7"]
 radius = 80.0
@@ -22,20 +25,29 @@ animations = [{
 "texture": ExtResource("5_utnah")
 }],
 "loop": true,
-"name": &"attak",
+"name": &"attack",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_utnah")
+}],
 "loop": true,
 "name": &"hurt",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_qgdai")
+}],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_odn85")
+}],
 "loop": true,
 "name": &"tele",
 "speed": 5.0

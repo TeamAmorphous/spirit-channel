@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bu3j8m5xgyrqc"]
 
 [ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_3ll0d"]
-[ext_resource type="Script" uid="uid://c7lkkyhnr4un0" path="res://entities/enemies/ghosts/mobster/attack.gd" id="2_245fo"]
+[ext_resource type="Script" uid="uid://c7lkkyhnr4un0" path="res://entities/enemies/ghosts/states/charge.gd" id="2_245fo"]
 [ext_resource type="Texture2D" uid="uid://bq22kdln3vvfm" path="res://entities/enemies/ghosts/mobster/damage.png" id="2_oullg"]
 [ext_resource type="Texture2D" uid="uid://mhw3hx2sqff0" path="res://entities/enemies/ghosts/mobster/attack0.png" id="2_si7u7"]
 [ext_resource type="Texture2D" uid="uid://c0sdc131aix4t" path="res://entities/enemies/ghosts/mobster/attack1.png" id="3_245fo"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bkwfnv61qsrqf" path="res://entities/enemies/ghosts/mobster/idle.png" id="3_ojsxy"]
 [ext_resource type="Texture2D" uid="uid://tn8slj4py572" path="res://entities/enemies/ghosts/mobster/tele.png" id="4_si7u7"]
 [ext_resource type="Texture2D" uid="uid://2mqf4op5qch3" path="res://entities/enemies/ghosts/mobster/fist2.png" id="4_w16mf"]
+[ext_resource type="Texture2D" uid="uid://hqfvytln8ahq" path="res://entities/enemies/ghosts/mobster/speedlines0.png" id="10_3tmiu"]
+[ext_resource type="Texture2D" uid="uid://cm3calyfv4fn3" path="res://entities/enemies/ghosts/mobster/speedlines1.png" id="11_nslht"]
+[ext_resource type="Texture2D" uid="uid://c7o0sboy14q80" path="res://entities/enemies/ghosts/mobster/speedlines2.png" id="12_3tmiu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eoei1"]
 animations = [{
@@ -27,6 +30,23 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wtb3a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_3tmiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_nslht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3tmiu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_245fo"]
@@ -68,23 +88,87 @@ animations = [{
 }]
 
 [sub_resource type="Animation" id="Animation_cvicm"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/PunchSprite:offset")
+tracks/0/path = NodePath("Sprite/AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.46666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(360, 0)]
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/PunchSprite:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.5),
+"transitions": PackedFloat32Array(1.802499, 4.2870927, 1),
+"update": 0,
+"values": [Vector2(-110, 15), Vector2(-154, -4), Vector2(193.99997, 10.999984)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/PunchSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.36581767, 0.4055012]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/PunchSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.43333334),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/PunchSprite/SpeedLines:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w16mf"]
 _data = {
-&"mobster": SubResource("Animation_cvicm")
+&"attack": SubResource("Animation_cvicm")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3tmiu"]
+radius = 120.0
 
 [node name="Ghost" unique_id=1958681849 instance=ExtResource("1_3ll0d")]
 
@@ -93,18 +177,44 @@ resistance = 5.0
 
 [node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
 chase_speed = 100.0
+contact_damage = 4
+excluded_states = Array[String](["Hurt", "Poof", "Charge"])
 
-[node name="Attack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=2075433503]
+[node name="Charge" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=2075433503 node_paths=PackedStringArray("attack_area", "next_state")]
 script = ExtResource("2_245fo")
+attack_area = NodePath("../../PunchArea")
+animation = &"mobster/attack"
+next_state = NodePath("../Idle")
 
 [node name="PunchSprite" type="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=1239580772]
-position = Vector2(-119, 15)
+visible = false
+position = Vector2(-161, 15)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_eoei1")
 animation = &"attack"
 
+[node name="SpeedLines" type="AnimatedSprite2D" parent="Sprite/PunchSprite" index="0" unique_id=353382279]
+visible = false
+position = Vector2(-17.159033, -2.7907434)
+rotation = -0.38397244
+sprite_frames = SubResource("SpriteFrames_wtb3a")
+frame_progress = 0.17873582
+flip_h = true
+
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="1" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_245fo")
 
+[node name="PunchArea" type="RemoteTransform2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="2" unique_id=1057777635]
+remote_path = NodePath("../../PunchArea")
+
 [node name="AnimationPlayer" parent="." index="6" unique_id=103237844]
-libraries/attack = SubResource("AnimationLibrary_w16mf")
+libraries/mobster = SubResource("AnimationLibrary_w16mf")
+
+[node name="PunchArea" type="Area2D" parent="." index="9" unique_id=1830956772]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchArea" index="0" unique_id=169701210]
+position = Vector2(148, 0)
+shape = SubResource("CircleShape2D_3tmiu")

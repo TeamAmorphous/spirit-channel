@@ -2,12 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4gowca5ktt81" path="res://screens/main_menu.gd" id="1_p3cyw"]
 [ext_resource type="Texture2D" uid="uid://kfhf0qr8mvip" path="res://screens/temp_menu_bg.png" id="2_t3bh0"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_csm0v"]
-font_size = 64
-font_color = Color(0.21568628, 0.9607843, 0.4, 1)
-outline_size = 20
-outline_color = Color(0, 0.43529412, 0, 1)
+[ext_resource type="Texture2D" uid="uid://bh3qtik4yuusf" path="res://screens/title.png" id="3_t3bh0"]
 
 [node name="MainMenu" type="Control" unique_id=1150759093]
 layout_mode = 3
@@ -41,14 +36,14 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1070119008]
 layout_mode = 2
-theme_override_constants/separation = 80
+theme_override_constants/separation = 5
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1209570070]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer" unique_id=55016044]
+modulate = Color(2.2419872, 2.2419872, 2.2419872, 1)
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Spirit Channel"
-label_settings = SubResource("LabelSettings_csm0v")
-horizontal_alignment = 1
+texture = ExtResource("3_t3bh0")
+expand_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=56621482]
 layout_mode = 2

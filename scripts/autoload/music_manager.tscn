@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://ce7jx8udw2m6k" path="res://music/yellow.ogg" id="6_j1of8"]
 
 [node name="MusicManager" type="Node" unique_id=738554524]
+process_mode = 3
 script = ExtResource("1_74np6")
 
 [node name="Base" type="AudioStreamPlayer" parent="." unique_id=41759303]

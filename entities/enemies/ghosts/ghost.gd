@@ -1,7 +1,6 @@
 class_name Ghost
 extends Enemy
 
-
 const GHOST_GROUP := &"ghosts"
 
 
@@ -32,10 +31,6 @@ const CHANNEL_COLORS: Dictionary[Channel, Color] = {
 @export var decel: float = 800.0
 
 @export var channel: Channel = Channel.NONE
-@export var max_audio_distance: float = 1000.0
-
-
-var idle_anim: StringName = &"idle"
 
 var facing: Vector2
 

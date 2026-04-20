@@ -1,7 +1,7 @@
 extends PlayerState
 
 func on_start(_msg := {}) -> void:
-	# todo: player.anim_player.play(&"jump")
+	player.movement_anim_player.play(&"jump")
 	# todo: sound fx
 	player.velocity.y = -player.jump_velocity
 

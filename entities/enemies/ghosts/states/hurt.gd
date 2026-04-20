@@ -1,5 +1,6 @@
 extends GhostState
 
+@export var animation: StringName = &"hurt"
 @export var stun_duration: float = 2.0
 
 var next_state: String
@@ -8,12 +9,10 @@ var stun_timer: float
 
 func on_start(msg := {}) -> void:
 	stun_timer = stun_duration
-	ghost.anim_player.play(&"hurt")
+	ghost.anim_player.play(animation)
 	next_state = msg.get("next", state_machine.last_state.name)
-	if "from" in msg and msg["from"] is Player:
-		var player := msg["from"] as Player
-		var recoil_dir := -ghost.global_position.direction_to(player.chase_target.global_position)
-		ghost.velocity = recoil_dir * 200
+	var recoil_dir := -ghost.global_position.direction_to(player.chase_target.global_position)
+	ghost.velocity = recoil_dir * 200
 	ghost.light_sensitivity.enabled = false
 	ghost.light_sensitivity.reset()
 

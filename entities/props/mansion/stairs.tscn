@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c0gfo3aqggi5h"]
+
+[ext_resource type="Script" uid="uid://b4332ew426oig" path="res://entities/props/mansion/stairs.gd" id="1_460fk"]
+[ext_resource type="Texture2D" uid="uid://clyyofgjfvqny" path="res://map/assets/STAIRS.png" id="1_mmlpv"]
+[ext_resource type="Script" uid="uid://d1k8eytqs0gno" path="res://scripts/types/interactable.gd" id="3_g3yhn"]
+
+[sub_resource type="Curve2D" id="Curve2D_2opwv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -448, 0, 0, 0, 0, 0, 384, -1088)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82aup"]
+size = Vector2(512, 128)
+
+[node name="Stairs" type="Node2D" unique_id=1675593934]
+process_mode = 3
+position = Vector2(0, 16)
+script = ExtResource("1_460fk")
+
+[node name="TopSprite" type="Sprite2D" parent="." unique_id=1660510782]
+z_index = 20
+texture = ExtResource("1_mmlpv")
+offset = Vector2(0, -1080)
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 376)
+
+[node name="BottomSprite" type="Sprite2D" parent="." unique_id=675547198]
+texture = ExtResource("1_mmlpv")
+offset = Vector2(0, -440)
+region_enabled = true
+region_rect = Rect2(0, 376, 1280, 904)
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1834898093]
+curve = SubResource("Curve2D_2opwv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=990410453]
+position = Vector2(-448, 0)
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="BottomFloor" type="Area2D" parent="." unique_id=1996031720]
+position = Vector2(-384, 0)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_g3yhn")
+repeatable = true
+metadata/_custom_type_script = "uid://d1k8eytqs0gno"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomFloor" unique_id=1959431817]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_82aup")
+
+[node name="TopFloor" type="Area2D" parent="." unique_id=815788520]
+position = Vector2(384, -1088)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_g3yhn")
+repeatable = true
+metadata/_custom_type_script = "uid://d1k8eytqs0gno"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopFloor" unique_id=1488875827]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_82aup")
+
+[connection signal="interacted_with" from="BottomFloor" to="." method="_on_bottom_floor_interacted_with"]
+[connection signal="interacted_with" from="TopFloor" to="." method="_on_top_floor_interacted_with"]

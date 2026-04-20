@@ -1,21 +1,27 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b4yya56gpkjyh"]
 
-[ext_resource type="Script" path="res://entities/enemies/ghosts/pizza/pizza_projectile.gd" id="1_8jp1d"]
-[ext_resource type="Texture2D" path="res://entities/enemies/ghosts/pizza/pizza.png" id="2_3d11w"]
+[ext_resource type="Script" uid="uid://csbtk4n4uueta" path="res://entities/enemies/ghosts/pizza/pizza_projectile.gd" id="1_8jp1d"]
+[ext_resource type="Texture2D" uid="uid://b48c4tu752qki" path="res://entities/enemies/ghosts/pizza/pizza.png" id="2_3d11w"]
+[ext_resource type="Texture2D" uid="uid://bi13g8k1gmfjl" path="res://entities/point_light_neutral.webp" id="3_xib50"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p04u3"]
 radius = 24.0
 
-[node name="PizzaProjectile" type="Area2D"]
+[node name="PizzaProjectile" type="Area2D" unique_id=397518361]
 collision_layer = 0
 collision_mask = 3
 monitorable = false
 script = ExtResource("1_8jp1d")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=562557072]
 shape = SubResource("CircleShape2D_p04u3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1138919050]
 texture = ExtResource("2_3d11w")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1460451597]
+position = Vector2(0, 40)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("3_xib50")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

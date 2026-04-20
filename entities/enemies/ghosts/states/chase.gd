@@ -1,5 +1,6 @@
 extends GhostState
 
+@export var animation: StringName
 
 @export var detection_area: Area2D
 @export var attack_area: Area2D
@@ -22,8 +23,11 @@ func _ready() -> void:
 		attack_area.body_entered.connect(_on_attack_area_body_entered)
 
 
-## dangerous to put _process in a State, can cause fucky wucky if you are not careful!!!
-## - ceri
+# dangerous to put _process in a State, can cause fucky wucky if you are not careful!!!
+# use update, physics_update, input, and unhandled_input functions instead,
+# uses proper state machine control flow.
+# - ceri
+
 func _process(_delta: float) -> void:
 	if state_machine.current_state == self or not enabled:
 		return
@@ -33,12 +37,13 @@ func _process(_delta: float) -> void:
 
 
 func on_start(_msg := {}) -> void:
-	ghost.anim_player.play(ghost.idle_anim)
+	if animation:
+		ghost.anim_player.play(animation)
 
 
 func physics_update(delta: float) -> void:
 	if target and enabled:
-		var dir_to_target := ghost.global_position.direction_to(target.chase_target.global_position).normalized()
+		var dir_to_target := ghost.global_position.direction_to(player.chase_target.global_position).normalized()
 
 		ghost.facing = dir_to_target
 		ghost.velocity = ghost.velocity.move_toward(dir_to_target * chase_speed, chase_accel * delta)
@@ -55,7 +60,7 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body is Player:
+	if body == player:
 		target = body
 
 

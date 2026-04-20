@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cs5x5byb030s1"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_4ovbj"]
+[ext_resource type="Texture2D" uid="uid://bilm1nmi71igh" path="res://map/assets/BED.png" id="2_k8bsj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8bsj"]
+size = Vector2(814, 200)
+
+[node name="Bed" unique_id=316347185 instance=ExtResource("1_4ovbj")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=1377903909]
+position = Vector2(0, -348)
+texture = ExtResource("2_k8bsj")
+
+[node name="Interactable" parent="." index="1" unique_id=1878105502]
+enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" index="0" unique_id=1045684328]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_k8bsj")

@@ -1,0 +1,506 @@
+[gd_scene format=3 uid="uid://choh73cfo4jm7"]
+
+[ext_resource type="Script" uid="uid://ctwbecx6tu076" path="res://entities/props/mansion/door.gd" id="1_nco46"]
+[ext_resource type="Texture2D" uid="uid://ss2x7jlpc57y" path="res://map/assets/DOOR_FRONT.png" id="2_lm8qd"]
+[ext_resource type="Texture2D" uid="uid://c6bvojnpjw1n7" path="res://map/assets/DOOR_SIDE.png" id="3_3u7nx"]
+[ext_resource type="AudioStream" uid="uid://cfyqeil1gllbp" path="res://entities/props/mansion/doorOpen.ogg" id="3_ogd60"]
+[ext_resource type="AudioStream" uid="uid://cy6fdu8v7eqsl" path="res://entities/props/mansion/doorClose.ogg" id="5_3u7nx"]
+[ext_resource type="Texture2D" uid="uid://rbq4kqr5et2e" path="res://entities/props/mansion/lock_indicator.png" id="5_lm8qd"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_11arx"]
+polygon = PackedVector2Array(-32.5, -639.99994, 32.5, -639.99994, 32.5, 0, -32.5, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nco46"]
+size = Vector2(160.00005, 640.0001)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3u7nx"]
+size = Vector2(480.0001, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogd60"]
+size = Vector2(65.00001, 640.00006)
+
+[sub_resource type="Animation" id="Animation_ogd60"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorOpen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorOpen:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DoorClosed:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ClosedOccluder:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaticBody2D:collision_layer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_nco46"]
+resource_name = "closed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorOpen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorOpen:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClosedOccluder:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DoorClosed:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaticBody2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StaticBody2D:collision_layer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_lm8qd"]
+resource_name = "left"
+length = 0.25
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorOpen:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(0.24148397, 1),
+"update": 0,
+"values": [Vector2(0.2, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorClosed:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClosedOccluder:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DoorOpen:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaticBody2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StaticBody2D:collision_layer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3u7nx"]
+resource_name = "right"
+length = 0.25
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorOpen:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(0.24148397, 1),
+"update": 0,
+"values": [Vector2(-0.2, 1), Vector2(-1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorClosed:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClosedOccluder:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DoorOpen:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaticBody2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StaticBody2D:collision_layer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7l5r6"]
+_data = {
+&"RESET": SubResource("Animation_ogd60"),
+&"closed": SubResource("Animation_nco46"),
+&"left": SubResource("Animation_lm8qd"),
+&"right": SubResource("Animation_3u7nx")
+}
+
+[sub_resource type="Animation" id="Animation_7l5r6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_885s0"]
+resource_name = "show_left"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 0.16666667, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(-1.8, 1.8), Vector2(-1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_rw6n7"]
+resource_name = "show_right"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 0.16666667, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.8, 1.8), Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1830q"]
+_data = {
+&"RESET": SubResource("Animation_7l5r6"),
+&"show_left": SubResource("Animation_885s0"),
+&"show_right": SubResource("Animation_rw6n7")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lm8qd"]
+light_mode = 1
+
+[node name="Door" type="Node2D" unique_id=441128494]
+position = Vector2(16, 16)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_nco46")
+
+[node name="DoorOpen" type="Sprite2D" parent="." unique_id=2028958891]
+visible = false
+z_index = -1
+z_as_relative = false
+position = Vector2(1.5258788e-05, -319.99997)
+texture = ExtResource("2_lm8qd")
+offset = Vector2(159.99997, 3.0517578e-05)
+
+[node name="DoorClosed" type="Sprite2D" parent="." unique_id=399303097]
+z_index = 10
+z_as_relative = false
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_3u7nx")
+offset = Vector2(0, -320)
+
+[node name="ClosedOccluder" type="LightOccluder2D" parent="." unique_id=1716071027]
+occluder = SubResource("OccluderPolygon2D_11arx")
+
+[node name="RightArea" type="Area2D" parent="." unique_id=1248143072]
+scale = Vector2(0.99999994, 0.99999994)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArea" unique_id=1914546788]
+position = Vector2(80.00001, -320.00003)
+shape = SubResource("RectangleShape2D_nco46")
+
+[node name="LeftArea" type="Area2D" parent="." unique_id=1254946525]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArea" unique_id=482832238]
+position = Vector2(-79.999985, -319.9999)
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_nco46")
+
+[node name="InsideArea" type="Area2D" parent="." unique_id=549697598]
+scale = Vector2(0.99999994, 0.99999994)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InsideArea" unique_id=411243031]
+position = Vector2(0, -320)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_3u7nx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1605677810]
+visible = false
+scale = Vector2(0.99999994, 0.99999994)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1050509444]
+position = Vector2(0, -320.00003)
+shape = SubResource("RectangleShape2D_ogd60")
+
+[node name="OpenSound" type="AudioStreamPlayer" parent="." unique_id=1002636784]
+stream = ExtResource("3_ogd60")
+
+[node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=56520482]
+stream = ExtResource("5_3u7nx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981103821]
+libraries/ = SubResource("AnimationLibrary_7l5r6")
+
+[node name="LockAnimPlayer" type="AnimationPlayer" parent="." unique_id=276871032]
+root_node = NodePath("../LockIndicator")
+libraries/ = SubResource("AnimationLibrary_1830q")
+
+[node name="LockIndicator" type="Sprite2D" parent="." unique_id=1873107452]
+visible = false
+z_index = 1
+material = SubResource("CanvasItemMaterial_lm8qd")
+position = Vector2(2.2737368e-13, -585)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_lm8qd")
+centered = false
+offset = Vector2(60, -135)
+
+[connection signal="body_entered" from="RightArea" to="." method="_on_right_area_body_entered"]
+[connection signal="body_exited" from="RightArea" to="." method="_on_right_area_body_exited"]
+[connection signal="body_entered" from="LeftArea" to="." method="_on_left_area_body_entered"]
+[connection signal="body_exited" from="LeftArea" to="." method="_on_left_area_body_exited"]
+[connection signal="body_entered" from="InsideArea" to="." method="_on_inside_area_body_entered"]
+[connection signal="body_exited" from="InsideArea" to="." method="_on_inside_area_body_exited"]

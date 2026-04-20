@@ -1,5 +1,7 @@
 extends PlayerState
 
+@export var land_sound: AudioStream
+
 var coyote_timer: float
 
 func on_start(msg := {}) -> void:
@@ -25,7 +27,7 @@ func physics_update(delta: float) -> void:
 		if direction:
 			state_machine.change_state("Walk")
 			return
-		# todo: landing
+		player.play_sound_effect(land_sound)
 		state_machine.change_state("Idle")
 		return
 

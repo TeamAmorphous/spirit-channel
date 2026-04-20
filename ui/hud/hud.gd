@@ -18,11 +18,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if randf() < 0.1 and not logo_anim_player.is_playing():
+	if randf() < 0.001 and not logo_anim_player.is_playing():
 		logo_anim_player.play(&"default", 0.25)
-	elif logo_anim_player.current_animation != &"RESET":
-		logo_anim_player.play(&"RESET", 0.25)
-
 
 func _on_player_max_health_changed(max_health: int, _old: int) -> void:
 	health_bar.max_value = max_health

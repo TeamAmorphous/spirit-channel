@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cmrydq17riis5"]
+
+[ext_resource type="Script" uid="uid://53e2enstgm1t" path="res://entities/props/furniture/furniture.gd" id="1_km3i8"]
+[ext_resource type="Script" uid="uid://d1k8eytqs0gno" path="res://scripts/types/interactable.gd" id="2_g6cac"]
+
+[node name="Furniture" type="Node2D" unique_id=316347185]
+z_index = -5
+script = ExtResource("1_km3i8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=102654398]
+volume_db = 15.0
+
+[node name="Sprite" type="Node2D" parent="." unique_id=541780398]
+
+[node name="Interactable" type="Area2D" parent="." unique_id=1878105502]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_g6cac")
+enabled = false
+metadata/_custom_type_script = "uid://d1k8eytqs0gno"
+
+[connection signal="interacted_with" from="Interactable" to="." method="_on_interacted_with"]

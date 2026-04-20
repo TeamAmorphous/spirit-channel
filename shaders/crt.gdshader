@@ -28,7 +28,7 @@ uniform vec2 resolution = vec2(320.0, 180.0);
 
 uniform float scan_line_amount :hint_range(0.0, 1.0) = 1.0;
 uniform float warp_amount :hint_range(0.0, 5.0) = 0.1;
-uniform float noise_amount :hint_range(0.0, 0.3) = 0.03;
+uniform float noise_amount :hint_range(0.0, 10.0) = 0.03;
 uniform float interference_amount :hint_range(0.0, 1.0) = 0.2;
 uniform float grille_amount :hint_range(0.0, 1.0) = 0.1;
 uniform float grille_size :hint_range(1.0, 5.0) = 1.0;
