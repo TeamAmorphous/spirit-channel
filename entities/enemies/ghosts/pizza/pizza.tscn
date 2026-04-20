@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dclbmboho1qq4"]
+
+[ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_vntsv"]
+[ext_resource type="Texture2D" uid="uid://ddm68ufoq8w2i" path="res://entities/enemies/ghosts/pizza/damage.png" id="2_2v0ht"]
+[ext_resource type="Texture2D" uid="uid://dy6dp8lkvr338" path="res://entities/enemies/ghosts/pizza/attack.png" id="2_b8kr0"]
+[ext_resource type="Texture2D" uid="uid://c2kk72hwjsf76" path="res://entities/enemies/ghosts/pizza/idle.png" id="3_ktweu"]
+[ext_resource type="Texture2D" uid="uid://b6jvwbty1cmbb" path="res://entities/enemies/ghosts/pizza/tele.png" id="4_kpwb0"]
+[ext_resource type="Texture2D" uid="uid://dwsv5vvyfikn0" path="res://entities/enemies/ghosts/pizza/attack_box0.png" id="6_3uu3j"]
+[ext_resource type="Texture2D" uid="uid://nqn7bw6xs8yl" path="res://entities/enemies/ghosts/pizza/attack_box2.png" id="7_c17p4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b8kr0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b8kr0")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2v0ht")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ktweu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_kpwb0")
+}],
+"loop": true,
+"name": &"tele",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ia68l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_3uu3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c17p4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Ghost" unique_id=1958681849 instance=ExtResource("1_vntsv")]
+
+[node name="HealthComponent" parent="." index="0" unique_id=908077137]
+max_health = 3
+
+[node name="Attack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=1101052154]
+
+[node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
+sprite_frames = SubResource("SpriteFrames_b8kr0")
+
+[node name="PizzaAttack" type="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="1" unique_id=911890201]
+position = Vector2(65, 8)
+scale = Vector2(0.685, 0.685)
+sprite_frames = SubResource("SpriteFrames_ia68l")
+animation = &"idle"

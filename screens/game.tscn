@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
 [ext_resource type="PackedScene" uid="uid://bvwsi0yxnfngv" path="res://entities/enemies/ghosts/liberty/liberty_ghost.tscn" id="3_6nlyh"]
 [ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_rypym"]
+[ext_resource type="PackedScene" uid="uid://dclbmboho1qq4" path="res://entities/enemies/ghosts/pizza/pizza.tscn" id="6_5kag3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_he66p"]
 size = Vector2(654.40015, 1.6000004)
@@ -162,3 +163,6 @@ color = Color(0.38928655, 0.38928664, 0.38928658, 1)
 
 [node name="Rat" parent="." unique_id=1510573839 instance=ExtResource("4_rypym")]
 position = Vector2(-1514, -3215)
+
+[node name="Ghost" parent="." unique_id=495033598 instance=ExtResource("6_5kag3")]
+position = Vector2(-898, -1405)
