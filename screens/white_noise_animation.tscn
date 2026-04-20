@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmo6oee0atcln"]
 
 [ext_resource type="Script" uid="uid://bvrrllaa8eugr" path="res://screens/white_noise_animation.gd" id="1_ahs35"]
-[ext_resource type="Shader" uid="uid://cwepqrnqyu8nt" path="res://screens/static.gdshader" id="2_rktxu"]
+[ext_resource type="Shader" uid="uid://cwepqrnqyu8nt" path="res://shaders/static.gdshader" id="2_rktxu"]
 
 [sub_resource type="Gradient" id="Gradient_rktxu"]
 offsets = PackedFloat32Array(0.4375, 0.54115856)

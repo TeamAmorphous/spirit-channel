@@ -159,7 +159,7 @@ position = Vector2(-2643, -1293)
 decel = 800.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
-color = Color(0.38928655, 0.38928664, 0.38928658, 1)
+color = Color(0.6052743, 0.6052743, 0.6052743, 1)
 
 [node name="Rat" parent="." unique_id=1510573839 instance=ExtResource("4_rypym")]
 position = Vector2(-1514, -3215)

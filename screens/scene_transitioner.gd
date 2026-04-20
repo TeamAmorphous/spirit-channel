@@ -18,7 +18,7 @@ func transition_to_file(scene_path: String, duration: float = 0.5) -> void:
 	if half_duration > 0.0:
 		await get_tree().create_timer(half_duration).timeout
 
-	var error := get_tree().change_scene_to_file(scene_path)
+	var error := SceneManager.change_scene(scene_path)
 	if error != OK:
 		white_noise.stop_transition()
 		_is_transitioning = false

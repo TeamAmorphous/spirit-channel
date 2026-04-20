@@ -4,6 +4,7 @@ extends Marker2D
 
 const SWITCH_THRESHOLD := 0.6
 const MOUSE_DEADZONE := 5.0
+const MOUSE_MAX_DIST := 1000.0
 const STICK_DEADZONE := 0.2
 const STICK_AIM_DISTANCE := 1000.0
 const STICK_AIM_LAG := 20.0
@@ -15,6 +16,9 @@ enum Mode {
 	NONE,
 	DISABLED,
 }
+
+
+@export var mouse_sensitivity: float = 1.0
 
 
 var mode: Mode = Mode.MOUSE
@@ -35,6 +39,7 @@ func _process(delta: float) -> void:
 				return
 			target = get_global_mouse_position()
 			last_direction = global_position.direction_to(target)
+		
 		Mode.STICK:
 			if stick_strength < STICK_DEADZONE and mouse_strength > MOUSE_DEADZONE:
 				mode = Mode.MOUSE
@@ -45,6 +50,7 @@ func _process(delta: float) -> void:
 				last_direction = stick_input.normalized()
 			else:
 				mode = Mode.NONE
+		
 		Mode.NONE:
 			if stick_strength > STICK_DEADZONE:
 				mode = Mode.STICK

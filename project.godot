@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Spirit Channel"
 config/tags=PackedStringArray("ludum_dare_59")
-run/main_scene="uid://cxssbyg13n1lp"
+run/main_scene="uid://6megmv5cp4sr"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://ey34lobmeewl"
 
 [autoload]
 
+SceneManager="*uid://ik8owkeakwau"
 Dialogic="*uid://ds2q0uclmolvu"
 SceneTransitioner="*uid://boye3p3mtyqkv"
 MusicManager="*uid://g8yr033gwr1y"
@@ -31,6 +32,24 @@ MusicManager="*uid://g8yr033gwr1y"
 directories/dtl_directory={}
 layout/style_directory={}
 directories/dch_directory={}
+extensions_folder="res://addons/dialogic_additions"
+text/letter_speed=0.01
+text/initial_text_reveal_skippable=true
+text/text_reveal_skip_delay=0.1
+text/advance_delay=0.1
+text/autoadvance_per_character_delay=0.1
+text/autoadvance_ignored_characters_enabled=true
+animations/join_default_length=0.5
+animations/join_default_wait=true
+animations/leave_default_length=0.5
+animations/leave_default_wait=true
+animations/cross_fade_default_length=0.5
+choices/autofocus_first=true
+choices/delay=0.2
+choices/reveal_delay=0
+choices/reveal_by_input=false
+save/autosave_delay=60.0
+save/encryption_on_exports_only=true
 
 [display]
 

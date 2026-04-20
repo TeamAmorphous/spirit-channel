@@ -34,7 +34,7 @@ const STICK_AIM_LAG := 20.0
 @onready var arm: Node2D = $Sprite/Arm
 @onready var body: AnimatedSprite2D = $Sprite/Body
 
-@onready var tv: ColorRect = $Sprite/Body/TV
+@onready var face_background: Sprite2D = $Sprite/FaceBackground
 @onready var eyes: AnimatedSprite2D = $Sprite/Body/Eyes
 @onready var pupils: Sprite2D = $Sprite/Body/Eyes/Pupils
 @onready var face_glow: PointLight2D = $Sprite/Body/FaceGlow
@@ -51,6 +51,7 @@ const STICK_AIM_LAG := 20.0
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var aim: AimController = $AimController
+@onready var reticle: Node2D = $Reticle
 
 @export var footstep_sounds: Array[AudioStream]
 
@@ -64,13 +65,14 @@ var flash_cooldown: float
 
 func _ready() -> void:
 	update_color()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	MusicManager.start()
 
 #region Process Functions
 
 func _process(delta: float) -> void:
 	camera.target = aim.target
+	reticle.global_position = aim.target
 	
 	if invincibility_timer > 0:
 		invincibility_timer -= delta
@@ -84,6 +86,8 @@ func _process(delta: float) -> void:
 			flashlight_beam.energy = 1.0
 
 	is_invincible = invincibility_timer > 0
+	
+	reticle.visible = aim.mode == AimController.Mode.STICK
 	
 	if aim.mode != AimController.Mode.DISABLED and flash_cooldown == 0:
 		do_flashlight_damage(delta)
@@ -130,10 +134,14 @@ func update_color() -> void:
 	#color_tween.tween_property(flashlight_beam, "energy", 1.0, 0.1).from(0.0)
 	eyes.modulate = color
 	face_glow.color = color
-	tv.color = color.darkened(0.8)
+	face_background.modulate = color.darkened(0.9)
 
 func play_footstep_sound() -> void:
 	var sound := footstep_sounds.pick_random() as AudioStream
+	if not sound:
+		push_warning("footstep_sounds is empty!")
+		return
+	sfx.play()
 	var playback := sfx.get_stream_playback() as AudioStreamPlaybackPolyphonic
 	playback.play_stream(sound)
 
@@ -182,7 +190,7 @@ func update_sprites(delta: float) -> void:
 func damage(amount: int, from: Node = null) -> void:
 	if is_invincible:
 		return
-	state_machine.change_state("Hurt")
+	state_machine.change_state("Hurt", {"from": from})
 	invincibility_timer = hurt_invincibility_length
 	health.damage(amount)
 

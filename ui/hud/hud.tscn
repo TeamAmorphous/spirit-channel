@@ -83,7 +83,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=2117649756]
@@ -122,5 +121,3 @@ texture = ExtResource("4_w75iv")
 libraries/ = SubResource("AnimationLibrary_o2lis")
 autoplay = &"default"
 speed_scale = 5.0
-
-[node name="ScreenFX" type="Node" parent="." unique_id=1107825153]
