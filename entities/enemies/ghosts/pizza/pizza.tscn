@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_vntsv"]
 [ext_resource type="Texture2D" uid="uid://ddm68ufoq8w2i" path="res://entities/enemies/ghosts/pizza/damage.png" id="2_2v0ht"]
-[ext_resource type="Script" uid="uid://cxxu0t8gsqx3w" path="res://entities/enemies/ghosts/states/attack.gd" id="2_3uu3j"]
+[ext_resource type="Script" uid="uid://cxxu0t8gsqx3w" path="res://entities/enemies/ghosts/pizza/attack.gd" id="2_3uu3j"]
 [ext_resource type="Texture2D" uid="uid://dy6dp8lkvr338" path="res://entities/enemies/ghosts/pizza/attack.png" id="2_b8kr0"]
 [ext_resource type="Texture2D" uid="uid://c2kk72hwjsf76" path="res://entities/enemies/ghosts/pizza/idle.png" id="3_ktweu"]
 [ext_resource type="Texture2D" uid="uid://b6jvwbty1cmbb" path="res://entities/enemies/ghosts/pizza/tele.png" id="4_kpwb0"]
@@ -67,7 +67,7 @@ animations = [{
 [node name="Ghost" unique_id=1958681849 instance=ExtResource("1_vntsv")]
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
-max_health = 3
+max_health = 1
 
 [node name="Attack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=1101052154]
 script = ExtResource("2_3uu3j")
