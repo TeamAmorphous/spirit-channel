@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bu3j8m5xgyrqc"]
+
+[ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_3ll0d"]
+[ext_resource type="Script" uid="uid://c7lkkyhnr4un0" path="res://entities/enemies/ghosts/mobster/attack.gd" id="2_245fo"]
+[ext_resource type="Texture2D" uid="uid://bq22kdln3vvfm" path="res://entities/enemies/ghosts/mobster/damage.png" id="2_oullg"]
+[ext_resource type="Texture2D" uid="uid://mhw3hx2sqff0" path="res://entities/enemies/ghosts/mobster/attack0.png" id="2_si7u7"]
+[ext_resource type="Texture2D" uid="uid://c0sdc131aix4t" path="res://entities/enemies/ghosts/mobster/attack1.png" id="3_245fo"]
+[ext_resource type="Texture2D" uid="uid://bd867rlbsrkr3" path="res://entities/enemies/ghosts/mobster/fist1.png" id="3_cvicm"]
+[ext_resource type="Texture2D" uid="uid://bkwfnv61qsrqf" path="res://entities/enemies/ghosts/mobster/idle.png" id="3_ojsxy"]
+[ext_resource type="Texture2D" uid="uid://tn8slj4py572" path="res://entities/enemies/ghosts/mobster/tele.png" id="4_si7u7"]
+[ext_resource type="Texture2D" uid="uid://2mqf4op5qch3" path="res://entities/enemies/ghosts/mobster/fist2.png" id="4_w16mf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eoei1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cvicm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w16mf")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_245fo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_si7u7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_245fo")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_oullg")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ojsxy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_si7u7")
+}],
+"loop": true,
+"name": &"tele",
+"speed": 5.0
+}]
+
+[node name="Ghost" unique_id=1958681849 instance=ExtResource("1_3ll0d")]
+
+[node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
+resistance = 5.0
+
+[node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
+chase_speed = 100.0
+
+[node name="Attack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=2075433503]
+script = ExtResource("2_245fo")
+
+[node name="PunchSprite" type="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=1239580772]
+position = Vector2(-96, 18)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_eoei1")
+animation = &"idle"
+
+[node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="1" unique_id=2083159277]
+sprite_frames = SubResource("SpriteFrames_245fo")
