@@ -28,6 +28,7 @@ func _ready() -> void:
 		base_chase_speed = chase_state.get("chase_speed")
 		base_chase_accel = chase_state.get("chase_accel")
 	if attack_sprite:
+		attack_sprite.visible = false
 		attack_sprite.offset = idle_offset
 
 
@@ -77,6 +78,7 @@ func _start_attack_animation() -> void:
 
 
 	if attack_sprite:
+		attack_sprite.visible = true
 		attack_sprite.offset = attack_offset
 
 
@@ -96,6 +98,7 @@ func _start_dash() -> void:
 	if chase_state:
 		chase_state.set("chase_speed", dash_speed)
 		chase_state.set("chase_accel", dash_accel)
+	ghost.anim_player.play(&"attack/mobster", -1.0, 1.0 / maxf(dash_duration, 0.01))
 	_set_dash_visuals()
 
 
@@ -117,9 +120,11 @@ func _end_attack_animation() -> void:
 
 	if attack_sprite:
 		attack_sprite.stop()
+		attack_sprite.visible = false
 		attack_sprite.offset = idle_offset
 
 	if state_machine.current_state == chase_state:
+		ghost.anim_player.play(ghost.idle_anim)
 		ghost.sprite.play(ghost.idle_anim)
 
 
