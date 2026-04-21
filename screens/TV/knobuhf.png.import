@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2xc4lfu5i3tr"
 path.s3tc="res://.godot/imported/knobuhf.png-4176c21b63f70e4dbfd3c07090e366de.s3tc.ctex"
-path.etc2="res://.godot/imported/knobuhf.png-4176c21b63f70e4dbfd3c07090e366de.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://screens/TV/knobuhf.png"
-dest_files=["res://.godot/imported/knobuhf.png-4176c21b63f70e4dbfd3c07090e366de.s3tc.ctex", "res://.godot/imported/knobuhf.png-4176c21b63f70e4dbfd3c07090e366de.etc2.ctex"]
+dest_files=["res://.godot/imported/knobuhf.png-4176c21b63f70e4dbfd3c07090e366de.s3tc.ctex"]
 
 [params]
 
