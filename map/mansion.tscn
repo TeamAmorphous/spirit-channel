@@ -54,6 +54,11 @@
 [ext_resource type="Texture2D" uid="uid://bidpk27aei026" path="res://map/assets/FOYER_PILLAR.png" id="30_gv4gc"]
 [ext_resource type="PackedScene" uid="uid://ch4v2qhde8fn5" path="res://entities/props/decoration/greenhouse_light.tscn" id="30_wruko"]
 [ext_resource type="PackedScene" uid="uid://k7obo3d3e03t" path="res://entities/props/furniture/mansion/knight.tscn" id="32_n52i4"]
+[ext_resource type="PackedScene" uid="uid://jygyuxusqve0" path="res://entities/props/decoration/painting.tscn" id="49_phslc"]
+[ext_resource type="PackedScene" uid="uid://el7pfnosp0uq" path="res://entities/props/decoration/painting_4.tscn" id="56_w5iee"]
+[ext_resource type="PackedScene" uid="uid://bvqb321oojgn" path="res://entities/props/decoration/painting_2.tscn" id="57_ewl3q"]
+[ext_resource type="PackedScene" uid="uid://1u3w72j13ixs" path="res://entities/props/decoration/painting_1.tscn" id="58_fo1kd"]
+[ext_resource type="PackedScene" uid="uid://dyaxoijk1i6ci" path="res://entities/props/decoration/painting_3.tscn" id="59_x18aq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_no78q"]
 texture = ExtResource("1_8susi")
@@ -282,10 +287,6 @@ position = Vector2(-448, 0)
 [node name="Furniture2" parent="Node2D/3F" unique_id=524819190 instance=ExtResource("10_fux5b")]
 z_index = 0
 position = Vector2(48, 0)
-
-[node name="Furniture3" parent="Node2D/3F" unique_id=839430154 instance=ExtResource("11_qrynr")]
-z_index = 0
-position = Vector2(720, -304)
 
 [node name="Furniture4" parent="Node2D/3F" unique_id=994048059 instance=ExtResource("12_4srbl")]
 z_index = 0
@@ -520,31 +521,40 @@ position = Vector2(528, 0)
 [node name="Furniture4" parent="Node2D/1A" unique_id=1936544686 instance=ExtResource("24_gv4gc")]
 position = Vector2(-624, 0)
 
+[node name="Window2" parent="Node2D/1A" unique_id=1444351528 instance=ExtResource("49_phslc")]
+position = Vector2(-208, -592)
+
 [node name="12CD" type="Node2D" parent="Node2D" unique_id=1140156771]
 
 [node name="Furniture" parent="Node2D/12CD" unique_id=756623522 instance=ExtResource("28_aqbxi")]
-z_index = 1
+z_index = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/12CD" unique_id=1098723958]
+z_index = -2
 position = Vector2(0, -992)
 texture = ExtResource("29_24nj8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Node2D/12CD" unique_id=2021021540]
+z_index = -2
 position = Vector2(-1344, -448)
 texture = ExtResource("30_gv4gc")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Node2D/12CD" unique_id=10361554]
+z_index = -2
 position = Vector2(0, -448)
 texture = ExtResource("30_gv4gc")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Node2D/12CD" unique_id=577945436]
+z_index = -2
 position = Vector2(1344, -448)
 texture = ExtResource("30_gv4gc")
 
 [node name="Window" parent="Node2D/12CD" unique_id=511061459 instance=ExtResource("15_qm6j5")]
-position = Vector2(-688, -448)
+z_index = -2
+position = Vector2(-688, -1536)
 
 [node name="Window2" parent="Node2D/12CD" unique_id=900630943 instance=ExtResource("15_qm6j5")]
+z_index = -2
 position = Vector2(688, -448)
 
 [node name="Furniture" parent="." unique_id=572380277 instance=ExtResource("15_frd6q")]
@@ -568,3 +578,16 @@ z_index = 10
 position = Vector2(-3, -4169)
 texture = ExtResource("2_43m5h")
 offset = Vector2(3, -410)
+
+[node name="Window" parent="." unique_id=1178229449 instance=ExtResource("56_w5iee")]
+position = Vector2(-4736, -3856)
+
+[node name="Window2" parent="." unique_id=209569658 instance=ExtResource("57_ewl3q")]
+position = Vector2(880, -3936)
+
+[node name="Window3" parent="." unique_id=1888484892 instance=ExtResource("58_fo1kd")]
+position = Vector2(5104.0005, -2560.0002)
+scale = Vector2(0.65, 0.65)
+
+[node name="Window4" parent="." unique_id=639787061 instance=ExtResource("59_x18aq")]
+position = Vector2(2944, -656)

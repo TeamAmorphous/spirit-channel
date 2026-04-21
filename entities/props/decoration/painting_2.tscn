@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bvqb321oojgn"]
+
+[ext_resource type="Texture2D" uid="uid://3qqxe63wg3d2" path="res://map/assets/Apple_and_Son.png" id="1_no4lo"]
+[ext_resource type="Texture2D" uid="uid://dernd77wpyr4n" path="res://map/assets/FRAME_WIDE.png" id="2_woax0"]
+
+[node name="Window" type="Node2D" unique_id=1590567196]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=646486866]
+scale = Vector2(0.51, 0.47)
+texture = ExtResource("1_no4lo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2132084113]
+texture = ExtResource("2_woax0")
