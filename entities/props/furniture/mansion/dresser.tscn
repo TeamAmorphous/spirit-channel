@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://l4m5rt72qf3i"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_3jtms"]
+[ext_resource type="Texture2D" uid="uid://b05txadepgb4b" path="res://map/assets/DRESSER.png" id="2_u7dw7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yopel"]
+size = Vector2(32, 128)
+
+[node name="Furniture" unique_id=316347185 instance=ExtResource("1_3jtms")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=1312621183]
+position = Vector2(0, -336)
+texture = ExtResource("2_u7dw7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=465484740]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_yopel")

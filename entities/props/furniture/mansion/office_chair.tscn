@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cy5gygiojd4a8"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_gxn7l"]
+[ext_resource type="Texture2D" uid="uid://5ut7oespbnov" path="res://map/assets/OFFICE_CHAIR.png" id="2_gxn7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twvne"]
+size = Vector2(32, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxn7l"]
+size = Vector2(256, 64)
+
+[node name="Furniture" unique_id=316347185 instance=ExtResource("1_gxn7l")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=126615693]
+position = Vector2(8, -168)
+texture = ExtResource("2_gxn7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=2114463694]
+position = Vector2(0, -128)
+shape = SubResource("RectangleShape2D_twvne")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3" unique_id=1418802516]
+position = Vector2(0, -144)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=322747839]
+shape = SubResource("RectangleShape2D_gxn7l")
+one_way_collision = true
+debug_color = Color(0.9017107, 0.00016210436, 0.76028866, 0.41960785)

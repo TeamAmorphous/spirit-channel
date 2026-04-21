@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c4nlsttq8epjf"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_jjnea"]
+[ext_resource type="Texture2D" uid="uid://y5s5epyc1h3u" path="res://map/assets/KITCHEN_BOARD.png" id="2_jjnea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yopel"]
+size = Vector2(32, 384)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bl4p"]
+size = Vector2(464, 42)
+
+[node name="Furniture" unique_id=316347185 instance=ExtResource("1_jjnea")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=1312621183]
+position = Vector2(0, -176)
+texture = ExtResource("2_jjnea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=465484740]
+position = Vector2(0, -192)
+shape = SubResource("RectangleShape2D_yopel")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3" unique_id=807201916]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1209578657]
+position = Vector2(-8, -213)
+shape = SubResource("RectangleShape2D_7bl4p")
+one_way_collision = true
+debug_color = Color(0.9887456, 0, 0.3037642, 0.41960785)

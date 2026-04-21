@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dkmjsaqh0cwgx"]
+
+[ext_resource type="Texture2D" uid="uid://dclwceuw700tk" path="res://map/assets/BILLARDS_LIGHT.png" id="1_glmiv"]
+[ext_resource type="Texture2D" uid="uid://c2lqe5x6q40vh" path="res://map/assets/BILLARDS_LIGHT_GLOW.png" id="2_yt5vr"]
+
+[node name="BillardsLight" type="Node2D" unique_id=685458638]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=425917969]
+position = Vector2(0, 320)
+texture = ExtResource("1_glmiv")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=285437626]
+position = Vector2(0, 320)
+texture = ExtResource("2_yt5vr")

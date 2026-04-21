@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://jygyuxusqve0"]
+
+[ext_resource type="Texture2D" uid="uid://depc84kexthpc" path="res://map/assets/Big_Apple.png" id="1_tkews"]
+[ext_resource type="Texture2D" uid="uid://bc71hna55nct" path="res://map/assets/FRAME_TALL.png" id="2_amgfq"]
+
+[node name="Window" type="Node2D" unique_id=1590567196]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=646486866]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_tkews")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2132084113]
+texture = ExtResource("2_amgfq")
