@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://k7obo3d3e03t"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_02bk2"]
+[ext_resource type="Texture2D" uid="uid://cy05xfhwar3m" path="res://map/assets/KNIGHT.png" id="2_02bk2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yopel"]
+size = Vector2(32, 384)
+
+[node name="Furniture" unique_id=316347185 instance=ExtResource("1_02bk2")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=1312621183]
+position = Vector2(0, -336)
+texture = ExtResource("2_02bk2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=465484740]
+position = Vector2(0, -192)
+shape = SubResource("RectangleShape2D_yopel")

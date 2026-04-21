@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://b56ayo8cmo0k1"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_wk3v8"]
+[ext_resource type="Texture2D" uid="uid://dmf27mn2o6nsl" path="res://map/assets/FOUNTAIN_WATER.png" id="2_vms2u"]
+[ext_resource type="Texture2D" uid="uid://b7ck0wk1wvv01" path="res://map/assets/FOUNTAIN.png" id="3_r5rfc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twvne"]
+size = Vector2(448, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2e6lb"]
+size = Vector2(1088, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghgwx"]
+size = Vector2(320, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8dsx"]
+size = Vector2(256, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvix5"]
+size = Vector2(192, 80)
+
+[node name="Furniture" unique_id=316347185 instance=ExtResource("1_wk3v8")]
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=533907499]
+position = Vector2(0, -384)
+texture = ExtResource("2_vms2u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="1" unique_id=126615693]
+position = Vector2(0, -384)
+texture = ExtResource("3_r5rfc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=2114463694]
+position = Vector2(0, -128)
+shape = SubResource("RectangleShape2D_twvne")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3" unique_id=1422412815]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1185339082]
+position = Vector2(0, -112)
+shape = SubResource("RectangleShape2D_2e6lb")
+one_way_collision = true
+debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." index="4" unique_id=1238835190]
+position = Vector2(0, -192)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" index="0" unique_id=1571760394]
+position = Vector2(0, -96)
+shape = SubResource("RectangleShape2D_ghgwx")
+one_way_collision = true
+debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." index="5" unique_id=1558884476]
+position = Vector2(0, -368)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" index="0" unique_id=1300390208]
+position = Vector2(0, -88)
+shape = SubResource("RectangleShape2D_y8dsx")
+one_way_collision = true
+debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." index="6" unique_id=468525422]
+position = Vector2(0, -512)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" index="0" unique_id=1083449397]
+position = Vector2(0, -88)
+shape = SubResource("RectangleShape2D_qvix5")
+one_way_collision = true
+debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)

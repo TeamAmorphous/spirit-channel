@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://j6066vidqpvm"]
+
+[ext_resource type="Texture2D" uid="uid://cgdsh71u14y5d" path="res://map/assets/WINDOW_FLAME_GLOW.png" id="1_t21ub"]
+[ext_resource type="Texture2D" uid="uid://ckn66njsja0bn" path="res://map/assets/WINDOW_FLAME.png" id="2_k5yge"]
+[ext_resource type="Texture2D" uid="uid://bupv5mcwmyoag" path="res://map/assets/WINDOW.png" id="3_vqf4b"]
+
+[node name="Window" type="Node2D" unique_id=1590567196]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1826157334]
+texture = ExtResource("1_t21ub")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1016821128]
+texture = ExtResource("2_k5yge")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=646486866]
+texture = ExtResource("3_vqf4b")

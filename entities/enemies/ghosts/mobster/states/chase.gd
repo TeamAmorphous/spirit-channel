@@ -10,7 +10,7 @@ func on_start(msg := {}) -> void:
 func physics_update(delta: float) -> void:
 	super.physics_update(delta)
 
-	if target.global_position.distance_to(ghost.global_position) < 500.0:
+	if player.global_position.distance_to(ghost.global_position) < 500.0:
 		timer -= delta
 		if timer <= 0.0:
 			state_machine.change_state("Charge")

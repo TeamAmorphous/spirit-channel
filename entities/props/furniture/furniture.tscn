@@ -16,7 +16,7 @@ volume_db = 15.0
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("2_g6cac")
-enabled = false
+repeatable = true
 metadata/_custom_type_script = "uid://d1k8eytqs0gno"
 
 [connection signal="interacted_with" from="Interactable" to="." method="_on_interacted_with"]

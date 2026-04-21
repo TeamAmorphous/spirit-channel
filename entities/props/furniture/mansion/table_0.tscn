@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://wg3i40n8rvgq"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_nrghp"]
+[ext_resource type="Texture2D" uid="uid://pprwo2s8drrp" path="res://map/assets/TABLE_0.png" id="2_nrghp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8bsj"]
+size = Vector2(32, 384)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qukt"]
+size = Vector2(384, 48)
+
+[node name="Bed" unique_id=316347185 instance=ExtResource("1_nrghp")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=1377903909]
+position = Vector2(0, -224)
+texture = ExtResource("2_nrghp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=1045684328]
+position = Vector2(0, -192)
+shape = SubResource("RectangleShape2D_k8bsj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3" unique_id=968598450]
+position = Vector2(0, -184)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1280880387]
+position = Vector2(0, -80)
+shape = SubResource("RectangleShape2D_2qukt")
+one_way_collision = true
+debug_color = Color(0.93165994, 2.4065375e-05, 0.65390545, 0.41960785)

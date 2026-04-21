@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://sqgtlfuvednc"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_fcp0w"]
+[ext_resource type="Texture2D" uid="uid://dvsoewmrk34n8" path="res://map/assets/ARTIFACT_2.png" id="2_fcp0w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yopel"]
+size = Vector2(32, 128)
+
+[node name="Furniture" unique_id=316347185 instance=ExtResource("1_fcp0w")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=1312621183]
+position = Vector2(0, -312)
+texture = ExtResource("2_fcp0w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=465484740]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_yopel")

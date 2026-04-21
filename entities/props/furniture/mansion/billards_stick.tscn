@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dk1nmu18dunbu"]
+
+[ext_resource type="PackedScene" uid="uid://cmrydq17riis5" path="res://entities/props/furniture/furniture.tscn" id="1_3qwk6"]
+[ext_resource type="Texture2D" uid="uid://87s0kb3p22s4" path="res://map/assets/BILLARDS_STICK.png" id="2_3qwk6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twvne"]
+size = Vector2(32, 192)
+
+[node name="Furniture" unique_id=316347185 instance=ExtResource("1_3qwk6")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=126615693]
+position = Vector2(0, -256)
+texture = ExtResource("2_3qwk6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=2114463694]
+position = Vector2(0, -96)
+shape = SubResource("RectangleShape2D_twvne")

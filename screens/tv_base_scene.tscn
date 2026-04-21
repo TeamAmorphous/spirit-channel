@@ -351,7 +351,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k6tew"]
-viewport_path = NodePath("../ScreenTextureViewport")
+viewport_path = NodePath("ScreenTextureViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljnyf"]
 resource_local_to_scene = true
