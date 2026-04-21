@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cps7va5utt200"
-path="res://.godot/imported/side.png-5539f36352dd8b537158fc9269460478.ctex"
+path="res://.godot/imported/side.png-a9f36792e7745434c431c63627a6f540.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/skeleton/side.png"
-dest_files=["res://.godot/imported/side.png-5539f36352dd8b537158fc9269460478.ctex"]
+source_file="res://entities/enemies/ghosts/skull/side.png"
+dest_files=["res://.godot/imported/side.png-a9f36792e7745434c431c63627a6f540.ctex"]
 
 [params]
 

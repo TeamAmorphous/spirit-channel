@@ -14,6 +14,13 @@ const STICK_AIM_DISTANCE := 1000.0
 const STICK_AIM_LAG := 20.0
 
 
+const ITEM_TEXTURES: Dictionary[StringName, Texture2D] = {
+	page = preload("uid://dgdejmdhadj5g"),
+	key = preload("uid://cf6od3s4xivo5"),
+	medkit = preload("uid://cl5kpq3q7te3v"),
+}
+
+
 @export_category("Physics")
 @export var speed: float = 800.0
 @export var accel: float = 1500.0
@@ -71,9 +78,6 @@ const STICK_AIM_LAG := 20.0
 @export var very_low_health: AudioStream
 
 var inventory: Array[StringName]
-var pages: int:
-	get:
-		return inventory.count(&"page")
 
 var current_interactable: Interactable
 var closest_ghost: Ghost

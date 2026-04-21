@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://hehs74mvqk1x"]
 
 [ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_n7gw7"]
-[ext_resource type="Script" uid="uid://dggw3jfua0ppp" path="res://entities/enemies/ghosts/rat_king/states/attack.gd" id="2_ideoo"]
+[ext_resource type="Script" uid="uid://d3qnrsh6ckufa" path="res://entities/enemies/ghosts/rat_king/rat_king.gd" id="2_g1vbm"]
+[ext_resource type="Script" uid="uid://b7bpb7kb3mjlr" path="res://entities/enemies/ghosts/rat_king/states/pop.gd" id="3_g1vbm"]
 [ext_resource type="Texture2D" uid="uid://c2pwi0hjwyya3" path="res://entities/enemies/ghosts/rat_king/attack0.png" id="3_hqvt0"]
+[ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_oh16l"]
 [ext_resource type="Texture2D" uid="uid://beudg86s2qvjw" path="res://entities/enemies/ghosts/rat_king/attack1.png" id="4_qgdai"]
 [ext_resource type="Texture2D" uid="uid://qyia7pu20jro" path="res://entities/enemies/ghosts/rat_king/attack2.png" id="5_utnah"]
 [ext_resource type="Texture2D" uid="uid://d4jbehpoxamj8" path="res://entities/enemies/ghosts/rat_king/idle.png" id="6_qgdai"]
@@ -53,20 +55,122 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_g1vbm"]
+length = 0.4
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/AnimatedSprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-7, -7), Vector2(45, 6.000002), Vector2(14, -24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/AnimatedSprite2D:rotation")
+tracks/2/interp = 4
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.1639884, 6.695752, 0.06431621]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/AnimatedSprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_oh16l"]
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hurt"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/AnimatedSprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(32, 0), Vector2(-32, 0), Vector2(32, 0), Vector2(-32, 0), Vector2(32, 0), Vector2(-24, 0), Vector2(24, 0), Vector2(-24, 0), Vector2(24, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 2.3784142, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(0.75, 0.75), Vector2(0.844, 0.955)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hburk"]
+_data = {
+&"bite": SubResource("Animation_g1vbm"),
+&"pop": SubResource("Animation_oh16l")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ideoo"]
 radius = 130.0
 
-[node name="Ghost" unique_id=1958681849 instance=ExtResource("1_n7gw7")]
+[node name="RatKing" unique_id=1958681849 instance=ExtResource("1_n7gw7")]
+script = ExtResource("2_g1vbm")
 
 [node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
 can_be_flashed = false
 
 [node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
-contact_damage = 0
-excluded_states = Array[String](["Hurt", "Poof", "Attack"])
+animation = &"rat_king/bite"
+chase_speed = 300.0
+contact_damage = 4
+excluded_states = Array[String](["Hurt", "Poof", "Pop"])
 
-[node name="Attack" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=1595899198]
-script = ExtResource("2_ideoo")
+[node name="Pop" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=1218734116]
+script = ExtResource("3_g1vbm")
+rat_scene = ExtResource("4_oh16l")
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 
 [node name="CollisionShape2D" parent="." index="3" unique_id=2109752796]
@@ -74,6 +178,10 @@ shape = SubResource("CircleShape2D_n7gw7")
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_odn85")
+animation = &"attack"
+
+[node name="AnimationPlayer" parent="." index="6" unique_id=103237844]
+libraries/rat_king = SubResource("AnimationLibrary_hburk")
 
 [node name="AttackArea" parent="." index="8" unique_id=1724781933]
 visible = false

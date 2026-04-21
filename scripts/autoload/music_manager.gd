@@ -16,6 +16,7 @@ const GHOST_TRACKS: Dictionary[Ghost.Channel, AudioStreamOggVorbis] = {
 	Ghost.Channel.YELLOW: $Yellow,
 	Ghost.Channel.BLUE: $Blue,
 }
+const MENU_TRACK: AudioStreamOggVorbis = preload("uid://dny8wl3vpjisv")
 
 var current_channel: Ghost.Channel = Ghost.Channel.NONE
 
@@ -45,8 +46,17 @@ func snap_volume() -> void:
 
 
 func start() -> void:
+	base.stop()
+	menu_started = false
+	base.stream = BASE_TRACK
+	base.stream.loop = true
+
 	base.play()
-	for player in ghost_players.values():
+	for channel in ghost_players:
+		var player := ghost_players[channel]
+		player.stream = GHOST_TRACKS.get(channel)
+		player.stream.loop = true
+		player.volume_db = -80.0
 		player.play()
 	
 	await get_tree().process_frame
@@ -58,3 +68,16 @@ func _sync_all() -> void:
 
 	for player in ghost_players.values():
 		player.seek(pos)
+
+
+var menu_started: bool
+func start_menu():
+	if menu_started:
+		return
+	menu_started = true
+	base.stream = MENU_TRACK
+	base.stream.loop = true
+	current_channel = Ghost.Channel.NONE
+	snap_volume()
+	base.play()
+

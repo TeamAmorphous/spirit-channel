@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cukn8q1jnyvlh"
-path="res://.godot/imported/intro1.png-fc3862cd9552b9d4de9be2c34b6d2385.ctex"
+uid="uid://diyavi72qsc2v"
+path="res://.godot/imported/intro0.png-4a7cb6b92eede665659ce6bd7e6f9a37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/skeleton/intro1.png"
-dest_files=["res://.godot/imported/intro1.png-fc3862cd9552b9d4de9be2c34b6d2385.ctex"]
+source_file="res://entities/enemies/ghosts/skull/intro0.png"
+dest_files=["res://.godot/imported/intro0.png-4a7cb6b92eede665659ce6bd7e6f9a37.ctex"]
 
 [params]
 

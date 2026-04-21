@@ -16,15 +16,16 @@ var showing_lock: bool = false
 @onready var lock_anim_player: AnimationPlayer = $LockAnimPlayer
 @onready var open_sound: AudioStreamPlayer = $OpenSound
 @onready var closed_sound: AudioStreamPlayer = $CloseSound
+@onready var unlock_sound: AudioStreamPlayer = $UnlockSound
+
 
 func _ready() -> void:
 	anim_player.play(&"closed")
 
 
-func can_open(_player: Player) -> bool:
+func can_open(player: Player) -> bool:
 	if needs_item:
-		push_warning("todo: check inventory item")
-		return false
+		return player.item_count(needs_item) > 0
 	return true
 
 
@@ -60,6 +61,11 @@ func set_state(new_state: DoorState) -> void:
 
 func _on_enter_from(left: bool, player: Player) -> void:
 	if can_open(player):
+		if needs_item:
+			player.remove_item(needs_item)
+			needs_item = &""
+			unlock_sound.play()
+			showing_lock = false
 		set_state(DoorState.OPEN_LEFT if left else DoorState.OPEN_RIGHT)
 
 

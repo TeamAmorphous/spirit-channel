@@ -350,8 +350,8 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_k6tew"]
-viewport_path = NodePath("../ScreenTextureViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_wgbpd"]
+viewport_path = NodePath("ScreenTextureViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljnyf"]
 resource_local_to_scene = true
@@ -359,7 +359,7 @@ albedo_color = Color(0.37413922, 0.37413928, 0.37413913, 1)
 metallic = 0.74
 metallic_specular = 0.33
 emission_enabled = true
-emission_texture = SubResource("ViewportTexture_k6tew")
+emission_texture = SubResource("ViewportTexture_wgbpd")
 clearcoat_enabled = true
 clearcoat = 0.41
 clearcoat_roughness = 0.19

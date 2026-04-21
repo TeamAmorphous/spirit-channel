@@ -33,5 +33,7 @@ func shake() -> void:
 func _on_interacted_with(player: Player) -> void:
 	shake()
 	if contains is StringName:
-		player.get_item(contains)
+		player.add_item(contains)
+	elif contains is PackedScene:
+		push_warning("ghost spawn!!?!")
 		

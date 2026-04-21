@@ -25,7 +25,7 @@ func change_scene_packed(scene: PackedScene) -> int:
 		current_scene.queue_free()
 	
 	current_scene = scene.instantiate()
-	scene_container.add_child(current_scene)
+	scene_container.call_deferred("add_child", current_scene)
 	return Error.OK
 
 

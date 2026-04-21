@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cfyqeil1gllbp" path="res://entities/props/mansion/doorOpen.ogg" id="3_ogd60"]
 [ext_resource type="AudioStream" uid="uid://cy6fdu8v7eqsl" path="res://entities/props/mansion/doorClose.ogg" id="5_3u7nx"]
 [ext_resource type="Texture2D" uid="uid://rbq4kqr5et2e" path="res://entities/props/mansion/lock_indicator.png" id="5_lm8qd"]
+[ext_resource type="AudioStream" uid="uid://bb42v8gm2ni52" path="res://entities/props/mansion/unlocked.ogg" id="6_bkgpu"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_11arx"]
 polygon = PackedVector2Array(-32.5, -639.99994, 32.5, -639.99994, 32.5, 0, -32.5, 0)
@@ -480,6 +481,9 @@ stream = ExtResource("3_ogd60")
 
 [node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=56520482]
 stream = ExtResource("5_3u7nx")
+
+[node name="UnlockSound" type="AudioStreamPlayer" parent="." unique_id=639104944]
+stream = ExtResource("6_bkgpu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981103821]
 libraries/ = SubResource("AnimationLibrary_7l5r6")

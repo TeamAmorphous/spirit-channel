@@ -3,12 +3,81 @@
 [ext_resource type="Script" uid="uid://bfteu2csm4kt3" path="res://ui/hud/components/osd_progress_bar.gd" id="1_4d6w6"]
 [ext_resource type="Script" uid="uid://k4rsvgg883i2" path="res://ui/hud/hud.gd" id="1_e0nub"]
 [ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="1_xmswo"]
+[ext_resource type="Texture2D" uid="uid://b6756yt706bqv" path="res://ui/pages/page2.png" id="3_3mxrk"]
+[ext_resource type="Texture2D" uid="uid://crc0dw4x5uclg" path="res://ui/pages/page3.png" id="4_6gxmt"]
 [ext_resource type="Texture2D" uid="uid://cav0uslnvfnd5" path="res://ui/hud/logo.png" id="4_w75iv"]
+[ext_resource type="Texture2D" uid="uid://b01wxruo4sugg" path="res://ui/pages/page4.png" id="5_olkg6"]
+[ext_resource type="Texture2D" uid="uid://capdy6p636wv4" path="res://ui/pages/page5.png" id="6_hk13k"]
+[ext_resource type="Texture2D" uid="uid://banlwttow0gtv" path="res://ui/pages/page1.png" id="7_gfles"]
+[ext_resource type="Texture2D" uid="uid://btmeqlhiik0s5" path="res://ui/pages/page6.png" id="7_uyo40"]
+[ext_resource type="Texture2D" uid="uid://drme6v8vlb5ox" path="res://ui/pages/page7.png" id="8_m6r7j"]
+[ext_resource type="Texture2D" uid="uid://bvg7l8hjo42j" path="res://ui/pages/page8.png" id="9_3rj2y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e0nub"]
 font = ExtResource("1_xmswo")
 font_size = 48
 font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Animation" id="Animation_o2lis"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gfles"]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aixkq"]
+_data = {
+&"RESET": SubResource("Animation_o2lis"),
+&"show": SubResource("Animation_gfles")
+}
 
 [sub_resource type="Animation" id="Animation_imuuq"]
 length = 0.001
@@ -73,7 +142,9 @@ _data = {
 }
 
 [node name="HUD" type="CanvasLayer" unique_id=1783848203]
+process_mode = 3
 script = ExtResource("1_e0nub")
+pages = Array[Texture2D]([ExtResource("7_gfles"), ExtResource("3_3mxrk"), ExtResource("4_6gxmt"), ExtResource("5_olkg6"), ExtResource("6_hk13k"), ExtResource("7_uyo40"), ExtResource("8_m6r7j"), ExtResource("9_3rj2y")])
 
 [node name="UI" type="Control" parent="." unique_id=1349016239]
 layout_mode = 3
@@ -90,10 +161,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
 
 [node name="HealthBar" type="VBoxContainer" parent="UI/MarginContainer" unique_id=860184880]
 unique_name_in_owner = true
@@ -109,6 +180,47 @@ label_settings = SubResource("LabelSettings_e0nub")
 segment_enabled_size = Vector2(5, 45)
 segment_spacing = 5
 metadata/_custom_type_script = "uid://bfteu2csm4kt3"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=453010312]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="PagesCounter" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=1559113553]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_e0nub")
+
+[node name="KeysCounter" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=1820724290]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_e0nub")
+
+[node name="PagePlayer" type="AnimationPlayer" parent="UI" unique_id=730368368]
+root_node = NodePath("../PageDisplay")
+libraries/ = SubResource("AnimationLibrary_aixkq")
+
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=1545452610]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="PageDisplay" type="TextureRect" parent="UI" unique_id=1549384862]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_right = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+stretch_mode = 3
 
 [node name="Logo" type="Sprite2D" parent="." unique_id=531410892]
 modulate = Color(0, 1, 0.6, 0.39215687)

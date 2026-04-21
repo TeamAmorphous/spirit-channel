@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://rhs6x8t1gyyf"]
 
 [ext_resource type="Script" uid="uid://dx7yq2ul3rl8p" path="res://screens/options_menu.gd" id="1_tsaat"]
-[ext_resource type="Texture2D" uid="uid://kfhf0qr8mvip" path="res://screens/temp_menu_bg.png" id="3_0jdrk"]
+[ext_resource type="PackedScene" uid="uid://dfyq1nvm8rvvn" path="res://screens/menu_bg.tscn" id="2_xaejh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xaejh"]
 content_margin_left = 0.0
@@ -38,16 +38,7 @@ grow_vertical = 2
 script = ExtResource("1_tsaat")
 menu_scene_path = "uid://cxssbyg13n1lp"
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=472264530]
-modulate = Color(0.42365062, 0.42365065, 0.42365062, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_0jdrk")
-expand_mode = 5
+[node name="MenuBg" parent="." unique_id=1331379525 instance=ExtResource("2_xaejh")]
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1872382636]
 layout_mode = 1

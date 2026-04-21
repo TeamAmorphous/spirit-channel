@@ -6,6 +6,10 @@ extends Control
 @export_file("*.tscn") var options_scene_path: String
 
 
+func _ready() -> void:
+	MusicManager.start_menu()
+
+
 func _on_start_button_pressed() -> void:
 	if not game_scene_path:
 		push_error("no game_scene_path set!")

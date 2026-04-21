@@ -7,14 +7,13 @@
 script/source = "extends Sprite2D
 
 func _ready():
-	get_parent().remove_child(self)
-	free()
+	queue_free()
 "
 
 [node name="Door" unique_id=441128494 instance=ExtResource("1_dmrvo")]
 needs_item = &"key"
 
-[node name="LockAnimPlayer" parent="." index="10" unique_id=276871032]
+[node name="LockAnimPlayer" parent="." index="11" unique_id=276871032]
 autoplay = &"RESET"
 
 [node name="DebugIndicator" type="Sprite2D" parent="." index="12" unique_id=168945405]

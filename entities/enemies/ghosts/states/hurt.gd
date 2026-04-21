@@ -10,7 +10,7 @@ var stun_timer: float
 func on_start(msg := {}) -> void:
 	stun_timer = stun_duration
 	ghost.anim_player.play(animation)
-	var next :=  msg.get("next") as String
+	var next :=  msg.get("next", "") as String
 	next_state = next if next else state_machine.last_state.name
 
 	var recoil_dir := -ghost.global_position.direction_to(player.chase_target.global_position)

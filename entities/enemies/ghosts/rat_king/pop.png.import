@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diyavi72qsc2v"
-path="res://.godot/imported/intro0.png-62a7fe28af0a565f58b8a5c5d8da6804.ctex"
+uid="uid://dgdlbtbmlmwk4"
+path="res://.godot/imported/pop.png-88f6910f69199cff6b3464d66dad8cfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/ghosts/skeleton/intro0.png"
-dest_files=["res://.godot/imported/intro0.png-62a7fe28af0a565f58b8a5c5d8da6804.ctex"]
+source_file="res://entities/enemies/ghosts/rat_king/pop.png"
+dest_files=["res://.godot/imported/pop.png-88f6910f69199cff6b3464d66dad8cfa.ctex"]
 
 [params]
 

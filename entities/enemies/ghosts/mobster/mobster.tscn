@@ -176,9 +176,6 @@ radius = 120.0
 [node name="Mobster" unique_id=1958681849 instance=ExtResource("1_3ll0d")]
 channel = 0
 
-[node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
-resistance = 5.0
-
 [node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
 script = ExtResource("2_wtb3a")
 chase_speed = 100.0
@@ -194,13 +191,13 @@ stream = ExtResource("3_nslht")
 hit_stream = ExtResource("4_jcg5b")
 
 [node name="PunchSprite" type="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=1239580772]
-position = Vector2(-110, 15)
+position = Vector2(193.99997, 10.999984)
+rotation = 0.4055012
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_eoei1")
 animation = &"attack"
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Sprite/PunchSprite" index="0" unique_id=353382279]
-visible = false
 position = Vector2(-17.159033, -2.7907434)
 rotation = -0.38397244
 sprite_frames = SubResource("SpriteFrames_wtb3a")
@@ -209,6 +206,8 @@ flip_h = true
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="1" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_245fo")
+animation = &"attack"
+frame = 1
 
 [node name="PunchArea" type="RemoteTransform2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="2" unique_id=1057777635]
 remote_path = NodePath("../../PunchArea")

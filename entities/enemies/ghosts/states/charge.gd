@@ -2,7 +2,7 @@ class_name Charge
 extends GhostState
 
 @export var windup_time: float = 0.5
-@export var charge_time: float = 3.0
+@export var charge_time: float = 1.0
 @export var recovery_time: float = 2.0
 
 @export var charge_speed: float = 550.0
