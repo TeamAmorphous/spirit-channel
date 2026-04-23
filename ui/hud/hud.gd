@@ -61,7 +61,6 @@ func show_page(n: int) -> void:
 	
 	player.state_machine.change_state("Cutscene")
 	get_tree().paused = true
-	player.movement_anim_player.play(&"read")
 	await get_tree().create_timer(0.2).timeout
 	page_anim_player.play(&"show")
 	await  get_tree().create_timer(5.0).timeout

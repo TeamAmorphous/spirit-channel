@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://wrdlham5o7rd"]
+
+[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="1_11mxd"]
+[ext_resource type="Script" uid="uid://cw6afx3uv3kkt" path="res://screens/game_over.gd" id="1_skulm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_skulm"]
+font = ExtResource("1_11mxd")
+font_size = 64
+font_color = Color(1, 0, 0, 1)
+
+[node name="GameOver" type="Control" unique_id=1087164499]
+custom_minimum_size = Vector2(1000, 750)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_skulm")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2068074675]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1689151730]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -263.0
+offset_top = -58.5
+offset_right = 263.0
+offset_bottom = 58.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "GRABBED BY THE
+GHOULIES"
+label_settings = SubResource("LabelSettings_skulm")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=454018068]
+wait_time = 2.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="." unique_id=2144039367]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

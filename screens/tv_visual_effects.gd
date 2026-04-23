@@ -33,6 +33,7 @@ func _ready() -> void:
 	base_rotation = skeleton.get_bone_pose_rotation(channel_bone_idx)
 	SignalBus.channel_changed.connect(_on_channel_changed)
 	SceneManager.scene_changed.connect(_on_scene_changed)
+	SignalBus.static_interference.connect(_on_static_interference)
 
 
 func _on_channel_changed(new: Ghost.Channel, _old: Ghost.Channel) -> void:
@@ -85,3 +86,10 @@ func _on_scene_changed() -> void:
 		STATIC_DURATION
 	)
 	scene_tween.chain().tween_callback(func(): get_tree().paused = false)
+
+
+func _on_static_interference(amount: float) -> void:
+	var shader_mat : ShaderMaterial = crt_overlay.material as ShaderMaterial
+	shader_mat.set_shader_parameter("noise_amount", amount)
+	static_sfx.play()
+	static_sfx.volume_db = lerpf(0.0, -80.0, clampf(amount, 0.0, 1.0))

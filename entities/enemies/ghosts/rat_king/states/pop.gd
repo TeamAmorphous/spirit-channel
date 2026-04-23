@@ -9,7 +9,7 @@ func on_start(_msg := {}) -> void:
 	ghost.anim_player.animation_finished.connect(_on_animation_finished)
 
 
-func update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	ghost.velocity = Vector2.ZERO
 
 

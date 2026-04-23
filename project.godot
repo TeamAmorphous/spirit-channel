@@ -10,11 +10,13 @@ config_version=5
 
 [application]
 
-config/name="Spirit Channel"
+config/name="Ghost Channel"
 config/tags=PackedStringArray("ludum_dare_59")
 run/main_scene="uid://6megmv5cp4sr"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bkfvevoovuekq"
+config/macos_native_icon="res://ico/icon.icns"
+config/windows_native_icon="res://ico/icon.ico"
 
 [audio]
 
@@ -65,6 +67,7 @@ project/assembly_name="Spirit Channel"
 ghosts=""
 enemies=""
 player=""
+furniture=""
 
 [input]
 

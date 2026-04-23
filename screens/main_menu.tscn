@@ -11,7 +11,7 @@ anchors_preset = 0
 offset_right = 1000.0
 offset_bottom = 700.0
 script = ExtResource("1_p3cyw")
-game_scene_path = "uid://colhxe528q6lr"
+game_scene_path = "uid://btuv676ifdf5b"
 options_scene_path = "uid://rhs6x8t1gyyf"
 
 [node name="MenuBg" parent="." unique_id=1331379525 instance=ExtResource("2_t3bh0")]

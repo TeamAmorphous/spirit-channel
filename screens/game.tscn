@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://colhxe528q6lr"]
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
+[ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/notes_distributor.gd" id="2_5kag3"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
-[ext_resource type="PackedScene" uid="uid://bu3j8m5xgyrqc" path="res://entities/enemies/ghosts/mobster/mobster.tscn" id="5_he66p"]
 [ext_resource type="PackedScene" uid="uid://chuwtkmxhvbg" path="res://map/mansion.tscn" id="6_5kag3"]
-[ext_resource type="PackedScene" uid="uid://hehs74mvqk1x" path="res://entities/enemies/ghosts/rat_king/rat_king.tscn" id="6_gfkhe"]
 
 [node name="Game" type="Node2D" unique_id=965120324]
 
 [node name="Mansion" parent="." unique_id=2071726716 instance=ExtResource("6_5kag3")]
+
+[node name="NotesDistributor" type="Node" parent="." unique_id=605552993]
+script = ExtResource("2_5kag3")
 
 [node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
 position = Vector2(0, -8)
@@ -18,9 +20,3 @@ player = NodePath("../Player")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
 color = Color(0.6052743, 0.6052743, 0.6052743, 1)
-
-[node name="Mobster" parent="." unique_id=179045201 instance=ExtResource("5_he66p")]
-position = Vector2(-3192, -2800)
-
-[node name="RatKing" parent="." unique_id=1958681849 instance=ExtResource("6_gfkhe")]
-position = Vector2(1112, -496)

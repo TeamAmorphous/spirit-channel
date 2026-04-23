@@ -4,12 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://cjtaa6avi6jt2" path="res://map/assets/TOWEL.png" id="2_ma66w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twvne"]
-size = Vector2(128, 160)
+size = Vector2(60, 128)
 
 [node name="Furniture" unique_id=316347185 instance=ExtResource("1_ma66w")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=126615693]
+use_parent_material = true
 texture = ExtResource("2_ma66w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=2114463694]
+position = Vector2(0, 256)
 shape = SubResource("RectangleShape2D_twvne")

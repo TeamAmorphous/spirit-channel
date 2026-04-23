@@ -389,6 +389,7 @@ position = Vector2(0, -256)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/3CD/Counter/StaticBody2D" unique_id=601693642]
 shape = SubResource("RectangleShape2D_by0bj")
 one_way_collision = true
+debug_color = Color(0.8006188, 0.1829691, 0.9182893, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/3CD" unique_id=543128145]
 position = Vector2(-1280, -448)
@@ -569,9 +570,8 @@ rendering_quadrant_size = 32
 metadata/_edit_lock_ = true
 
 [node name="Props" type="TileMapLayer" parent="." unique_id=1167291061]
-tile_map_data = PackedByteArray("AAA2AP//AQAAAAAAAQBtAP//AQAAAAAAAQA2AN3/AQAAAAAAAQBtAN3/AQAAAAAAAQA2AJn/AQAAAAAAAQBtAJn/AQAAAAAAAQA2ALv/AQAAAAAAAQBtALv/AQAAAAAAAQCR/93/AQAAAAAAAQCR////AQAAAAAAAQDI/93/AQAAAAAAAQCR/7v/AQAAAAAAAQDI/7v/AQAAAAAAAQCR/5n/AQAAAAAAAQDI/5n/AQAAAAAAAQDI////AQAAAAAAAQD//5n/AQAAAAAAAQDs////AQAAAAAAAwB0/7v/AQAAAAAAAwAbAN3/AQAAAAAAAwA=")
+tile_map_data = PackedByteArray("AAA2AP//AQAAAAAAAQBtAP//AQAAAAAAAQA2AN3/AQAAAAAAAQBtAN3/AQAAAAAAAQA2AJn/AQAAAAAAAQBtAJn/AQAAAAAAAQA2ALv/AQAAAAAAAQBtALv/AQAAAAAAAQCR/93/AQAAAAAAAQCR////AQAAAAAAAQDI/93/AQAAAAAAAQDI/7v/AQAAAAAAAQCR/5n/AQAAAAAAAQDI/5n/AQAAAAAAAQDI////AQAAAAAAAQD//5n/AQAAAAAAAQDs////AQAAAAAAAwB0/7v/AQAAAAAAAwAbAN3/AQAAAAAAAwCR/7v/AQAAAAAAAQA=")
 tile_set = ExtResource("1_8qye7")
-metadata/_edit_lock_ = true
 
 [node name="MansionRoof" type="Sprite2D" parent="." unique_id=1962558979]
 z_index = 10

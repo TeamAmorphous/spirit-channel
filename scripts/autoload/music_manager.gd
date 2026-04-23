@@ -9,6 +9,8 @@ const GHOST_TRACKS: Dictionary[Ghost.Channel, AudioStreamOggVorbis] = {
 	Ghost.Channel.BLUE: preload("uid://b3offadp4kk77"),
 }
 
+@onready var general: AudioStreamPlayer = $General
+
 @onready var base: AudioStreamPlayer = $Base
 @onready var ghost_players: Dictionary[Ghost.Channel, AudioStreamPlayer] = {
 	Ghost.Channel.RED: $Red,
@@ -16,6 +18,7 @@ const GHOST_TRACKS: Dictionary[Ghost.Channel, AudioStreamOggVorbis] = {
 	Ghost.Channel.YELLOW: $Yellow,
 	Ghost.Channel.BLUE: $Blue,
 }
+
 const MENU_TRACK: AudioStreamOggVorbis = preload("uid://dny8wl3vpjisv")
 
 var current_channel: Ghost.Channel = Ghost.Channel.NONE
@@ -46,8 +49,8 @@ func snap_volume() -> void:
 
 
 func start() -> void:
-	base.stop()
-	menu_started = false
+	general.stop()
+	
 	base.stream = BASE_TRACK
 	base.stream.loop = true
 
@@ -63,6 +66,13 @@ func start() -> void:
 	_sync_all()
 
 
+func stop() -> void:
+	base.stop()
+	for channel in ghost_players:
+		var player := ghost_players[channel]
+		player.stop()
+
+
 func _sync_all() -> void:
 	var pos := base.get_playback_position() + AudioServer.get_time_since_last_mix()
 
@@ -70,14 +80,10 @@ func _sync_all() -> void:
 		player.seek(pos)
 
 
-var menu_started: bool
 func start_menu():
-	if menu_started:
-		return
-	menu_started = true
-	base.stream = MENU_TRACK
-	base.stream.loop = true
+	general.stream = MENU_TRACK
+	general.stream.loop = true
 	current_channel = Ghost.Channel.NONE
 	snap_volume()
-	base.play()
+	general.play()
 

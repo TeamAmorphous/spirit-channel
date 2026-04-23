@@ -1,8 +1,17 @@
 [gd_scene format=3 uid="uid://c0gfo3aqggi5h"]
 
 [ext_resource type="Script" uid="uid://b4332ew426oig" path="res://entities/props/mansion/stairs.gd" id="1_460fk"]
+[ext_resource type="Shader" uid="uid://cc3frq827kvn3" path="res://shaders/outline.gdshader" id="1_g3yhn"]
 [ext_resource type="Texture2D" uid="uid://clyyofgjfvqny" path="res://map/assets/STAIRS.png" id="1_mmlpv"]
 [ext_resource type="Script" uid="uid://d1k8eytqs0gno" path="res://scripts/types/interactable.gd" id="3_g3yhn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_82aup"]
+shader = ExtResource("1_g3yhn")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="Curve2D" id="Curve2D_2opwv"]
 _data = {
@@ -15,17 +24,20 @@ size = Vector2(512, 128)
 
 [node name="Stairs" type="Node2D" unique_id=1675593934]
 process_mode = 3
+material = SubResource("ShaderMaterial_82aup")
 position = Vector2(0, 16)
 script = ExtResource("1_460fk")
 
 [node name="TopSprite" type="Sprite2D" parent="." unique_id=1660510782]
 z_index = 20
+use_parent_material = true
 texture = ExtResource("1_mmlpv")
 offset = Vector2(0, -1080)
 region_enabled = true
 region_rect = Rect2(0, 0, 1280, 376)
 
 [node name="BottomSprite" type="Sprite2D" parent="." unique_id=675547198]
+use_parent_material = true
 texture = ExtResource("1_mmlpv")
 offset = Vector2(0, -440)
 region_enabled = true
@@ -65,4 +77,8 @@ position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_82aup")
 
 [connection signal="interacted_with" from="BottomFloor" to="." method="_on_bottom_floor_interacted_with"]
+[connection signal="on_player_can_interact" from="BottomFloor" to="." method="_on_player_can_interact"]
+[connection signal="on_player_cannot_interact" from="BottomFloor" to="." method="_on_player_cannot_interact"]
 [connection signal="interacted_with" from="TopFloor" to="." method="_on_top_floor_interacted_with"]
+[connection signal="on_player_can_interact" from="TopFloor" to="." method="_on_player_can_interact"]
+[connection signal="on_player_cannot_interact" from="TopFloor" to="." method="_on_player_cannot_interact"]

@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://cmrydq17riis5"]
 
 [ext_resource type="Script" uid="uid://53e2enstgm1t" path="res://entities/props/furniture/furniture.gd" id="1_km3i8"]
+[ext_resource type="Shader" uid="uid://cc3frq827kvn3" path="res://shaders/outline.gdshader" id="2_fs03t"]
 [ext_resource type="Script" uid="uid://d1k8eytqs0gno" path="res://scripts/types/interactable.gd" id="2_g6cac"]
 
-[node name="Furniture" type="Node2D" unique_id=316347185]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3t568"]
+shader = ExtResource("2_fs03t")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="Furniture" type="Node2D" unique_id=316347185 groups=["furniture"]]
 z_index = -5
 script = ExtResource("1_km3i8")
 
@@ -11,6 +20,7 @@ script = ExtResource("1_km3i8")
 volume_db = 15.0
 
 [node name="Sprite" type="Node2D" parent="." unique_id=541780398]
+material = SubResource("ShaderMaterial_3t568")
 
 [node name="Interactable" type="Area2D" parent="." unique_id=1878105502]
 collision_layer = 16
@@ -20,3 +30,5 @@ repeatable = true
 metadata/_custom_type_script = "uid://d1k8eytqs0gno"
 
 [connection signal="interacted_with" from="Interactable" to="." method="_on_interacted_with"]
+[connection signal="on_player_can_interact" from="Interactable" to="." method="_on_player_can_interact"]
+[connection signal="on_player_cannot_interact" from="Interactable" to="." method="_on_player_cannot_interact"]

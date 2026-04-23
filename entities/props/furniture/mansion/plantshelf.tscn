@@ -12,6 +12,7 @@ size = Vector2(416, 24)
 [node name="Furniture" unique_id=316347185 instance=ExtResource("1_3yv65")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=126615693]
+use_parent_material = true
 position = Vector2(0, -240)
 texture = ExtResource("2_3yv65")
 

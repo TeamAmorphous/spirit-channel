@@ -26,6 +26,7 @@ position = Vector2(0, -384)
 texture = ExtResource("2_vms2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="1" unique_id=126615693]
+use_parent_material = true
 position = Vector2(0, -384)
 texture = ExtResource("3_r5rfc")
 

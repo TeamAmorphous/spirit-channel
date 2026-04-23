@@ -33,6 +33,8 @@ const ITEM_TEXTURES: Dictionary[StringName, Texture2D] = {
 @export var flash_damage: int = 1
 @export var hurt_invincibility_length: float = 3.0 
 
+@export var game_over_scene: PackedScene
+
 @export_category("Visual")
 @export var arm_min_angle: float = -60
 @export var arm_max_angle: float = 75
@@ -105,6 +107,9 @@ func _ready() -> void:
 	update_channel()
 	MusicManager.snap_volume()
 
+	if game_over_scene:
+		health.health_depleted.connect(SceneManager.change_scene_packed.bind(game_over_scene))
+
 
 #region Process Functions
 
@@ -138,9 +143,13 @@ func _process(delta: float) -> void:
 		elif Input.is_action_just_pressed(&"tune_down"):
 			change_channel(-1)
 
-		if Input.is_action_just_pressed(&"secondary_action"):
-			if is_instance_valid(current_interactable) and state_machine.in_state(["Idle", "Walk"]):
-				current_interactable.interact(self)
+		if is_instance_valid(current_interactable):
+			if state_machine.in_state(["Idle", "Walk"]):
+				current_interactable.on_player_can_interact.emit()
+				if Input.is_action_just_pressed(&"secondary_action"):
+					current_interactable.interact(self)
+			else:
+				current_interactable.on_player_cannot_interact.emit()
 	
 	track_timer -= delta
 	if track_timer < 0.0:
@@ -339,13 +348,13 @@ func _on_interactable_area_entered(area: Area2D) -> void:
 
 func _on_interactable_area_exited(area: Area2D) -> void:
 	if current_interactable == area:
+		current_interactable.on_player_cannot_interact.emit()
 		current_interactable = null
 
 
 func add_item(item: StringName) -> void:
 	inventory.append(item)
 	item_recieved.emit(item)
-	push_warning("Todo: ITEM GET STATE")
 
 
 func remove_item(item: StringName) -> bool:
