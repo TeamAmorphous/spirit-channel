@@ -159,8 +159,8 @@ radius = 130.0
 [node name="RatKing" unique_id=1958681849 instance=ExtResource("1_n7gw7")]
 script = ExtResource("2_g1vbm")
 
-[node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
-can_be_flashed = false
+[node name="HealthComponent" parent="." index="0" unique_id=908077137]
+max_health = 1
 
 [node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
 animation = &"rat_king/bite"

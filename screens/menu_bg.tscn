@@ -64,6 +64,7 @@ _data = {
 }
 
 [node name="MenuBg" type="Node2D" unique_id=1331379525]
+process_mode = 3
 
 [node name="BG" type="Sprite2D" parent="." unique_id=809670446]
 texture = ExtResource("1_3stpt")
@@ -73,7 +74,7 @@ centered = false
 position = Vector2(570, 182)
 texture = ExtResource("2_6u7q5")
 centered = false
-offset = Vector2(1.9076611, 0)
+offset = Vector2(-4.8367333, 0)
 script = ExtResource("3_42l25")
 shift = 8.0
 frequency = 0.165
@@ -82,7 +83,7 @@ frequency = 0.165
 position = Vector2(570, 182)
 texture = ExtResource("4_520cd")
 centered = false
-offset = Vector2(-9.1292305, 0)
+offset = Vector2(2.6648061, 0)
 script = ExtResource("3_42l25")
 shift = 10.0
 frequency = 0.125
@@ -91,7 +92,7 @@ frequency = 0.125
 position = Vector2(-80, 531)
 texture = ExtResource("2_hvm4s")
 centered = false
-offset = Vector2(-14.500774, 0)
+offset = Vector2(-8.99823, 0)
 script = ExtResource("3_42l25")
 shift = 30.0
 frequency = 0.15
@@ -105,7 +106,7 @@ centered = false
 position = Vector2(-100, 531)
 texture = ExtResource("4_imhxr")
 centered = false
-offset = Vector2(6.6004086, 0)
+offset = Vector2(14.947606, 0)
 script = ExtResource("3_42l25")
 frequency = 0.1
 

@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://vh38t38fdfp4" path="res://entities/player/reticle.png" id="28_wq0jh"]
 [ext_resource type="Texture2D" uid="uid://rrd766cygikt" path="res://entities/player/arrow.png" id="30_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://dlqmq0u8jgwy6" path="res://entities/player/interact.png" id="35_np63p"]
+[ext_resource type="Texture2D" uid="uid://b0r78qwim8ee0" path="res://entities/player/heal_particle.png" id="36_geky7"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_we0b7"]
 
@@ -82,6 +83,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("18_wuv6x")
+}, {
+"duration": 1.0,
 "texture": ExtResource("15_ghoj8")
 }, {
 "duration": 1.0,
@@ -89,9 +93,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_50fht")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_wuv6x")
 }],
 "loop": true,
 "name": &"walk",
@@ -124,12 +125,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_geky7"]
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_qwspa"]
+_data = [Vector2(0, 0), 0.0, 11.100464, 0, 0, Vector2(0.11879896, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
+point_count = 3
+
 [sub_resource type="Animation" id="Animation_gx6sm"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Body:animation")
+tracks/0/path = NodePath("Visual/Sprite/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -141,7 +149,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Arm:visible")
+tracks/1/path = NodePath("Visual/Sprite/Arm:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -153,7 +161,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Body/Eyes:visible")
+tracks/2/path = NodePath("Visual/Sprite/Body/Eyes:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -165,7 +173,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/Body/Eyes:animation")
+tracks/3/path = NodePath("Visual/Sprite/Body/Eyes:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -177,7 +185,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Body/Eyes/Pupils:visible")
+tracks/4/path = NodePath("Visual/Sprite/Body/Eyes/Pupils:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -189,7 +197,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/FaceBackground:scale")
+tracks/5/path = NodePath("Visual/Sprite/FaceBackground:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -201,7 +209,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/FaceBackground:position")
+tracks/6/path = NodePath("Visual/Sprite/FaceBackground:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -213,7 +221,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Body/Eyes:position")
+tracks/7/path = NodePath("Visual/Sprite/Body/Eyes:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -225,7 +233,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Body:offset")
+tracks/8/path = NodePath("Visual/Sprite/Body:offset")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -237,7 +245,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Sprite/Body:frame")
+tracks/9/path = NodePath("Visual/Sprite/Body:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -249,7 +257,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Sprite/Arm:position")
+tracks/10/path = NodePath("Visual/Sprite/Arm:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -261,7 +269,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Sprite/Body/FaceGlow:position")
+tracks/11/path = NodePath("Visual/Sprite/Body/FaceGlow:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -273,7 +281,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Sprite/Body/FaceBackground:scale")
+tracks/12/path = NodePath("Visual/Sprite/Body/FaceBackground:scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -285,7 +293,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Sprite/Body/FaceBackground:position")
+tracks/13/path = NodePath("Visual/Sprite/Body/FaceBackground:position")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -293,6 +301,18 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-32, -358)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Visual/Sprite:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_j3ovn"]
@@ -302,7 +322,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Body/Eyes/Pupils:visible")
+tracks/0/path = NodePath("Visual/Sprite/Body/Eyes/Pupils:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -314,7 +334,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Body/Eyes:animation")
+tracks/1/path = NodePath("Visual/Sprite/Body/Eyes:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -326,7 +346,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Body/Eyes:position")
+tracks/2/path = NodePath("Visual/Sprite/Body/Eyes:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -338,7 +358,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/Body:animation")
+tracks/3/path = NodePath("Visual/Sprite/Body:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -350,7 +370,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Body/FaceBackground:scale")
+tracks/4/path = NodePath("Visual/Sprite/Body/FaceBackground:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -362,7 +382,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Body/FaceBackground:position")
+tracks/5/path = NodePath("Visual/Sprite/Body/FaceBackground:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -374,7 +394,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Arm:visible")
+tracks/6/path = NodePath("Visual/Sprite/Arm:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -386,7 +406,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Body:offset")
+tracks/7/path = NodePath("Visual/Sprite/Body:offset")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -398,7 +418,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Body/FaceGlow:position")
+tracks/8/path = NodePath("Visual/Sprite/Body/FaceGlow:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -406,6 +426,18 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-13, -299)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Visual/Sprite:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_yqrof"]
@@ -415,7 +447,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Body:animation")
+tracks/0/path = NodePath("Visual/Sprite/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -427,7 +459,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Arm:visible")
+tracks/1/path = NodePath("Visual/Sprite/Arm:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -439,7 +471,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Body/Eyes:visible")
+tracks/2/path = NodePath("Visual/Sprite/Body/Eyes:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -451,7 +483,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/Body/Eyes:animation")
+tracks/3/path = NodePath("Visual/Sprite/Body/Eyes:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -463,7 +495,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Body/Eyes/Pupils:visible")
+tracks/4/path = NodePath("Visual/Sprite/Body/Eyes/Pupils:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -475,7 +507,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Body/FaceBackground:scale")
+tracks/5/path = NodePath("Visual/Sprite/Body/FaceBackground:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -487,7 +519,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Body/FaceBackground:position")
+tracks/6/path = NodePath("Visual/Sprite/Body/FaceBackground:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -499,7 +531,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Body/Eyes:position")
+tracks/7/path = NodePath("Visual/Sprite/Body/Eyes:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -511,7 +543,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Body:offset")
+tracks/8/path = NodePath("Visual/Sprite/Body:offset")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -523,7 +555,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Sprite/Arm:position")
+tracks/9/path = NodePath("Visual/Sprite/Arm:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -535,7 +567,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Sprite/Body/FaceGlow:position")
+tracks/10/path = NodePath("Visual/Sprite/Body/FaceGlow:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -544,16 +576,27 @@ tracks/10/keys = {
 "update": 0,
 "values": [Vector2(12, -328)]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Visual/Sprite:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_13wue"]
 resource_name = "jump"
-length = 0.1
-loop_mode = 1
+length = 0.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Body:animation")
+tracks/0/path = NodePath("Visual/Sprite/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -565,7 +608,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Body:offset")
+tracks/1/path = NodePath("Visual/Sprite/Body:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -577,7 +620,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Arm:position")
+tracks/2/path = NodePath("Visual/Sprite/Arm:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -589,7 +632,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/Arm:visible")
+tracks/3/path = NodePath("Visual/Sprite/Arm:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -601,7 +644,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Body/Eyes:visible")
+tracks/4/path = NodePath("Visual/Sprite/Body/Eyes:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -613,7 +656,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Body/Eyes:position")
+tracks/5/path = NodePath("Visual/Sprite/Body/Eyes:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -625,7 +668,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Body/Eyes:animation")
+tracks/6/path = NodePath("Visual/Sprite/Body/Eyes:animation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -637,7 +680,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Body/FaceGlow:position")
+tracks/7/path = NodePath("Visual/Sprite/Body/FaceGlow:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -649,7 +692,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Body/FaceBackground:position")
+tracks/8/path = NodePath("Visual/Sprite/Body/FaceBackground:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -658,16 +701,28 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(-32, -358)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Visual/Sprite:scale")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.9), Vector2(1, 1.06), Vector2(1, 1.074)]
+}
 
 [sub_resource type="Animation" id="Animation_221hk"]
 resource_name = "walk"
-length = 0.8
+length = 0.40001002
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Body:animation")
+tracks/0/path = NodePath("Visual/Sprite/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -679,11 +734,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Body:frame")
+tracks/1/path = NodePath("Visual/Sprite/Body:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -691,7 +746,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Body:offset")
+tracks/2/path = NodePath("Visual/Sprite/Body:offset")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -703,19 +758,19 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/Body/FaceBackground:position")
+tracks/3/path = NodePath("Visual/Sprite/Body/FaceBackground:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-32, -357), Vector2(-32, -351), Vector2(-32, -358), Vector2(-32, -364)]
+"values": [Vector2(-32, -364), Vector2(-32, -358), Vector2(-32, -351), Vector2(-32, -357)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Body/FaceBackground:scale")
+tracks/4/path = NodePath("Visual/Sprite/Body/FaceBackground:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -727,26 +782,26 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Body/Eyes:position")
+tracks/5/path = NodePath("Visual/Sprite/Body/Eyes:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(6, -331), Vector2(6, -324), Vector2(6, -330), Vector2(6, -336)]
+"values": [Vector2(6, -336), Vector2(6, -330), Vector2(6, -324), Vector2(6, -331)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Body/FaceGlow:position")
+tracks/6/path = NodePath("Visual/Sprite/Body/FaceGlow:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(11, -321), Vector2(11, -314), Vector2(11, -320), Vector2(11, -326)]
+"values": [Vector2(11, -326), Vector2(11, -320), Vector2(11, -314), Vector2(11, -321)]
 }
 tracks/7/type = "method"
 tracks/7/imported = false
@@ -755,7 +810,7 @@ tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0.10000001),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -765,14 +820,26 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Arm:position")
+tracks/8/path = NodePath("Visual/Sprite/Arm:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(29, -250), Vector2(29, -246), Vector2(29, -250), Vector2(29, -256)]
+"values": [Vector2(29, -256), Vector2(29, -250), Vector2(29, -246), Vector2(29, -250)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Visual/Sprite:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3wlsy"]
@@ -957,6 +1024,9 @@ _data = {
 &"default": SubResource("Animation_0eo6o")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy7bt"]
+size = Vector2(144, 384)
+
 [node name="Player" type="CharacterBody2D" unique_id=265899906 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_symyc")
@@ -1016,31 +1086,41 @@ script = ExtResource("3_8fjmc")
 [node name="FlashlightArea" type="Area2D" parent="." unique_id=600995211]
 unique_name_in_owner = true
 position = Vector2(220, -264.5)
+scale = Vector2(1, -1)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlashlightArea" unique_id=1739495203]
 polygon = PackedVector2Array(0, -32, 990, -328, 1075, -24, 989, 254, 0, 31.999985, -8, 24, -15.999985, 8, -15.999985, -8, -8, -24)
 
-[node name="Sprite" type="Node2D" parent="." unique_id=655486889]
+[node name="Visual" type="Node2D" parent="." unique_id=655486889]
 
-[node name="Arm" type="Sprite2D" parent="Sprite" unique_id=4805627]
+[node name="ArmColliderRay" type="RayCast2D" parent="Visual" unique_id=1919830658]
+position = Vector2(64, -256)
+target_position = Vector2(176, 0)
+
+[node name="Sprite" type="Node2D" parent="Visual" unique_id=1802581326]
+
+[node name="Arm" type="Sprite2D" parent="Visual/Sprite" unique_id=4805627]
 position = Vector2(29, -246.5)
 texture = ExtResource("4_8fjmc")
 offset = Vector2(99, -6)
 flip_h = true
 
-[node name="FlashlightArea" type="RemoteTransform2D" parent="Sprite/Arm" unique_id=720639430]
+[node name="FlashlightArea" type="RemoteTransform2D" parent="Visual/Sprite/Arm" unique_id=720639430]
 position = Vector2(191, -18)
-remote_path = NodePath("../../../FlashlightArea")
+remote_path = NodePath("../../../../FlashlightArea")
+update_scale = false
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite/Arm" unique_id=1433840950]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Visual/Sprite/Arm" unique_id=1433840950]
 position = Vector2(191, -18)
+scale = Vector2(1, -1)
 occluder = SubResource("OccluderPolygon2D_eyb6c")
 
-[node name="FlashlightBeam" type="PointLight2D" parent="Sprite/Arm" unique_id=293481272]
-position = Vector2(190.54218, -18.950123)
-rotation = 3.1415927
+[node name="FlashlightBeam" type="PointLight2D" parent="Visual/Sprite/Arm" unique_id=293481272]
+position = Vector2(190.54218, -17.049866)
+rotation = 3.1415925
+scale = Vector2(1, -1)
 color = Color(1, 1, 0.42754805, 1)
 range_z_max = 2
 shadow_enabled = true
@@ -1048,25 +1128,25 @@ shadow_filter = 1
 texture = ExtResource("12_mtric")
 offset = Vector2(-574.4578, 47.049927)
 
-[node name="FaceBackground" type="Sprite2D" parent="Sprite" unique_id=541641555]
+[node name="FaceBackground" type="Sprite2D" parent="Visual/Sprite" unique_id=541641555]
 position = Vector2(-32, -358)
 scale = Vector2(80, 56)
 texture = ExtResource("16_gt4e4")
 centered = false
 
-[node name="Body" type="AnimatedSprite2D" parent="Sprite" unique_id=1471779541]
+[node name="Body" type="AnimatedSprite2D" parent="Visual/Sprite" unique_id=1471779541]
 sprite_frames = SubResource("SpriteFrames_8fjmc")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(-21, -203)
 flip_h = true
 
-[node name="FaceBackground" type="RemoteTransform2D" parent="Sprite/Body" unique_id=2040153359]
+[node name="FaceBackground" type="RemoteTransform2D" parent="Visual/Sprite/Body" unique_id=2040153359]
 position = Vector2(-32, -358)
 scale = Vector2(80, 56)
 remote_path = NodePath("../../FaceBackground")
 
-[node name="Eyes" type="AnimatedSprite2D" parent="Sprite/Body" unique_id=867243479]
+[node name="Eyes" type="AnimatedSprite2D" parent="Visual/Sprite/Body" unique_id=867243479]
 light_mask = 2
 material = SubResource("CanvasItemMaterial_221hk")
 position = Vector2(6, -330)
@@ -1075,20 +1155,37 @@ animation = &"idle"
 autoplay = "idle"
 flip_h = true
 
-[node name="Pupils" type="Sprite2D" parent="Sprite/Body/Eyes" unique_id=1152065323]
+[node name="Pupils" type="Sprite2D" parent="Visual/Sprite/Body/Eyes" unique_id=1152065323]
 use_parent_material = true
 texture = ExtResource("7_bectd")
 flip_h = true
 
-[node name="FaceGlow" type="PointLight2D" parent="Sprite/Body" unique_id=1399885951]
+[node name="FaceGlow" type="PointLight2D" parent="Visual/Sprite/Body" unique_id=1399885951]
 position = Vector2(11, -320)
 color = Color(0, 1, 0, 1)
 energy = 0.75
 texture = ExtResource("19_eyb6c")
 
-[node name="ArmColliderRay" type="RayCast2D" parent="Sprite" unique_id=1919830658]
-position = Vector2(64, -256)
-target_position = Vector2(176, 0)
+[node name="HealParticles" type="CPUParticles2D" parent="Visual/Sprite" unique_id=1839360086]
+unique_name_in_owner = true
+light_mask = 2
+visibility_layer = 2
+material = SubResource("CanvasItemMaterial_geky7")
+position = Vector2(0, -264)
+emitting = false
+texture = ExtResource("36_geky7")
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0
+emission_shape = 2
+emission_sphere_radius = 80.0
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 100.0
+scale_amount_curve = SubResource("Curve_qwspa")
 
 [node name="MovementAnimPlayer" type="AnimationPlayer" parent="." unique_id=1810858035]
 libraries/ = SubResource("AnimationLibrary_3wlsy")
@@ -1155,9 +1252,19 @@ offset = Vector2(48, -52)
 libraries/ = SubResource("AnimationLibrary_ttr27")
 autoplay = &"default"
 
+[node name="PickupArea" type="Area2D" parent="." unique_id=743994125]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1117992094]
+position = Vector2(0, -184)
+shape = SubResource("RectangleShape2D_wy7bt")
+
 [connection signal="area_entered" from="FlashlightArea" to="." method="_on_flashlight_area_entered"]
 [connection signal="area_exited" from="FlashlightArea" to="." method="_on_flashlight_area_exited"]
 [connection signal="body_entered" from="FlashlightArea" to="." method="_on_flashlight_area_body_entered"]
 [connection signal="body_exited" from="FlashlightArea" to="." method="_on_flashlight_area_body_exited"]
 [connection signal="area_entered" from="InteractableArea" to="." method="_on_interactable_area_entered"]
 [connection signal="area_exited" from="InteractableArea" to="." method="_on_interactable_area_exited"]
+[connection signal="body_shape_entered" from="PickupArea" to="." method="_on_pickup_area_entered"]

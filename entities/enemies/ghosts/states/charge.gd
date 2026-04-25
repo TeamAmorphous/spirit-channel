@@ -1,3 +1,4 @@
+@tool
 class_name Charge
 extends GhostState
 
@@ -64,7 +65,7 @@ func physics_update(delta: float) -> void:
 			recovery_timer -= delta
 			if recovery_timer <= 0:
 				step = 3
-				state_machine.change_state(next.name)
+				state_machine.change_state(next)
 			
 	
 	ghost.move_and_slide()

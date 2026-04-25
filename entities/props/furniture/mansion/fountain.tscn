@@ -35,6 +35,8 @@ position = Vector2(0, -128)
 shape = SubResource("RectangleShape2D_twvne")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="3" unique_id=1422412815]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1185339082]
 position = Vector2(0, -112)
@@ -42,29 +44,20 @@ shape = SubResource("RectangleShape2D_2e6lb")
 one_way_collision = true
 debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." index="4" unique_id=1238835190]
-position = Vector2(0, -192)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" index="0" unique_id=1571760394]
-position = Vector2(0, -96)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" index="1" unique_id=1571760394]
+position = Vector2(0, -288)
 shape = SubResource("RectangleShape2D_ghgwx")
 one_way_collision = true
 debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="." index="5" unique_id=1558884476]
-position = Vector2(0, -368)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" index="0" unique_id=1300390208]
-position = Vector2(0, -88)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" index="2" unique_id=1300390208]
+position = Vector2(0, -456)
 shape = SubResource("RectangleShape2D_y8dsx")
 one_way_collision = true
 debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="." index="6" unique_id=468525422]
-position = Vector2(0, -512)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" index="0" unique_id=1083449397]
-position = Vector2(0, -88)
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" index="3" unique_id=1083449397]
+position = Vector2(0, -600)
 shape = SubResource("RectangleShape2D_qvix5")
 one_way_collision = true
 debug_color = Color(0.938375, 1.5305579e-05, 0.6261036, 0.41960785)

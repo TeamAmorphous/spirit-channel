@@ -1,3 +1,4 @@
+@tool
 class_name Wait
 extends GhostState
 
@@ -21,4 +22,4 @@ func on_start(msg := {}) -> void:
 func update(delta: float) -> void:
 	timer -= delta
 	if timer <= 0:
-		state_machine.change_state(next.name)
+		state_machine.change_state(next)

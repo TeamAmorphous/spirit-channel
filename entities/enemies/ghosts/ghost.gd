@@ -67,8 +67,8 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func damage(amount: int, from: Node = null, next_state: StringName = &"") -> void:
-	state_machine.change_state("Hurt", {from=from, next=next_state})
+func damage(amount: int, from: Node2D = null, next_state: State = null) -> void:
+	state_machine.change_state($StateMachine/Hurt, {from=from, next=next_state})
 	health.damage(amount)
 
 
@@ -82,4 +82,4 @@ func _on_light_resistance_depleted(from: Node2D) -> void:
 
 func _on_health_depleted() -> void:
 	defeated.emit()
-	state_machine.change_state("Poof")
+	state_machine.change_state($StateMachine/Poof)

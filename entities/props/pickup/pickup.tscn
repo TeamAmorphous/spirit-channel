@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://cqhulv0enyjra"]
+
+[ext_resource type="Script" uid="uid://d3nsom73rmtj" path="res://entities/props/pickup/pickup.gd" id="1_ukv8k"]
+[ext_resource type="PackedScene" uid="uid://c4yvni3a5853o" path="res://entities/props/pickup/pickup_particles.tscn" id="2_b3m8g"]
+[ext_resource type="PackedScene" uid="uid://pygh7nopqnho" path="res://entities/props/pickup/grabbed_particles.tscn" id="2_kovgd"]
+[ext_resource type="AudioStream" uid="uid://v8uqgcruw57c" path="res://entities/props/pickup/pickup.ogg" id="2_vasjn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ukv8k"]
+friction = 0.5
+bounce = 0.8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jvbqx"]
+radius = 64.0
+
+[sub_resource type="Animation" id="Animation_kovgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vasjn"]
+resource_name = "default"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kdh6h"]
+_data = {
+&"RESET": SubResource("Animation_kovgd"),
+&"default": SubResource("Animation_vasjn")
+}
+
+[node name="Pickup" type="RigidBody2D" unique_id=1735321551]
+collision_layer = 32
+physics_material_override = SubResource("PhysicsMaterial_ukv8k")
+lock_rotation = true
+script = ExtResource("1_ukv8k")
+pickup_sound = ExtResource("2_vasjn")
+grabbed_particles = ExtResource("2_kovgd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1010630053]
+shape = SubResource("CircleShape2D_jvbqx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2037140511]
+
+[node name="PickupParticles" parent="." unique_id=199616353 instance=ExtResource("2_b3m8g")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1534881451]
+libraries/ = SubResource("AnimationLibrary_kdh6h")
+autoplay = &"default"

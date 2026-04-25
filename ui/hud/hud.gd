@@ -2,6 +2,9 @@ class_name HUD
 extends CanvasLayer
 
 
+signal page_close_requested
+
+
 @export var player: Player
 @export var pages: Array[Texture2D]
 
@@ -41,6 +44,7 @@ func _on_player_item_recieved(item: StringName) -> void:
 	elif item == &"page":
 		show_page(player.item_count(&"page") - 1)
 
+
 func _on_player_item_lost(item: StringName) -> void:
 	if item == &"keys":
 		var count := player.item_count(&"keys") 
@@ -50,6 +54,8 @@ func _on_player_item_lost(item: StringName) -> void:
 func _input(_event: InputEvent) -> void:
 	if not showing_page:
 		return
+	if Input.is_action_just_pressed(&"primary_action") or Input.is_action_just_pressed(&"secondary_action"):
+		page_close_requested.emit()
 
 
 func show_page(n: int) -> void:
@@ -58,13 +64,14 @@ func show_page(n: int) -> void:
 
 	$UI/PageDisplay.texture = pages[n]
 	%PagesCounter.text = "PAGES:\n%d" % (n + 1)
-	
-	player.state_machine.change_state("Cutscene")
+	player.state_machine.change_state(player.state_machine.get_node("Cutscene"))
 	get_tree().paused = true
 	await get_tree().create_timer(0.2).timeout
 	page_anim_player.play(&"show")
-	await  get_tree().create_timer(5.0).timeout
+	showing_page = true
+	await page_close_requested
+	showing_page = false
 	page_anim_player.play_backwards(&"show")
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
-	player.state_machine.change_state("Idle")
+	player.state_machine.change_state(player.state_machine.get_node("Idle"))

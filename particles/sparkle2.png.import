@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba0poqi3ybws2"
-path="res://.godot/imported/ROOMBG_6 copy.png-05963a68578b36a03c549d095c82cc54.ctex"
+uid="uid://dgoujxes2ebed"
+path="res://.godot/imported/sparkle2.png-4bb732ccc54aa9c9c656997e6192f107.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/assets/ROOMBG_6 copy.png"
-dest_files=["res://.godot/imported/ROOMBG_6 copy.png-05963a68578b36a03c549d095c82cc54.ctex"]
+source_file="res://particles/sparkle2.png"
+dest_files=["res://.godot/imported/sparkle2.png-4bb732ccc54aa9c9c656997e6192f107.ctex"]
 
 [params]
 

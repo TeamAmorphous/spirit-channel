@@ -8,6 +8,6 @@ extends Node2D
 
 
 func _ready() -> void:
+	randomize()
 	if funny:
-		sprite.texture = funny if funny_chance <= randf() else normal
-		
+		sprite.texture = funny if funny_chance >= randf() else normal

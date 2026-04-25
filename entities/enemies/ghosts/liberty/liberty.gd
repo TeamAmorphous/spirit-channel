@@ -31,5 +31,5 @@ func _drop_shades() -> void:
 
 func _on_flashed(from: Node2D) -> void:
 	if has_shades:
-		state_machine.change_state("Hurt", {"from"=from})
+		state_machine.change_state($"StateMachine/Hurt", {"from"=from})
 		_drop_shades()

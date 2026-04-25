@@ -42,7 +42,7 @@ channel = 1
 max_health = 1
 
 [node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
-resistance = 0.5
+resistance = 1.5
 recovery_rate = 2.0
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]

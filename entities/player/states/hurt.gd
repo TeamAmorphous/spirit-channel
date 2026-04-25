@@ -1,3 +1,4 @@
+@tool
 extends PlayerState
 
 
@@ -27,5 +28,5 @@ func physics_update(delta: float) -> void:
 	player.move_and_slide()
 
 	if player.is_on_floor():
-		state_machine.change_state("Idle")
+		state_machine.change_state($"../Idle")
 		return

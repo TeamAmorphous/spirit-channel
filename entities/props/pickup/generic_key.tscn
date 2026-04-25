@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bm1fwuasel8u2"]
+
+[ext_resource type="PackedScene" uid="uid://cqhulv0enyjra" path="res://entities/props/pickup/pickup.tscn" id="1_wsjya"]
+[ext_resource type="Texture2D" uid="uid://cf6od3s4xivo5" path="res://entities/props/pickup/key.png" id="2_vndt5"]
+
+[node name="GenericKey" unique_id=1735321551 instance=ExtResource("1_wsjya")]
+item = &"key"
+
+[node name="Sprite2D" parent="." index="1" unique_id=2037140511]
+texture = ExtResource("2_vndt5")

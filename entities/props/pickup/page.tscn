@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dxo0frj63e45l"]
+
+[ext_resource type="PackedScene" uid="uid://cqhulv0enyjra" path="res://entities/props/pickup/pickup.tscn" id="1_tw4rs"]
+[ext_resource type="Texture2D" uid="uid://dgdejmdhadj5g" path="res://entities/props/pickup/page.png" id="2_tts0j"]
+
+[node name="Pickup" unique_id=1735321551 instance=ExtResource("1_tw4rs")]
+item = &"page"
+lifetime = 0.0
+
+[node name="Sprite2D" parent="." index="1" unique_id=2037140511]
+texture = ExtResource("2_tts0j")
+
+[node name="PickupParticles" parent="." index="2" unique_id=199616353]
+light_mask = 0
+visibility_layer = 3

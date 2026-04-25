@@ -1,3 +1,4 @@
+@tool
 extends GhostState
 
 
@@ -56,8 +57,8 @@ func _teleport() -> void:
 
 	ghost.global_position = tele_position
 
-	state_machine.change_state("Appear")
+	state_machine.change_state($"../Appear")
 
 
 func _on_flashed(from: Node2D) -> void:
-	ghost.damage(1, from, "WaitDisappear")
+	ghost.damage(1, from, $"../WaitDisappear")

@@ -1,3 +1,4 @@
+@tool
 extends PlayerState
 
 @export var land_sound: AudioStream
@@ -25,14 +26,14 @@ func physics_update(delta: float) -> void:
 	
 	if player.is_on_floor():
 		if direction:
-			state_machine.change_state("Walk")
+			state_machine.change_state($"../Walk")
 			return
 		player.play_sound_effect(land_sound)
-		state_machine.change_state("Idle")
+		state_machine.change_state($"../Idle")
 		return
 
 	if coyote_timer > 0:
 		coyote_timer -= delta
 		if Input.is_action_just_pressed(&"jump"):
-			state_machine.change_state("Jump")
+			state_machine.change_state($"../Jump")
 			return

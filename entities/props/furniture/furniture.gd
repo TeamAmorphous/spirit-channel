@@ -1,14 +1,16 @@
 class_name Furniture
 extends Node2D
 
-@export var contains: StringName
+signal interacted_with(player: Player)
+
+@export var contains: PackedScene
 @export var shake_length: float = 1.0
 @export var shake_intensity: float = 10.0
 @export var shake_sound: AudioStream
 
 @onready var interactable: Interactable = $Interactable
 @onready var sprite: Node2D = $Sprite
-@onready var sound_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var sound_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var sprite_mat: ShaderMaterial
 
@@ -31,13 +33,22 @@ func _process(delta: float) -> void:
 
 func shake() -> void:
 	shake_timer = shake_length
-
+	sound_player.play()
 
 func _on_interacted_with(player: Player) -> void:
+	interacted_with.emit(player)
 	shake()
-	if contains:
-		player.add_item(contains)
-	contains = &""
+	if contains and contains.can_instantiate():
+		var item = contains.instantiate() as Node2D
+		item.global_position = player.global_position + Vector2(0, -100)
+		if item is Pickup:
+			item.apply_impulse(Vector2(1000.0 * [-1, 1].pick_random(), randf_range(-2000.0, -1000.0)))
+		get_tree().current_scene.add_child(item)
+	
+	contains = null
+
+func get_spawn_position() -> Vector2:
+	return $SpawnPosition.global_position if has_node("$SpawnPosition") else global_position
 
 
 func _on_player_cannot_interact() -> void:

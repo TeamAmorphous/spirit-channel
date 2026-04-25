@@ -1,16 +1,23 @@
 [gd_scene format=3 uid="uid://colhxe528q6lr"]
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
-[ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/notes_distributor.gd" id="2_5kag3"]
+[ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/distributor.gd" id="2_5kag3"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
+[ext_resource type="PackedScene" uid="uid://dxo0frj63e45l" path="res://entities/props/pickup/page.tscn" id="3_gfkhe"]
+[ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_g7iek"]
+[ext_resource type="PackedScene" uid="uid://hehs74mvqk1x" path="res://entities/enemies/ghosts/rat_king/rat_king.tscn" id="5_4v2gu"]
 [ext_resource type="PackedScene" uid="uid://chuwtkmxhvbg" path="res://map/mansion.tscn" id="6_5kag3"]
 
 [node name="Game" type="Node2D" unique_id=965120324]
 
 [node name="Mansion" parent="." unique_id=2071726716 instance=ExtResource("6_5kag3")]
 
-[node name="NotesDistributor" type="Node" parent="." unique_id=605552993]
+[node name="Distributor" type="Node" parent="." unique_id=605552993 node_paths=PackedStringArray("player")]
 script = ExtResource("2_5kag3")
+page_pickup_scene = ExtResource("3_gfkhe")
+rat_scene = ExtResource("4_g7iek")
+rat_king_scene = ExtResource("5_4v2gu")
+player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
 position = Vector2(0, -8)

@@ -1,3 +1,4 @@
+@tool
 extends GhostState
 
 func on_start(_msg := {}) -> void:
