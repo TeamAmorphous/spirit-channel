@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://tunpjbplh4uu" path="res://map/assets/BAR_BEHIND.png" id="10_frd6q"]
 [ext_resource type="PackedScene" uid="uid://bh4bkbjrbbtte" path="res://entities/props/furniture/mansion/sink.tscn" id="10_fux5b"]
 [ext_resource type="PackedScene" uid="uid://wg3i40n8rvgq" path="res://entities/props/furniture/mansion/table_0.tscn" id="10_qrynr"]
+[ext_resource type="Texture2D" uid="uid://iejbh2oao12n" path="res://map/assets/ROOMBG_7.png" id="11_phslc"]
 [ext_resource type="PackedScene" uid="uid://ypty6s52yc4x" path="res://entities/props/furniture/mansion/towel.tscn" id="11_qrynr"]
 [ext_resource type="PackedScene" uid="uid://dhd0f38rvmg8h" path="res://entities/props/furniture/mansion/bookshelf.tscn" id="12_3p8s4"]
 [ext_resource type="PackedScene" uid="uid://ct0bo5sulyia4" path="res://entities/props/furniture/mansion/the_haunted_john.tscn" id="12_4srbl"]
@@ -25,13 +26,12 @@
 [ext_resource type="PackedScene" uid="uid://cmivxrcfyme48" path="res://entities/props/furniture/mansion/fireplace.tscn" id="13_6jow3"]
 [ext_resource type="Texture2D" uid="uid://ijsfnqtnqinr" path="res://map/assets/LIGHTWALL.png" id="13_gotpx"]
 [ext_resource type="PackedScene" uid="uid://dh2h42xp111k5" path="res://entities/props/furniture/mansion/piano.tscn" id="14_3hn6f"]
-[ext_resource type="Texture2D" uid="uid://ba0poqi3ybws2" path="res://map/assets/ROOMBG_6 copy.png" id="14_6jow3"]
 [ext_resource type="PackedScene" uid="uid://l4m5rt72qf3i" path="res://entities/props/furniture/mansion/dresser.tscn" id="14_6su2q"]
 [ext_resource type="Texture2D" uid="uid://d4gcpq78rjs87" path="res://map/assets/LIGHTWALL_GLOW.png" id="14_hr8f0"]
 [ext_resource type="PackedScene" uid="uid://dsohsygtvtshb" path="res://entities/props/furniture/mansion/diner_table.tscn" id="15_frd6q"]
 [ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="15_qm6j5"]
 [ext_resource type="PackedScene" uid="uid://mbt5gdgu0msx" path="res://entities/props/furniture/mansion/sofa.tscn" id="16_l3cv2"]
-[ext_resource type="Texture2D" uid="uid://iejbh2oao12n" path="res://map/assets/ROOMBG_6.png" id="16_qmy3s"]
+[ext_resource type="Texture2D" uid="uid://ba0poqi3ybws2" path="res://map/assets/ROOMBG_6.png" id="16_qmy3s"]
 [ext_resource type="PackedScene" uid="uid://crkgl8bm8ogin" path="res://entities/props/furniture/mansion/billards_table.tscn" id="16_y4e8e"]
 [ext_resource type="PackedScene" uid="uid://dk1nmu18dunbu" path="res://entities/props/furniture/mansion/billards_stick.tscn" id="17_vacv1"]
 [ext_resource type="PackedScene" uid="uid://cncd3x8ndqh5" path="res://entities/props/furniture/mansion/artifact_0.tscn" id="17_y4e8e"]
@@ -48,7 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://b48hkxak137cb" path="res://entities/props/furniture/mansion/safe.tscn" id="24_gv4gc"]
 [ext_resource type="PackedScene" uid="uid://byrwnin2f6yh7" path="res://entities/props/furniture/mansion/fridge.tscn" id="25_toqgn"]
 [ext_resource type="PackedScene" uid="uid://b56ayo8cmo0k1" path="res://entities/props/furniture/mansion/fountain.tscn" id="28_aqbxi"]
-[ext_resource type="Texture2D" uid="uid://cknkx75aqn4u8" path="res://map/assets/ROOMBG_7.png" id="28_yaxv6"]
+[ext_resource type="Texture2D" uid="uid://cknkx75aqn4u8" path="res://map/assets/ROOMBG_8.png" id="28_yaxv6"]
 [ext_resource type="Texture2D" uid="uid://dwm3uno1fgjsy" path="res://map/assets/ROOMBG_FOYER.png" id="29_24nj8"]
 [ext_resource type="PackedScene" uid="uid://c2u6fojwjtmjt" path="res://entities/props/furniture/mansion/plantshelf.tscn" id="29_oo527"]
 [ext_resource type="Texture2D" uid="uid://bidpk27aei026" path="res://map/assets/FOYER_PILLAR.png" id="30_gv4gc"]
@@ -103,6 +103,24 @@ texture_region_size = Vector2i(1728, 926)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(-880, -96)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w5iee"]
+texture = ExtResource("16_qmy3s")
+texture_region_size = Vector2i(1696, 928)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -96)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ewl3q"]
+texture = ExtResource("11_phslc")
+texture_region_size = Vector2i(1696, 928)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -96)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo1kd"]
+texture = ExtResource("28_yaxv6")
+texture_region_size = Vector2i(1696, 928)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -96)
+
 [sub_resource type="TileSet" id="TileSet_frd6q"]
 tile_size = Vector2i(1760, 1088)
 sources/0 = SubResource("TileSetAtlasSource_no78q")
@@ -112,32 +130,35 @@ sources/3 = SubResource("TileSetAtlasSource_jnlwl")
 sources/4 = SubResource("TileSetAtlasSource_gario")
 sources/5 = SubResource("TileSetAtlasSource_qkqpr")
 sources/6 = SubResource("TileSetAtlasSource_caicn")
+sources/7 = SubResource("TileSetAtlasSource_w5iee")
+sources/8 = SubResource("TileSetAtlasSource_ewl3q")
+sources/9 = SubResource("TileSetAtlasSource_fo1kd")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_by0bj"]
 size = Vector2(2128, 64)
 
 [node name="MansionMap" type="Node2D" unique_id=2071726716]
 
+[node name="OutsideBG" type="Sprite2D" parent="." unique_id=1118030208]
+z_index = -20
+position = Vector2(0, -3168)
+scale = Vector2(4, 4)
+texture = ExtResource("2_4cltl")
+metadata/_edit_lock_ = true
+
 [node name="BlackBG" type="Sprite2D" parent="." unique_id=794182533]
 modulate = Color(0, 0, 0, 1)
-z_index = -50
+z_index = -10
 position = Vector2(0, 28.656734)
 scale = Vector2(10566.354, 4218)
 texture = ExtResource("1_no78q")
 offset = Vector2(0, -0.5)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1118030208]
-z_index = -20
-position = Vector2(0, -3168)
-scale = Vector2(4, 4)
-texture = ExtResource("2_4cltl")
-
 [node name="Backgrounds" type="TileMapLayer" parent="." unique_id=2026134729]
 z_index = -10
-tile_map_data = PackedByteArray("AAD/////BgAAAAAAAAD///7/BgAAAAAAAAD///3/BgAAAAAAAAD+////AQAAAAAAAAD9////AQAAAAAAAAD+//7/AQAAAAAAAAD9//7/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD///z/AQAAAAAAAAAAAPz/AQAAAAAAAAABAPz/AQAAAAAAAAACAPz/AQAAAAAAAAACAP3/AQAAAAAAAAABAP3/AQAAAAAAAAABAP7/AQAAAAAAAAACAP//AQAAAAAAAAACAP7/AQAAAAAAAAABAP//AQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD/////BgAAAAAAAAD///7/BgAAAAAAAAD///3/BgAAAAAAAAD+////AgAAAAAAAAD9////BwAAAAAAAAD+//7/BwAAAAAAAAD9//7/CAAAAAAAAAD9//3/CAAAAAAAAAD+//3/AwAAAAAAAAD+//z/BwAAAAAAAAD9//z/BAAAAAAAAAD///z/AQAAAAAAAAAAAPz/BQAAAAAAAAABAPz/AwAAAAAAAAACAPz/BQAAAAAAAAACAP3/AgAAAAAAAAABAP3/AgAAAAAAAAABAP7/BQAAAAAAAAACAP//AgAAAAAAAAACAP7/CQAAAAAAAAABAP//BwAAAAAAAAA=")
 tile_set = SubResource("TileSet_frd6q")
-metadata/_edit_lock_ = true
 
 [node name="Node2D" type="Node2D" parent="." unique_id=2089187116]
 
@@ -146,12 +167,13 @@ position = Vector2(4400, -3264)
 
 [node name="Bed" parent="Node2D/4F" unique_id=316347185 instance=ExtResource("9_fux5b")]
 position = Vector2(304, 0)
+shake_sound = null
 
 [node name="Bed2" parent="Node2D/4F" unique_id=1747347556 instance=ExtResource("10_qrynr")]
 position = Vector2(-416, 0)
+shake_sound = null
 
 [node name="Window" parent="Node2D/4F" unique_id=1590567196 instance=ExtResource("15_qm6j5")]
-z_index = -6
 position = Vector2(-416, -448)
 
 [node name="4F2" type="Node2D" parent="Node2D" unique_id=397074275]
@@ -159,116 +181,118 @@ position = Vector2(-2640, -1088)
 
 [node name="Bed" parent="Node2D/4F2" unique_id=842462324 instance=ExtResource("9_fux5b")]
 position = Vector2(304, 0)
+shake_sound = null
 
 [node name="Bed2" parent="Node2D/4F2" unique_id=232613461 instance=ExtResource("10_qrynr")]
 position = Vector2(-416, 0)
+shake_sound = null
 
 [node name="Window" parent="Node2D/4F2" unique_id=1353233829 instance=ExtResource("15_qm6j5")]
-z_index = -6
 position = Vector2(-416, -448)
 
 [node name="4D" type="Node2D" parent="Node2D" unique_id=853731353]
 position = Vector2(880, -3264)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/4D" unique_id=1320231577]
-position = Vector2(0, -448)
-texture = ExtResource("6_gario")
-
 [node name="Furniture" parent="Node2D/4D" unique_id=1269118935 instance=ExtResource("12_3p8s4")]
 z_index = 0
 position = Vector2(-560, 0)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/4D" unique_id=121450048 instance=ExtResource("12_3p8s4")]
 z_index = 0
 position = Vector2(560, 0)
+shake_sound = null
 
 [node name="Furniture3" parent="Node2D/4D" unique_id=1026972253 instance=ExtResource("13_6jow3")]
 z_index = 0
+shake_sound = null
 
 [node name="4C" type="Node2D" parent="Node2D" unique_id=641688840]
 position = Vector2(-880, -3264)
 
 [node name="Furniture" parent="Node2D/4C" unique_id=1839981974 instance=ExtResource("14_6su2q")]
 z_index = 0
+shake_sound = null
 
 [node name="Window" parent="Node2D/4C" unique_id=39535580 instance=ExtResource("15_qm6j5")]
-z_index = -1
 position = Vector2(-304, -448)
 
 [node name="Window2" parent="Node2D/4C" unique_id=2131972456 instance=ExtResource("15_qm6j5")]
-z_index = -1
 position = Vector2(304, -448)
 
 [node name="Furniture2" parent="Node2D/4C" unique_id=518028227 instance=ExtResource("22_aqbxi")]
 z_index = -1
 position = Vector2(-576, 0)
+shake_sound = null
 
 [node name="Furniture3" parent="Node2D/4C" unique_id=937623603 instance=ExtResource("22_aqbxi")]
 z_index = -1
 position = Vector2(576, 0)
+shake_sound = null
 
 [node name="4C2" type="Node2D" parent="Node2D" unique_id=2066151935]
 position = Vector2(2640, -3264)
 
 [node name="Furniture" parent="Node2D/4C2" unique_id=377905486 instance=ExtResource("14_6su2q")]
 z_index = 0
+shake_sound = null
 
 [node name="Window" parent="Node2D/4C2" unique_id=1644232585 instance=ExtResource("15_qm6j5")]
-z_index = -1
 position = Vector2(-304, -448)
 
 [node name="Window2" parent="Node2D/4C2" unique_id=1967707773 instance=ExtResource("15_qm6j5")]
-z_index = -1
 position = Vector2(304, -448)
 
 [node name="Furniture2" parent="Node2D/4C2" unique_id=809140825 instance=ExtResource("22_aqbxi")]
 z_index = -1
 position = Vector2(-576, 0)
+shake_sound = null
 
 [node name="Furniture3" parent="Node2D/4C2" unique_id=1319459355 instance=ExtResource("22_aqbxi")]
 z_index = -1
 position = Vector2(576, 0)
+shake_sound = null
 
 [node name="4B" type="Node2D" parent="Node2D" unique_id=131260143]
 position = Vector2(-2640, -3264)
 
 [node name="Window" parent="Node2D/4B" unique_id=1978378141 instance=ExtResource("15_qm6j5")]
-z_index = -5
 position = Vector2(-320, -448)
 
 [node name="Furniture" parent="Node2D/4B" unique_id=79541861 instance=ExtResource("14_3hn6f")]
 position = Vector2(400, 0)
+shake_sound = null
 
 [node name="Bed" parent="Node2D/4B" unique_id=240086196 instance=ExtResource("10_qrynr")]
 position = Vector2(-112, 16)
+shake_sound = null
 
 [node name="4B2" type="Node2D" parent="Node2D" unique_id=1296911446]
 position = Vector2(2640, 0)
 
 [node name="Window" parent="Node2D/4B2" unique_id=1110784179 instance=ExtResource("15_qm6j5")]
-z_index = -5
 position = Vector2(-320, -448)
 
 [node name="Furniture" parent="Node2D/4B2" unique_id=1115323526 instance=ExtResource("14_3hn6f")]
 position = Vector2(400, 0)
+shake_sound = null
 
 [node name="Bed" parent="Node2D/4B2" unique_id=864725275 instance=ExtResource("10_qrynr")]
 position = Vector2(-112, 16)
+shake_sound = null
 
 [node name="4A" type="Node2D" parent="Node2D" unique_id=839170246]
 position = Vector2(-4400, -3264)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/4A" unique_id=150294942]
-position = Vector2(0, -448)
-texture = ExtResource("14_6jow3")
-
 [node name="Furniture" parent="Node2D/4A" unique_id=1532583355 instance=ExtResource("16_l3cv2")]
 z_index = 0
 position = Vector2(-336, 0)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/4A" unique_id=1703260813 instance=ExtResource("22_aqbxi")]
 z_index = 0
 position = Vector2(-640, 0)
+shake_sound = null
 
 [node name="Window" parent="Node2D/4A" unique_id=1564384599 instance=ExtResource("15_qm6j5")]
 position = Vector2(304, -448)
@@ -276,53 +300,53 @@ position = Vector2(304, -448)
 [node name="3F" type="Node2D" parent="Node2D" unique_id=1096773257]
 position = Vector2(4400, -2176)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/3F" unique_id=1493679061]
-position = Vector2(0, -448)
-texture = ExtResource("3_fid38")
-
 [node name="Furniture" parent="Node2D/3F" unique_id=971822332 instance=ExtResource("9_0657s")]
 z_index = 0
 position = Vector2(-448, 0)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/3F" unique_id=524819190 instance=ExtResource("10_fux5b")]
 z_index = 0
 position = Vector2(48, 0)
+shake_sound = null
 
 [node name="Furniture4" parent="Node2D/3F" unique_id=994048059 instance=ExtResource("12_4srbl")]
 z_index = 0
 position = Vector2(432, 0)
+shake_sound = null
 
 [node name="1F" type="Node2D" parent="Node2D" unique_id=2110264149]
 position = Vector2(4400, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/1F" unique_id=889181415]
-position = Vector2(0, -448)
-texture = ExtResource("3_fid38")
-
 [node name="Furniture" parent="Node2D/1F" unique_id=647340308 instance=ExtResource("9_0657s")]
-z_index = 0
 position = Vector2(-448, 0)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/1F" unique_id=277151508 instance=ExtResource("10_fux5b")]
 z_index = 0
 position = Vector2(48, 0)
+shake_sound = null
 
 [node name="Furniture3" parent="Node2D/1F" unique_id=1027626750 instance=ExtResource("11_qrynr")]
 z_index = 0
 position = Vector2(720, -304)
+shake_sound = null
 
 [node name="Furniture4" parent="Node2D/1F" unique_id=146591023 instance=ExtResource("12_4srbl")]
 z_index = 0
 position = Vector2(432, 0)
+shake_sound = null
 
 [node name="3E" type="Node2D" parent="Node2D" unique_id=629704848]
 position = Vector2(2640, -2176)
 
 [node name="Furniture" parent="Node2D/3E" unique_id=1686149629 instance=ExtResource("22_3dh3y")]
 position = Vector2(336, 16)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/3E" unique_id=1098377413 instance=ExtResource("23_6su2q")]
 position = Vector2(-512, 0)
+shake_sound = null
 
 [node name="KitchenBgdeco" type="Sprite2D" parent="Node2D/3E" unique_id=1647034302]
 position = Vector2(-336, -400)
@@ -330,15 +354,18 @@ texture = ExtResource("24_4cltl")
 
 [node name="Furniture3" parent="Node2D/3E" unique_id=330275683 instance=ExtResource("25_toqgn")]
 position = Vector2(-112, 0)
+shake_sound = null
 
 [node name="3E2" type="Node2D" parent="Node2D" unique_id=15319879]
 position = Vector2(-2640, 0)
 
 [node name="Furniture" parent="Node2D/3E2" unique_id=799897261 instance=ExtResource("22_3dh3y")]
 position = Vector2(336, 16)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/3E2" unique_id=909808205 instance=ExtResource("23_6su2q")]
 position = Vector2(-512, 0)
+shake_sound = null
 
 [node name="KitchenBgdeco" type="Sprite2D" parent="Node2D/3E2" unique_id=1631912230]
 position = Vector2(-336, -400)
@@ -346,6 +373,7 @@ texture = ExtResource("24_4cltl")
 
 [node name="Furniture3" parent="Node2D/3E2" unique_id=2146402929 instance=ExtResource("25_toqgn")]
 position = Vector2(-112, 0)
+shake_sound = null
 
 [node name="3CD" type="Node2D" parent="Node2D" unique_id=1684264171]
 position = Vector2(0, -2176)
@@ -353,13 +381,16 @@ position = Vector2(0, -2176)
 [node name="Furniture" parent="Node2D/3CD" unique_id=1344705423 instance=ExtResource("9_caicn")]
 z_index = 1
 position = Vector2(-512, 0)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/3CD" unique_id=1861414800 instance=ExtResource("9_caicn")]
 z_index = 1
+shake_sound = null
 
 [node name="Furniture3" parent="Node2D/3CD" unique_id=224286633 instance=ExtResource("9_caicn")]
 z_index = 1
 position = Vector2(512, 0)
+shake_sound = null
 
 [node name="Sprite2D2" type="Sprite2D" parent="Node2D/3CD" unique_id=2138646631]
 position = Vector2(-672, -336)
@@ -385,6 +416,8 @@ texture = ExtResource("9_fid38")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Node2D/3CD/Counter" unique_id=1999309666]
 position = Vector2(0, -256)
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/3CD/Counter/StaticBody2D" unique_id=601693642]
 shape = SubResource("RectangleShape2D_by0bj")
@@ -416,10 +449,6 @@ texture = ExtResource("14_hr8f0")
 [node name="3B" type="Node2D" parent="Node2D" unique_id=1943898892]
 position = Vector2(-2640, -2176)
 
-[node name="BG" type="Sprite2D" parent="Node2D/3B" unique_id=151349563]
-position = Vector2(0, -448)
-texture = ExtResource("4_by0bj")
-
 [node name="Window" parent="Node2D/3B" unique_id=592934786 instance=ExtResource("15_qm6j5")]
 position = Vector2(-432, -448)
 
@@ -431,20 +460,18 @@ position = Vector2(-4400, -2176)
 
 [node name="Furniture" parent="Node2D/3A" unique_id=144856562 instance=ExtResource("32_n52i4")]
 position = Vector2(416, 16)
+shake_sound = null
 
 [node name="2F" type="Node2D" parent="Node2D" unique_id=38103691]
 position = Vector2(4400, -1088)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/2F" unique_id=1129168520]
-z_index = -5
-position = Vector2(0, -448)
-texture = ExtResource("28_yaxv6")
-
 [node name="Furniture" parent="Node2D/2F" unique_id=1133804490 instance=ExtResource("29_oo527")]
 position = Vector2(0, 16)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/2F" unique_id=1451652808 instance=ExtResource("29_oo527")]
 position = Vector2(608, 16)
+shake_sound = null
 
 [node name="BillardsLight" parent="Node2D/2F" unique_id=685458638 instance=ExtResource("30_wruko")]
 position = Vector2(0, -896)
@@ -454,13 +481,10 @@ position = Vector2(608, -896)
 
 [node name="Furniture3" parent="Node2D/2F" unique_id=754658962 instance=ExtResource("22_aqbxi")]
 position = Vector2(-432, 0)
+shake_sound = null
 
 [node name="2D" type="Node2D" parent="Node2D" unique_id=1055646610]
 position = Vector2(2640, -1088)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/2D" unique_id=473756102]
-position = Vector2(0, -448)
-texture = ExtResource("5_jnlwl")
 
 [node name="Window" parent="Node2D/2D" unique_id=1781553661 instance=ExtResource("15_qm6j5")]
 position = Vector2(-592, -448)
@@ -473,10 +497,11 @@ position = Vector2(592, -480)
 
 [node name="Furniture" parent="Node2D/2D" unique_id=315214368 instance=ExtResource("16_y4e8e")]
 z_index = 0
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/2D" unique_id=2030879930 instance=ExtResource("17_vacv1")]
-z_index = 0
 position = Vector2(624, 0)
+shake_sound = null
 
 [node name="BillardsLight" parent="Node2D/2D" unique_id=2016537081 instance=ExtResource("18_f6ve6")]
 position = Vector2(0, -896)
@@ -484,20 +509,19 @@ position = Vector2(0, -896)
 [node name="2A" type="Node2D" parent="Node2D" unique_id=1162784542]
 position = Vector2(-4400, -1088)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/2A" unique_id=746470939]
-position = Vector2(0, -448)
-texture = ExtResource("16_qmy3s")
-
 [node name="Furniture" parent="Node2D/2A" unique_id=1138832482 instance=ExtResource("17_y4e8e")]
 z_index = 0
 position = Vector2(-528, 0)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/2A" unique_id=1259283159 instance=ExtResource("18_vacv1")]
 z_index = 0
+shake_sound = null
 
 [node name="Furniture3" parent="Node2D/2A" unique_id=2142263739 instance=ExtResource("19_6mqdj")]
 z_index = 0
 position = Vector2(560, 0)
+shake_sound = null
 
 [node name="Sprite2D2" type="Sprite2D" parent="Node2D/2A" unique_id=759148657]
 position = Vector2(0, -144)
@@ -507,20 +531,23 @@ texture = ExtResource("20_2qe5j")
 position = Vector2(-4400, 0)
 
 [node name="Window" parent="Node2D/1A" unique_id=2024139948 instance=ExtResource("15_qm6j5")]
-z_index = -7
 position = Vector2(224, -496)
 
 [node name="Furniture" parent="Node2D/1A" unique_id=2019696687 instance=ExtResource("21_f6ve6")]
 position = Vector2(112, 0)
+shake_sound = null
 
 [node name="Furniture2" parent="Node2D/1A" unique_id=1094856742 instance=ExtResource("22_aqbxi")]
 position = Vector2(-304, 0)
+shake_sound = null
 
 [node name="Furniture3" parent="Node2D/1A" unique_id=1621830447 instance=ExtResource("23_24nj8")]
 position = Vector2(528, 0)
+shake_sound = null
 
 [node name="Furniture4" parent="Node2D/1A" unique_id=1936544686 instance=ExtResource("24_gv4gc")]
 position = Vector2(-624, 0)
+shake_sound = null
 
 [node name="Window2" parent="Node2D/1A" unique_id=1444351528 instance=ExtResource("49_phslc")]
 position = Vector2(-208, -592)
@@ -529,9 +556,10 @@ position = Vector2(-208, -592)
 
 [node name="Furniture" parent="Node2D/12CD" unique_id=756623522 instance=ExtResource("28_aqbxi")]
 z_index = -1
+shake_sound = null
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/12CD" unique_id=1098723958]
-z_index = -2
+z_index = -6
 position = Vector2(0, -992)
 texture = ExtResource("29_24nj8")
 
@@ -551,16 +579,15 @@ position = Vector2(1344, -448)
 texture = ExtResource("30_gv4gc")
 
 [node name="Window" parent="Node2D/12CD" unique_id=511061459 instance=ExtResource("15_qm6j5")]
-z_index = -2
 position = Vector2(-688, -1536)
 
 [node name="Window2" parent="Node2D/12CD" unique_id=900630943 instance=ExtResource("15_qm6j5")]
-z_index = -2
 position = Vector2(688, -448)
 
 [node name="Furniture" parent="." unique_id=572380277 instance=ExtResource("15_frd6q")]
 z_index = 0
 position = Vector2(-2640, -2176)
+shake_sound = null
 
 [node name="Walls" type="TileMapLayer" parent="." unique_id=1920712605]
 z_index = 10

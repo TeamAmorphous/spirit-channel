@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ikan3mhvjl4l"]
+
+[ext_resource type="PackedScene" uid="uid://cqhulv0enyjra" path="res://entities/props/pickup/pickup.tscn" id="1_8dgwg"]
+[ext_resource type="Texture2D" uid="uid://cl5kpq3q7te3v" path="res://entities/props/pickup/medkit.png" id="2_b6wr7"]
+
+[node name="Medkit" unique_id=1735321551 instance=ExtResource("1_8dgwg")]
+item = &"medkit"
+
+[node name="Sprite2D" parent="." index="1" unique_id=2037140511]
+texture = ExtResource("2_b6wr7")

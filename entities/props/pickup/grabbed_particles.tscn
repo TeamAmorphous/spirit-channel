@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://pygh7nopqnho"]
+
+[ext_resource type="Texture2D" uid="uid://b43cxl0rh2cno" path="res://particles/sparkle.png" id="1_wo4tw"]
+[ext_resource type="Script" uid="uid://dqk7nfcd68r2i" path="res://entities/props/pickup/grabbed_particles.gd" id="2_qa38o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ldn0o"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_w07cw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
+point_count = 2
+
+[node name="GrabbedParticles" type="CPUParticles2D" unique_id=199616353]
+material = SubResource("CanvasItemMaterial_ldn0o")
+emitting = false
+amount = 16
+texture = ExtResource("1_wo4tw")
+lifetime = 0.5
+one_shot = true
+preprocess = 0.1
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+scale_amount_min = 0.4
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_w07cw")
+color = Color(0.97152907, 0.9350743, 0.8122318, 1)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_offset_max = 0.5
+script = ExtResource("2_qa38o")

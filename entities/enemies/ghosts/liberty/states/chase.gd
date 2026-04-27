@@ -1,3 +1,4 @@
+@tool
 extends Chase
 
 @onready var hot_dog: Sprite2D = %HotDog 
@@ -11,4 +12,4 @@ func physics_update(delta: float) -> void:
 		if player.global_position.distance_to(ghost.global_position) > 1000.0:
 			timer -= delta
 			if timer <= 0.0:
-				state_machine.change_state("HotDogThrow")
+				state_machine.change_state($"../HotDogThrow")

@@ -1,20 +1,24 @@
+@tool
 extends GhostState
 
 @export var animation: StringName = &"hurt"
 @export var stun_duration: float = 2.0
 
-var next_state: String
+var next_state: State
 var stun_timer: float
 
 
 func on_start(msg := {}) -> void:
 	stun_timer = stun_duration
 	ghost.anim_player.play(animation)
-	var next :=  msg.get("next", "") as String
-	next_state = next if next else state_machine.last_state.name
+	var next := msg.get("next") as State
+	next_state = next if next else state_machine.last_state
 
-	var recoil_dir := -ghost.global_position.direction_to(player.chase_target.global_position)
-	ghost.velocity = recoil_dir * 200
+	if "velocity" in msg:
+		ghost.velocity = msg["velocity"]
+	elif "from" in msg and msg["from"] is Node2D and player.chase_target:
+		var recoil_dir := -ghost.global_position.direction_to(player.chase_target.global_position)
+		ghost.velocity = recoil_dir * 200
 	ghost.light_sensitivity.enabled = false
 	ghost.light_sensitivity.reset()
 
@@ -29,6 +33,6 @@ func physics_update(delta) -> void:
 		state_machine.change_state(next_state)
 		return
 	
-	ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * 2.0 * delta)
+	ghost.velocity = ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * 2.0 * delta)
 	
 	ghost.move_and_slide()

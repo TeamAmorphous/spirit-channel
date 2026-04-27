@@ -1,6 +1,8 @@
+@tool
 extends GhostState
 
 @export var animation: StringName = &"idle"
+
 
 func on_start(_msg := {}) -> void:
 	ghost.anim_player.play(animation)

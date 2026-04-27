@@ -1,3 +1,4 @@
+@tool
 extends PlayerState
 
 func on_start(_msg := {}) -> void:
@@ -21,8 +22,8 @@ func physics_update(delta: float) -> void:
 	
 	if player.is_on_floor():
 		# todo: landing
-		state_machine.change_state("Idle")
+		state_machine.change_state($"../Idle")
 		return
 	elif player.velocity.y > 0:
-		state_machine.change_state("Fall", {jumped=true})
+		state_machine.change_state($"../Fall", {jumped=true})
 		return

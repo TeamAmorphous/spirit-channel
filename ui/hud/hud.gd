@@ -2,6 +2,9 @@ class_name HUD
 extends CanvasLayer
 
 
+signal page_close_requested
+
+
 @export var player: Player
 @export var pages: Array[Texture2D]
 
@@ -43,6 +46,7 @@ func _on_player_item_recieved(item: StringName) -> void:
 	elif item == &"page":
 		show_page(player.item_count(&"page") - 1)
 
+
 func _on_player_item_lost(item: StringName) -> void:
 	if item == &"keys":
 		var count := player.item_count(&"keys") 
@@ -57,8 +61,7 @@ func show_page(n: int) -> void:
 	var request_id := _page_request_id
 	page_display.texture = pages[n]
 	%PagesCounter.text = "PAGES:\n%d" % (n + 1)
-	
-	player.state_machine.change_state("Cutscene")
+	player.state_machine.change_state(player.state_machine.get_node("Cutscene"))
 	get_tree().paused = true
 	await get_tree().create_timer(0.2).timeout
 	if request_id != _page_request_id:

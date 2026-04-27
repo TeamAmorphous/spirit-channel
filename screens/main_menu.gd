@@ -5,9 +5,11 @@ extends Control
 @export_file("*.tscn") var game_scene_path: String
 @export_file("*.tscn") var options_scene_path: String
 
+@onready var version_label = $MarginContainer/VersionLabel
 
 func _ready() -> void:
 	MusicManager.start_menu()
+	version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
 
 
 func _on_start_button_pressed() -> void:

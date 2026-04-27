@@ -1,3 +1,4 @@
+@tool
 class_name Chase
 extends GhostState
 
@@ -17,6 +18,8 @@ var target: Player
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	if detection_area:
 		detection_area.body_entered.connect(_on_detection_area_body_entered)
 		detection_area.body_exited.connect(_on_detection_area_body_exited)
@@ -30,11 +33,13 @@ func _ready() -> void:
 # - ceri
 
 func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	if state_machine.current_state == self or not enabled:
 		return
 	if target and not state_machine.in_state(excluded_states):
 		ghost.show_shock()
-		state_machine.change_state(name)
+		state_machine.change_state(self)
 
 
 func on_start(_msg := {}) -> void:
@@ -50,7 +55,7 @@ func physics_update(delta: float) -> void:
 		ghost.velocity = ghost.velocity.move_toward(dir_to_target * chase_speed, chase_accel * delta)
 		
 	else:
-		state_machine.change_state("Idle")
+		state_machine.change_state($"../Idle")
 
 	ghost.move_and_slide()
 

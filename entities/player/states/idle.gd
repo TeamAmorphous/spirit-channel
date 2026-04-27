@@ -1,3 +1,4 @@
+@tool
 extends PlayerState
 
 func on_start(_msg := {}) -> void:
@@ -6,18 +7,18 @@ func on_start(_msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if not player.is_on_floor():
-		state_machine.change_state("Fall", {jumped=false})
+		state_machine.change_state($"../Fall", {jumped=false})
 		return
 	
 	if Input.is_action_just_pressed(&"jump"):
-		state_machine.change_state("Jump")
+		state_machine.change_state($"../Jump")
 		return
 	
 	var direction := Input.get_axis(&"move_left", &"move_right")
 	if direction:
-		state_machine.change_state("Walk")
+		state_machine.change_state($"../Walk")
 		return
 	
-	player.velocity.x = move_toward(player.velocity.x, 0, player.accel * 1.5 * delta)
+	player.velocity.x = move_toward(player.velocity.x, 0, player.decel * delta)
 
 	player.move_and_slide()

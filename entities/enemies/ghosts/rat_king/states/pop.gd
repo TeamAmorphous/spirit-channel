@@ -1,3 +1,4 @@
+@tool
 extends GhostState
 
 @export var rat_scene: PackedScene
@@ -18,12 +19,12 @@ func _on_animation_finished(_anim_name: StringName) -> void:
 		for i in rat_count:
 			var rat := rat_scene.instantiate() as Ghost
 			var random_dir := Vector2(
-				randf_range(-1.0, 1.0),
-				randf_range(-1.0, 1.0)
+				randf_range(-100.0, 100.0),
+				randf_range(-100.0, 100.0)
 			).normalized()
 			ghost.add_sibling(rat)
 			rat.global_position = ghost.global_position
-			rat.state_machine.call_deferred("change_state", "Hurt", {from=ghost})
-			rat.velocity = random_dir * (100.0 + (50.0 * randf()))
+			rat.state_machine.call_deferred("change_state", rat.state_machine.get_node("Hurt"))
+			rat.velocity = random_dir * (1000.0 + (200.0 * randf()))
 	await get_tree().process_frame
 	ghost.queue_free()

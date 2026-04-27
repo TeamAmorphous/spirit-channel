@@ -22,6 +22,8 @@ shape = SubResource("RectangleShape2D_k8bsj")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="3" unique_id=968598450]
 position = Vector2(0, -184)
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1280880387]
 position = Vector2(0, -80)

@@ -22,14 +22,15 @@ const ITEM_TEXTURES: Dictionary[StringName, Texture2D] = {
 
 
 @export_category("Physics")
-@export var speed: float = 800.0
-@export var accel: float = 1500.0
-@export var jump_velocity: float = 800.0
+@export var speed: float = 1000.0
+@export var accel: float = 2000.0
+@export var decel: float = 4000.0
+@export var jump_velocity: float = 1400.0
 @export var coyote_time: float = 0.25 ## seconds
 
 @export_category("Gameplay")
 @export var light_power_multiplier: float = 1.0
-@export var flash_cooldown_length: float = 5.0
+@export var flash_cooldown_length: float = 2.0
 @export var flash_damage: int = 1
 @export var hurt_invincibility_length: float = 3.0 
 
@@ -43,14 +44,15 @@ const ITEM_TEXTURES: Dictionary[StringName, Texture2D] = {
 
 @onready var camera: PlayerCamera = $PlayerCamera
 
-@onready var sprite: Node2D = $Sprite
-@onready var arm: Node2D = $Sprite/Arm
-@onready var body: AnimatedSprite2D = $Sprite/Body
+@onready var visual: Node2D = $Visual
+@onready var sprite: Node2D = $Visual/Sprite
+@onready var arm: Node2D = $Visual/Sprite/Arm
+@onready var body: AnimatedSprite2D = $Visual/Sprite/Body
 
-@onready var face_background: Sprite2D = $Sprite/FaceBackground
-@onready var eyes: AnimatedSprite2D = $Sprite/Body/Eyes
-@onready var pupils: Sprite2D = $Sprite/Body/Eyes/Pupils
-@onready var face_glow: PointLight2D = $Sprite/Body/FaceGlow
+@onready var face_background: Sprite2D = $Visual/Sprite/FaceBackground
+@onready var eyes: AnimatedSprite2D = $Visual/Sprite/Body/Eyes
+@onready var pupils: Sprite2D = $Visual/Sprite/Body/Eyes/Pupils
+@onready var face_glow: PointLight2D = $Visual/Sprite/Body/FaceGlow
 
 @onready var movement_anim_player: AnimationPlayer = $MovementAnimPlayer
 @onready var sfx: AudioStreamPlayer = $SFX
@@ -58,13 +60,13 @@ const ITEM_TEXTURES: Dictionary[StringName, Texture2D] = {
 @onready var chase_target: Marker2D = $ChaseTarget
 
 @onready var flashlight_beam_area: Area2D = $FlashlightArea
-@onready var flashlight_beam: PointLight2D = $Sprite/Arm/FlashlightBeam
+@onready var flashlight_beam: PointLight2D = $Visual/Sprite/Arm/FlashlightBeam
 
 @onready var health: HealthComponent = $HealthComponent
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var aim: AimController = $AimController
-@onready var arm_collider_ray: RayCast2D = $Sprite/ArmColliderRay
+@onready var arm_collider_ray: RayCast2D = $Visual/ArmColliderRay
 @onready var reticle: Node2D = $Reticle
 
 @onready var arrow_anim_player: AnimationPlayer = $ArrowAnimPlayer
@@ -144,7 +146,7 @@ func _process(delta: float) -> void:
 			change_channel(-1)
 
 		if is_instance_valid(current_interactable):
-			if state_machine.in_state(["Idle", "Walk"]):
+			if state_machine.in_state([$"StateMachine/Idle", $"StateMachine/Walk"]):
 				current_interactable.on_player_can_interact.emit()
 				if Input.is_action_just_pressed(&"secondary_action"):
 					current_interactable.interact(self)
@@ -227,8 +229,8 @@ func update_sprites(delta: float) -> void:
 	var facing_left := aim.direction.x < 0 if not override_facing else direction_override.x < 0
 
 	## flip direction
-	sprite.scale.x = lerpf(
-		sprite.scale.x,
+	visual.scale.x = lerpf(
+		visual.scale.x,
 		-1 if facing_left else 1,
 		10.0 * delta
 	)
@@ -266,26 +268,58 @@ func update_sprites(delta: float) -> void:
 	pupils.position.y = lerpf(pupils_min_y_offset, pupils_max_y_offset, pupil_y_ratio)
 	
 	if invincibility_timer > 0.0:
-		sprite.visible = (int(invincibility_timer * 50.0) % 2) == 0
+		visual.visible = (int(invincibility_timer * 50.0) % 2) == 0
 	else:
-		sprite.visible = true
+		visual.visible = true
 	
-	if closest_ghost:
+	if closest_ghost and is_instance_valid(closest_ghost):
 		var dir := arrow.global_position.direction_to(closest_ghost.global_position)
 		arrow.rotation = lerp_angle(arrow.rotation, dir.angle(), 10.0 * delta)
 		arrow_anim_player.play(&"show", 0.2)
 	else:
 		arrow_anim_player.play_backwards(&"show", 0.2)
 	
-	interaction_prompt.visible = is_instance_valid(current_interactable) and state_machine.in_state(["Idle", "Walk"])
+	interaction_prompt.visible = is_instance_valid(current_interactable) and state_machine.in_state([$StateMachine/Idle, $StateMachine/Walk])
+
+
+func update_arm_rotation(delta: float) -> void:
+	var facing_left := aim.direction.x < 0 if not override_facing else direction_override.x < 0
+
+	var arm_dir := aim.target - arm.global_position
+	if override_facing:
+		arm_dir = arm.global_position + direction_override
+
+	if facing_left:
+		arm_dir.x *= -1
+
+	var arm_angle = clampf(
+		arm_dir.angle(),
+		deg_to_rad(arm_min_angle),
+		deg_to_rad(arm_max_angle)
+	)
 	
+
+	if arm_collider_ray.is_colliding() and not override_facing:
+		var ray_collision_ratio := 1.0 - ((arm_collider_ray.global_position - arm_collider_ray.get_collision_point()).length_squared() / arm_collider_ray.target_position.length_squared())
+		arm_angle = lerpf(arm_angle, deg_to_rad(arm_max_angle + 10), ray_collision_ratio)
+
+
+	if facing_left:
+		arm_angle = PI - arm_angle
+	
+	arm.global_rotation = lerp_angle(
+		arm.global_rotation,
+		arm_angle,
+		20.0 * delta
+	)
+
 
 #endregion
 
 func damage(amount: int, from: Node = null) -> void:
 	if is_invincible or invincibility_timer > 0.0:
 		return
-	state_machine.change_state("Hurt", {"from": from})
+	state_machine.change_state($StateMachine/Hurt, {"from": from})
 	invincibility_timer = hurt_invincibility_length
 	health.damage(amount)
 
@@ -353,6 +387,10 @@ func _on_interactable_area_exited(area: Area2D) -> void:
 
 
 func add_item(item: StringName) -> void:
+	match item:
+		&"medkit":
+			health.heal(5)
+			return
 	inventory.append(item)
 	item_recieved.emit(item)
 
@@ -369,16 +407,20 @@ func item_count(item: StringName) -> int:
 	return inventory.count(item)
 
 
-func walk_to(target: Vector2) -> void:
+func walk_to(target: Vector2, speed_scale: float = 1.0) -> void:
+	velocity = Vector2.ZERO
 	movement_anim_player.play(&"walk")
 	override_facing = true
-	var left := target.x < global_position.x
-	aim.target = Vector2(-40 if left else 40, -200)
 	var dir := global_position.direction_to(target)
 	var dist := global_position.distance_to(target)
-	direction_override = Vector2(dir.x, 0.0)
+	direction_override = Vector2(dir.x * 200, 0.0)
 	var walk_tween := get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	walk_tween.tween_property(self, "global_position", target, dist / speed)
+	walk_tween.tween_property(self, "global_position", target, dist / (speed * speed_scale))
 	await walk_tween.finished
 	override_facing = false
 	movement_anim_player.play(&"idle")
+
+
+func _on_pickup_area_entered(_body_rid: RID, colliding_body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
+	if colliding_body is Pickup:
+		colliding_body.pickup(self)

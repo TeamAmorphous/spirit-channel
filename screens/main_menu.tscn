@@ -3,6 +3,14 @@
 [ext_resource type="Script" uid="uid://b4gowca5ktt81" path="res://screens/main_menu.gd" id="1_p3cyw"]
 [ext_resource type="PackedScene" uid="uid://dfyq1nvm8rvvn" path="res://screens/menu_bg.tscn" id="2_t3bh0"]
 [ext_resource type="Texture2D" uid="uid://bh3qtik4yuusf" path="res://screens/title.png" id="3_t3bh0"]
+[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="4_5mnfb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5mnfb"]
+font = ExtResource("4_5mnfb")
+font_size = 32
+font_color = Color(0.735357, 0.735357, 0.735357, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control" unique_id=1150759093]
 custom_minimum_size = Vector2(1000, 750)
@@ -47,8 +55,9 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("4_5mnfb")
+theme_override_font_sizes/font_size = 48
 text = "START"
 flat = true
 
@@ -56,8 +65,9 @@ flat = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("4_5mnfb")
+theme_override_font_sizes/font_size = 48
 text = "OPTIONS"
 flat = true
 
@@ -65,10 +75,18 @@ flat = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 32
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("4_5mnfb")
+theme_override_font_sizes/font_size = 48
 text = "QUIT"
 flat = true
+
+[node name="VersionLabel" type="Label" parent="MarginContainer" unique_id=110299405]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "X.X.X"
+label_settings = SubResource("LabelSettings_5mnfb")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

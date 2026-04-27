@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func stairs_cutscene(player: Player, reverse: bool) -> void:
-	player.state_machine.change_state("Cutscene")
+	player.state_machine.change_state(player.state_machine.get_node("Cutscene"))
 	var old_vis_layer = player.visibility_layer
 	player.z_index = 200
 
@@ -24,13 +24,13 @@ func stairs_cutscene(player: Player, reverse: bool) -> void:
 	await player.walk_to(follower.global_position)
 	await get_tree().create_timer(0.2).timeout
 	follower.progress_ratio = 0.0 if reverse else 1.0
-	await player.walk_to(follower.global_position)
+	await player.walk_to(follower.global_position, 0.75)
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
 	player.process_mode = Node.PROCESS_MODE_INHERIT
 
 	player.z_index = old_vis_layer
-	player.state_machine.change_state("Idle")
+	player.state_machine.change_state(player.state_machine.get_node("Idle"))
 	shader_mat.set_shader_parameter("width", 10.0)
 
 

@@ -3,7 +3,7 @@ extends Area2D
 
 @export var damage: int = 1
 @export var lifetime: float = 2.5
-@export var gravity_scale: float = 1.0
+@export var gravity_scale: float = 0.5
 @export var angular_velocity: float = 200.0
 @export var random_angular_direction: bool = true
 
