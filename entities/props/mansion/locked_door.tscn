@@ -13,6 +13,15 @@ func _ready():
 [node name="Door" unique_id=441128494 instance=ExtResource("1_dmrvo")]
 needs_item = &"key"
 
+[node name="OpenSound" parent="." index="7" unique_id=1002636784]
+bus = &"SFX_Vol"
+
+[node name="CloseSound" parent="." index="8" unique_id=56520482]
+bus = &"SFX_Vol"
+
+[node name="UnlockSound" parent="." index="9" unique_id=639104944]
+bus = &"SFX_Vol"
+
 [node name="LockAnimPlayer" parent="." index="11" unique_id=276871032]
 autoplay = &"RESET"
 

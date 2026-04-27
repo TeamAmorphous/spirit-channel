@@ -18,6 +18,7 @@ script = ExtResource("1_km3i8")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=102654398]
 volume_db = 15.0
+bus = &"SFX_Vol"
 
 [node name="Sprite" type="Node2D" parent="." unique_id=541780398]
 material = SubResource("ShaderMaterial_3t568")

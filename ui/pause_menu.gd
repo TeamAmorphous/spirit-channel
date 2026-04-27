@@ -1,28 +1,65 @@
-class_name OptionsMenu
-extends Control
+class_name PauseMenu
+extends CanvasLayer
 
-@export_file("*.tscn") var menu_scene_path: String
+@export var hud: HUD
 
+const PAUSE_ACTION := &"pause"
 const MASTER_BUS := &"Master"
 const MUSIC_BUS := &"Music"
 const SFX_BUS := &"SFX_Vol"
 const MIN_VOLUME_DB := -80.0
 
-@onready var master_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/master_volume_slider
-@onready var music_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/music_volume_slider
-@onready var sfx_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/sfx_volume_slider
+@onready var master_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/master_volume_slider
+@onready var music_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/music_volume_slider
+@onready var sfx_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/sfx_volume_slider
 
 
 func _ready() -> void:
+	hide()
+	_sync_slider_values()
+
+
+func _process(_delta: float) -> void:
+	if not Input.is_action_just_pressed(PAUSE_ACTION):
+		return
+	if _is_page_open():
+		return
+
+	if visible:
+		resume()
+	else:
+		pause()
+
+
+func pause() -> void:
+	if visible:
+		return
+
+	_sync_slider_values()
+	show()
+	get_tree().paused = true
+
+
+func resume() -> void:
+	if not visible:
+		return
+
+	hide()
+	get_tree().paused = false
+
+
+func _is_page_open() -> bool:
+	return is_instance_valid(hud) and hud.is_page_open()
+
+
+func _sync_slider_values() -> void:
 	master_volume_slider.set_value_no_signal(_get_bus_volume_linear(MASTER_BUS))
 	music_volume_slider.set_value_no_signal(_get_bus_volume_linear(MUSIC_BUS))
 	sfx_volume_slider.set_value_no_signal(_get_bus_volume_linear(SFX_BUS))
 
-func _on_back_button_pressed() -> void:
-	if not menu_scene_path:
-		push_error("no menu_scene_path set!")
-		return
-	SceneManager.change_scene(menu_scene_path)
+
+func _on_resume_button_pressed() -> void:
+	resume()
 
 
 func _on_master_volume_slider_value_changed(value: float) -> void:

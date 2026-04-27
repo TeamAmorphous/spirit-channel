@@ -222,6 +222,8 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 stretch_mode = 3
 
+[connection signal="gui_input" from="UI/PageDisplay" to="." method="_on_page_display_gui_input"]
+
 [node name="Logo" type="Sprite2D" parent="." unique_id=531410892]
 modulate = Color(0, 1, 0.6, 0.39215687)
 position = Vector2(856, 96)
