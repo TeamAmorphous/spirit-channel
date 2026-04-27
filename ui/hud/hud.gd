@@ -87,3 +87,7 @@ func _on_page_display_gui_input(event: InputEvent) -> void:
 	if mouse_button and mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_LEFT:
 		get_viewport().set_input_as_handled()
 		await close_page()
+
+
+func is_page_open() -> bool:
+	return showing_page

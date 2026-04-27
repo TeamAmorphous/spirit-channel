@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://cle7e7fe6x3q7"]
+
+[ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_6u2xg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2j7ri"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.75)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lq7v"]
+font_size = 64
+font_color = Color(0.34282136, 0.90070415, 0.929171, 1)
+outline_size = 20
+outline_color = Color(0.17642763, 0.38680488, 0.45416057, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wopu"]
+font_size = 32
+font_color = Color(0.9999998, 0.5877061, 0.27305, 1)
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("hud")]
+visible = false
+process_mode = 3
+layer = 10
+script = ExtResource("1_6u2xg")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=1715017736]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1791789308]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=187127833]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2j7ri")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=402988978]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="PauseLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1119860200]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Paused"
+label_settings = SubResource("LabelSettings_8lq7v")
+horizontal_alignment = 1
+
+[node name="Content" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=257636228]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 18
+
+[node name="Labels" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/Content" unique_id=166261452]
+layout_mode = 2
+
+[node name="master_volume_slider_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Labels" unique_id=1458980199]
+layout_mode = 2
+text = "Master"
+label_settings = SubResource("LabelSettings_3wopu")
+
+[node name="music_volume_slider_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Labels" unique_id=1217977101]
+layout_mode = 2
+text = "Music"
+label_settings = SubResource("LabelSettings_3wopu")
+
+[node name="sfx_volume_slider_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Labels" unique_id=1583903724]
+layout_mode = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_3wopu")
+
+[node name="Sliders" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/Content" unique_id=1209287138]
+layout_mode = 2
+theme_override_constants/separation = 31
+alignment = 1
+
+[node name="master_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders" unique_id=2118529559]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="music_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders" unique_id=1173593011]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="sfx_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders" unique_id=1931578173]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1477557831]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "RESUME"
+flat = true
+
+[connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/master_volume_slider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/music_volume_slider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/sfx_volume_slider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

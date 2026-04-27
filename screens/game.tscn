@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
 [ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/notes_distributor.gd" id="2_5kag3"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
+[ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="3_v0y06"]
 [ext_resource type="PackedScene" uid="uid://chuwtkmxhvbg" path="res://map/mansion.tscn" id="6_5kag3"]
 
 [node name="Game" type="Node2D" unique_id=965120324]
@@ -17,6 +18,9 @@ position = Vector2(0, -8)
 
 [node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player") instance=ExtResource("2_6nlyh")]
 player = NodePath("../Player")
+
+[node name="PauseMenu" parent="." unique_id=1989161602 node_paths=PackedStringArray("hud") instance=ExtResource("3_v0y06")]
+hud = NodePath("../HUD")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
 color = Color(0.6052743, 0.6052743, 0.6052743, 1)
