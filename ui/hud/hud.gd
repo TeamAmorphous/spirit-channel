@@ -10,10 +10,12 @@ signal page_close_requested
 
 @onready var logo_anim_player: AnimationPlayer = $Logo/AnimationPlayer
 @onready var page_anim_player: AnimationPlayer = $UI/PagePlayer
+@onready var page_display: TextureRect = $UI/PageDisplay
 
 @onready var health_bar: OSDProgressBar = %HealthBar
 
 var showing_page: bool = false
+var _page_request_id := 0
 
 func _ready() -> void:
 	if player:
@@ -51,27 +53,44 @@ func _on_player_item_lost(item: StringName) -> void:
 		%KeysCounter.text = ("KEYS:\n%d" % count) if count > 0 else ""
 
 
-func _input(_event: InputEvent) -> void:
-	if not showing_page:
-		return
-	if Input.is_action_just_pressed(&"primary_action") or Input.is_action_just_pressed(&"secondary_action"):
-		page_close_requested.emit()
-
-
 func show_page(n: int) -> void:
-	if n > pages.size():
+	if n >= pages.size():
 		return
 
-	$UI/PageDisplay.texture = pages[n]
+	_page_request_id += 1
+	var request_id := _page_request_id
+	page_display.texture = pages[n]
 	%PagesCounter.text = "PAGES:\n%d" % (n + 1)
 	player.state_machine.change_state(player.state_machine.get_node("Cutscene"))
 	get_tree().paused = true
 	await get_tree().create_timer(0.2).timeout
+	if request_id != _page_request_id:
+		return
 	page_anim_player.play(&"show")
 	showing_page = true
-	await page_close_requested
+
+
+func close_page() -> void:
+	if not showing_page:
+		return
+
 	showing_page = false
+	_page_request_id += 1
 	page_anim_player.play_backwards(&"show")
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
-	player.state_machine.change_state(player.state_machine.get_node("Idle"))
+	player.state_machine.change_state("Idle")
+
+
+func _on_page_display_gui_input(event: InputEvent) -> void:
+	if not showing_page:
+		return
+
+	var mouse_button := event as InputEventMouseButton
+	if mouse_button and mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_LEFT:
+		get_viewport().set_input_as_handled()
+		await close_page()
+
+
+func is_page_open() -> bool:
+	return showing_page

@@ -25,5 +25,8 @@ position = Vector2(0, -8)
 [node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player") instance=ExtResource("2_6nlyh")]
 player = NodePath("../Player")
 
+[node name="PauseMenu" parent="." unique_id=1989161602 node_paths=PackedStringArray("hud") instance=ExtResource("3_v0y06")]
+hud = NodePath("../HUD")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
 color = Color(0.6052743, 0.6052743, 0.6052743, 1)

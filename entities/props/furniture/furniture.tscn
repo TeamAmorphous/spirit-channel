@@ -18,8 +18,9 @@ z_index = -5
 script = ExtResource("1_km3i8")
 shake_sound = ExtResource("2_3t568")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=72028334]
-volume_db = 10.0
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=102654398]
+volume_db = 15.0
+bus = &"SFX_Vol"
 
 [node name="Sprite" type="Node2D" parent="." unique_id=541780398]
 material = SubResource("ShaderMaterial_3t568")

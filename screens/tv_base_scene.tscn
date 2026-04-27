@@ -526,10 +526,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0621295, 1.3714797, 1.2737
 stream = ExtResource("5_k6tew")
 volume_db = 40.0
 max_polyphony = 4
+bus = &"SFX_Vol"
 
 [node name="Static" type="AudioStreamPlayer3D" parent="Television" unique_id=2037379137]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 1, -4.8082526e-08)
 stream = ExtResource("6_ljnyf")
+bus = &"SFX_Vol"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2027038612]
 environment = SubResource("Environment_a2qay")
