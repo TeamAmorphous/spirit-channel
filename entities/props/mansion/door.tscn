@@ -478,12 +478,15 @@ shape = SubResource("RectangleShape2D_ogd60")
 
 [node name="OpenSound" type="AudioStreamPlayer" parent="." unique_id=1002636784]
 stream = ExtResource("3_ogd60")
+bus = &"SFX_Vol"
 
 [node name="CloseSound" type="AudioStreamPlayer" parent="." unique_id=56520482]
 stream = ExtResource("5_3u7nx")
+bus = &"SFX_Vol"
 
 [node name="UnlockSound" type="AudioStreamPlayer" parent="." unique_id=639104944]
 stream = ExtResource("6_bkgpu")
+bus = &"SFX_Vol"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1981103821]
 libraries/ = SubResource("AnimationLibrary_7l5r6")

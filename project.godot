@@ -62,6 +62,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Spirit Channel"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 ghosts=""

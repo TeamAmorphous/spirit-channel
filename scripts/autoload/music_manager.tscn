@@ -12,18 +12,24 @@ process_mode = 3
 script = ExtResource("1_74np6")
 
 [node name="General" type="AudioStreamPlayer" parent="." unique_id=884774684]
+bus = &"Music"
 
 [node name="Base" type="AudioStreamPlayer" parent="." unique_id=41759303]
 stream = ExtResource("2_uijyf")
+bus = &"Music"
 
 [node name="Red" type="AudioStreamPlayer" parent="." unique_id=1796849834]
 stream = ExtResource("3_oesyv")
+bus = &"Music"
 
 [node name="Green" type="AudioStreamPlayer" parent="." unique_id=815078027]
 stream = ExtResource("4_weci2")
+bus = &"Music"
 
 [node name="Blue" type="AudioStreamPlayer" parent="." unique_id=687176767]
 stream = ExtResource("5_k5reo")
+bus = &"Music"
 
 [node name="Yellow" type="AudioStreamPlayer" parent="." unique_id=778839122]
 stream = ExtResource("6_j1of8")
+bus = &"Music"
