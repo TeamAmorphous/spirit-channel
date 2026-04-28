@@ -1,10 +1,6 @@
 class_name HUD
 extends CanvasLayer
 
-
-signal page_close_requested
-
-
 @export var player: Player
 @export var pages: Array[Texture2D]
 
@@ -79,7 +75,7 @@ func close_page() -> void:
 	page_anim_player.play_backwards(&"show")
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
-	player.state_machine.change_state("Idle")
+	player.state_machine.change_state(player.state_machine.get_node("Idle"))
 
 
 func _on_page_display_gui_input(event: InputEvent) -> void:

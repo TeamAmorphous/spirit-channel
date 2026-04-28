@@ -27,15 +27,20 @@ func _ready() -> void:
 		return f.contains == null
 	))
 
+	var furniture_with_pages: Array[Furniture]
+
 	# spawn pages
-	for i in NOTE_COUNT:
-		var f := empty_furniture.pick_random() as Node
-		empty_furniture.erase(f)
-		f.contains = page_pickup_scene
+	var page_count := mini(NOTE_COUNT, empty_furniture.size())
+	while page_count > 0 and empty_furniture.size() > 0:
+		var f := empty_furniture.pick_random() as Furniture
+		if f:
+			empty_furniture.erase(f)
+			f.contains = page_pickup_scene
+			furniture_with_pages.push_back(f)
+			page_count -= 1
 
 	for f in all_furniture:
 		f.interacted_with.connect(try_spawn_rat.bind(f).unbind(1))
-
 
 func try_spawn_rat(furniture: Furniture) -> void:
 	# if furniture is not empty, don't spawn anything

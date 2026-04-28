@@ -1078,7 +1078,6 @@ metadata/_custom_type_script = "uid://bha7evwrvwkjb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=455751787]
 stream = SubResource("AudioStreamPolyphonic_we0b7")
-bus = &"SFX_Vol"
 
 [node name="AimController" type="Marker2D" parent="." unique_id=14312483]
 position = Vector2(4, -258)

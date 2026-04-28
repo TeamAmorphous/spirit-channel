@@ -6,7 +6,7 @@ extends CanvasLayer
 const PAUSE_ACTION := &"pause"
 const MASTER_BUS := &"Master"
 const MUSIC_BUS := &"Music"
-const SFX_BUS := &"SFX_Vol"
+const SFX_BUS := &"SFX"
 const MIN_VOLUME_DB := -80.0
 
 @onready var master_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/master_volume_slider
