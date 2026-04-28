@@ -62,7 +62,7 @@ const ITEM_TEXTURES: Dictionary[StringName, Texture2D] = {
 @onready var flashlight_beam_area: Area2D = $FlashlightArea
 @onready var flashlight_beam: PointLight2D = $Visual/Sprite/Arm/FlashlightBeam
 
-@onready var health: HealthComponent = $HealthComponent
+@onready var health: Health = $Health
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var aim: AimController = $AimController
@@ -333,8 +333,8 @@ func damage(amount: int, from: Node = null) -> void:
 
 func do_flashlight_damage(delta: float) -> void:
 	for flashed in in_beam:
-		if flashed.has_node("LightSensitiveComponent"):
-			flashed.get_node("LightSensitiveComponent").receive_light(delta * light_power_multiplier, self)
+		if flashed.has_node("LightSensitive"):
+			flashed.get_node("LightSensitive").receive_light(delta * light_power_multiplier, self)
 		elif flashed.has_method("receive_flash"):
 			flashed.receive_flash(self)
 
@@ -350,8 +350,8 @@ func flash() -> void:
 	flash_tween.tween_property(flashlight_beam, "energy", 0.0, 0.25).from(8.0)
 	play_sound_effect(flashlight_flash)
 	for flashed in in_beam:
-		if flashed.has_node("LightSensitiveComponent"):
-			flashed.get_node("LightSensitiveComponent").receive_flash(self)
+		if flashed.has_node("LightSensitive"):
+			flashed.get_node("LightSensitive").receive_flash(self)
 
 
 func _on_flashlight_area_body_entered(new_body: Node2D) -> void:

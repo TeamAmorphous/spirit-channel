@@ -1,4 +1,4 @@
-class_name HealthComponent
+class_name Health
 extends Node
 ## A component node that stores a health value and it's maximum.
 
@@ -13,7 +13,8 @@ signal healed(amount: int)
 signal hurt(amount: int)
 ## Emits when [member health] is set to [code]0[/code].
 signal health_depleted
-
+## Emits when a knockback is applied to the owner of this health component.
+signal knockback_applied(knockback: Vector2)
 
 ## Maximum health. Is not allowed to go below [code]1[/code].[br]
 ##
@@ -69,7 +70,9 @@ func _set_health(value: int) -> void:
 ##
 ## Emits: [signal health_changed], [signal hurt][br]
 ## See: [method _set_health]
-func damage(amount: int) -> int:
+func damage(amount: int, knockback := Vector2.ZERO) -> int:
+	if not knockback.is_zero_approx():
+		knockback_applied.emit(knockback)
 	if amount <= 0:
 		return 0
 	var applied := mini(health, amount)

@@ -53,15 +53,18 @@ func try_spawn_rat(furniture: Furniture) -> void:
 	last_furniture = furniture
 	
 	if randf() < rat_king_chance and not rat_king_spawned:
-		var rat_king = rat_king_scene.instantiate() as Ghost
-		rat_king.global_position = furniture.global_position + Vector2(0, -200)
-		add_sibling(rat_king)
-		rat_king.state_machine.change_state(rat_king.state_machine.get_node("Hurt"))
-		rat_king.velocity = Vector2(randf_range(-800.0, 800.0), -randf_range(300.0, 500.0))
+		spawn_ghost(rat_king_scene, furniture.global_position + Vector2(0, -200))
 		rat_king_spawned = true
 	elif randf() < rat_chance:
-		var rat = rat_scene.instantiate() as Ghost
-		rat.global_position = furniture.global_position + Vector2(0, -200)
-		add_sibling(rat)
-		rat.state_machine.change_state(rat.state_machine.get_node("Hurt"))
-		rat.velocity = Vector2(randf_range(-800.0, 800.0), -randf_range(300.0, 500.0))
+		spawn_ghost(rat_scene, furniture.global_position + Vector2(0, -200))
+
+func spawn_ghost(ghost_scene: PackedScene, position: Vector2) -> void:
+	if not ghost_scene or not ghost_scene.can_instantiate():
+		return
+	var ghost := ghost_scene.instantiate() as Ghost
+	ghost.global_position = position
+	add_sibling(ghost)
+	ghost._on_hurt(0)
+	var rand_angle := randf() * TAU
+	var rand_velocity := Vector2.RIGHT.rotated(rand_angle) * 500.0
+	ghost.apply_knockback(rand_velocity, 2.0)

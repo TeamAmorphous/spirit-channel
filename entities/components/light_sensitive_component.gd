@@ -1,4 +1,4 @@
-class_name LightSensitiveComponent
+class_name LightSensitive
 extends Node
 
 const LIGHT_SENSITIVE_LAYER: int = 1 << 3

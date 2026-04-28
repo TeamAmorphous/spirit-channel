@@ -1,0 +1,136 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://cggiy6nsrc4r7"]
+
+[ext_resource type="Script" uid="uid://c0modo7drjt82" path="res://entities/ai/tasks/get_first_in_group.gd" id="1_s4caf"]
+[ext_resource type="Script" uid="uid://b4q752dh7keg2" path="res://entities/ai/tasks/select_random_nearby_pos.gd" id="1_twm6i"]
+[ext_resource type="Script" uid="uid://b0ymlbd6mvsxe" path="res://entities/ai/tasks/in_range.gd" id="1_u2pbk"]
+[ext_resource type="Script" uid="uid://ganlwyxynbx0" path="res://entities/ai/tasks/move_to.gd" id="2_krw7y"]
+[ext_resource type="Script" uid="uid://mlvsrvprfs60" path="res://entities/ai/tasks/face_target.gd" id="3_twm6i"]
+[ext_resource type="Script" uid="uid://b20ihvugk2eej" path="res://entities/ai/tasks/pursue.gd" id="4_krw7y"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_148s8"]
+var/pos/name = &"pos"
+var/pos/type = 5
+var/pos/value = Vector2(0, 0)
+var/pos/hint = 0
+var/pos/hint_string = ""
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 34
+var/target/hint_string = ""
+var/speed/name = &"speed"
+var/speed/type = 3
+var/speed/value = 0.0
+var/speed/hint = 0
+var/speed/hint_string = ""
+
+[sub_resource type="BBNode" id="BBNode_krw7y"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_b0ohd"]
+animation_player = SubResource("BBNode_krw7y")
+animation_name = &"idle"
+
+[sub_resource type="BTAction" id="BTAction_krw7y"]
+script = ExtResource("1_twm6i")
+
+[sub_resource type="BTAction" id="BTAction_r3jpo"]
+script = ExtResource("2_krw7y")
+tolerance = 100.0
+
+[sub_resource type="BTSequence" id="BTSequence_daao5"]
+children = [SubResource("BTPlayAnimation_b0ohd"), SubResource("BTAction_krw7y"), SubResource("BTAction_r3jpo")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_b0ohd"]
+duration = 5.0
+children = [SubResource("BTSequence_daao5")]
+
+[sub_resource type="BTProbability" id="BTProbability_krw7y"]
+run_chance = 0.25
+children = [SubResource("BTCooldown_b0ohd")]
+
+[sub_resource type="BBNode" id="BBNode_42q1j"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0mnvs"]
+animation_player = SubResource("BBNode_42q1j")
+animation_name = &"idle"
+
+[sub_resource type="BBVariant" id="BBVariant_krw7y"]
+type = 5
+saved_value = Vector2(0, 0)
+resource_name = "<null>"
+
+[sub_resource type="BBNode" id="BBNode_5hwdx"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_7xadv"]
+node = SubResource("BBNode_5hwdx")
+method = &"move"
+args_include_delta = true
+args = Array[BBVariant]([SubResource("BBVariant_krw7y")])
+
+[sub_resource type="BTSequence" id="BTSequence_lxtbx"]
+custom_name = "Idle"
+children = [SubResource("BTPlayAnimation_0mnvs"), SubResource("BTCallMethod_7xadv")]
+
+[sub_resource type="BTAction" id="BTAction_b0ohd"]
+script = ExtResource("1_s4caf")
+group = &"player"
+
+[sub_resource type="BTCondition" id="BTCondition_2nfuw"]
+script = ExtResource("1_u2pbk")
+distance_max = 1000.0
+
+[sub_resource type="BTAction" id="BTAction_daao5"]
+script = ExtResource("3_twm6i")
+
+[sub_resource type="BBNode" id="BBNode_twm6i"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_krw7y"]
+animation_player = SubResource("BBNode_twm6i")
+animation_name = &"idle"
+
+[sub_resource type="BBNode" id="BBNode_r3jpo"]
+saved_value = NodePath("Root/ShockPopup/AnimationPlayer")
+resource_name = "Root/ShockPopup/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_42q1j"]
+await_completion = 3.0
+animation_player = SubResource("BBNode_r3jpo")
+animation_name = &"show"
+custom_name = "Show Shock Popup"
+
+[sub_resource type="BBNode" id="BBNode_b0ohd"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_daao5"]
+animation_player = SubResource("BBNode_b0ohd")
+animation_name = &"idle"
+
+[sub_resource type="BTCondition" id="BTCondition_krw7y"]
+script = ExtResource("1_u2pbk")
+distance_max = 1000.0
+
+[sub_resource type="BTAction" id="BTAction_5hwdx"]
+script = ExtResource("4_krw7y")
+
+[sub_resource type="BTParallel" id="BTParallel_twm6i"]
+num_successes_required = 2
+children = [SubResource("BTPlayAnimation_daao5"), SubResource("BTCondition_krw7y"), SubResource("BTAction_5hwdx")]
+
+[sub_resource type="BTSequence" id="BTSequence_tgj0j"]
+custom_name = "ChasePlayer"
+children = [SubResource("BTAction_b0ohd"), SubResource("BTCondition_2nfuw"), SubResource("BTAction_daao5"), SubResource("BTPlayAnimation_krw7y"), SubResource("BTPlayAnimation_42q1j"), SubResource("BTParallel_twm6i")]
+
+[sub_resource type="BTSelector" id="BTSelector_7xadv"]
+children = [SubResource("BTProbability_krw7y"), SubResource("BTSequence_lxtbx"), SubResource("BTSequence_tgj0j")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_148s8")
+root_task = SubResource("BTSelector_7xadv")

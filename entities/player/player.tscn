@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1k24q610gun0"]
 
 [ext_resource type="Script" uid="uid://x6c2xq2j40ty" path="res://entities/player/player.gd" id="1_symyc"]
-[ext_resource type="Script" uid="uid://c8p8t8cdvc218" path="res://entities/components/health_component.gd" id="2_fkugw"]
+[ext_resource type="Script" uid="uid://c8p8t8cdvc218" path="res://entities/components/health.gd" id="2_fkugw"]
 [ext_resource type="AudioStream" uid="uid://daxc2gsclir4h" path="res://entities/player/sounds/step1.ogg" id="2_qpopc"]
 [ext_resource type="Script" uid="uid://clv52am4h0a65" path="res://entities/player/aim_controller.gd" id="3_8fjmc"]
 [ext_resource type="AudioStream" uid="uid://dusmqygd46qfn" path="res://entities/player/sounds/step2.ogg" id="3_wq0jh"]
@@ -1040,7 +1040,7 @@ very_low_health = ExtResource("9_ttr27")
 position = Vector2(0, -256)
 current = true
 
-[node name="HealthComponent" type="Node" parent="." unique_id=2086328317]
+[node name="Health" type="Node" parent="." unique_id=2086328317]
 script = ExtResource("2_fkugw")
 max_health = 20
 metadata/_custom_type_script = "uid://c8p8t8cdvc218"
