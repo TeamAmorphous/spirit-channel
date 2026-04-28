@@ -1,8 +1,11 @@
 extends Control
 
+@export var menu_scene: PackedScene
 
 func _ready() -> void:
-	SignalBus.static_interference.emit(20.0)
+	Engine.time_scale = 1.0
+	MusicManager.stop()
+	$Label.visible = false
 
 
 func _on_timer_timeout() -> void:
@@ -10,4 +13,7 @@ func _on_timer_timeout() -> void:
 
 
 func _on_timer_2_timeout() -> void:
-	get_tree().quit()
+	if menu_scene:
+		SceneManager.change_scene_packed(menu_scene)
+	else:
+		get_tree().quit()

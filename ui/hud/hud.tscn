@@ -223,8 +223,6 @@ scale = Vector2(1e-05, 1e-05)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 stretch_mode = 3
 
-[connection signal="gui_input" from="UI/PageDisplay" to="." method="_on_page_display_gui_input"]
-
 [node name="Logo" type="Sprite2D" parent="." unique_id=531410892]
 modulate = Color(0, 1, 0.6, 0.39215687)
 position = Vector2(856, 96)
@@ -235,3 +233,5 @@ texture = ExtResource("4_w75iv")
 libraries/ = SubResource("AnimationLibrary_o2lis")
 autoplay = &"default"
 speed_scale = 5.0
+
+[connection signal="gui_input" from="UI/PageDisplay" to="." method="_on_page_display_gui_input"]

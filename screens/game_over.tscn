@@ -2,6 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="1_11mxd"]
 [ext_resource type="Script" uid="uid://cw6afx3uv3kkt" path="res://screens/game_over.gd" id="1_skulm"]
+[ext_resource type="PackedScene" uid="uid://cxssbyg13n1lp" path="res://screens/main_menu.tscn" id="2_x01cv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_skulm"]
 font = ExtResource("1_11mxd")
@@ -13,6 +14,7 @@ custom_minimum_size = Vector2(1000, 750)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_skulm")
+menu_scene = ExtResource("2_x01cv")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2068074675]
 layout_mode = 1
@@ -23,7 +25,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="." unique_id=1689151730]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,11 +43,10 @@ label_settings = SubResource("LabelSettings_skulm")
 horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="." unique_id=454018068]
-wait_time = 2.0
 autostart = true
 
 [node name="Timer2" type="Timer" parent="." unique_id=2144039367]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

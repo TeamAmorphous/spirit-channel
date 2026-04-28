@@ -49,7 +49,7 @@ func snap_volume() -> void:
 
 
 func start() -> void:
-	general.stop()
+	stop()
 	
 	base.stream = BASE_TRACK
 	base.stream.loop = true
@@ -67,6 +67,7 @@ func start() -> void:
 
 
 func stop() -> void:
+	general.stop()
 	base.stop()
 	for channel in ghost_players:
 		var player := ghost_players[channel]

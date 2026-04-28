@@ -1042,7 +1042,6 @@ current = true
 
 [node name="HealthComponent" type="Node" parent="." unique_id=2086328317]
 script = ExtResource("2_fkugw")
-max_health = 20
 metadata/_custom_type_script = "uid://c8p8t8cdvc218"
 
 [node name="StateMachine" type="Node" parent="." unique_id=878413740 node_paths=PackedStringArray("default_state")]
