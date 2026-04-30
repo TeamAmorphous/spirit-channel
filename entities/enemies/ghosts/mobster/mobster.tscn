@@ -111,7 +111,7 @@ tracks/1/path = NodePath("Sprite/AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.033333335, 1.2),
+"times": PackedFloat32Array(0, 1.2665668),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
@@ -147,10 +147,10 @@ tracks/4/path = NodePath("Sprite/PunchSprite:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.2665668, 1.2666667, 2, 2.0001001),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true, false, true, false, false]
+"values": [false, true, false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -159,10 +159,10 @@ tracks/5/path = NodePath("Sprite/PunchSprite/SpeedLines:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.2665668, 1.2666667, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true, false, true, false]
+"values": [false, true, false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -171,10 +171,10 @@ tracks/6/path = NodePath("Sprite/PunchSprite:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.19999999, 1.0333333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1.2665668, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w16mf"]

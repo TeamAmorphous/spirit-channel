@@ -32,6 +32,10 @@ var charge_direction := Vector2.ZERO
 var charge_target_position := Vector2.ZERO
 var recovery_animation_played := false
 
+@onready var punch_sprite: AnimatedSprite2D = ghost.get_node_or_null("Sprite/PunchSprite") as AnimatedSprite2D
+
+@onready var speed_lines: CanvasItem = ghost.get_node_or_null("Sprite/PunchSprite/SpeedLines") as CanvasItem
+
 
 func on_start(msg := {}) -> void:
 	if &"next" in msg:
@@ -47,6 +51,11 @@ func on_start(msg := {}) -> void:
 	charge_direction = Vector2.ZERO
 	charge_target_position = player.chase_target.global_position if player and player.chase_target else ghost.global_position
 	recovery_animation_played = false
+	if punch_sprite:
+		punch_sprite.visible = false
+		punch_sprite.frame = 0
+	if speed_lines:
+		speed_lines.visible = false
 	ghost.anim_player.play(animation)
 	attack_area.body_entered.connect(_on_attack_area_body_entered)
 

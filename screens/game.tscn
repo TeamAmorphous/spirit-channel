@@ -2,10 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
 [ext_resource type="Script" uid="uid://d0vxy8cv4g512" path="res://screens/game.gd" id="1_w0xem"]
-[ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/ghost_manager.gd" id="2_5kag3"]
+[ext_resource type="Script" path="res://screens/ghost_manager.gd" id="2_5kag3"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
 [ext_resource type="PackedScene" uid="uid://wrdlham5o7rd" path="res://screens/game_over.tscn" id="2_w4cu3"]
-[ext_resource type="PackedScene" uid="uid://dxo0frj63e45l" path="res://entities/props/pickup/page.tscn" id="3_gfkhe"]
 [ext_resource type="PackedScene" uid="uid://cle7e7fe6x3q7" path="res://ui/pause_menu.tscn" id="3_v0y06"]
 [ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_g7iek"]
 [ext_resource type="PackedScene" uid="uid://hehs74mvqk1x" path="res://entities/enemies/ghosts/rat_king/rat_king.tscn" id="5_4v2gu"]
@@ -20,7 +19,6 @@ game_over_scene = ExtResource("2_w4cu3")
 
 [node name="GhostManager" type="Node" parent="." unique_id=605552993 node_paths=PackedStringArray("random_ghost_spawns", "player", "red_spawn", "blue_spawn", "yellow_spawn")]
 script = ExtResource("2_5kag3")
-page_pickup_scene = ExtResource("3_gfkhe")
 random_ghost_spawns = NodePath("../RandomGhostSpawns")
 player = NodePath("../Player")
 rat_scene = ExtResource("4_g7iek")
@@ -124,3 +122,6 @@ position = Vector2(3072, -2816)
 
 [node name="BlueSpawn" type="Marker2D" parent="." unique_id=1618653493]
 position = Vector2(4406, -672)
+
+[node name="Mobster" parent="." unique_id=1958681849 instance=ExtResource("6_okr7b")]
+position = Vector2(-489, -598)
