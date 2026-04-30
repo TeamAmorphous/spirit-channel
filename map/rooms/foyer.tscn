@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c2y4egkt04i1b"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_4k2rc"]
+[ext_resource type="PackedScene" uid="uid://b56ayo8cmo0k1" path="res://entities/props/furniture/mansion/fountain.tscn" id="1_cg3rt"]
+[ext_resource type="Texture2D" uid="uid://bidpk27aei026" path="res://map/assets/FOYER_PILLAR.png" id="2_4k2rc"]
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="3_gr37b"]
+[ext_resource type="PackedScene" uid="uid://k7obo3d3e03t" path="res://entities/props/furniture/mansion/knight.tscn" id="4_1jeq4"]
+
+[node name="Foyer" type="Node2D" unique_id=1166223827]
+script = ExtResource("1_4k2rc")
+
+[node name="Furniture" parent="." unique_id=316347185 instance=ExtResource("1_cg3rt")]
+z_index = -1
+shake_sound = null
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=756651710]
+z_index = -2
+position = Vector2(-1344, -448)
+texture = ExtResource("2_4k2rc")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=274973371]
+z_index = -2
+position = Vector2(0, -448)
+texture = ExtResource("2_4k2rc")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1303578361]
+z_index = -2
+position = Vector2(1344, -448)
+texture = ExtResource("2_4k2rc")
+
+[node name="Window" parent="." unique_id=1590567196 instance=ExtResource("3_gr37b")]
+position = Vector2(-1408, -1536)
+
+[node name="Window3" parent="." unique_id=2141937196 instance=ExtResource("3_gr37b")]
+position = Vector2(-320, -1536)
+
+[node name="Window4" parent="." unique_id=710521363 instance=ExtResource("3_gr37b")]
+position = Vector2(320, -1536)
+
+[node name="Window5" parent="." unique_id=284079696 instance=ExtResource("3_gr37b")]
+position = Vector2(1408, -1536)
+
+[node name="Window2" parent="." unique_id=956826786 instance=ExtResource("3_gr37b")]
+position = Vector2(640, -448)
+
+[node name="Window6" parent="." unique_id=498101372 instance=ExtResource("3_gr37b")]
+position = Vector2(-640, -448)
+
+[node name="Furniture2" parent="." unique_id=1105045596 instance=ExtResource("4_1jeq4")]
+position = Vector2(0, -1088)
+shake_sound = null

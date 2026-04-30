@@ -10,8 +10,8 @@ size = Vector2(32, 256)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=1312621183]
 use_parent_material = true
-position = Vector2(0, -224)
 texture = ExtResource("2_4el8c")
+offset = Vector2(0, -232)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=465484740]
 position = Vector2(0, -128)

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://m35psun552q7"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_j80l6"]
+[ext_resource type="PackedScene" uid="uid://dhd0f38rvmg8h" path="res://entities/props/furniture/mansion/bookshelf.tscn" id="2_t0d3w"]
+[ext_resource type="PackedScene" uid="uid://8ttm8rkg5h3k" path="res://entities/props/furniture/mansion/desk.tscn" id="3_vydsa"]
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="4_mn35n"]
+[ext_resource type="Texture2D" uid="uid://dqjl78rvtsgt2" path="res://map/assets/BOOKSHELF.png" id="5_vydsa"]
+
+[node name="LibraryRoom" type="Node2D" unique_id=95262007]
+script = ExtResource("1_j80l6")
+
+[node name="Bookshelf" parent="." unique_id=316347185 instance=ExtResource("2_t0d3w")]
+position = Vector2(-512, 0)
+
+[node name="BookshelfTop" type="Sprite2D" parent="Bookshelf" unique_id=2075463333]
+z_index = -1
+position = Vector2(-3.0517578e-05, -552)
+texture = ExtResource("5_vydsa")
+offset = Vector2(-4, -180)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 456, 360)
+
+[node name="Bookshelf2" parent="." unique_id=1655562382 instance=ExtResource("2_t0d3w")]
+position = Vector2(512, 0)
+
+[node name="BookshelfTop" type="Sprite2D" parent="Bookshelf2" unique_id=533106412]
+z_index = -1
+position = Vector2(0, -552)
+texture = ExtResource("5_vydsa")
+offset = Vector2(-4, -180)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 456, 360)
+
+[node name="Furniture" parent="." unique_id=54115347 instance=ExtResource("3_vydsa")]
+
+[node name="Window" parent="." unique_id=1590567196 instance=ExtResource("4_mn35n")]
+position = Vector2(0, -448)

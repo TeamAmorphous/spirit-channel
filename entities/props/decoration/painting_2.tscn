@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dernd77wpyr4n" path="res://map/assets/FRAME_WIDE.png" id="2_woax0"]
 [ext_resource type="Texture2D" uid="uid://daewotc0e2s2d" path="res://map/assets/thefunny.png" id="3_68o31"]
 
-[node name="Window" type="Node2D" unique_id=1590567196]
+[node name="FunnyPainting" type="Node2D" unique_id=1590567196]
 script = ExtResource("1_woax0")
 normal = ExtResource("1_no4lo")
 funny = ExtResource("3_68o31")

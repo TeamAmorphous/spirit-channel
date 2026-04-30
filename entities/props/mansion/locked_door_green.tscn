@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://8snblvpo51s7"]
+
+[ext_resource type="PackedScene" uid="uid://0yho043dnls2" path="res://entities/props/mansion/locked_door.tscn" id="1_3gcyb"]
+[ext_resource type="Texture2D" uid="uid://nq6o5nto0vpw" path="res://map/assets/GREEN_DOOR_FRONT.png" id="2_mqsky"]
+[ext_resource type="Texture2D" uid="uid://c0lfmnf8gdfxa" path="res://entities/props/mansion/lock_indicator_green.png" id="2_qsfui"]
+[ext_resource type="Texture2D" uid="uid://sqo12xbgla6u" path="res://map/assets/GREEN_DOOR_SIDE.png" id="3_pg5ic"]
+
+[node name="GreenDoor" unique_id=441128494 instance=ExtResource("1_3gcyb")]
+needs_item = &"key_green"
+
+[node name="DoorOpen" parent="." index="0" unique_id=2028958891]
+texture = ExtResource("2_mqsky")
+
+[node name="DoorClosed" parent="." index="1" unique_id=399303097]
+texture = ExtResource("3_pg5ic")
+
+[node name="OpenSound" parent="." index="7" unique_id=1002636784]
+bus = &"Master"
+
+[node name="CloseSound" parent="." index="8" unique_id=56520482]
+bus = &"Master"
+
+[node name="UnlockSound" parent="." index="9" unique_id=639104944]
+bus = &"Master"
+
+[node name="DebugIndicator" parent="." index="12" unique_id=168945405]
+texture = ExtResource("2_qsfui")
+
+[node name="LockIndicator" parent="." index="13" unique_id=1873107452]
+texture = ExtResource("2_qsfui")

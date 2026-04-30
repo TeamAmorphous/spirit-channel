@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bndwbuto3vdfs"]
+
+[ext_resource type="PackedScene" uid="uid://0yho043dnls2" path="res://entities/props/mansion/locked_door.tscn" id="1_idbct"]
+[ext_resource type="Texture2D" uid="uid://bqfr7rudd3sal" path="res://map/assets/RED_DOOR_FRONT.png" id="2_gg144"]
+[ext_resource type="Texture2D" uid="uid://csxacnev5q3ll" path="res://entities/props/mansion/lock_indicator_red.png" id="2_xcwco"]
+[ext_resource type="Texture2D" uid="uid://cn0t8kbrxov6f" path="res://map/assets/RED_DOOR_SIDE.png" id="3_g8ees"]
+
+[node name="RedDoor" unique_id=441128494 instance=ExtResource("1_idbct")]
+needs_item = &"key_red"
+
+[node name="DoorOpen" parent="." index="0" unique_id=2028958891]
+texture = ExtResource("2_gg144")
+
+[node name="DoorClosed" parent="." index="1" unique_id=399303097]
+texture = ExtResource("3_g8ees")
+
+[node name="OpenSound" parent="." index="7" unique_id=1002636784]
+bus = &"Master"
+
+[node name="CloseSound" parent="." index="8" unique_id=56520482]
+bus = &"Master"
+
+[node name="UnlockSound" parent="." index="9" unique_id=639104944]
+bus = &"Master"
+
+[node name="DebugIndicator" parent="." index="12" unique_id=168945405]
+texture = ExtResource("2_xcwco")
+
+[node name="LockIndicator" parent="." index="13" unique_id=1873107452]
+texture = ExtResource("2_xcwco")

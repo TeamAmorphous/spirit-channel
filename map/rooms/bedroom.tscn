@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b6qnnlors137k"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_873mq"]
+[ext_resource type="PackedScene" uid="uid://cs5x5byb030s1" path="res://entities/props/furniture/mansion/bed.tscn" id="1_ugpnr"]
+[ext_resource type="PackedScene" uid="uid://wg3i40n8rvgq" path="res://entities/props/furniture/mansion/table_0.tscn" id="2_873mq"]
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="3_id5rm"]
+
+[node name="Bedroom" type="Node2D" unique_id=545207689]
+script = ExtResource("1_873mq")
+
+[node name="Bed" parent="." unique_id=316347185 instance=ExtResource("1_ugpnr")]
+position = Vector2(304, 0)
+shake_sound = null
+
+[node name="Cabinet" parent="." unique_id=123066805 instance=ExtResource("2_873mq")]
+position = Vector2(-416, 0)
+shake_sound = null
+
+[node name="Window" parent="." unique_id=1590567196 instance=ExtResource("3_id5rm")]
+position = Vector2(-416, -448)

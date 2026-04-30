@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d0nwiy4m535ca"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_ipid2"]
+[ext_resource type="PackedScene" uid="uid://cncd3x8ndqh5" path="res://entities/props/furniture/mansion/artifact_jar.tscn" id="1_kuf8u"]
+[ext_resource type="PackedScene" uid="uid://t47lg0iefl2d" path="res://entities/props/furniture/mansion/artifact_jewel.tscn" id="2_ipid2"]
+[ext_resource type="PackedScene" uid="uid://sqgtlfuvednc" path="res://entities/props/furniture/mansion/artifact_bruh.tscn" id="3_w2qwe"]
+[ext_resource type="Texture2D" uid="uid://ba7ovx6ptpuhp" path="res://map/assets/ROPE.png" id="4_etepp"]
+
+[node name="Museum" type="Node2D" unique_id=1850190775]
+script = ExtResource("1_ipid2")
+
+[node name="ArtifactJar" parent="." unique_id=316347185 instance=ExtResource("1_kuf8u")]
+z_index = 0
+position = Vector2(-528, 0)
+shake_sound = null
+
+[node name="ArtifactJewel" parent="." unique_id=468038497 instance=ExtResource("2_ipid2")]
+z_index = 0
+shake_sound = null
+
+[node name="ArtifactBruh" parent="." unique_id=643385145 instance=ExtResource("3_w2qwe")]
+z_index = 0
+position = Vector2(560, 0)
+shake_sound = null
+
+[node name="RopeFence" type="Sprite2D" parent="." unique_id=1651854143]
+position = Vector2(0, -144)
+texture = ExtResource("4_etepp")

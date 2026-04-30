@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dfyq1nvm8rvvn" path="res://screens/menu_bg.tscn" id="1_3wdwh"]
 [ext_resource type="Script" uid="uid://dpgp2ugu4lh8t" path="res://screens/intro_scene.gd" id="1_ckdar"]
-[ext_resource type="Texture2D" uid="uid://cwxwixn6m7bfw" path="res://screens/newspaper.png" id="1_j6yrn"]
 [ext_resource type="PackedScene" uid="uid://colhxe528q6lr" path="res://screens/game.tscn" id="2_5gyak"]
+[ext_resource type="Texture2D" uid="uid://bnewwtttst6d6" path="res://screens/control_tutorial.png" id="4_5gyak"]
 
 [node name="IntroScene" type="Control" unique_id=1123212565]
 custom_minimum_size = Vector2(1000, 750)
@@ -15,9 +15,10 @@ next_scene = ExtResource("2_5gyak")
 [node name="MenuBg" parent="." unique_id=1331379525 instance=ExtResource("1_3wdwh")]
 
 [node name="Newspaper" type="Sprite2D" parent="." unique_id=2100770324]
-position = Vector2(512, 384)
+position = Vector2(499.00003, 372.00003)
 rotation = 0.049702838
-texture = ExtResource("1_j6yrn")
+scale = Vector2(0.94866776, 0.94866776)
+texture = ExtResource("4_5gyak")
 
 [node name="Timer" type="Timer" parent="." unique_id=1043268259]
 wait_time = 10.0

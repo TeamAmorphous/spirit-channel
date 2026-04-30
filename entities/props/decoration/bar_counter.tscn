@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cukfjblu0fi1m"]
+
+[ext_resource type="Texture2D" uid="uid://bp76o38k3b308" path="res://map/assets/BARCOUNTER.png" id="1_lj2nb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_by0bj"]
+size = Vector2(2128, 64)
+
+[node name="BarCounter" type="Node2D" unique_id=93367627]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1618101315]
+position = Vector2(0, -144)
+texture = ExtResource("1_lj2nb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2012227090]
+position = Vector2(0, -256)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=147314553]
+shape = SubResource("RectangleShape2D_by0bj")
+one_way_collision = true
+debug_color = Color(0.8006188, 0.1829691, 0.9182893, 0.41960785)

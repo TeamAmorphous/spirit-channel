@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://btmeqlhiik0s5" path="res://ui/pages/page6.png" id="7_uyo40"]
 [ext_resource type="Texture2D" uid="uid://drme6v8vlb5ox" path="res://ui/pages/page7.png" id="8_m6r7j"]
 [ext_resource type="Texture2D" uid="uid://bvg7l8hjo42j" path="res://ui/pages/page8.png" id="9_3rj2y"]
+[ext_resource type="PackedScene" uid="uid://sixa6uqk76s2" path="res://ui/hud/components/item_tex_rect.tscn" id="12_5mn0o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e0nub"]
 font = ExtResource("1_xmswo")
@@ -181,20 +182,26 @@ segment_enabled_size = Vector2(5, 45)
 segment_spacing = 5
 metadata/_custom_type_script = "uid://bfteu2csm4kt3"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=453010312]
+[node name="PagesCounter" type="Label" parent="UI/MarginContainer" unique_id=1559113553]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-
-[node name="PagesCounter" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=1559113553]
-unique_name_in_owner = true
-layout_mode = 2
 label_settings = SubResource("LabelSettings_e0nub")
 
-[node name="KeysCounter" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=1820724290]
+[node name="KeysIndicator" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1974288897]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ColorKey" parent="UI/MarginContainer/KeysIndicator" unique_id=1920787962 instance=ExtResource("12_5mn0o")]
 unique_name_in_owner = true
 layout_mode = 2
-label_settings = SubResource("LabelSettings_e0nub")
+texture = null
+
+[node name="StandardKeys" type="HBoxContainer" parent="UI/MarginContainer/KeysIndicator" unique_id=2074244566]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="PagePlayer" type="AnimationPlayer" parent="UI" unique_id=730368368]
 root_node = NodePath("../PageDisplay")

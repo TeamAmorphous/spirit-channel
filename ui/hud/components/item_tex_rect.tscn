@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://sixa6uqk76s2"]
+
+[ext_resource type="Texture2D" uid="uid://bncdqfrucb7m1" path="res://entities/props/key_red.png" id="1_en8tf"]
+
+[node name="ItemTextureRect" type="TextureRect" unique_id=1920787962]
+custom_minimum_size = Vector2(60, 60)
+texture = ExtResource("1_en8tf")
+expand_mode = 3
+stretch_mode = 5

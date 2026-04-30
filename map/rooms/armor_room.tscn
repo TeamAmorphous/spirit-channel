@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://gku1425p2w3f"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_6vfd3"]
+[ext_resource type="PackedScene" uid="uid://b758kuxlhq6mv" path="res://entities/props/decoration/column.tscn" id="1_6xv8r"]
+[ext_resource type="PackedScene" uid="uid://k7obo3d3e03t" path="res://entities/props/furniture/mansion/knight.tscn" id="2_6vfd3"]
+
+[node name="ArmorRoom" type="Node2D" unique_id=1735104157]
+script = ExtResource("1_6vfd3")
+
+[node name="Column" parent="." unique_id=344564516 instance=ExtResource("1_6xv8r")]
+position = Vector2(-320, -448)
+
+[node name="Column1" parent="." unique_id=1048196004 instance=ExtResource("1_6xv8r")]
+position = Vector2(256, -448)
+
+[node name="Armor" parent="." unique_id=316347185 instance=ExtResource("2_6vfd3")]
+position = Vector2(-576, 0)
+shake_sound = null
+
+[node name="Armor2" parent="." unique_id=1209025251 instance=ExtResource("2_6vfd3")]
+shake_sound = null
+
+[node name="Armor3" parent="." unique_id=1029453874 instance=ExtResource("2_6vfd3")]
+position = Vector2(512, 0)
+shake_sound = null

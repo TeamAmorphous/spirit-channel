@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bydmw1rgo4bph" path="res://map/assets/Greenos.png" id="1_jnko2"]
 [ext_resource type="Texture2D" uid="uid://dernd77wpyr4n" path="res://map/assets/FRAME_WIDE.png" id="2_06nhj"]
 
-[node name="Window" type="Node2D" unique_id=1590567196]
+[node name="Painting" type="Node2D" unique_id=1590567196]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=646486866]
 scale = Vector2(0.5, 0.507)

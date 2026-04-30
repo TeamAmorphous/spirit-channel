@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cl1qovqudunct"]
+
+[ext_resource type="PackedScene" uid="uid://bhri7neidmvjc" path="res://entities/props/furniture/mansion/stove.tscn" id="1_4xjp2"]
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_eha5h"]
+[ext_resource type="PackedScene" uid="uid://c4nlsttq8epjf" path="res://entities/props/furniture/mansion/counter.tscn" id="2_eha5h"]
+[ext_resource type="Texture2D" uid="uid://cmhmd00prrvtb" path="res://map/assets/KITCHEN_BGDECO.png" id="3_8ynqf"]
+[ext_resource type="PackedScene" uid="uid://byrwnin2f6yh7" path="res://entities/props/furniture/mansion/fridge.tscn" id="4_pgicg"]
+
+[node name="Kitchen" type="Node2D" unique_id=1474413327]
+script = ExtResource("1_eha5h")
+
+[node name="Stove" parent="." unique_id=316347185 instance=ExtResource("1_4xjp2")]
+position = Vector2(384, 0)
+shake_sound = null
+
+[node name="KitchenCounter" parent="." unique_id=774200123 instance=ExtResource("2_eha5h")]
+position = Vector2(-512, 0)
+shake_sound = null
+
+[node name="KitchenBgdeco" type="Sprite2D" parent="." unique_id=604598106]
+position = Vector2(-336, -400)
+texture = ExtResource("3_8ynqf")
+
+[node name="Fridge" parent="." unique_id=2045768572 instance=ExtResource("4_pgicg")]
+position = Vector2(-112, 0)
+shake_sound = null

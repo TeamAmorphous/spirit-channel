@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://xrm11hkftmfm"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_k5uy2"]
+[ext_resource type="PackedScene" uid="uid://bdans88xe1qr0" path="res://entities/props/furniture/mansion/shower.tscn" id="1_lf7xp"]
+[ext_resource type="PackedScene" uid="uid://bh4bkbjrbbtte" path="res://entities/props/furniture/mansion/sink.tscn" id="2_k5uy2"]
+[ext_resource type="PackedScene" uid="uid://ypty6s52yc4x" path="res://entities/props/furniture/mansion/towel.tscn" id="3_qybc1"]
+[ext_resource type="PackedScene" uid="uid://ct0bo5sulyia4" path="res://entities/props/furniture/mansion/the_haunted_john.tscn" id="4_7xl8t"]
+
+[node name="Bathroom" type="Node2D" unique_id=1530821154]
+script = ExtResource("1_k5uy2")
+
+[node name="Furniture" parent="." unique_id=316347185 instance=ExtResource("1_lf7xp")]
+position = Vector2(-448, 0)
+shake_sound = null
+
+[node name="Furniture2" parent="." unique_id=328063801 instance=ExtResource("2_k5uy2")]
+z_index = 0
+position = Vector2(48, 0)
+shake_sound = null
+
+[node name="Furniture3" parent="." unique_id=396476531 instance=ExtResource("3_qybc1")]
+z_index = 0
+position = Vector2(720, -304)
+shake_sound = null
+
+[node name="Furniture4" parent="." unique_id=750674496 instance=ExtResource("4_7xl8t")]
+z_index = 0
+position = Vector2(432, 0)
+shake_sound = null

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://grh1u3wqq4p7"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_uoixu"]
+[ext_resource type="PackedScene" uid="uid://c2u6fojwjtmjt" path="res://entities/props/furniture/mansion/plantshelf.tscn" id="2_05gtu"]
+[ext_resource type="PackedScene" uid="uid://ch4v2qhde8fn5" path="res://entities/props/decoration/greenhouse_light.tscn" id="3_rclwa"]
+[ext_resource type="PackedScene" uid="uid://pw6mo6uyyjqr" path="res://entities/props/furniture/mansion/potted_plant.tscn" id="4_uaurm"]
+
+[node name="TopFloorStairRoom" type="Node2D" unique_id=862179721]
+script = ExtResource("1_uoixu")
+
+[node name="PlantShelf" parent="." unique_id=316347185 instance=ExtResource("2_05gtu")]
+position = Vector2(512, 0)
+
+[node name="BillardsLight" parent="." unique_id=685458638 instance=ExtResource("3_rclwa")]
+position = Vector2(512, -896)
+
+[node name="PottedPlant2" parent="." unique_id=1189638014 instance=ExtResource("4_uaurm")]
+position = Vector2(192, 0)
+
+[node name="PottedPlant" parent="." unique_id=1965771014 instance=ExtResource("4_uaurm")]
+position = Vector2(-64, 0)

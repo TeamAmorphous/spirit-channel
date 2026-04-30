@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjnea"]
 size = Vector2(128, 182)
 
-[node name="Furniture" unique_id=316347185 instance=ExtResource("1_jjnea")]
+[node name="KitchenCounter" unique_id=316347185 instance=ExtResource("1_jjnea")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=85967860]
 use_parent_material = true

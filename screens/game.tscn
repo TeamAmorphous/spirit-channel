@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
 [ext_resource type="Script" uid="uid://d0vxy8cv4g512" path="res://screens/game.gd" id="1_w0xem"]
-[ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/distributor.gd" id="2_5kag3"]
+[ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/ghost_manager.gd" id="2_5kag3"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
 [ext_resource type="PackedScene" uid="uid://wrdlham5o7rd" path="res://screens/game_over.tscn" id="2_w4cu3"]
 [ext_resource type="PackedScene" uid="uid://dxo0frj63e45l" path="res://entities/props/pickup/page.tscn" id="3_gfkhe"]
@@ -18,9 +18,7 @@
 script = ExtResource("1_w0xem")
 game_over_scene = ExtResource("2_w4cu3")
 
-[node name="Mansion" parent="." unique_id=2071726716 instance=ExtResource("6_5kag3")]
-
-[node name="Distributor" type="Node" parent="." unique_id=605552993 node_paths=PackedStringArray("random_ghost_spawns", "player")]
+[node name="GhostManager" type="Node" parent="." unique_id=605552993 node_paths=PackedStringArray("random_ghost_spawns", "player", "red_spawn", "blue_spawn", "yellow_spawn")]
 script = ExtResource("2_5kag3")
 page_pickup_scene = ExtResource("3_gfkhe")
 random_ghost_spawns = NodePath("../RandomGhostSpawns")
@@ -28,8 +26,13 @@ player = NodePath("../Player")
 rat_scene = ExtResource("4_g7iek")
 rat_king_scene = ExtResource("5_4v2gu")
 red_scene = ExtResource("6_okr7b")
+red_spawn = NodePath("../RedSpawn")
 blue_scene = ExtResource("7_s1lue")
+blue_spawn = NodePath("../BlueSpawn")
 yellow_scene = ExtResource("8_w0xem")
+yellow_spawn = NodePath("../YellowSpawn")
+
+[node name="Mansion" parent="." unique_id=2071726716 instance=ExtResource("6_5kag3")]
 
 [node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
 position = Vector2(0, -8)
@@ -43,7 +46,9 @@ hud = NodePath("../HUD")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
 color = Color(0.6052743, 0.6052743, 0.6052743, 1)
 
-[node name="RandomGhostSpawns" type="Node" parent="." unique_id=1640086339]
+[node name="RandomGhostSpawns" type="Node2D" parent="." unique_id=1875733350]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Marker2D" type="Marker2D" parent="RandomGhostSpawns" unique_id=580135823]
 position = Vector2(-4352, -512)
@@ -110,3 +115,12 @@ position = Vector2(-4, -1664)
 
 [node name="Marker2D22" type="Marker2D" parent="RandomGhostSpawns" unique_id=1005444975]
 position = Vector2(-4, -496)
+
+[node name="RedSpawn" type="Marker2D" parent="." unique_id=203382387]
+position = Vector2(-5024, -672)
+
+[node name="YellowSpawn" type="Marker2D" parent="." unique_id=19319432]
+position = Vector2(3072, -2816)
+
+[node name="BlueSpawn" type="Marker2D" parent="." unique_id=1618653493]
+position = Vector2(4406, -672)

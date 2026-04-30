@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://yo2ijrekhxlp"]
+
+[ext_resource type="PackedScene" uid="uid://b758kuxlhq6mv" path="res://entities/props/decoration/column.tscn" id="1_clwkv"]
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_et422"]
+[ext_resource type="Texture2D" uid="uid://tunpjbplh4uu" path="res://map/assets/BAR_BEHIND.png" id="2_et422"]
+[ext_resource type="PackedScene" uid="uid://cukfjblu0fi1m" path="res://entities/props/decoration/bar_counter.tscn" id="3_1r2qc"]
+[ext_resource type="PackedScene" uid="uid://clacnltytfkrn" path="res://entities/props/furniture/mansion/barstool.tscn" id="4_4t4e8"]
+
+[node name="Bar" type="Node2D" unique_id=1543752015]
+script = ExtResource("1_et422")
+
+[node name="Column" parent="." unique_id=344564516 instance=ExtResource("1_clwkv")]
+position = Vector2(-1280, -448)
+
+[node name="Column2" parent="." unique_id=1063486803 instance=ExtResource("1_clwkv")]
+position = Vector2(1280, -448)
+
+[node name="BarShelf" type="Sprite2D" parent="." unique_id=202000999]
+position = Vector2(-672, -336)
+texture = ExtResource("2_et422")
+
+[node name="BarShelf2" type="Sprite2D" parent="." unique_id=1522748106]
+position = Vector2(-224, -336)
+texture = ExtResource("2_et422")
+
+[node name="BarShelf3" type="Sprite2D" parent="." unique_id=488942624]
+position = Vector2(224, -336)
+texture = ExtResource("2_et422")
+
+[node name="BarShelf4" type="Sprite2D" parent="." unique_id=1141588020]
+position = Vector2(672, -336)
+texture = ExtResource("2_et422")
+
+[node name="BarCounter" parent="." unique_id=93367627 instance=ExtResource("3_1r2qc")]
+
+[node name="BarStool" parent="." unique_id=316347185 instance=ExtResource("4_4t4e8")]
+z_index = 1
+position = Vector2(-1216, 0)
+shake_sound = null
+
+[node name="BarStool2" parent="." unique_id=1886766611 instance=ExtResource("4_4t4e8")]
+z_index = 1
+shake_sound = null
+
+[node name="BarStool3" parent="." unique_id=2131297418 instance=ExtResource("4_4t4e8")]
+z_index = 1
+position = Vector2(1216, 0)
+shake_sound = null

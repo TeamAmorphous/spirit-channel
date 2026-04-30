@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://t6pws3rn42i7"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_0ba1l"]
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="1_y4txs"]
+[ext_resource type="PackedScene" uid="uid://crkgl8bm8ogin" path="res://entities/props/furniture/mansion/billards_table.tscn" id="2_0ba1l"]
+[ext_resource type="PackedScene" uid="uid://dk1nmu18dunbu" path="res://entities/props/furniture/mansion/billards_stick.tscn" id="3_cbymi"]
+[ext_resource type="PackedScene" uid="uid://dkmjsaqh0cwgx" path="res://entities/props/decoration/billards_light.tscn" id="4_gyxsi"]
+
+[node name="BillardsRoom" type="Node2D" unique_id=1583595777]
+script = ExtResource("1_0ba1l")
+
+[node name="Window" parent="." unique_id=1590567196 instance=ExtResource("1_y4txs")]
+position = Vector2(-592, -448)
+
+[node name="Window2" parent="." unique_id=158113882 instance=ExtResource("1_y4txs")]
+position = Vector2(0, -448)
+
+[node name="Window3" parent="." unique_id=640398845 instance=ExtResource("1_y4txs")]
+position = Vector2(592, -480)
+
+[node name="BillardsTable" parent="." unique_id=316347185 instance=ExtResource("2_0ba1l")]
+z_index = 0
+shake_sound = null
+
+[node name="BillardsStick" parent="." unique_id=967502857 instance=ExtResource("3_cbymi")]
+position = Vector2(624, 0)
+shake_sound = null
+
+[node name="BillardsLight" parent="." unique_id=685458638 instance=ExtResource("4_gyxsi")]
+position = Vector2(0, -896)

@@ -14,13 +14,6 @@ const STICK_AIM_DISTANCE := 1000.0
 const STICK_AIM_LAG := 20.0
 
 
-const ITEM_TEXTURES: Dictionary[StringName, Texture2D] = {
-	page = preload("uid://dgdejmdhadj5g"),
-	key = preload("uid://cf6od3s4xivo5"),
-	medkit = preload("uid://cl5kpq3q7te3v"),
-}
-
-
 @export_category("Physics")
 @export var speed: float = 1000.0
 @export var accel: float = 2000.0
@@ -391,16 +384,39 @@ func add_item(item: StringName) -> void:
 		&"medkit":
 			health.heal(5)
 			return
+		&"key_red", &"key_green", &"key_blue", &"key_yellow":
+			remove_all_color_keys()
+
 	inventory.append(item)
 	item_recieved.emit(item)
 
 
 func remove_item(item: StringName) -> bool:
-	var has_item := inventory.has(item)
-	if has_item:
+	if has_item(item):
 		inventory.erase(item)
 		item_lost.emit(item)
-	return has_item
+		return true
+	return false
+
+
+func remove_all_color_keys() -> bool:
+	var to_remove := get_color_keys()
+	for i in to_remove:
+		remove_item(i)
+	return not to_remove.is_empty()
+
+
+func get_color_keys() -> Array[StringName]:
+	var color_keys: Array[StringName]
+	color_keys.assign(inventory.filter(
+		func(i: StringName):
+			return i.begins_with("key_"))
+		)
+	return color_keys
+
+
+func has_item(item: StringName) -> bool:
+	return inventory.has(item)
 
 
 func item_count(item: StringName) -> int:

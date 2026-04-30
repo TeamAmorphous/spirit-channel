@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b758kuxlhq6mv"]
+
+[ext_resource type="Texture2D" uid="uid://fu8hku8c8tpr" path="res://map/assets/PILLAR.png" id="1_fltik"]
+[ext_resource type="Texture2D" uid="uid://ijsfnqtnqinr" path="res://map/assets/LIGHTWALL.png" id="2_ugkex"]
+[ext_resource type="Texture2D" uid="uid://d4gcpq78rjs87" path="res://map/assets/LIGHTWALL_GLOW.png" id="3_28ram"]
+
+[node name="Column" type="Sprite2D" unique_id=344564516]
+z_index = -5
+texture = ExtResource("1_fltik")
+
+[node name="Light" type="Sprite2D" parent="." unique_id=184071652]
+position = Vector2(0, -192)
+texture = ExtResource("2_ugkex")
+
+[node name="PointLight2D" type="PointLight2D" parent="Light" unique_id=1330523976]
+texture = ExtResource("3_28ram")

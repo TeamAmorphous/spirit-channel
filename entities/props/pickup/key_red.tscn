@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dh3v67hsv3bp6"]
+
+[ext_resource type="PackedScene" uid="uid://bm1fwuasel8u2" path="res://entities/props/pickup/key.tscn" id="1_yb430"]
+[ext_resource type="Texture2D" uid="uid://bsnx7u6s5pxa6" path="res://entities/props/pickup/key_red.png" id="2_8lbvc"]
+
+[node name="KeyRed" unique_id=1735321551 instance=ExtResource("1_yb430")]
+item = &"key_red"
+
+[node name="Sprite2D" parent="." index="1" unique_id=2037140511]
+texture = ExtResource("2_8lbvc")

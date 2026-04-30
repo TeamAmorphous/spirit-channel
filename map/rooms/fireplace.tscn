@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c4l2enk6u4g6p"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_17wx4"]
+[ext_resource type="PackedScene" uid="uid://cmivxrcfyme48" path="res://entities/props/furniture/mansion/fireplace.tscn" id="2_17wx4"]
+[ext_resource type="PackedScene" uid="uid://bvqb321oojgn" path="res://entities/props/decoration/painting_2.tscn" id="3_uci8b"]
+[ext_resource type="PackedScene" uid="uid://mbt5gdgu0msx" path="res://entities/props/furniture/mansion/sofa.tscn" id="4_uci8b"]
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="5_lg34d"]
+
+[node name="Fireplace" type="Node2D" unique_id=1208891824]
+script = ExtResource("1_17wx4")
+
+[node name="Window" parent="." unique_id=369367049 instance=ExtResource("5_lg34d")]
+position = Vector2(-576, -448)
+
+[node name="Window2" parent="." unique_id=1935792186 instance=ExtResource("5_lg34d")]
+position = Vector2(576, -448)
+
+[node name="Fireplace" parent="." unique_id=674224515 instance=ExtResource("2_17wx4")]
+z_index = 0
+shake_sound = null
+
+[node name="FunnyPainting" parent="." unique_id=1590567196 instance=ExtResource("3_uci8b")]
+position = Vector2(0, -672)
+
+[node name="Sofa" parent="." unique_id=316347185 instance=ExtResource("4_uci8b")]
+position = Vector2(-576, 0)
+
+[node name="Sofa2" parent="." unique_id=59386208 instance=ExtResource("4_uci8b")]
+position = Vector2(576, 0)

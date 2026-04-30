@@ -9,12 +9,12 @@ size = Vector2(16, 640)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2e6lb"]
 size = Vector2(288, 32)
 
-[node name="Furniture" unique_id=316347185 instance=ExtResource("1_6s62p")]
+[node name="Fridge" unique_id=316347185 instance=ExtResource("1_6s62p")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=126615693]
 use_parent_material = true
-position = Vector2(0, -240)
 texture = ExtResource("2_6s62p")
+offset = Vector2(0, -243)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" parent_id_path=PackedInt32Array(1878105502) index="0" unique_id=2114463694]
 position = Vector2(0, -320)

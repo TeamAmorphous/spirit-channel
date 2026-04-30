@@ -1,10 +1,7 @@
 extends Node
 
-const NOTE_COUNT = 8
-
 const FURNITURE_GROUP := &"furniture"
 
-@export var page_pickup_scene: PackedScene
 @export var rat_chance: float = 0.25
 @export var rat_king_chance: float = 0.10
 
@@ -54,23 +51,6 @@ func _ready() -> void:
 	var all_furniture: Array[Furniture]
 	all_furniture.assign(get_tree().get_nodes_in_group(FURNITURE_GROUP))
 
-	var empty_furniture: Array[Furniture]
-	empty_furniture.assign(all_furniture.filter(func(f) -> bool:
-		return f.contains == null
-	))
-
-	var furniture_with_pages: Array[Furniture]
-
-	# spawn pages
-	var page_count := mini(NOTE_COUNT, empty_furniture.size())
-	while page_count > 0 and empty_furniture.size() > 0:
-		var f := empty_furniture.pick_random() as Furniture
-		if f:
-			empty_furniture.erase(f)
-			f.contains = page_pickup_scene
-			furniture_with_pages.push_back(f)
-			page_count -= 1
-
 	for f in all_furniture:
 		f.interacted_with.connect(try_spawn_rat.bind(f).unbind(1))
 
@@ -78,11 +58,12 @@ func _ready() -> void:
 	spawn_timer.autostart = false
 	spawn_timer.timeout.connect(func():
 		spawn_timer.start(randf_range(spawn_cooldown_min, spawn_cooldown_max))
-		try_spawn_random_page_ghost()
+		try_spawn_random_page_ghost.call_deferred()
 	)
 	spawn_timer.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(spawn_timer)
 	spawn_timer.start(randf_range(spawn_cooldown_min, spawn_cooldown_max))
+
 
 func populate_spawns() -> void:
 	if random_ghost_spawns:
@@ -205,7 +186,7 @@ func try_spawn_ghost(ghost_scene: PackedScene, position: Vector2, velocity: Vect
 	var ghost := ghost_scene.instantiate() as Ghost
 	ghost.global_position = position
 	ghost.velocity = velocity
-	add_sibling(ghost)
+	SceneManager.current_scene.add_child(ghost)
 	if not ghost.velocity.is_zero_approx():
 		# 'Fling' if there's a spawn velocity
 		ghost.state_machine.change_state(ghost.state_machine.get_node("Hurt"))

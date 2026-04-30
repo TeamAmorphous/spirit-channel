@@ -1,6 +1,16 @@
 class_name HUD
 extends CanvasLayer
 
+@export var item_tex_rect: PackedScene = preload("uid://sixa6uqk76s2")
+
+@export var key_textures: Dictionary[StringName, Texture2D] = {
+	key = preload("uid://bw8i86xgxvex0"),
+	key_red = preload("uid://bsnx7u6s5pxa6"),
+	key_green = preload("uid://c5fsxfg8k6p0l"),
+	key_blue = preload("uid://c8qg57dnyibgp"),
+	key_yellow = preload("uid://dg0lb260qqbvo"),
+}
+
 @export var player: Player
 @export var pages: Array[Texture2D]
 
@@ -9,6 +19,8 @@ extends CanvasLayer
 @onready var page_display: TextureRect = $UI/PageDisplay
 
 @onready var health_bar: OSDProgressBar = %HealthBar
+@onready var standard_keys: HBoxContainer = %StandardKeys
+@onready var color_key: TextureRect = %ColorKey
 
 var showing_page: bool = false
 var _page_request_id := 0
@@ -21,6 +33,7 @@ func _ready() -> void:
 		player.health.health_changed.connect(_on_player_health_changed)
 		player.item_recieved.connect(_on_player_item_recieved)
 		player.item_lost.connect(_on_player_item_lost)
+	update_item_displays()
 
 
 func _process(_delta: float) -> void:
@@ -37,16 +50,38 @@ func _on_player_health_changed(health: int, _old: int) -> void:
 
 
 func _on_player_item_recieved(item: StringName) -> void:
-	if item == &"keys":
-		%KeysCounter.text = "KEYS:\n%d" % player.item_count(&"keys")
-	elif item == &"page":
+	if item == &"page":
 		show_page(player.item_count(&"page") - 1)
+	update_item_displays()
 
 
-func _on_player_item_lost(item: StringName) -> void:
-	if item == &"keys":
-		var count := player.item_count(&"keys") 
-		%KeysCounter.text = ("KEYS:\n%d" % count) if count > 0 else ""
+func _on_player_item_lost(_item: StringName) -> void:
+	update_item_displays()
+
+func update_item_displays() -> void:
+	%PagesCounter.text = "PAGES:\n%d" % player.item_count(&"page")
+	if item_tex_rect:
+		var key_count := player.item_count(&"key")
+		var key_counter_children: Array[Node] = %StandardKeys.get_children()
+		var shown_key_count := key_counter_children.size()
+		while key_count != shown_key_count:
+			if key_count > shown_key_count:
+				# add key
+				var key_rect: TextureRect = item_tex_rect.instantiate()
+				key_rect.texture = key_textures.get(&"key")
+				%StandardKeys.add_child(key_rect)
+				shown_key_count += 1
+			else:
+				# remove key
+				%StandardKeys.remove_child(key_counter_children.pop_front())
+				shown_key_count -= 1
+		var current_color_key := &""
+		var color_keys_list := player.get_color_keys()
+		if color_keys_list:
+			current_color_key = color_keys_list.front()
+		%ColorKey.texture = key_textures[current_color_key] if current_color_key else null
+
+
 
 
 func show_page(n: int) -> void:
@@ -56,7 +91,7 @@ func show_page(n: int) -> void:
 	_page_request_id += 1
 	var request_id := _page_request_id
 	page_display.texture = pages[n]
-	%PagesCounter.text = "PAGES:\n%d" % (n + 1)
+	
 	player.state_machine.change_state(player.state_machine.get_node("Cutscene"))
 	get_tree().paused = true
 	await get_tree().create_timer(0.2).timeout

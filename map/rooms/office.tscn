@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://boen34fla8s0j"]
+
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_1bbq2"]
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="1_83u1j"]
+[ext_resource type="PackedScene" uid="uid://8ttm8rkg5h3k" path="res://entities/props/furniture/mansion/desk.tscn" id="2_1bbq2"]
+[ext_resource type="PackedScene" uid="uid://pw6mo6uyyjqr" path="res://entities/props/furniture/mansion/potted_plant.tscn" id="3_rm0t6"]
+[ext_resource type="PackedScene" uid="uid://cy5gygiojd4a8" path="res://entities/props/furniture/mansion/office_chair.tscn" id="4_rirdu"]
+[ext_resource type="PackedScene" uid="uid://b48hkxak137cb" path="res://entities/props/furniture/mansion/safe.tscn" id="5_1ndek"]
+[ext_resource type="PackedScene" uid="uid://jygyuxusqve0" path="res://entities/props/decoration/painting.tscn" id="6_s7wi1"]
+
+[node name="Office" type="Node2D" unique_id=1408542599]
+script = ExtResource("1_1bbq2")
+
+[node name="Window" parent="." unique_id=1590567196 instance=ExtResource("1_83u1j")]
+position = Vector2(224, -496)
+
+[node name="Furniture" parent="." unique_id=316347185 instance=ExtResource("2_1bbq2")]
+position = Vector2(112, 0)
+shake_sound = null
+
+[node name="Furniture2" parent="." unique_id=134837709 instance=ExtResource("3_rm0t6")]
+position = Vector2(-304, 0)
+shake_sound = null
+
+[node name="Furniture3" parent="." unique_id=513466716 instance=ExtResource("4_rirdu")]
+position = Vector2(528, 0)
+shake_sound = null
+
+[node name="Furniture4" parent="." unique_id=1320544639 instance=ExtResource("5_1ndek")]
+position = Vector2(-624, 0)
+shake_sound = null
+
+[node name="Window2" parent="." unique_id=1903841839 instance=ExtResource("6_s7wi1")]
+position = Vector2(-208, -592)

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://biw3b050tds0j"]
+
+[ext_resource type="PackedScene" uid="uid://c2u6fojwjtmjt" path="res://entities/props/furniture/mansion/plantshelf.tscn" id="1_8c5ig"]
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_veamb"]
+[ext_resource type="PackedScene" uid="uid://ch4v2qhde8fn5" path="res://entities/props/decoration/greenhouse_light.tscn" id="2_veamb"]
+[ext_resource type="PackedScene" uid="uid://pw6mo6uyyjqr" path="res://entities/props/furniture/mansion/potted_plant.tscn" id="3_0ibct"]
+
+[node name="Greenhouse" type="Node2D" unique_id=1618108121]
+script = ExtResource("1_veamb")
+
+[node name="PlantShelf" parent="." unique_id=316347185 instance=ExtResource("1_8c5ig")]
+position = Vector2(16, 0)
+shake_sound = null
+
+[node name="PlantShelf2" parent="." unique_id=810688505 instance=ExtResource("1_8c5ig")]
+position = Vector2(624, 0)
+shake_sound = null
+
+[node name="BillardsLight" parent="." unique_id=685458638 instance=ExtResource("2_veamb")]
+position = Vector2(0, -896)
+
+[node name="BillardsLight2" parent="." unique_id=1687840263 instance=ExtResource("2_veamb")]
+position = Vector2(608, -896)
+
+[node name="PottedPlant" parent="." unique_id=14941097 instance=ExtResource("3_0ibct")]
+position = Vector2(-432, 0)
+shake_sound = null

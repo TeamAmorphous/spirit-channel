@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ogyfoowxa586"]
+
+[ext_resource type="PackedScene" uid="uid://dsohsygtvtshb" path="res://entities/props/furniture/mansion/diner_table.tscn" id="1_tuv28"]
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_uice6"]
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="2_uice6"]
+
+[node name="DiningRoom" type="Node2D" unique_id=1073956408]
+script = ExtResource("1_uice6")
+
+[node name="DinnerTable" parent="." unique_id=316347185 instance=ExtResource("1_tuv28")]
+z_index = 0
+shake_sound = null
+
+[node name="Window" parent="." unique_id=1590567196 instance=ExtResource("2_uice6")]
+position = Vector2(-432, -448)
+
+[node name="Window2" parent="." unique_id=1092510440 instance=ExtResource("2_uice6")]
+position = Vector2(464, -448)

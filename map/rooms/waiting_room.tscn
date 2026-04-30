@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dubuhimo0lu2k"]
+
+[ext_resource type="PackedScene" uid="uid://j6066vidqpvm" path="res://entities/props/decoration/window.tscn" id="1_3mjt3"]
+[ext_resource type="Script" uid="uid://cfk7n5n4uanu3" path="res://map/rooms/room.gd" id="1_oxmgm"]
+[ext_resource type="PackedScene" uid="uid://b758kuxlhq6mv" path="res://entities/props/decoration/column.tscn" id="2_oxmgm"]
+[ext_resource type="PackedScene" uid="uid://el7pfnosp0uq" path="res://entities/props/decoration/painting_4.tscn" id="3_0yn8t"]
+[ext_resource type="PackedScene" uid="uid://pw6mo6uyyjqr" path="res://entities/props/furniture/mansion/potted_plant.tscn" id="4_lndub"]
+[ext_resource type="PackedScene" uid="uid://mbt5gdgu0msx" path="res://entities/props/furniture/mansion/sofa.tscn" id="5_8do2c"]
+
+[node name="WaitingRoom" type="Node2D" unique_id=740446853]
+script = ExtResource("1_oxmgm")
+
+[node name="Window" parent="." unique_id=1590567196 instance=ExtResource("1_3mjt3")]
+position = Vector2(-384, -512)
+
+[node name="Column" parent="." unique_id=344564516 instance=ExtResource("2_oxmgm")]
+position = Vector2(0, -448)
+
+[node name="Painting" parent="." unique_id=2063374746 instance=ExtResource("3_0yn8t")]
+position = Vector2(512, -576)
+
+[node name="PottedPlant" parent="." unique_id=316347185 instance=ExtResource("4_lndub")]
+position = Vector2(-576, 0)
+
+[node name="PottedPlant2" parent="." unique_id=929453092 instance=ExtResource("4_lndub")]
+position = Vector2(576, 0)
+
+[node name="Sofa" parent="." unique_id=1634101314 instance=ExtResource("5_8do2c")]
+position = Vector2(-256, 0)
+
+[node name="Sofa2" parent="." unique_id=61127051 instance=ExtResource("5_8do2c")]
+position = Vector2(256, 0)
