@@ -91,7 +91,7 @@ animations = [{
 }]
 
 [sub_resource type="Animation" id="Animation_cvicm"]
-length = 0.5
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -111,7 +111,7 @@ tracks/1/path = NodePath("Sprite/AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.46666667),
+"times": PackedFloat32Array(0.033333335, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
@@ -123,10 +123,10 @@ tracks/2/path = NodePath("Sprite/PunchSprite:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.20000002, 0.5),
-"transitions": PackedFloat32Array(1.802499, 4.2870927, 1),
+"times": PackedFloat32Array(0, 0.20000002, 1.2665668, 2),
+"transitions": PackedFloat32Array(1.802499, 4.2870927, 1, 1),
 "update": 0,
-"values": [Vector2(-110, 15), Vector2(-154, -4), Vector2(193.99997, 10.999984)]
+"values": [Vector2(-110, 15), Vector2(-154.04, -65.265), Vector2(179.59, 11), Vector2(250, 11)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -135,10 +135,10 @@ tracks/3/path = NodePath("Sprite/PunchSprite:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.20000002, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.20000002, 1.2665668, 2, 2.0001001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.36581767, 0.4055012]
+"values": [0.0, -0.36581767, 0.4055012, 0.4055012, 0.4055012]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -147,10 +147,10 @@ tracks/4/path = NodePath("Sprite/PunchSprite:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.43333334),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 1.2665668, 1.2666667, 2, 2.0001001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true, false, true, false, false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -159,10 +159,22 @@ tracks/5/path = NodePath("Sprite/PunchSprite/SpeedLines:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.4666667),
+"times": PackedFloat32Array(0, 0.2, 1.2665668, 1.2666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite/PunchSprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.19999999, 1.0333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [0, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w16mf"]
@@ -171,37 +183,45 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3tmiu"]
-radius = 120.0
+radius = 139.35925
 
 [node name="Mobster" unique_id=1958681849 instance=ExtResource("1_3ll0d")]
 channel = 0
 
 [node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
 script = ExtResource("2_wtb3a")
+charge_trigger_distance = 450.0
 chase_speed = 100.0
 contact_damage = 4
 excluded_states = Array[String](["Hurt", "Poof", "Charge"])
 
 [node name="Charge" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=2075433503 node_paths=PackedStringArray("attack_area", "next_state")]
 script = ExtResource("2_245fo")
+windup_time = 1.0
+recovery_time = 5.0
+charge_speed = 500.0
+overshoot_distance = 300.0
+recovery_slide_factor = 1.0
 attack_area = NodePath("../../PunchArea")
 animation = &"mobster/attack"
-next_state = NodePath("../Idle")
+next_state = NodePath("../Chase")
 stream = ExtResource("3_nslht")
 hit_stream = ExtResource("4_jcg5b")
 
 [node name="PunchSprite" type="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=1239580772]
-position = Vector2(193.99997, 10.999984)
+visible = false
+position = Vector2(250, 11)
 rotation = 0.4055012
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_eoei1")
 animation = &"attack"
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Sprite/PunchSprite" index="0" unique_id=353382279]
+visible = false
 position = Vector2(-17.159033, -2.7907434)
 rotation = -0.38397244
 sprite_frames = SubResource("SpriteFrames_wtb3a")
-frame_progress = 0.17873582
+frame_progress = 0.9794027
 flip_h = true
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="1" unique_id=2083159277]
@@ -220,6 +240,10 @@ collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchArea" index="0" unique_id=169701210]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PunchArea" index="0" unique_id=171174504]
+position = Vector2(-8, 0)
+shape = SubResource("CircleShape2D_3tmiu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchArea" index="1" unique_id=169701210]
 position = Vector2(148, 0)
 shape = SubResource("CircleShape2D_3tmiu")

@@ -7,6 +7,10 @@ extends GhostState
 @export var recovery_time: float = 2.0
 
 @export var charge_speed: float = 550.0
+@export var overshoot_distance: float = 120.0
+@export var recovery_slide_factor: float = 0.3
+@export var recovery_animation: StringName = &"idle"
+@export var recovery_stop_threshold: float = 25.0
 
 @export var damage := 4
 
@@ -24,11 +28,14 @@ var windup_timer: float
 var recovery_timer: float
 var charge_timer: float
 var charging: bool = false
+var charge_direction := Vector2.ZERO
+var charge_target_position := Vector2.ZERO
+var recovery_animation_played := false
 
 
 func on_start(msg := {}) -> void:
 	if &"next" in msg:
-		next = state_machine.state
+		next = msg[&"next"] as State
 	else:
 		next = next_state if next_state else state_machine.default_state
 	
@@ -37,31 +44,41 @@ func on_start(msg := {}) -> void:
 	windup_timer = windup_time
 	charge_timer = charge_time
 	recovery_timer = recovery_time
+	charge_direction = Vector2.ZERO
+	charge_target_position = player.chase_target.global_position if player and player.chase_target else ghost.global_position
+	recovery_animation_played = false
 	ghost.anim_player.play(animation)
-	ghost.anim_player.animation_finished.connect(_on_animation_finished)
 	attack_area.body_entered.connect(_on_attack_area_body_entered)
 
 
 func on_end():
-	ghost.anim_player.animation_finished.disconnect(_on_animation_finished)
 	attack_area.body_entered.disconnect(_on_attack_area_body_entered)
+	charging = false
 
 
 func physics_update(delta: float) -> void:
 	match step:
 		0:
-			ghost.velocity = ghost.velocity.move_toward(Vector2.ZERO, 20.0 * delta)
+			ghost.velocity = ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * delta)
+			if player and player.chase_target:
+				ghost.facing = ghost.global_position.direction_to(player.chase_target.global_position)
 			windup_timer -= delta
 			if windup_timer <= 0:
-				var dir := ghost.global_position.direction_to(player.chase_target.global_position)
-				ghost.velocity = dir * charge_speed
+				_begin_charge()
 				step = 1
 		1:
+			ghost.velocity = charge_direction * charge_speed
 			charge_timer -= delta
-			if charge_timer <= 0:
-				step = 2
+			if _has_reached_charge_target() or charge_timer <= 0:
+				_finish_charge()
 		2:
-			ghost.velocity = ghost.velocity.move_toward(Vector2.ZERO, 20.0 * delta)
+			ghost.velocity = ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * 2.0 * delta)
+			if not recovery_animation_played and recovery_animation and ghost.velocity.length() <= recovery_stop_threshold:
+				ghost.anim_player.play(recovery_animation)
+				recovery_animation_played = true
+				step = 3
+				state_machine.change_state(next)
+				return
 			recovery_timer -= delta
 			if recovery_timer <= 0:
 				step = 3
@@ -71,7 +88,13 @@ func physics_update(delta: float) -> void:
 	ghost.move_and_slide()
 
 
-func _on_animation_finished(_anim_name: StringName) -> void:
+func _begin_charge() -> void:
+	if player and player.chase_target:
+		charge_target_position = player.chase_target.global_position
+	charge_direction = ghost.global_position.direction_to(charge_target_position)
+	if charge_direction.is_zero_approx():
+		charge_direction = ghost.facing if not ghost.facing.is_zero_approx() else Vector2.RIGHT
+	ghost.facing = charge_direction
 	charging = true
 	if stream:
 		var sfx := AudioStreamPlayer.new()
@@ -80,6 +103,17 @@ func _on_animation_finished(_anim_name: StringName) -> void:
 		add_child(sfx)
 		sfx.play()
 		sfx.finished.connect(func(): sfx.queue_free())
+
+
+func _finish_charge() -> void:
+	charging = false
+	ghost.velocity = charge_direction * charge_speed * recovery_slide_factor
+	step = 2
+
+
+func _has_reached_charge_target() -> bool:
+	var to_target := charge_target_position - ghost.global_position
+	return to_target.dot(charge_direction) <= -overshoot_distance
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
