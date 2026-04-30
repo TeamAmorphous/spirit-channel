@@ -67,6 +67,8 @@ const STICK_AIM_LAG := 20.0
 
 @onready var interaction_prompt = $InteractionPrompt
 
+@onready var heal_particles: CPUParticles2D = %HealParticles
+
 @export var footstep_sounds: Array[AudioStream]
 @export var flashlight_click: AudioStream
 @export var flashlight_flash: AudioStream
@@ -382,6 +384,7 @@ func _on_interactable_area_exited(area: Area2D) -> void:
 func add_item(item: StringName) -> void:
 	match item:
 		&"medkit":
+			heal_particles.emitting = true
 			health.heal(5)
 			return
 		&"key_red", &"key_green", &"key_blue", &"key_yellow":

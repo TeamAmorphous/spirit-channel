@@ -82,6 +82,8 @@ func _sync_all() -> void:
 
 
 func start_menu():
+	if general.playing and general.stream == MENU_TRACK:
+		return
 	general.stream = MENU_TRACK
 	general.stream.loop = true
 	current_channel = Ghost.Channel.NONE

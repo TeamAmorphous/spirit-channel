@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dclbmboho1qq4" path="res://entities/enemies/ghosts/pizza/pizza.tscn" id="8_w0xem"]
 [ext_resource type="PackedScene" uid="uid://c3l0tf7x756hk" path="res://entities/props/pickup/key_blue.tscn" id="10_m8ne0"]
 [ext_resource type="PackedScene" uid="uid://dsykn4vagjoxs" path="res://entities/props/pickup/key_yellow.tscn" id="12_1vjtm"]
+[ext_resource type="Script" uid="uid://cxoh4mohnah63" path="res://screens/random_item_spawner.gd" id="13_m8ne0"]
+[ext_resource type="PackedScene" uid="uid://ikan3mhvjl4l" path="res://entities/props/pickup/medkit.tscn" id="14_1vjtm"]
 
 [node name="Game" type="Node2D" unique_id=965120324]
 script = ExtResource("1_w0xem")
@@ -38,6 +40,11 @@ yellow_scene = ExtResource("8_w0xem")
 yellow_spawn = NodePath("../YellowSpawn")
 yellow_key_scene = ExtResource("12_1vjtm")
 
+[node name="RandomItemSpawner" type="Node" parent="." unique_id=1538460791]
+script = ExtResource("13_m8ne0")
+item_scene = ExtResource("14_1vjtm")
+spawn_chance = 0.15
+
 [node name="Mansion" parent="." unique_id=2071726716 instance=ExtResource("6_5kag3")]
 
 [node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
@@ -50,7 +57,7 @@ player = NodePath("../Player")
 hud = NodePath("../HUD")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]
-color = Color(0.6052743, 0.6052743, 0.6052743, 1)
+color = Color(0.4198129, 0.41981322, 0.41981304, 1)
 
 [node name="RandomGhostSpawns" type="Node2D" parent="." unique_id=1875733350]
 metadata/_edit_lock_ = true
@@ -130,6 +137,3 @@ position = Vector2(3072, -2816)
 
 [node name="BlueSpawn" type="Marker2D" parent="." unique_id=1618653493]
 position = Vector2(4406, -672)
-
-[node name="Mobster" parent="." unique_id=1958681849 instance=ExtResource("6_okr7b")]
-position = Vector2(-489, -598)

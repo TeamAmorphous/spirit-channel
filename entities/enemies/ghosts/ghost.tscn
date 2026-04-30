@@ -326,7 +326,6 @@ motion_mode = 1
 script = ExtResource("2_obe3h")
 decel = 1000.0
 channel = -1
-held_pickup = null
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 2

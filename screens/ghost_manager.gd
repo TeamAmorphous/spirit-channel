@@ -104,17 +104,17 @@ func check_pages() -> void:
 	if red_enabled and not old_red and not red_active:
 		to_spawn = red_scene
 		spawn_pos = get_spawn_pos(red_spawn)
-		on_defeat = func(): red_active = false
+		on_defeat = on_red_defeat
 		red_active = true
 	if blue_enabled and not old_blue and not blue_active:
 		to_spawn = blue_scene
 		spawn_pos = get_spawn_pos(blue_spawn)
-		on_defeat = func(): blue_active = false
+		on_defeat = on_blue_defeat
 		blue_active = true
 	if yellow_enabled and not old_yellow and not yellow_active:
 		to_spawn = yellow_scene
 		spawn_pos = get_spawn_pos(yellow_spawn)
-		on_defeat = func(): yellow_active = false
+		on_defeat = on_yellow_defeat
 		yellow_active = true
 
 	if to_spawn:
@@ -128,26 +128,58 @@ func check_pages() -> void:
 
 func on_red_defeat(ghost: Ghost) -> void:
 	red_active = false
+
+	if player.has_item(&"key_red"):
+		return
 	if not red_key_spawned:
-		try_spawn_pickup(red_key_scene, ghost.global_position)
+		try_spawn_pickup(
+			red_key_scene,
+			ghost.global_position,
+			func():
+				red_key_spawned = false
+				)
 		red_key_spawned = true
 
 func on_green_defeat(ghost: Ghost) -> void:
 	green_active = false
+
+	if player.has_item(&"key_green"):
+		return
 	if not green_key_spawned:
-		try_spawn_pickup(green_key_scene, ghost.global_position)
+		try_spawn_pickup(
+			green_key_scene,
+			ghost.global_position,
+			func():
+				green_key_spawned = false
+				)
 		green_key_spawned = true
 
 func on_blue_defeat(ghost: Ghost) -> void:
 	blue_active = false
+
+	if player.has_item(&"key_blue"):
+		return
 	if not blue_key_spawned:
-		try_spawn_pickup(blue_key_scene, ghost.global_position)
+		try_spawn_pickup(
+			blue_key_scene,
+			ghost.global_position,
+			func():
+				blue_key_spawned = false
+				)
 		blue_key_spawned = true
 
 func on_yellow_defeat(ghost: Ghost) -> void:
 	yellow_active = false
+	
+	if player.has_item(&"key_yellow"):
+		return
 	if not yellow_key_spawned:
-		try_spawn_pickup(yellow_key_scene, ghost.global_position)
+		try_spawn_pickup(
+			yellow_key_scene,
+			ghost.global_position,
+			func():
+				yellow_key_spawned = false
+				)
 		yellow_key_spawned = true
 
 
@@ -256,7 +288,7 @@ func get_random_offscreen_position() -> Vector2:
 	return Vector2.ZERO
 
 
-func try_spawn_pickup(pickup_scene: PackedScene, position: Vector2) -> void:
+func try_spawn_pickup(pickup_scene: PackedScene, position: Vector2, on_removed := Callable()) -> void:
 	var pickup: Pickup = pickup_scene.instantiate() as Pickup
 	if pickup:
 		var rand_angle := randf() * TAU
@@ -265,3 +297,5 @@ func try_spawn_pickup(pickup_scene: PackedScene, position: Vector2) -> void:
 		parent.add_sibling.call_deferred(pickup)
 		pickup.global_position = position
 		pickup.apply_force(rand_dir * 200.0)
+		if on_removed.is_valid():
+			pickup.tree_exiting.connect(on_removed)

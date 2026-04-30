@@ -118,6 +118,17 @@ sources/8 = SubResource("TileSetAtlasSource_ewl3q")
 sources/9 = SubResource("TileSetAtlasSource_fo1kd")
 sources/10 = SubResource("TileSetAtlasSource_phslc")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_24nj8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gv4gc"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0657s"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fux5b"]
+normal = Vector2(1, 0)
+
 [node name="MansionMap" type="Node2D" unique_id=2071726716]
 
 [node name="OutsideBG" type="Sprite2D" parent="." unique_id=1118030208]
@@ -235,3 +246,23 @@ position = Vector2(-3, -4169)
 texture = ExtResource("2_43m5h")
 offset = Vector2(3, -410)
 metadata/_edit_lock_ = true
+
+[node name="Ghost Border" type="StaticBody2D" parent="." unique_id=702498323]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost Border" unique_id=268686284]
+position = Vector2(0, 128)
+shape = SubResource("WorldBoundaryShape2D_24nj8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ghost Border" unique_id=641819905]
+position = Vector2(0, -4224)
+shape = SubResource("WorldBoundaryShape2D_gv4gc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ghost Border" unique_id=1640818124]
+position = Vector2(5376, -2560)
+shape = SubResource("WorldBoundaryShape2D_0657s")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Ghost Border" unique_id=974375283]
+position = Vector2(-5376, -2560)
+shape = SubResource("WorldBoundaryShape2D_fux5b")
