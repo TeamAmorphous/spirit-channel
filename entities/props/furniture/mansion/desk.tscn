@@ -9,7 +9,7 @@ size = Vector2(16, 256)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2e6lb"]
 size = Vector2(560, 64)
 
-[node name="Furniture" unique_id=316347185 instance=ExtResource("1_a6bnl")]
+[node name="Desk" unique_id=316347185 instance=ExtResource("1_a6bnl")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite" parent_id_path=PackedInt32Array(541780398) index="0" unique_id=126615693]
 use_parent_material = true

@@ -6,6 +6,8 @@ const FURNITURE_GROUP := &"furniture"
 @export var item_scene: PackedScene
 @export_range(0.0, 1.0, 0.05) var spawn_chance: float
 
+var last_furniture: Furniture
+
 func _ready() -> void:
 	if not item_scene:
 		queue_free()
@@ -20,6 +22,9 @@ func _ready() -> void:
 func _on_furniture_interacted_with(player: Player, f: Furniture) -> void:
 	if f.contains:
 		return
+	if last_furniture == f:
+		return
+	last_furniture = f
 	if randf() <= spawn_chance:
 		spawn_pickup_at(player)
 

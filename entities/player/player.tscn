@@ -36,10 +36,13 @@
 [ext_resource type="AudioStream" uid="uid://dn1ftisoh6ln7" path="res://entities/player/sounds/hit.ogg" id="18_wy7bt"]
 [ext_resource type="Texture2D" uid="uid://bi13g8k1gmfjl" path="res://entities/point_light_neutral.webp" id="19_eyb6c"]
 [ext_resource type="Texture2D" uid="uid://dtbnlyiilfm0x" path="res://entities/player/jump.png" id="25_ttr27"]
+[ext_resource type="Texture2D" uid="uid://cr0r5bb46m5oo" path="res://entities/player/body_relief0.png" id="28_r633c"]
 [ext_resource type="Texture2D" uid="uid://vh38t38fdfp4" path="res://entities/player/reticle.png" id="28_wq0jh"]
+[ext_resource type="Texture2D" uid="uid://bxtvjdfq65phu" path="res://entities/player/body_relief1.png" id="29_pacje"]
 [ext_resource type="Texture2D" uid="uid://rrd766cygikt" path="res://entities/player/arrow.png" id="30_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://dlqmq0u8jgwy6" path="res://entities/player/interact.png" id="35_np63p"]
 [ext_resource type="Texture2D" uid="uid://b0r78qwim8ee0" path="res://entities/player/heal_particle.png" id="36_geky7"]
+[ext_resource type="Texture2D" uid="uid://ubafwlcc3axp" path="res://entities/player/eyes_relief.png" id="36_pacje"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_we0b7"]
 
@@ -83,6 +86,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("28_r633c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_pacje")
+}],
+"loop": true,
+"name": &"relief",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("18_wuv6x")
 }, {
 "duration": 1.0,
@@ -122,6 +136,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_pacje")
+}],
+"loop": true,
+"name": &"relief",
 "speed": 5.0
 }]
 
@@ -714,6 +736,106 @@ tracks/9/keys = {
 "values": [Vector2(1, 0.9), Vector2(1, 1.06), Vector2(1, 1.074)]
 }
 
+[sub_resource type="Animation" id="Animation_2h0qb"]
+resource_name = "relief"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Sprite/Body:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"relief"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite/Body/Eyes:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"relief"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite/Body/Eyes:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, -340)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite/Body/Eyes/Pupils:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visual/Sprite/Body:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visual/Sprite/Body/FaceBackground:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-37, -359.00003)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visual/Sprite/Arm:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visual/Sprite:scale")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 0.90000004),
+"transitions": PackedFloat32Array(1.6817931, 0.5547847, 1.9318726, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.025), Vector2(1, 0.96), Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_221hk"]
 resource_name = "walk"
 length = 0.40001002
@@ -848,6 +970,7 @@ _data = {
 &"hurt": SubResource("Animation_j3ovn"),
 &"idle": SubResource("Animation_yqrof"),
 &"jump": SubResource("Animation_13wue"),
+&"relief": SubResource("Animation_2h0qb"),
 &"walk": SubResource("Animation_221hk")
 }
 
@@ -1042,6 +1165,7 @@ current = true
 
 [node name="HealthComponent" type="Node" parent="." unique_id=2086328317]
 script = ExtResource("2_fkugw")
+max_health = 20
 metadata/_custom_type_script = "uid://c8p8t8cdvc218"
 
 [node name="StateMachine" type="Node" parent="." unique_id=878413740 node_paths=PackedStringArray("default_state")]
@@ -1128,6 +1252,7 @@ texture = ExtResource("12_mtric")
 offset = Vector2(-574.4578, 47.049927)
 
 [node name="FaceBackground" type="Sprite2D" parent="Visual/Sprite" unique_id=541641555]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(-32, -358)
 scale = Vector2(80, 56)
 texture = ExtResource("16_gt4e4")
@@ -1137,6 +1262,7 @@ centered = false
 sprite_frames = SubResource("SpriteFrames_8fjmc")
 animation = &"idle"
 autoplay = "idle"
+speed_scale = 0.0
 offset = Vector2(-21, -203)
 flip_h = true
 
@@ -1191,6 +1317,7 @@ libraries/ = SubResource("AnimationLibrary_3wlsy")
 autoplay = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2033865394]
+visible = false
 position = Vector2(0, -185)
 shape = SubResource("CapsuleShape2D_symyc")
 
@@ -1234,6 +1361,7 @@ collision_mask = 16
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea" unique_id=219433226]
+visible = false
 position = Vector2(0, -48)
 shape = SubResource("RectangleShape2D_bwdx1")
 
@@ -1257,6 +1385,7 @@ collision_mask = 32
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1117992094]
+visible = false
 position = Vector2(0, -184)
 shape = SubResource("RectangleShape2D_wy7bt")
 

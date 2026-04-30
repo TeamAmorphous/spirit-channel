@@ -414,7 +414,7 @@ _data = {
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lm8qd"]
 light_mode = 1
 
-[node name="Door" type="Node2D" unique_id=441128494]
+[node name="Door" type="Node2D" unique_id=441128494 groups=["doors"]]
 position = Vector2(16, 16)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_nco46")

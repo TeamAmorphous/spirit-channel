@@ -96,6 +96,10 @@ var in_beam: Array[Node2D]
 const TRACK_TIMER_LENGTH := 3.0
 var track_timer: float = TRACK_TIMER_LENGTH
 
+var can_jump := true
+var can_interact := true
+var can_move := true
+
 
 func _ready() -> void:
 	update_color()
@@ -371,11 +375,14 @@ func _on_interactable_area_entered(area: Area2D) -> void:
 	if current_interactable:
 		return
 	current_interactable = area as Interactable
-	if not current_interactable.can_interact():
+	if not current_interactable or not current_interactable.can_interact() or not can_interact:
 		current_interactable = null
 
 
 func _on_interactable_area_exited(area: Area2D) -> void:
+	if not can_interact:
+		current_interactable = null
+		return
 	if current_interactable == area:
 		current_interactable.on_player_cannot_interact.emit()
 		current_interactable = null
@@ -390,6 +397,8 @@ func add_item(item: StringName) -> void:
 		&"key_red", &"key_green", &"key_blue", &"key_yellow":
 			if has_item(item):
 				return
+		&"skull":
+			SignalBus.skull_picked_up.emit()
 
 	inventory.append(item)
 	item_recieved.emit(item)

@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://c3haf634petig" path="res://entities/enemies/ghosts/liberty/idle.png" id="2_iy2jy"]
 [ext_resource type="PackedScene" uid="uid://cvjpyks6bw86f" path="res://entities/enemies/ghosts/liberty/shades.tscn" id="3_v0g6m"]
 [ext_resource type="Script" uid="uid://cxxu0t8gsqx3w" path="res://entities/enemies/ghosts/states/shoot_projectile.gd" id="4_aloxn"]
-[ext_resource type="PackedScene" uid="uid://c3l0tf7x756hk" path="res://entities/props/pickup/key_blue.tscn" id="4_gsbnq"]
 [ext_resource type="Script" uid="uid://cmiyhj2s7h4n8" path="res://entities/enemies/ghosts/liberty/states/chase.gd" id="4_s38fd"]
 [ext_resource type="Texture2D" uid="uid://c46vfnitg3jq2" path="res://entities/enemies/ghosts/liberty/hot_dog.png" id="4_xhhdn"]
 [ext_resource type="PackedScene" uid="uid://dlq3q1bggfea" path="res://entities/enemies/ghosts/liberty/hot_dog_projectile.tscn" id="5_s38fd"]
@@ -228,7 +227,6 @@ script = ExtResource("2_6xjem")
 shades_droppable = ExtResource("3_v0g6m")
 shades_spawnpoint = NodePath("Sprite/AnimatedSprite2D/ShadesSpawn")
 channel = 3
-held_pickup = ExtResource("4_gsbnq")
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 1
@@ -283,5 +281,3 @@ visible = false
 [node name="CollisionShape2D" parent="AttackArea" index="0" unique_id=874946689]
 shape = SubResource("CircleShape2D_xhhdn")
 debug_color = Color(0.79091656, 0.3917211, 0.4699465, 0.41960785)
-
-[connection signal="flashed" from="LightSensitiveComponent" to="." method="_on_flashed"]

@@ -165,7 +165,6 @@ position = Vector2(-2688, -1088)
 
 [node name="Fireplace" parent="MansionRooms" unique_id=1208891824 instance=ExtResource("15_gv4gc")]
 position = Vector2(-896, -3264)
-items = Array[PackedScene]([ExtResource("32_gv4gc")])
 
 [node name="ArmoireRoom" parent="MansionRooms" unique_id=2055040839 instance=ExtResource("16_0657s")]
 position = Vector2(896, -3264)
@@ -212,6 +211,7 @@ items = Array[PackedScene]([ExtResource("32_gv4gc")])
 
 [node name="Office" parent="MansionRooms" unique_id=1408542599 instance=ExtResource("30_3hn6f")]
 position = Vector2(-4400, 0)
+items = Array[PackedScene]([ExtResource("32_gv4gc")])
 
 [node name="WaitingRoom" parent="MansionRooms" unique_id=740446853 instance=ExtResource("32_24nj8")]
 position = Vector2(-2688, 0)
@@ -236,9 +236,8 @@ rendering_quadrant_size = 32
 metadata/_edit_lock_ = true
 
 [node name="Props" type="TileMapLayer" parent="." unique_id=1167291061]
-tile_map_data = PackedByteArray("AAA2AN3/AQAAAAAAAQBtAJn/AQAAAAAAAQCR/93/AQAAAAAAAQDI/7v/AQAAAAAAAQCR/5n/AQAAAAAAAQDI////AQAAAAAAAQD//5n/AQAAAAAAAQDl/93/AQAAAAAAAwDl////AQAAAAAAAwAaAN3/AQAAAAAABAAaAP//AQAAAAAABAA2AP//AQAAAAAAAgBtAP//AQAAAAAABwBtAN3/AQAAAAAAAgA2ALv/AQAAAAAAAgBtALv/AQAAAAAAAQA2AJn/AQAAAAAAAgCR////AQAAAAAACADI/93/AQAAAAAAAgCR/7v/AQAAAAAABgDI/5n/AQAAAAAABQBy/7v/AQAAAAAAAwA=")
+tile_map_data = PackedByteArray("AAA2AN3/AQAAAAAAAQBtAJn/AQAAAAAAAQCR/93/AQAAAAAAAQDI/7v/AQAAAAAAAQCR/5n/AQAAAAAAAQDI////AQAAAAAAAQD//5n/AQAAAAAAAQDl/93/AQAAAAAAAwDl////AQAAAAAAAwAaAN3/AQAAAAAABAAaAP//AQAAAAAABAA2AP//AQAAAAAAAgBtAP//AQAAAAAABwBtAN3/AQAAAAAAAgA2ALv/AQAAAAAAAgBtALv/AQAAAAAAAQA2AJn/AQAAAAAAAgDI/93/AQAAAAAAAgCR/7v/AQAAAAAABgBy/7v/AQAAAAAAAwDI/5n/AQAAAAAABQCR/w8AAQAAAAAACAA=")
 tile_set = ExtResource("1_8qye7")
-metadata/_edit_lock_ = true
 
 [node name="MansionRoof" type="Sprite2D" parent="." unique_id=1962558979]
 z_index = 10

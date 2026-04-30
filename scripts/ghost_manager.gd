@@ -51,6 +51,7 @@ var random_spawn_positions: Array[Vector2]
 var spawn_timer: Timer
 
 func _ready() -> void:
+	SignalBus.stop_spawning_ghosts.connect(_on_stop_spawning_ghosts)
 	player.item_recieved.connect(_on_item_added_or_removed)
 	player.item_lost.connect(_on_item_added_or_removed)
 	await get_tree().process_frame
@@ -230,6 +231,9 @@ func try_spawn_rat(furniture: Furniture) -> void:
 	if furniture.contains:
 		return
 	
+	if spawn_timer.paused:
+		return
+	
 	# don't allow spawns on the same piece of furniture twice in a row
 	if last_furniture == furniture:
 		return
@@ -299,3 +303,11 @@ func try_spawn_pickup(pickup_scene: PackedScene, position: Vector2, on_removed :
 		pickup.apply_force(rand_dir * 200.0)
 		if on_removed.is_valid():
 			pickup.tree_exiting.connect(on_removed)
+
+
+func _on_stop_spawning_ghosts() -> void:
+	spawn_timer.stop()
+	for g in get_tree().get_nodes_in_group(Ghost.GHOST_GROUP):
+		g.process_mode = Node.PROCESS_MODE_ALWAYS
+		if g is Ghost:
+			g.health.health = 0

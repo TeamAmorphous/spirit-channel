@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://boye3p3mtyqkv"]
-
-[ext_resource type="Script" uid="uid://cvxwh2xos2ges" path="res://screens/scene_transitioner.gd" id="1_dxhr0"]
-[ext_resource type="PackedScene" uid="uid://bmo6oee0atcln" path="res://screens/white_noise_animation.tscn" id="1_otwr5"]
-
-[node name="SceneTransitioner" type="Node" unique_id=331989723]
-script = ExtResource("1_dxhr0")
-
-[node name="CanvasLayer" parent="." unique_id=1521293547 instance=ExtResource("1_otwr5")]

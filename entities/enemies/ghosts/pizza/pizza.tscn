@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://cxxu0t8gsqx3w" path="res://entities/enemies/ghosts/states/shoot_projectile.gd" id="2_3uu3j"]
 [ext_resource type="Script" uid="uid://bisoqhsv8q2mo" path="res://entities/enemies/ghosts/states/ghost_state.gd" id="2_0272d"]
 [ext_resource type="Texture2D" uid="uid://dy6dp8lkvr338" path="res://entities/enemies/ghosts/pizza/attack.png" id="2_b8kr0"]
-[ext_resource type="PackedScene" uid="uid://dsykn4vagjoxs" path="res://entities/props/pickup/key_yellow.tscn" id="2_x78fb"]
 [ext_resource type="Texture2D" uid="uid://c2kk72hwjsf76" path="res://entities/enemies/ghosts/pizza/idle.png" id="3_ktweu"]
 [ext_resource type="Texture2D" uid="uid://b6jvwbty1cmbb" path="res://entities/enemies/ghosts/pizza/tele.png" id="4_kpwb0"]
 [ext_resource type="Script" uid="uid://b6c4lktm61k2b" path="res://entities/enemies/ghosts/pizza/states/invisible.gd" id="5_0272d"]
@@ -321,42 +320,38 @@ _data = {
 
 [node name="Pizza" unique_id=1958681849 instance=ExtResource("1_vntsv")]
 channel = 2
-held_pickup = ExtResource("2_x78fb")
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 4
 
-[node name="StateMachine" parent="." index="2" unique_id=2135702627 node_paths=PackedStringArray("default_state")]
-default_state = NodePath("Invisible")
-
-[node name="Idle" parent="StateMachine" index="0" unique_id=896072109]
+[node name="Idle" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="0" unique_id=896072109]
 script = ExtResource("2_0272d")
 
-[node name="Chase" parent="StateMachine" index="2" unique_id=660995331]
+[node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
 enabled = false
 contact_damage = 0
 
-[node name="Invisible" type="Node" parent="StateMachine" index="4" unique_id=822334671]
+[node name="Invisible" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=822334671]
 script = ExtResource("5_0272d")
 teleport_cooldown = 20.0
 teleport_distance = 500.0
 teleport_radius = 100.0
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 
-[node name="Appear" type="Node" parent="StateMachine" index="5" unique_id=515971898 node_paths=PackedStringArray("next_state")]
+[node name="Appear" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="5" unique_id=515971898 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_1rho0")
 animation = &"pizza/appear"
 next_state = NodePath("../WaitThrow")
 metadata/_custom_type_script = "uid://d3vcayuuutyrv"
 
-[node name="WaitThrow" type="Node" parent="StateMachine" index="6" unique_id=471763831 node_paths=PackedStringArray("next_state")]
+[node name="WaitThrow" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="6" unique_id=471763831 node_paths=PackedStringArray("next_state")]
 script = ExtResource("7_1rho0")
 length = 1.0
 animaton = &"idle"
 next_state = NodePath("../ThrowPizza")
 metadata/_custom_type_script = "uid://dl6bu25eug6nc"
 
-[node name="ThrowPizza" type="Node" parent="StateMachine" index="7" unique_id=1101052154 node_paths=PackedStringArray("projectile_spawn_position", "next_state")]
+[node name="ThrowPizza" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="7" unique_id=1101052154 node_paths=PackedStringArray("projectile_spawn_position", "next_state")]
 script = ExtResource("2_3uu3j")
 projectile_scene = ExtResource("5_nf5ks")
 projectile_damage = 4
@@ -365,14 +360,14 @@ animation = &"pizza/throw"
 next_state = NodePath("../WaitDisappear")
 stream = ExtResource("5_x78fb")
 
-[node name="WaitDisappear" type="Node" parent="StateMachine" index="8" unique_id=861746237 node_paths=PackedStringArray("next_state")]
+[node name="WaitDisappear" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="8" unique_id=861746237 node_paths=PackedStringArray("next_state")]
 script = ExtResource("7_1rho0")
 length = 1.0
 animaton = &"idle"
 next_state = NodePath("../Disappear")
 metadata/_custom_type_script = "uid://dl6bu25eug6nc"
 
-[node name="Disappear" type="Node" parent="StateMachine" index="9" unique_id=1448086396 node_paths=PackedStringArray("next_state")]
+[node name="Disappear" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="9" unique_id=1448086396 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_1rho0")
 animation = &"pizza/disappear"
 next_state = NodePath("../Invisible")

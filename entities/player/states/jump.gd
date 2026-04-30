@@ -9,7 +9,7 @@ func on_start(_msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	var direction := Input.get_axis(&"move_left", &"move_right")
-	if direction:
+	if direction and player.can_move:
 		player.velocity.x = move_toward(
 			player.velocity.x,
 			direction * player.speed,

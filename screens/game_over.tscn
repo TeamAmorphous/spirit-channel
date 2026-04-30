@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cw6afx3uv3kkt" path="res://screens/game_over.gd" id="1_skulm"]
 [ext_resource type="PackedScene" uid="uid://cxssbyg13n1lp" path="res://screens/main_menu.tscn" id="2_x01cv"]
-[ext_resource type="Texture2D" uid="uid://05cquyy5840w" path="res://screens/nosignal.png" id="3_x01cv"]
+[ext_resource type="Texture2D" uid="uid://bxtha2dk6rloc" path="res://screens/no_signal.png" id="3_4qfck"]
+[ext_resource type="AudioStream" uid="uid://b600d2bi8nt20" path="res://music/no_signal.ogg" id="4_40pha"]
 
 [node name="GameOver" type="Control" unique_id=1087164499]
 custom_minimum_size = Vector2(1000, 750)
@@ -18,12 +19,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_x01cv")
+texture = ExtResource("3_4qfck")
 expand_mode = 5
 stretch_mode = 5
 
 [node name="Timer" type="Timer" parent="." unique_id=2144039367]
 wait_time = 3.0
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1751837756]
+process_mode = 3
+stream = ExtResource("4_40pha")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

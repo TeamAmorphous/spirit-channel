@@ -14,13 +14,15 @@ const MIN_VOLUME_DB := -80.0
 @onready var sfx_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/sfx_volume_slider
 
 
+var can_pause := true
+
 func _ready() -> void:
 	hide()
 	_sync_slider_values()
 
 
 func _process(_delta: float) -> void:
-	if not Input.is_action_just_pressed(PAUSE_ACTION):
+	if not Input.is_action_just_pressed(PAUSE_ACTION) or not can_pause:
 		return
 	if _is_page_open():
 		return

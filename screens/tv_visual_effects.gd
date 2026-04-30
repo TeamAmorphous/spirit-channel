@@ -90,6 +90,13 @@ func _on_scene_changed() -> void:
 
 func _on_static_interference(amount: float) -> void:
 	var shader_mat : ShaderMaterial = crt_overlay.material as ShaderMaterial
-	shader_mat.set_shader_parameter("noise_amount", amount)
+	var tween := get_tree().create_tween().set_parallel(true).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	static_sfx.play()
-	static_sfx.volume_db = lerpf(0.0, -80.0, clampf(amount, 0.0, 1.0))
+	tween.tween_method(
+		func(n):
+			shader_mat.set_shader_parameter("noise_amount", n),
+		amount,
+		0.03,
+		0.5
+	)
+	tween.tween_property(static_sfx, "volume_db", -80.0, 0.5).from(0.0)

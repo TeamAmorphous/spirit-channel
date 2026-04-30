@@ -20,8 +20,11 @@ const GHOST_TRACKS: Dictionary[Ghost.Channel, AudioStreamOggVorbis] = {
 }
 
 const MENU_TRACK: AudioStreamOggVorbis = preload("uid://dny8wl3vpjisv")
+const BOSS_TRACK: AudioStreamOggVorbis = preload("uid://d0872m2ed47tk")
+const WIN_TRACK: AudioStreamOggVorbis = preload("uid://be4ff6ceaxfp8")
 
 var current_channel: Ghost.Channel = Ghost.Channel.NONE
+var fading: bool = false
 
 func _ready() -> void:
 	base.stream = BASE_TRACK
@@ -35,6 +38,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if fading:
+		return
 	for channel in ghost_players:
 		var player := ghost_players[channel]
 		var target_db = 0.0 if channel == current_channel else -80.0
@@ -54,6 +59,7 @@ func start() -> void:
 	base.stream = BASE_TRACK
 	base.stream.loop = true
 
+	base.volume_db = 0.0
 	base.play()
 	for channel in ghost_players:
 		var player := ghost_players[channel]
@@ -86,7 +92,44 @@ func start_menu():
 		return
 	general.stream = MENU_TRACK
 	general.stream.loop = true
+	general.volume_db = 0.0
 	current_channel = Ghost.Channel.NONE
 	snap_volume()
 	general.play()
 
+
+func start_boss():
+	if general.playing and general.stream == BOSS_TRACK:
+		return
+	general.stream = BOSS_TRACK
+	general.stream.loop = true
+	general.volume_db = 0.0
+	current_channel = Ghost.Channel.NONE
+	snap_volume()
+	general.play()
+
+
+func start_win():
+	if general.playing and general.stream == WIN_TRACK:
+		return
+	general.stream = WIN_TRACK
+	general.stream.loop = false
+	general.volume_db = 0.0
+	current_channel = Ghost.Channel.NONE
+	snap_volume()
+	general.play()
+
+func fade_out(time: float = 0.5) -> void:
+	fading = true
+	var tween := get_tree().create_tween().set_parallel(true).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(general, "volume_linear", 0.0, time).from_current()
+	tween.tween_property(base, "volume_linear", 0.0, time).from_current()
+	for channel in ghost_players:
+		tween.tween_property(ghost_players[channel], "volume_linear", 0.0, time).from_current()
+	await tween.finished
+	stop()
+	base.volume_db = -80.0
+	general.volume_db = -80.0
+	for channel in ghost_players:
+		ghost_players[channel].volume_db = -80.0
+	fading = false

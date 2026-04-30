@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://du5vt5eemyrcf"]
+
+[ext_resource type="PackedScene" uid="uid://bu3j8m5xgyrqc" path="res://entities/enemies/ghosts/mobster/mobster.tscn" id="1_s4ytq"]
+[ext_resource type="PackedScene" uid="uid://dclbmboho1qq4" path="res://entities/enemies/ghosts/pizza/pizza.tscn" id="2_8mduu"]
+[ext_resource type="PackedScene" uid="uid://hehs74mvqk1x" path="res://entities/enemies/ghosts/rat_king/rat_king.tscn" id="3_uxhjx"]
+[ext_resource type="PackedScene" uid="uid://bvwsi0yxnfngv" path="res://entities/enemies/ghosts/liberty/liberty.tscn" id="4_xy70i"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_m8ne0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1vjtm"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h1mhi"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hn1xn"]
+normal = Vector2(1, 0)
+
+[node name="BossGhosts" type="Node" unique_id=1827441520]
+
+[node name="Mobster" parent="." unique_id=1958681849 instance=ExtResource("1_s4ytq")]
+position = Vector2(-1113, -385)
+
+[node name="Pizza" parent="." unique_id=692608611 instance=ExtResource("2_8mduu")]
+position = Vector2(1088, -310)
+
+[node name="RatKing" parent="." unique_id=253016991 instance=ExtResource("3_uxhjx")]
+position = Vector2(-768, -747)
+
+[node name="Liberty" parent="." unique_id=1968686237 instance=ExtResource("4_xy70i")]
+position = Vector2(736, -724)
+
+[node name="Ghost Border" type="StaticBody2D" parent="." unique_id=1694753397]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost Border" unique_id=328129936]
+position = Vector2(0, 128)
+shape = SubResource("WorldBoundaryShape2D_m8ne0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ghost Border" unique_id=458812083]
+position = Vector2(-4, -3104)
+shape = SubResource("WorldBoundaryShape2D_1vjtm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ghost Border" unique_id=1479148636]
+position = Vector2(1837, -1440)
+shape = SubResource("WorldBoundaryShape2D_h1mhi")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Ghost Border" unique_id=1448204010]
+position = Vector2(-1837, -1480)
+shape = SubResource("WorldBoundaryShape2D_hn1xn")

@@ -11,7 +11,7 @@ func on_end():
 
 func physics_update(delta: float) -> void:
 	var direction := Input.get_axis(&"move_left", &"move_right")
-	if direction:
+	if direction and player.can_move:
 		player.movement_anim_player.speed_scale = absf(direction)
 		player.velocity.x = move_toward(
 			player.velocity.x,
@@ -32,11 +32,11 @@ func physics_update(delta: float) -> void:
 		state_machine.change_state($"../Fall")
 		return
 	
-	if Input.is_action_just_pressed(&"jump"):
+	if Input.is_action_just_pressed(&"jump") and player.can_jump:
 		state_machine.change_state($"../Jump")
 		return
 	
-	if not direction:
+	if not direction or not player.can_move:
 		state_machine.change_state($"../Idle")
 		return
 	

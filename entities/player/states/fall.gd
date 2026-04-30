@@ -11,7 +11,7 @@ func on_start(msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	var direction := Input.get_axis(&"move_left", &"move_right")
-	if direction:
+	if direction and player.can_move:
 		player.velocity.x = move_toward(
 			player.velocity.x,
 			direction * player.speed,
@@ -24,7 +24,7 @@ func physics_update(delta: float) -> void:
 	player.move_and_slide()
 	
 	if player.is_on_floor():
-		if direction:
+		if direction and player.can_move:
 			state_machine.change_state($"../Walk")
 			return
 		player.play_sound_effect(land_sound)
@@ -33,6 +33,6 @@ func physics_update(delta: float) -> void:
 
 	if coyote_timer > 0:
 		coyote_timer -= delta
-		if Input.is_action_just_pressed(&"jump"):
+		if Input.is_action_just_pressed(&"jump") and player.can_jump:
 			state_machine.change_state($"../Jump")
 			return

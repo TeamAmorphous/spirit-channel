@@ -7,7 +7,6 @@ extends Ghost
 var has_shades: bool = true
 
 
-
 func _process(delta: float) -> void:
 	super._process(delta)
 	light_sensitivity.can_be_damaged = not has_shades

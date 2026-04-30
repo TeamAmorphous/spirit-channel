@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dy3e5uwotgjs5"]
+
+[ext_resource type="PackedScene" uid="uid://cqhulv0enyjra" path="res://entities/props/pickup/pickup.tscn" id="1_ajoxa"]
+[ext_resource type="AudioStream" uid="uid://d27clx262t1yy" path="res://entities/props/pickup/thunder.mp3" id="2_2e6ey"]
+[ext_resource type="PackedScene" uid="uid://1cfry8wmm3kl" path="res://entities/props/pickup/skull_grabbed_particles.tscn" id="2_fylnd"]
+[ext_resource type="Texture2D" uid="uid://b40jf1h3o0mpa" path="res://entities/props/pickup/skull.png" id="2_lolec"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ajoxa"]
+friction = 0.5
+bounce = 0.9
+
+[sub_resource type="Curve" id="Curve_fylnd"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 2.7635827, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Pickup" unique_id=1735321551 instance=ExtResource("1_ajoxa")]
+physics_material_override = SubResource("PhysicsMaterial_ajoxa")
+item = &"skull"
+lifetime = 0.0
+pickup_sound = ExtResource("2_2e6ey")
+grabbed_particles = ExtResource("2_fylnd")
+
+[node name="Sprite2D" parent="." index="1" unique_id=2037140511]
+texture = ExtResource("2_lolec")
+
+[node name="PickupParticles" parent="." index="2" unique_id=199616353]
+modulate = Color(0.8434205, 0.5125768, 0.7583016, 1)
+amount = 15
+lifetime = 0.5
+emission_sphere_radius = 80.0
+spread = 71.18
+initial_velocity_min = 206.74
+initial_velocity_max = 206.74
+hue_variation_min = -0.49
+hue_variation_max = 0.35
+hue_variation_curve = SubResource("Curve_fylnd")

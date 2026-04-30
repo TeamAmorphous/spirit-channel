@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://1cfry8wmm3kl"]
+
+[ext_resource type="PackedScene" uid="uid://pygh7nopqnho" path="res://entities/props/pickup/grabbed_particles.tscn" id="1_yune3"]
+
+[sub_resource type="Curve" id="Curve_fylnd"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 2.7635827, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="SkullGrabbedParticles" unique_id=199616353 instance=ExtResource("1_yune3")]
+modulate = Color(0.8434205, 0.5125768, 0.7583016, 1)
+amount = 20
+hue_variation_min = -0.49
+hue_variation_max = 0.35
+hue_variation_curve = SubResource("Curve_fylnd")

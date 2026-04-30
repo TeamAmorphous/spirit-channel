@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cle7e7fe6x3q7"]
 
-[ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_6u2xg"]
+[ext_resource type="Script" uid="uid://drnppjq8gnggq" path="res://ui/pause_menu.gd" id="1_6u2xg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2j7ri"]
 content_margin_left = 0.0
@@ -27,14 +27,13 @@ outline_color = Color(0.17642763, 0.38680488, 0.45416057, 1)
 font_size = 32
 font_color = Color(0.9999998, 0.5877061, 0.27305, 1)
 
-[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("hud")]
-visible = false
+[node name="PauseMenu" type="CanvasLayer" unique_id=1824415615]
 process_mode = 3
 layer = 10
+visible = false
 script = ExtResource("1_6u2xg")
 
 [node name="Overlay" type="ColorRect" parent="." unique_id=1715017736]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -43,7 +42,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.55)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1791789308]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -10,12 +10,12 @@ func physics_update(delta: float) -> void:
 		state_machine.change_state($"../Fall", {jumped=false})
 		return
 	
-	if Input.is_action_just_pressed(&"jump"):
+	if Input.is_action_just_pressed(&"jump") and player.can_jump:
 		state_machine.change_state($"../Jump")
 		return
 	
 	var direction := Input.get_axis(&"move_left", &"move_right")
-	if direction:
+	if direction and player.can_move:
 		state_machine.change_state($"../Walk")
 		return
 	

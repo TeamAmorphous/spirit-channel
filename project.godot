@@ -73,6 +73,7 @@ ghosts=""
 enemies=""
 player=""
 furniture=""
+doors=""
 
 [input]
 
