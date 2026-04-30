@@ -63,6 +63,7 @@ func on_start(msg := {}) -> void:
 func on_end():
 	attack_area.body_entered.disconnect(_on_attack_area_body_entered)
 	charging = false
+	punch_sprite.visible = false
 
 
 func physics_update(delta: float) -> void:
