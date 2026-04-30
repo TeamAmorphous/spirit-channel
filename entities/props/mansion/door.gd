@@ -8,6 +8,7 @@ enum DoorState {
 }
 
 @export var needs_item: StringName
+@export var consumes_needed_item := true
 var state := DoorState.CLOSED
 var occupied: int = 0
 var showing_lock: bool = false
@@ -62,7 +63,8 @@ func set_state(new_state: DoorState) -> void:
 func _on_enter_from(left: bool, player: Player) -> void:
 	if can_open(player):
 		if needs_item:
-			player.remove_item(needs_item)
+			if consumes_needed_item:
+				player.remove_item(needs_item)
 			needs_item = &""
 			unlock_sound.play()
 			showing_lock = false

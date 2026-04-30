@@ -1239,7 +1239,7 @@ shape = SubResource("RectangleShape2D_bwdx1")
 
 [node name="InteractionPrompt" type="Marker2D" parent="." unique_id=2014202486]
 visible = false
-z_index = 100
+z_index = 10
 position = Vector2(72, -368)
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionPrompt" unique_id=185810695]

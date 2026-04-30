@@ -7,6 +7,7 @@
 
 [node name="BlueDoor" unique_id=441128494 instance=ExtResource("1_vmno8")]
 needs_item = &"key_blue"
+consumes_needed_item = false
 
 [node name="DoorOpen" parent="." index="0" unique_id=2028958891]
 texture = ExtResource("2_5v1kc")

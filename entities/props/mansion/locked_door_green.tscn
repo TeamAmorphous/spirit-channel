@@ -7,6 +7,7 @@
 
 [node name="GreenDoor" unique_id=441128494 instance=ExtResource("1_3gcyb")]
 needs_item = &"key_green"
+consumes_needed_item = false
 
 [node name="DoorOpen" parent="." index="0" unique_id=2028958891]
 texture = ExtResource("2_mqsky")

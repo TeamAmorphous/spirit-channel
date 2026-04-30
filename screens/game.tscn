@@ -2,16 +2,20 @@
 
 [ext_resource type="PackedScene" uid="uid://1k24q610gun0" path="res://entities/player/player.tscn" id="1_6ydpi"]
 [ext_resource type="Script" uid="uid://d0vxy8cv4g512" path="res://screens/game.gd" id="1_w0xem"]
-[ext_resource type="Script" path="res://screens/ghost_manager.gd" id="2_5kag3"]
+[ext_resource type="Script" uid="uid://cwsjmpxbw3xxr" path="res://screens/ghost_manager.gd" id="2_5kag3"]
 [ext_resource type="PackedScene" uid="uid://chxvgy481xpyn" path="res://ui/hud/hud.tscn" id="2_6nlyh"]
 [ext_resource type="PackedScene" uid="uid://wrdlham5o7rd" path="res://screens/game_over.tscn" id="2_w4cu3"]
 [ext_resource type="PackedScene" uid="uid://cle7e7fe6x3q7" path="res://ui/pause_menu.tscn" id="3_v0y06"]
 [ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_g7iek"]
 [ext_resource type="PackedScene" uid="uid://hehs74mvqk1x" path="res://entities/enemies/ghosts/rat_king/rat_king.tscn" id="5_4v2gu"]
 [ext_resource type="PackedScene" uid="uid://chuwtkmxhvbg" path="res://map/mansion.tscn" id="6_5kag3"]
+[ext_resource type="PackedScene" uid="uid://cthw4oeyug8hs" path="res://entities/props/pickup/key_green.tscn" id="6_g5ijc"]
 [ext_resource type="PackedScene" uid="uid://bu3j8m5xgyrqc" path="res://entities/enemies/ghosts/mobster/mobster.tscn" id="6_okr7b"]
 [ext_resource type="PackedScene" uid="uid://bvwsi0yxnfngv" path="res://entities/enemies/ghosts/liberty/liberty.tscn" id="7_s1lue"]
+[ext_resource type="PackedScene" uid="uid://dh3v67hsv3bp6" path="res://entities/props/pickup/key_red.tscn" id="8_5qun0"]
 [ext_resource type="PackedScene" uid="uid://dclbmboho1qq4" path="res://entities/enemies/ghosts/pizza/pizza.tscn" id="8_w0xem"]
+[ext_resource type="PackedScene" uid="uid://c3l0tf7x756hk" path="res://entities/props/pickup/key_blue.tscn" id="10_m8ne0"]
+[ext_resource type="PackedScene" uid="uid://dsykn4vagjoxs" path="res://entities/props/pickup/key_yellow.tscn" id="12_1vjtm"]
 
 [node name="Game" type="Node2D" unique_id=965120324]
 script = ExtResource("1_w0xem")
@@ -23,12 +27,16 @@ random_ghost_spawns = NodePath("../RandomGhostSpawns")
 player = NodePath("../Player")
 rat_scene = ExtResource("4_g7iek")
 rat_king_scene = ExtResource("5_4v2gu")
+green_key_scene = ExtResource("6_g5ijc")
 red_scene = ExtResource("6_okr7b")
 red_spawn = NodePath("../RedSpawn")
+red_key_scene = ExtResource("8_5qun0")
 blue_scene = ExtResource("7_s1lue")
 blue_spawn = NodePath("../BlueSpawn")
+blue_key_scene = ExtResource("10_m8ne0")
 yellow_scene = ExtResource("8_w0xem")
 yellow_spawn = NodePath("../YellowSpawn")
+yellow_key_scene = ExtResource("12_1vjtm")
 
 [node name="Mansion" parent="." unique_id=2071726716 instance=ExtResource("6_5kag3")]
 

@@ -20,7 +20,7 @@ extends CanvasLayer
 
 @onready var health_bar: OSDProgressBar = %HealthBar
 @onready var standard_keys: HBoxContainer = %StandardKeys
-@onready var color_key: TextureRect = %ColorKey
+@onready var color_keys: HBoxContainer = %ColorKeys
 
 var showing_page: bool = false
 var _page_request_id := 0
@@ -75,11 +75,13 @@ func update_item_displays() -> void:
 				# remove key
 				%StandardKeys.remove_child(key_counter_children.pop_front())
 				shown_key_count -= 1
-		var current_color_key := &""
-		var color_keys_list := player.get_color_keys()
-		if color_keys_list:
-			current_color_key = color_keys_list.front()
-		%ColorKey.texture = key_textures[current_color_key] if current_color_key else null
+		for n in %ColorKeys.get_children():
+			n.queue_free()
+			%ColorKeys.remove_child(n)
+		for color_key in player.get_color_keys():
+			var key_rect: TextureRect = item_tex_rect.instantiate()
+			key_rect.texture = key_textures.get(color_key)
+			%ColorKeys.add_child(key_rect)
 
 
 

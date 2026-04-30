@@ -14,26 +14,35 @@ var last_furniture: Furniture
 @export var rat_scene: PackedScene
 @export var rat_king_scene: PackedScene
 @export var pages_spawn_green: int = 0
+@export var green_key_scene: PackedScene
 var green_enabled := false
 var green_active := false
+var green_key_spawned := false
 
 @export var red_scene: PackedScene
 @export var pages_spawn_red: int = 3
 @export var red_spawn: Node2D
+@export var red_key_scene: PackedScene
 var red_enabled := false
 var red_active := false
+var red_key_spawned := false
 
 @export var blue_scene: PackedScene
 @export var pages_spawn_blue: int = 6
 @export var blue_spawn: Node2D
+@export var blue_key_scene: PackedScene
 var blue_enabled := false
 var blue_active := false
+var blue_key_spawned := false
 
 @export var yellow_scene: PackedScene
 @export var pages_spawn_yellow: int = 7
 @export var yellow_spawn: Node2D
+@export var yellow_key_scene: PackedScene
 var yellow_enabled := false
 var yellow_active := false
+var yellow_key_spawned := false
+
 var random_spawn_positions: Array[Vector2]
 
 @export var spawn_cooldown_min: float = 30.0
@@ -89,30 +98,57 @@ func check_pages() -> void:
 	blue_enabled = page_count >= pages_spawn_blue
 	yellow_enabled = page_count >= pages_spawn_yellow
 
+	var to_spawn: PackedScene = null
+	var spawn_pos: Vector2 = Vector2.ZERO
+	var on_defeat: Callable = Callable()
 	if red_enabled and not old_red and not red_active:
-		try_spawn_ghost(
-			red_scene,
-			get_spawn_pos(red_spawn)
-		).tree_exiting.connect(func():
-			red_active = false
-		)
+		to_spawn = red_scene
+		spawn_pos = get_spawn_pos(red_spawn)
+		on_defeat = func(): red_active = false
 		red_active = true
 	if blue_enabled and not old_blue and not blue_active:
-		try_spawn_ghost(
-			blue_scene,
-			get_spawn_pos(blue_spawn)
-		).tree_exiting.connect(func():
-			blue_active = false
-		)
+		to_spawn = blue_scene
+		spawn_pos = get_spawn_pos(blue_spawn)
+		on_defeat = func(): blue_active = false
 		blue_active = true
 	if yellow_enabled and not old_yellow and not yellow_active:
-		try_spawn_ghost(
-			yellow_scene,
-			get_spawn_pos(yellow_spawn)
-		).tree_exiting.connect(func():
-			yellow_active = false
-		)
+		to_spawn = yellow_scene
+		spawn_pos = get_spawn_pos(yellow_spawn)
+		on_defeat = func(): yellow_active = false
 		yellow_active = true
+
+	if to_spawn:
+		try_spawn_ghost.call_deferred(
+			to_spawn,
+			spawn_pos,
+			Vector2.ZERO,
+			on_defeat
+		)
+
+
+func on_red_defeat(ghost: Ghost) -> void:
+	red_active = false
+	if not red_key_spawned:
+		try_spawn_pickup(red_key_scene, ghost.global_position)
+		red_key_spawned = true
+
+func on_green_defeat(ghost: Ghost) -> void:
+	green_active = false
+	if not green_key_spawned:
+		try_spawn_pickup(green_key_scene, ghost.global_position)
+		green_key_spawned = true
+
+func on_blue_defeat(ghost: Ghost) -> void:
+	blue_active = false
+	if not blue_key_spawned:
+		try_spawn_pickup(blue_key_scene, ghost.global_position)
+		blue_key_spawned = true
+
+func on_yellow_defeat(ghost: Ghost) -> void:
+	yellow_active = false
+	if not yellow_key_spawned:
+		try_spawn_pickup(yellow_key_scene, ghost.global_position)
+		yellow_key_spawned = true
 
 
 func try_spawn_random_page_ghost() -> bool:
@@ -124,31 +160,35 @@ func try_spawn_random_page_ghost() -> bool:
 	if not available:
 		return false
 	
+	var to_spawn: PackedScene = null
+	var spawn_pos: Vector2 = Vector2.ZERO
+	var on_defeat: Callable = Callable()
+
 	match available.pick_random():
 		&"red":
-			try_spawn_ghost(
-				red_scene,
-				get_spawn_pos(red_spawn)
-			).tree_exiting.connect(func():
-				red_active = false
-			)
+			to_spawn = red_scene
+			spawn_pos = get_spawn_pos(red_spawn)
+			on_defeat = on_red_defeat
 			red_active = true
 		&"blue":
-			try_spawn_ghost(
-				blue_scene,
-				get_spawn_pos(blue_spawn)
-			).tree_exiting.connect(func():
-				blue_active = false
-			)
+			to_spawn = blue_scene
+			spawn_pos = get_spawn_pos(blue_spawn)
+			on_defeat = on_blue_defeat
 			blue_active = true
 		&"yellow":
-			try_spawn_ghost(
-				yellow_scene,
-				get_spawn_pos(yellow_spawn)
-			).tree_exiting.connect(func():
-				yellow_active = false
-			)
-			yellow_active = true
+			to_spawn = yellow_scene
+			spawn_pos = get_spawn_pos(yellow_spawn)
+			on_defeat = on_yellow_defeat
+			yellow_active = true 
+	
+	if to_spawn:
+		try_spawn_ghost.call_deferred(
+			to_spawn,
+			spawn_pos,
+			Vector2.ZERO,
+			on_defeat
+		)
+
 	return true
 
 
@@ -164,12 +204,11 @@ func try_spawn_rat(furniture: Furniture) -> void:
 	last_furniture = furniture
 	
 	if green_enabled and randf() < rat_king_chance and not green_active:
-		try_spawn_ghost(
+		try_spawn_ghost.call_deferred(
 			rat_king_scene,
 			furniture.global_position + Vector2(0, -200),
-			Vector2(randf_range(-800.0, 800.0), -randf_range(300.0, 500.0))
-		).tree_exiting.connect(func():
-			green_active = false
+			Vector2(randf_range(-800.0, 800.0), -randf_range(300.0, 500.0)),
+			on_green_defeat
 		)
 		green_active = true
 	elif randf() < rat_chance:
@@ -180,7 +219,7 @@ func try_spawn_rat(furniture: Furniture) -> void:
 		)
 
 
-func try_spawn_ghost(ghost_scene: PackedScene, position: Vector2, velocity: Vector2 = Vector2.ZERO) -> Ghost:
+func try_spawn_ghost(ghost_scene: PackedScene, position: Vector2, velocity: Vector2 = Vector2.ZERO, on_defeat := Callable()) -> Ghost:
 	if not ghost_scene or not ghost_scene.can_instantiate():
 		return null
 	var ghost := ghost_scene.instantiate() as Ghost
@@ -190,6 +229,8 @@ func try_spawn_ghost(ghost_scene: PackedScene, position: Vector2, velocity: Vect
 	if not ghost.velocity.is_zero_approx():
 		# 'Fling' if there's a spawn velocity
 		ghost.state_machine.change_state(ghost.state_machine.get_node("Hurt"))
+	if on_defeat.is_valid():
+		ghost.tree_exiting.connect(on_defeat.bind(ghost))
 	return ghost
 
 
@@ -213,3 +254,14 @@ func get_random_offscreen_position() -> Vector2:
 			return pos
 	push_error("No valid offscreen point found in spawn positions.")
 	return Vector2.ZERO
+
+
+func try_spawn_pickup(pickup_scene: PackedScene, position: Vector2) -> void:
+	var pickup: Pickup = pickup_scene.instantiate() as Pickup
+	if pickup:
+		var rand_angle := randf() * TAU
+		var rand_dir := Vector2.RIGHT.rotated(rand_angle)
+		var parent := get_parent()
+		parent.add_sibling.call_deferred(pickup)
+		pickup.global_position = position
+		pickup.apply_force(rand_dir * 200.0)

@@ -326,6 +326,7 @@ motion_mode = 1
 script = ExtResource("2_obe3h")
 decel = 1000.0
 channel = -1
+held_pickup = null
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 2
@@ -360,6 +361,7 @@ script = ExtResource("8_f2m55")
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 
 [node name="ShockPopup" type="Marker2D" parent="." index="4" unique_id=575857656]
+z_index = 5
 position = Vector2(47, -53)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ShockPopup" index="0" unique_id=1556758847]
@@ -414,6 +416,7 @@ max_distance = 4000.0
 bus = &"SFX"
 
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]
+[connection signal="flashed" from="LightSensitiveComponent" to="." method="_on_flashed"]
 [connection signal="resistance_depleted" from="LightSensitiveComponent" to="." method="_on_light_resistance_depleted"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

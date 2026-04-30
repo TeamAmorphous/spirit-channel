@@ -385,7 +385,8 @@ func add_item(item: StringName) -> void:
 			health.heal(5)
 			return
 		&"key_red", &"key_green", &"key_blue", &"key_yellow":
-			remove_all_color_keys()
+			if has_item(item):
+				return
 
 	inventory.append(item)
 	item_recieved.emit(item)
@@ -397,13 +398,6 @@ func remove_item(item: StringName) -> bool:
 		item_lost.emit(item)
 		return true
 	return false
-
-
-func remove_all_color_keys() -> bool:
-	var to_remove := get_color_keys()
-	for i in to_remove:
-		remove_item(i)
-	return not to_remove.is_empty()
 
 
 func get_color_keys() -> Array[StringName]:

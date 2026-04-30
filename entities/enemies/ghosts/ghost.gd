@@ -83,3 +83,8 @@ func _on_light_resistance_depleted(from: Node2D) -> void:
 func _on_health_depleted() -> void:
 	defeated.emit()
 	state_machine.change_state($StateMachine/Poof)
+
+
+func _on_flashed(from: Node2D) -> void:
+	if not state_machine.in_state($StateMachine/Hurt):
+		state_machine.change_state($StateMachine/Hurt, {"from"=from})

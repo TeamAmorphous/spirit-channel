@@ -6,8 +6,7 @@ extends PlayerState
 var coyote_timer: float
 
 func on_start(msg := {}) -> void:
-	# todo: player.anim_player.play(&"jump")
-	coyote_timer = player.coyote_time if msg.get("jumped") else 0.0
+	coyote_timer = player.coyote_time if not msg.get("jumped") else 0.0
 
 
 func physics_update(delta: float) -> void:

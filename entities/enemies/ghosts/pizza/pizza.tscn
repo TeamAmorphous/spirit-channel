@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cxxu0t8gsqx3w" path="res://entities/enemies/ghosts/states/shoot_projectile.gd" id="2_3uu3j"]
 [ext_resource type="Script" uid="uid://bisoqhsv8q2mo" path="res://entities/enemies/ghosts/states/ghost_state.gd" id="2_0272d"]
 [ext_resource type="Texture2D" uid="uid://dy6dp8lkvr338" path="res://entities/enemies/ghosts/pizza/attack.png" id="2_b8kr0"]
+[ext_resource type="PackedScene" uid="uid://dsykn4vagjoxs" path="res://entities/props/pickup/key_yellow.tscn" id="2_x78fb"]
 [ext_resource type="Texture2D" uid="uid://c2kk72hwjsf76" path="res://entities/enemies/ghosts/pizza/idle.png" id="3_ktweu"]
 [ext_resource type="Texture2D" uid="uid://b6jvwbty1cmbb" path="res://entities/enemies/ghosts/pizza/tele.png" id="4_kpwb0"]
 [ext_resource type="Script" uid="uid://b6c4lktm61k2b" path="res://entities/enemies/ghosts/pizza/states/invisible.gd" id="5_0272d"]
@@ -320,6 +321,7 @@ _data = {
 
 [node name="Pizza" unique_id=1958681849 instance=ExtResource("1_vntsv")]
 channel = 2
+held_pickup = ExtResource("2_x78fb")
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 4

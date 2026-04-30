@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_n7gw7"]
 [ext_resource type="Script" uid="uid://d3qnrsh6ckufa" path="res://entities/enemies/ghosts/rat_king/rat_king.gd" id="2_g1vbm"]
 [ext_resource type="Script" uid="uid://b7bpb7kb3mjlr" path="res://entities/enemies/ghosts/rat_king/states/pop.gd" id="3_g1vbm"]
+[ext_resource type="PackedScene" uid="uid://cthw4oeyug8hs" path="res://entities/props/pickup/key_green.tscn" id="3_hburk"]
 [ext_resource type="Texture2D" uid="uid://c2pwi0hjwyya3" path="res://entities/enemies/ghosts/rat_king/attack0.png" id="3_hqvt0"]
 [ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_oh16l"]
 [ext_resource type="Texture2D" uid="uid://beudg86s2qvjw" path="res://entities/enemies/ghosts/rat_king/attack1.png" id="4_qgdai"]
@@ -158,6 +159,8 @@ radius = 130.0
 
 [node name="RatKing" unique_id=1958681849 instance=ExtResource("1_n7gw7")]
 script = ExtResource("2_g1vbm")
+channel = 1
+held_pickup = ExtResource("3_hburk")
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 1
