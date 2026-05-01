@@ -12,6 +12,13 @@ font_color = Color(0.735357, 0.735357, 0.735357, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_wu0qq"]
+font = ExtResource("4_5mnfb")
+font_size = 24
+font_color = Color(0.735357, 0.735357, 0.735357, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="MainMenu" type="Control" unique_id=1150759093]
 custom_minimum_size = Vector2(1000, 750)
 layout_mode = 3
@@ -81,12 +88,23 @@ theme_override_font_sizes/font_size = 48
 text = "QUIT"
 flat = true
 
-[node name="VersionLabel" type="Label" parent="MarginContainer" unique_id=110299405]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=244698175]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+
+[node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer2" unique_id=110299405]
+unique_name_in_owner = true
+layout_mode = 2
 text = "X.X.X"
 label_settings = SubResource("LabelSettings_5mnfb")
+horizontal_alignment = 2
+
+[node name="PostJamLabel" type="Label" parent="MarginContainer/VBoxContainer2" unique_id=1490416307]
+layout_mode = 2
+text = "POST-JAM"
+label_settings = SubResource("LabelSettings_wu0qq")
+horizontal_alignment = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
