@@ -8,7 +8,6 @@ extends Node2D
 @onready var pause_menu: PauseMenu = $PauseMenu
 @onready var player: Player = $Player
 
-
 var boss_node: Node
 
 var win := false
@@ -63,7 +62,10 @@ func _on_win() -> void:
 	get_tree().paused = false
 	var cam_tween := get_tree().create_tween()
 	cam_tween.tween_property(player.camera, "global_position", player.aim.global_position + (Vector2.UP * 5000), 5.0).from_current().set_ease(Tween.EASE_IN)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.5).timeout
+	var fadeout_tween := get_tree().create_tween()
+	fadeout_tween.tween_property(%FadeoutRect, "modulate:a", 1.0, 0.5).from(0.0)
+	await fadeout_tween.finished
 	SceneManager.change_scene_packed(win_scene)
 
 

@@ -26,7 +26,7 @@ func _spawn_projectile() -> void:
 	var projectile := projectile_scene.instantiate() as Node2D
 	if projectile == null:
 		return
-	add_sibling(projectile)
+	SceneManager.current_scene.add_sibling(projectile)
 
 	var spawn_position := projectile_spawn_position.global_position if projectile_spawn_position else ghost.global_position
 	var target_position := player.chase_target.global_position

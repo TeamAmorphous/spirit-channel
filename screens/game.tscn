@@ -157,4 +157,15 @@ debug_color = Color(0.84224856, 0.37739858, 0.15459064, 0.41960785)
 [node name="Fadeout" type="CanvasLayer" parent="." unique_id=273462301]
 layer = 20
 
+[node name="FadeoutRect" type="ColorRect" parent="Fadeout" unique_id=458584265]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="body_entered" from="BossTriggerArea" to="." method="_on_boss_trigger_area_body_entered"]

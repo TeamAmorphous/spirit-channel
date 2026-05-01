@@ -43,10 +43,6 @@ var channel_synced: bool = false
 
 
 func _ready() -> void:
-	state_machine.state_changed.connect(
-		func(s: State, msg := {}):
-			print(s.name)
-	)
 	pizza_box.visible = false
 
 
