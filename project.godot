@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ghost Channel"
-config/version="0.0.3"
+config/version="0.1.0"
 config/tags=PackedStringArray("ludum_dare_59")
 run/main_scene="uid://6megmv5cp4sr"
 config/features=PackedStringArray("4.6", "GL Compatibility")
