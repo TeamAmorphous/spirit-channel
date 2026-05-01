@@ -1,4 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-/build/
+build/*
+
+# Include build script
+!build/package.sh
