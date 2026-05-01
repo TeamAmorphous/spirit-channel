@@ -85,6 +85,8 @@ var channel: Ghost.Channel = Ghost.Channel.BLUE
 
 var color_tween: Tween
 
+var camera_focus: Vector2
+var use_camera_focus_override := false
 var override_facing: bool
 var direction_override: Vector2
 
@@ -115,7 +117,10 @@ func _ready() -> void:
 #region Process Functions
 
 func _process(delta: float) -> void:
-	camera.target = aim.global_position if override_facing else aim.target
+	if use_camera_focus_override:
+		camera.target = camera_focus
+	else:
+		camera.target = aim.global_position if override_facing else aim.target
 	reticle.global_position = aim.target
 	
 	if invincibility_timer > 0:

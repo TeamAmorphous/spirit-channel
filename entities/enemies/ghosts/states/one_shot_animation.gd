@@ -8,9 +8,7 @@ extends GhostState
 @export var next_state: State
 @export var stream: AudioStream
 
-var next: State
-
-func on_start(msg := {}) -> void:
+func on_start(_msg := {}) -> void:
 	if not play_backwards:
 		ghost.anim_player.play(animation)
 	else:
@@ -26,7 +24,6 @@ func on_start(msg := {}) -> void:
 
 
 	ghost.light_sensitivity.can_be_damaged = true
-	next = msg.get("next", state_machine.default_state) as State
 	ghost.anim_player.animation_finished.connect(_on_animation_finished)
 
 
@@ -36,4 +33,4 @@ func on_end() -> void:
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	if animation == anim_name:
-		state_machine.change_state(next)
+		state_machine.change_state(next_state)

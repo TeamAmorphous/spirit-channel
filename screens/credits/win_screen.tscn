@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://i65f0rqjpv0t"]
+
+[ext_resource type="PackedScene" uid="uid://dfyq1nvm8rvvn" path="res://screens/menu_bg.tscn" id="1_gt3jw"]
+[ext_resource type="Script" uid="uid://c8gkhrqvb0grc" path="res://screens/win_screen.gd" id="1_mby22"]
+[ext_resource type="PackedScene" uid="uid://cxssbyg13n1lp" path="res://screens/main_menu.tscn" id="2_3y6hx"]
+[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="2_louiv"]
+
+[node name="WinScreen" type="Control" unique_id=46341471]
+custom_minimum_size = Vector2(1000, 750)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1000.0
+offset_bottom = 750.0
+script = ExtResource("1_mby22")
+menu_scene = ExtResource("2_3y6hx")
+
+[node name="MenuBg" parent="." unique_id=1331379525 instance=ExtResource("1_gt3jw")]
+metadata/_edit_lock_ = true
+
+[node name="Scrolling" type="Control" parent="." unique_id=1543815460]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scrolling" unique_id=1020618638]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -356.5
+offset_top = -40.0
+offset_right = 356.5
+offset_bottom = 2244.0
+grow_horizontal = 2
+
+[node name="MansionClear" type="RichTextLabel" parent="Scrolling/VBoxContainer" unique_id=1125234649]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 32
+theme_override_fonts/normal_font = ExtResource("2_louiv")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[rainbow][shake level=4][wave amp=50.0 freq=2.0]MANSION CLEARED![/wave][/shake][/rainbow]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Control" type="Control" parent="Scrolling/VBoxContainer" unique_id=1828019583]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="Credits" type="RichTextLabel" parent="Scrolling/VBoxContainer" unique_id=1592740248]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 16
+theme_override_fonts/normal_font = ExtResource("2_louiv")
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[font_size=48][center]DIRECTOR, LEAD ARTIST, WRITER[/center][/font_size]
+[br]
+[left]Tetracold[/left][right][img=200]res://screens/credits/tetra.png[/img]
+[br]
+[font_size=48][center]LEAD PROGRAMMER[/center][/font_size]
+[br]
+[right]Ceriole[/right][left][img=200]res://screens/credits/ceri.png[/img]
+[br]
+[font_size=48][center]PROGRAMMER[/center][/font_size]
+[br]
+[left]Parzival[/left][right][img=200]res://screens/credits/parzival.png[/img]
+[br]
+[font_size=48][center]B.G. ARTIST, PROGRAMMER[/center][/font_size]
+[br]
+[right]McKrak[/right][left][img=200]res://screens/credits/mckrak.png[/img]
+[br]
+[font_size=48][center]MISC. ARTIST[/center][/font_size]
+[br]
+[left]Muse[/left]
+[br]
+[br]
+[font_size=48][center]SOUND ARTIST, MISC. ARTIST[/center][/font_size]
+[br]
+[right]CertifiedAbsoluteShlock[/right][left][img=200]res://screens/credits/cas.png[/img]
+[br]
+[font_size=48][center]MUSIC[/center][/font_size]
+[br]
+[left]Levc[/left][right][img=200]res://screens/credits/levc.png[/img]
+[br]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1

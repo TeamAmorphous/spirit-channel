@@ -321,37 +321,39 @@ _data = {
 [node name="Pizza" unique_id=1958681849 instance=ExtResource("1_vntsv")]
 channel = 2
 
-[node name="HealthComponent" parent="." index="0" unique_id=908077137]
-max_health = 4
+[node name="StateMachine" parent="." index="2" unique_id=2135702627 node_paths=PackedStringArray("default_state")]
+default_state = NodePath("Disappear")
 
-[node name="Idle" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="0" unique_id=896072109]
+[node name="Idle" parent="StateMachine" index="0" unique_id=896072109]
 script = ExtResource("2_0272d")
 
-[node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
+[node name="Chase" parent="StateMachine" index="2" unique_id=660995331]
 enabled = false
 contact_damage = 0
 
-[node name="Invisible" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="4" unique_id=822334671]
+[node name="Invisible" type="Node" parent="StateMachine" index="4" unique_id=822334671 node_paths=PackedStringArray("next_state")]
 script = ExtResource("5_0272d")
-teleport_cooldown = 20.0
+teleport_cooldown = 5.0
+teleport_cooldown_random_range = 2.0
 teleport_distance = 500.0
 teleport_radius = 100.0
+next_state = NodePath("../Appear")
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 
-[node name="Appear" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="5" unique_id=515971898 node_paths=PackedStringArray("next_state")]
+[node name="Appear" type="Node" parent="StateMachine" index="5" unique_id=515971898 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_1rho0")
 animation = &"pizza/appear"
 next_state = NodePath("../WaitThrow")
 metadata/_custom_type_script = "uid://d3vcayuuutyrv"
 
-[node name="WaitThrow" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="6" unique_id=471763831 node_paths=PackedStringArray("next_state")]
+[node name="WaitThrow" type="Node" parent="StateMachine" index="6" unique_id=471763831 node_paths=PackedStringArray("next_state")]
 script = ExtResource("7_1rho0")
 length = 1.0
 animaton = &"idle"
 next_state = NodePath("../ThrowPizza")
 metadata/_custom_type_script = "uid://dl6bu25eug6nc"
 
-[node name="ThrowPizza" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="7" unique_id=1101052154 node_paths=PackedStringArray("projectile_spawn_position", "next_state")]
+[node name="ThrowPizza" type="Node" parent="StateMachine" index="7" unique_id=1101052154 node_paths=PackedStringArray("projectile_spawn_position", "next_state")]
 script = ExtResource("2_3uu3j")
 projectile_scene = ExtResource("5_nf5ks")
 projectile_damage = 4
@@ -360,14 +362,14 @@ animation = &"pizza/throw"
 next_state = NodePath("../WaitDisappear")
 stream = ExtResource("5_x78fb")
 
-[node name="WaitDisappear" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="8" unique_id=861746237 node_paths=PackedStringArray("next_state")]
+[node name="WaitDisappear" type="Node" parent="StateMachine" index="8" unique_id=861746237 node_paths=PackedStringArray("next_state")]
 script = ExtResource("7_1rho0")
 length = 1.0
 animaton = &"idle"
 next_state = NodePath("../Disappear")
 metadata/_custom_type_script = "uid://dl6bu25eug6nc"
 
-[node name="Disappear" type="Node" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="9" unique_id=1448086396 node_paths=PackedStringArray("next_state")]
+[node name="Disappear" type="Node" parent="StateMachine" index="9" unique_id=1448086396 node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_1rho0")
 animation = &"pizza/disappear"
 next_state = NodePath("../Invisible")
@@ -375,16 +377,19 @@ metadata/_custom_type_script = "uid://d3vcayuuutyrv"
 
 [node name="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(2064633110) index="0" unique_id=2083159277]
 sprite_frames = SubResource("SpriteFrames_b8kr0")
-animation = &"attack"
 
 [node name="PointLight2D" parent="Sprite/AnimatedSprite2D" index="0" unique_id=720677011]
 color = Color(0.9571325, 0.95061964, 0, 1)
 
 [node name="PizzaAttack" type="AnimatedSprite2D" parent="Sprite/AnimatedSprite2D" index="1" unique_id=911890201]
-position = Vector2(69.99999, 18.874996)
+unique_name_in_owner = true
+visible = false
+position = Vector2(58.000004, 18.000002)
+rotation = 0.041782096
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_ia68l")
 animation = &"attack"
+frame = 1
 
 [node name="ProjectileSpawnPosition" type="Marker2D" parent="Sprite/AnimatedSprite2D/PizzaAttack" index="0" unique_id=205837562]
 

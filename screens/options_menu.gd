@@ -14,6 +14,12 @@ const MIN_VOLUME_DB := -80.0
 
 
 func _ready() -> void:
+	if not MusicManager.is_playing():
+		MusicManager.start_menu()
+	else:
+		if not MusicManager.general_finished.is_connected(MusicManager.start_menu):
+			MusicManager.general_finished.connect(MusicManager.start_menu, Node.CONNECT_ONE_SHOT)
+	
 	master_volume_slider.set_value_no_signal(_get_bus_volume_linear(MASTER_BUS))
 	music_volume_slider.set_value_no_signal(_get_bus_volume_linear(MUSIC_BUS))
 	sfx_volume_slider.set_value_no_signal(_get_bus_volume_linear(SFX_BUS))

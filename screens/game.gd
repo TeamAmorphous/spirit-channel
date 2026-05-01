@@ -3,7 +3,7 @@ extends Node2D
 @export var game_over_scene: PackedScene
 @export var boss_ghosts_scene: PackedScene
 
-@export var menu_scene: PackedScene
+@export var win_scene: PackedScene
 
 @onready var pause_menu: PauseMenu = $PauseMenu
 @onready var player: Player = $Player
@@ -51,6 +51,8 @@ func _on_win() -> void:
 	player.state_machine.change_state(player.state_machine.get_node("Cutscene"))
 	get_tree().paused = true
 	await player.walk_to(Vector2(0.0, player.global_position.y), 0.8)
+	player.use_camera_focus_override = true
+	player.camera_focus = player.aim.global_position
 	await get_tree().create_timer(0.1).timeout
 	player.movement_anim_player.play(&"relief")
 	await player.movement_anim_player.animation_finished
@@ -59,8 +61,10 @@ func _on_win() -> void:
 	await get_tree().create_timer(2.0).timeout
 	player.movement_anim_player.play(&"idle")
 	get_tree().paused = false
-	await get_tree().create_timer(10.0).timeout
-	SceneManager.change_scene_packed(menu_scene)
+	var cam_tween := get_tree().create_tween()
+	cam_tween.tween_property(player.camera, "global_position", player.aim.global_position + (Vector2.UP * 5000), 5.0).from_current().set_ease(Tween.EASE_IN)
+	await get_tree().create_timer(2.0).timeout
+	SceneManager.change_scene_packed(win_scene)
 
 
 func _on_boss_trigger_area_body_entered(body: Node2D) -> void:

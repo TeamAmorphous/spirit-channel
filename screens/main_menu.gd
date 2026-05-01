@@ -8,7 +8,11 @@ extends Control
 @onready var version_label = $MarginContainer/VersionLabel
 
 func _ready() -> void:
-	MusicManager.start_menu()
+	if not MusicManager.is_playing():
+		MusicManager.start_menu()
+	else:
+		if not MusicManager.general_finished.is_connected(MusicManager.start_menu):
+			MusicManager.general_finished.connect(MusicManager.start_menu, Node.CONNECT_ONE_SHOT)
 	version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
 
 

@@ -10,6 +10,8 @@ extends GhostState
 @export var teleport_distance: float = 800.0
 @export var teleport_radius: float = 20.0
 
+@export var next_state: State
+
 var teleport_timer: float
 
 func on_start(_msg := {}) -> void:
@@ -35,14 +37,6 @@ func physics_update(delta: float) -> void:
 	ghost.velocity = ghost.velocity.move_toward(Vector2.ZERO, ghost.decel * delta)
 
 
-func input(_event: InputEvent) -> void:
-	pass
-
-
-func unhandled_input(_event: InputEvent) -> void:
-	pass
-
-
 func _teleport() -> void:
 	var player_facing_left := player.aim.direction.x < 0
 
@@ -57,8 +51,8 @@ func _teleport() -> void:
 
 	ghost.global_position = tele_position
 
-	state_machine.change_state($"../Appear")
+	state_machine.change_state(next_state)
 
 
 func _on_flashed(from: Node2D) -> void:
-	ghost.damage(1, from, $"../WaitDisappear")
+	ghost.damage(1, from, next_state)
