@@ -8,11 +8,13 @@ const MUSIC_BUS := &"Music"
 const SFX_BUS := &"SFX"
 const MIN_VOLUME_DB := -80.0
 
+var confirm_delete: bool = false
+
 @onready var master_volume_slider: HSlider = %master_volume_slider
 @onready var music_volume_slider: HSlider = %music_volume_slider
 @onready var sfx_volume_slider: HSlider = %sfx_volume_slider
 @onready var speedrun_toggle: CheckButton = %speedrun_toggle
-
+@onready var clear_data_button: Button = %ClearDataButton
 
 func _ready() -> void:
 	if not MusicManager.is_playing():
@@ -25,6 +27,12 @@ func _ready() -> void:
 	master_volume_slider.set_value_no_signal(_get_bus_volume_linear(MASTER_BUS))
 	music_volume_slider.set_value_no_signal(_get_bus_volume_linear(MUSIC_BUS))
 	sfx_volume_slider.set_value_no_signal(_get_bus_volume_linear(SFX_BUS))
+
+	clear_data_button.disabled = not Settings.has_persistent_data()
+
+	if Input.get_connected_joypads().size() > 0:
+		master_volume_slider.grab_focus.call_deferred()
+	
 
 func _on_back_button_pressed() -> void:
 	if not menu_scene_path:
@@ -61,3 +69,15 @@ func _linear_to_bus_db(value: float) -> float:
 
 func _on_speedrun_toggled(toggled_on: bool) -> void:
 	Settings.speedrun = toggled_on
+
+
+func _on_clear_data_button_pressed() -> void:
+	if not confirm_delete:
+		clear_data_button.add_theme_color_override("font_color", Color.ORANGE_RED)
+		clear_data_button.text = "CONFIRM?"
+		confirm_delete = true
+	else:
+		clear_data_button.disabled = Settings.clear_persistent_data()
+		clear_data_button.add_theme_color_override("font_color", Color.ORANGE)
+		clear_data_button.text = "USER DATA CLEARED"
+		confirm_delete = false

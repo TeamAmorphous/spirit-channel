@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://kidd1g24kct5"]
+
+[ext_resource type="PackedScene" uid="uid://cap8ddh5scddb" path="res://ui/hud/components/tutorial_page.tscn" id="1_07q80"]
+[ext_resource type="Script" uid="uid://bdx4ey4yx0e8i" path="res://ui/hud/tuts/tutorial_viewer.gd" id="1_7ullv"]
+[ext_resource type="Texture2D" uid="uid://cclr75gm71sso" path="res://ui/hud/tuts/rat_king.png" id="2_b48gu"]
+[ext_resource type="Texture2D" uid="uid://dukkhrbxrq2j0" path="res://ui/hud/tuts/marco.png" id="3_7ullv"]
+[ext_resource type="Texture2D" uid="uid://bqww2odn2xecu" path="res://ui/hud/tuts/pizza_boy.png" id="4_v7g0f"]
+[ext_resource type="Texture2D" uid="uid://clplpop1lu6gp" path="res://ui/hud/tuts/liberty.png" id="5_kyw2x"]
+
+[sub_resource type="Animation" id="Animation_7ullv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pages:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Overlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.55)]
+}
+
+[sub_resource type="Animation" id="Animation_v7g0f"]
+resource_name = "hide"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pages:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(2.5491211, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 320)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Overlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.55), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kyw2x"]
+resource_name = "show"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pages:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333335),
+"transitions": PackedFloat32Array(2.5491211, 1),
+"update": 0,
+"values": [Vector2(0, 320), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Overlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.55)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fvs3s"]
+_data = {
+&"RESET": SubResource("Animation_7ullv"),
+&"hide": SubResource("Animation_v7g0f"),
+&"show": SubResource("Animation_kyw2x")
+}
+
+[node name="TutorialViewer" type="Control" unique_id=52701926]
+process_mode = 3
+custom_minimum_size = Vector2(1000, 750)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1000.0
+offset_bottom = 750.0
+mouse_filter = 2
+script = ExtResource("1_7ullv")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=1656350547]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Pages" type="Node2D" parent="." unique_id=81833281]
+
+[node name="RaiseTarget" type="Marker2D" parent="Pages" unique_id=1807066301]
+position = Vector2(500, 360)
+
+[node name="RatKing" parent="Pages" unique_id=1883818641 node_paths=PackedStringArray("raise_target") instance=ExtResource("1_07q80")]
+position = Vector2(191.63583, 708.26697)
+rotation = -0.09319065
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_b48gu")
+raise_target = NodePath("../RaiseTarget")
+
+[node name="Marco" parent="Pages" unique_id=587048891 node_paths=PackedStringArray("raise_target") instance=ExtResource("1_07q80")]
+position = Vector2(351.99997, 704)
+rotation = 0.03223837
+scale = Vector2(0.59999996, 0.59999996)
+texture = ExtResource("3_7ullv")
+raise_target = NodePath("../RaiseTarget")
+
+[node name="PizzaBoy" parent="Pages" unique_id=1516825471 node_paths=PackedStringArray("raise_target") instance=ExtResource("1_07q80")]
+position = Vector2(608, 704)
+rotation = -0.12359159
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_v7g0f")
+raise_target = NodePath("../RaiseTarget")
+
+[node name="Liberty" parent="Pages" unique_id=2012667206 node_paths=PackedStringArray("raise_target") instance=ExtResource("1_07q80")]
+position = Vector2(768, 704)
+rotation = 0.09840615
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_kyw2x")
+raise_target = NodePath("../RaiseTarget")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=749575447]
+libraries/ = SubResource("AnimationLibrary_fvs3s")

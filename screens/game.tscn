@@ -62,9 +62,10 @@ spawn_chance = 0.15
 [node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
 position = Vector2(0, -8)
 
-[node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player", "speedrun_timer") instance=ExtResource("2_6nlyh")]
+[node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player", "speedrun_timer", "pause_menu") instance=ExtResource("2_6nlyh")]
 player = NodePath("../Player")
 speedrun_timer = NodePath("../SpeedrunTimer")
+pause_menu = NodePath("../PauseMenu")
 
 [node name="PauseMenu" parent="." unique_id=1989161602 node_paths=PackedStringArray("hud") instance=ExtResource("3_v0y06")]
 visible = false

@@ -36,6 +36,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed(&"primary_action"):
+	if Input.is_action_just_pressed(&"primary_action") \
+			or Input.is_action_just_pressed(&"ui_accept") \
+			or Input.is_action_just_pressed(&"ui_cancel"):
 		MusicManager.stop()
 		SceneManager.change_scene_packed(menu_scene)

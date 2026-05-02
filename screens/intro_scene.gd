@@ -5,7 +5,9 @@ extends Control
 
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed(&"primary_action") or Input.is_action_just_pressed(&"secondary_action"):
+	if Input.is_action_just_pressed(&"primary_action") \
+			or Input.is_action_just_pressed(&"ui_accept") \
+			or Input.is_action_just_pressed(&"ui_cancel"):
 		_on_skip_button_pressed()
 
 

@@ -146,7 +146,9 @@ func has_persistent_data() -> bool:
 	return FileAccess.file_exists(PERSISTENT_DATA_PATH)
 
 
-func clear_persistent_data() -> void:
+func clear_persistent_data() -> bool:
 	if has_persistent_data():
-		DirAccess.remove_absolute(PERSISTENT_DATA_PATH)
+		_load_settings({})
+		return DirAccess.remove_absolute(PERSISTENT_DATA_PATH) == Error.OK
+	return false
 	

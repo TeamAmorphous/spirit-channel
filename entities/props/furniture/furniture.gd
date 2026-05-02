@@ -39,6 +39,7 @@ func shake() -> void:
 	shake_timer = shake_length
 	sound_player.play()
 
+
 func _on_interacted_with(player: Player) -> void:
 	interacted_with.emit(player)
 	shake()

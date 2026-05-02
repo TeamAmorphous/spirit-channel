@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://btmeqlhiik0s5" path="res://ui/pages/page6.png" id="7_uyo40"]
 [ext_resource type="Texture2D" uid="uid://drme6v8vlb5ox" path="res://ui/pages/page7.png" id="8_m6r7j"]
 [ext_resource type="Texture2D" uid="uid://bvg7l8hjo42j" path="res://ui/pages/page8.png" id="9_3rj2y"]
+[ext_resource type="PackedScene" uid="uid://kidd1g24kct5" path="res://ui/hud/tuts/tutorial_viewer.tscn" id="13_gv4gi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e0nub"]
 font = ExtResource("1_xmswo")
@@ -152,12 +153,11 @@ script = ExtResource("1_e0nub")
 pages = Array[Texture2D]([ExtResource("7_gfles"), ExtResource("3_3mxrk"), ExtResource("4_6gxmt"), ExtResource("5_olkg6"), ExtResource("6_hk13k"), ExtResource("7_uyo40"), ExtResource("8_m6r7j"), ExtResource("9_3rj2y")])
 
 [node name="UI" type="Control" parent="." unique_id=1349016239]
+custom_minimum_size = Vector2(1000, 750)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1000.0
+offset_bottom = 750.0
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=2117649756]
 layout_mode = 1
@@ -261,5 +261,8 @@ texture = ExtResource("4_w75iv")
 libraries/ = SubResource("AnimationLibrary_o2lis")
 autoplay = &"default"
 speed_scale = 5.0
+
+[node name="TutorialViewer" parent="." unique_id=52701926 instance=ExtResource("13_gv4gi")]
+visible = false
 
 [connection signal="gui_input" from="UI/PageDisplay" to="." method="_on_page_display_gui_input"]

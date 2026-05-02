@@ -13,12 +13,14 @@ extends CanvasLayer
 
 @export var player: Player
 @export var speedrun_timer: SpeedrunTimer
+@export var pause_menu: PauseMenu
 
 @export var pages: Array[Texture2D]
 
 @onready var logo_anim_player: AnimationPlayer = $Logo/AnimationPlayer
 @onready var page_anim_player: AnimationPlayer = $UI/PagePlayer
 @onready var page_display: TextureRect = $UI/PageDisplay
+@onready var tutorial: TutorialViewer = $TutorialViewer
 
 @onready var health_bar: OSDProgressBar = %HealthBar
 @onready var standard_keys: HBoxContainer = %StandardKeys
@@ -47,6 +49,17 @@ func _process(_delta: float) -> void:
 		timer_label.text = speedrun_timer.get_as_string()
 		if Settings.best_time >= 0.0 and speedrun_timer.time >= Settings.best_time:
 			timer_label.modulate.a = 0.5
+	
+	if showing_page:	
+		if Input.is_action_just_pressed(&"primary_action") \
+				or Input.is_action_just_pressed(&"ui_accept") \
+				or Input.is_action_just_pressed(&"ui_cancel"):
+			get_viewport().set_input_as_handled()
+			await close_page()
+
+	if not is_page_open() and not pause_menu.visible and pause_menu.can_pause:
+		if Input.is_action_just_pressed(&"tutorial") and not tutorial.visible:
+			tutorial.show_pages()
 
 
 func _on_player_max_health_changed(max_health: int, _old: int) -> void:
@@ -65,6 +78,7 @@ func _on_player_item_recieved(item: StringName) -> void:
 
 func _on_player_item_lost(_item: StringName) -> void:
 	update_item_displays()
+
 
 func update_item_displays() -> void:
 	%PagesCounter.text = "PAGES:\n%d" % player.item_count(&"page")
@@ -90,8 +104,6 @@ func update_item_displays() -> void:
 			var key_rect: TextureRect = item_tex_rect.instantiate()
 			key_rect.texture = key_textures.get(color_key)
 			%ColorKeys.add_child(key_rect)
-
-
 
 
 func show_page(n: int) -> void:
@@ -121,16 +133,7 @@ func close_page() -> void:
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
 	player.state_machine.change_state(player.state_machine.get_node("Idle"))
-
-
-func _on_page_display_gui_input(event: InputEvent) -> void:
-	if not showing_page:
-		return
-
-	var mouse_button := event as InputEventMouseButton
-	if mouse_button and mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_LEFT:
-		get_viewport().set_input_as_handled()
-		await close_page()
+	
 
 
 func is_page_open() -> bool:

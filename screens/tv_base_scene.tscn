@@ -372,20 +372,20 @@ viewport_path = NodePath("GameViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gky4l"]
 shader = ExtResource("3_5o2xl")
-shader_parameter/resolution = Vector2(720, 480)
+shader_parameter/resolution = Vector2(640, 360)
 shader_parameter/scan_line_amount = 0.800000038
-shader_parameter/warp_amount = 0.27600001311
+shader_parameter/warp_amount = 0.350000016625
 shader_parameter/noise_amount = 0.03
 shader_parameter/interference_amount = 0.50000002375
 shader_parameter/grille_amount = 0.1
-shader_parameter/grille_size = 1.0
-shader_parameter/vignette_amount = 0.50000002375
-shader_parameter/vignette_intensity = 0.37200001767
+shader_parameter/grille_size = 2.0000000475
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.800000038
 shader_parameter/aberation_amount = 0.5
 shader_parameter/roll_line_amount = 0.2000000095
 shader_parameter/roll_speed = 0.7500004156249993
 shader_parameter/scan_line_strength = -8.0
-shader_parameter/pixel_strength = -2.9999999525
+shader_parameter/pixel_strength = -2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5o2xl"]
 albedo_texture = ExtResource("4_c161p")
@@ -532,6 +532,7 @@ environment = SubResource("Environment_a2qay")
 [node name="GameViewport" type="SubViewport" parent="." unique_id=1778479418]
 process_mode = 1
 handle_input_locally = false
+physics_object_picking = true
 size = Vector2i(1000, 750)
 
 [node name="MainMenu" parent="GameViewport" unique_id=1150759093 instance=ExtResource("2_a3r5o")]

@@ -2,15 +2,27 @@ extends Furniture
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
+var _opened := false
+
+
+func _process(_delta: float) -> void:
+	if not _opened:
+		var player = get_tree().get_nodes_in_group(Player.PLAYER_GROUP).front()
+		if player:
+			interactable.enabled = player.item_count(&"page") == 8
+	else:
+		interactable.enabled = false
+
+
 func _on_interacted_with(player: Player) -> void:
 	if not contains or not contains.can_instantiate():
 		return
-	
+
 	#interacted_with.emit(player)
 
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
-	$Interactable.enabled = false
+	interactable.enabled = false
 	player.state_machine.change_state(player.state_machine.get_node("Cutscene"))
 	sprite_mat.set_shader_parameter("width", 0.0)
 	player.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -42,6 +54,5 @@ func _on_interacted_with(player: Player) -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	player.can_jump = false
 	player.can_interact = false
-	sprite_mat.set_shader_parameter("width", 0.0)
-	interactable.monitorable = false
 	player.state_machine.change_state(player.state_machine.get_node("Idle"))
+	sprite_mat.set_shader_parameter.call_deferred("width", 0.0)

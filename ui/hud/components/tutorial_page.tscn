@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cap8ddh5scddb"]
+
+[ext_resource type="Script" uid="uid://dyxwlpb1dd0ra" path="res://ui/hud/components/tutorial_page.gd" id="1_wna2s"]
+
+[node name="TutorialPage" type="Sprite2D" unique_id=1883818641 groups=["tutorial_pages"]]
+script = ExtResource("1_wna2s")

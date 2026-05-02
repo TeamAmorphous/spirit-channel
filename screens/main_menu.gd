@@ -16,6 +16,9 @@ func _ready() -> void:
 
 	%BestTime.text = Settings.get_best_as_string()
 
+	if Input.get_connected_joypads().size() > 0:
+		$MarginContainer/VBoxContainer/StartButton.grab_focus.call_deferred()
+
 
 func _on_start_button_pressed() -> void:
 	if not game_scene_path:

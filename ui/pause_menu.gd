@@ -40,6 +40,7 @@ func pause() -> void:
 	_sync_slider_values()
 	show()
 	get_tree().paused = true
+	master_volume_slider.grab_focus()
 
 
 func resume() -> void:
@@ -48,10 +49,11 @@ func resume() -> void:
 	Settings.save_persistent_data()
 	hide()
 	get_tree().paused = false
+	$CenterContainer.release_focus()
 
 
 func _is_page_open() -> bool:
-	return is_instance_valid(hud) and hud.is_page_open()
+	return is_instance_valid(hud) and (hud.is_page_open() or hud.tutorial.visible)
 
 
 func _sync_slider_values() -> void:
