@@ -4,7 +4,12 @@ extends Ghost
 @export var shades_spawnpoint: Node2D
 
 
+@onready var shades_anim: Sprite2D = %Shades
 var has_shades: bool = true
+
+
+func _ready() -> void:
+	shades_anim.visible = false
 
 
 func _process(delta: float) -> void:
@@ -26,6 +31,13 @@ func _drop_shades() -> void:
 		$StateMachine/Chase.animation = IDLE_ANIM
 		$StateMachine/Idle.animation = IDLE_ANIM 
 	has_shades = false
+
+
+func _get_shades() -> void:
+	has_shades = true
+	const IDLE_ANIM := &"idle"
+	$StateMachine/Chase.animation = IDLE_ANIM
+	$StateMachine/Idle.animation = IDLE_ANIM 
 
 
 func _on_flashed(from: Node2D) -> void:

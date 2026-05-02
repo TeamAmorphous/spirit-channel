@@ -2,9 +2,6 @@ class_name TutorialViewer
 extends Control
 
 
-signal exit_requested
-
-
 @onready var pages: Array[TutorialPage] = [
 	$Pages/RatKing,
 	$Pages/Marco,

@@ -1,30 +1,19 @@
 @tool
-extends Chase
+extends "res://entities/enemies/ghosts/states/idle.gd"
 
-@onready var hot_dog: Sprite2D = %HotDog
+
 @export var shades_cooldown: float = 5.0
 @export var shades_cooldown_random: float = 2.0
 @export var shades_get_state: State
 
 var _shades_timer: float
-var _hotdog_timer := 2.0
 
 func on_start(msg := {}) -> void:
 	super.on_start(msg)
 	_shades_timer = shades_cooldown + randf_range(-shades_cooldown_random, shades_cooldown_random)
 
 
-func physics_update(delta: float) -> void:
-	super.physics_update(delta)
-
-	if hot_dog.visible and animation == &"idle":
-		if player.global_position.distance_to(ghost.global_position) > 1000.0:
-			_hotdog_timer -= delta
-			if _hotdog_timer <= 0.0:
-				state_machine.change_state($"../HotDogThrow")
-
-
-func update(delta: float):
+func update(delta: float) -> void:
 	super.update(delta)
 	if not ghost.has_shades:
 		_shades_timer -= delta
