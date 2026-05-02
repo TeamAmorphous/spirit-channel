@@ -64,7 +64,7 @@ func is_playing() -> bool:
 
 func start() -> void:
 	stop()
-	
+	await get_tree().process_frame
 	base.stream = BASE_TRACK
 	base.stream.loop = true
 

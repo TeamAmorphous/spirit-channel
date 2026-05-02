@@ -57,6 +57,7 @@ func on_start(msg := {}) -> void:
 	if speed_lines:
 		speed_lines.visible = false
 	ghost.anim_player.play(animation)
+	attack_area.monitoring = true
 	attack_area.body_entered.connect(_on_attack_area_body_entered)
 
 
@@ -138,3 +139,5 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 			sfx.play()
 			sfx.finished.connect(func(): sfx.queue_free())
 		player.damage(damage, ghost)
+		attack_area.monitoring = false
+		
