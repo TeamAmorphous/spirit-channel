@@ -140,5 +140,5 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 			sfx.play()
 			sfx.finished.connect(func(): sfx.queue_free())
 		player.damage(damage, ghost)
-		attack_area.monitoring = false
+		attack_area.set_deferred("monitoring", false)
 		
