@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bko0chis672c0" path="res://entities/enemies/ghosts/ghost.tscn" id="1_3ll0d"]
 [ext_resource type="Script" uid="uid://c7lkkyhnr4un0" path="res://entities/enemies/ghosts/states/charge.gd" id="2_245fo"]
-[ext_resource type="PackedScene" uid="uid://dh3v67hsv3bp6" path="res://entities/props/pickup/key_red.tscn" id="2_dsfsl"]
 [ext_resource type="Texture2D" uid="uid://bq22kdln3vvfm" path="res://entities/enemies/ghosts/mobster/damage.png" id="2_oullg"]
 [ext_resource type="Texture2D" uid="uid://mhw3hx2sqff0" path="res://entities/enemies/ghosts/mobster/attack0.png" id="2_si7u7"]
 [ext_resource type="Script" uid="uid://dfggrmsrchltw" path="res://entities/enemies/ghosts/mobster/states/chase.gd" id="2_wtb3a"]
@@ -188,7 +187,6 @@ radius = 139.35925
 
 [node name="Mobster" unique_id=1958681849 instance=ExtResource("1_3ll0d")]
 channel = 0
-held_pickup = ExtResource("2_dsfsl")
 
 [node name="HealthComponent" parent="." index="0" unique_id=908077137]
 max_health = 1
@@ -196,7 +194,7 @@ max_health = 1
 [node name="LightSensitiveComponent" parent="." index="1" unique_id=1395163884]
 resistance = 5.0
 
-[node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="2" unique_id=660995331]
+[node name="Chase" parent="StateMachine" parent_id_path=PackedInt32Array(2135702627) index="3" unique_id=660995331]
 script = ExtResource("2_wtb3a")
 charge_trigger_distance = 450.0
 chase_speed = 100.0

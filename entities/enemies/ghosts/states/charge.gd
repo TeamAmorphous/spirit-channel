@@ -120,6 +120,7 @@ func _finish_charge() -> void:
 	charging = false
 	ghost.velocity = charge_direction * charge_speed * recovery_slide_factor
 	step = 2
+	attack_area.monitoring = false
 
 
 func _has_reached_charge_target() -> bool:
