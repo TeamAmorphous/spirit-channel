@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b782r3idko5t7" path="res://entities/enemies/enemy.tscn" id="1_e0x04"]
 [ext_resource type="Script" uid="uid://nopufwqctnnk" path="res://entities/enemies/ghosts/ghost.gd" id="2_obe3h"]
+[ext_resource type="Script" uid="uid://du55rahdekmkd" path="res://entities/enemies/ghosts/states/one_shot_animation.gd" id="4_f2m55"]
 [ext_resource type="Script" uid="uid://o6jsr3qf3je1" path="res://entities/enemies/ghosts/states/idle.gd" id="4_mm1xh"]
 [ext_resource type="Script" uid="uid://dhc0vp8a1unul" path="res://entities/components/light_sensitive_component.gd" id="4_yaxfg"]
 [ext_resource type="Script" uid="uid://b70ilquk5chwn" path="res://entities/enemies/ghosts/states/chase.gd" id="5_mm1xh"]
@@ -338,15 +339,22 @@ metadata/_custom_type_script = "uid://dhc0vp8a1unul"
 [node name="StateMachine" parent="." index="2" unique_id=2135702627 node_paths=PackedStringArray("default_state")]
 default_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=896072109]
+[node name="Spawn" type="Node" parent="StateMachine" index="0" unique_id=808079589 node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_f2m55")
+animation = &"poof"
+play_backwards = true
+next_state = NodePath("../Idle")
+metadata/_custom_type_script = "uid://du55rahdekmkd"
+
+[node name="Idle" type="Node" parent="StateMachine" index="1" unique_id=896072109]
 script = ExtResource("4_mm1xh")
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 
-[node name="Hurt" type="Node" parent="StateMachine" index="1" unique_id=2077284796]
+[node name="Hurt" type="Node" parent="StateMachine" index="2" unique_id=2077284796]
 script = ExtResource("6_ydex4")
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 
-[node name="Chase" type="Node" parent="StateMachine" index="2" unique_id=660995331 node_paths=PackedStringArray("detection_area", "attack_area")]
+[node name="Chase" type="Node" parent="StateMachine" index="3" unique_id=660995331 node_paths=PackedStringArray("detection_area", "attack_area")]
 script = ExtResource("5_mm1xh")
 animation = &"idle"
 detection_area = NodePath("../../DetectionArea")
@@ -355,7 +363,7 @@ chase_speed = 200.0
 chase_accel = 400.0
 excluded_states = Array[String](["Hurt", "Poof"])
 
-[node name="Poof" type="Node" parent="StateMachine" index="3" unique_id=1292064116]
+[node name="Poof" type="Node" parent="StateMachine" index="4" unique_id=1292064116]
 script = ExtResource("8_f2m55")
 metadata/_custom_type_script = "uid://bisoqhsv8q2mo"
 

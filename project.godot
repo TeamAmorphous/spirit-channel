@@ -25,6 +25,7 @@ buses/default_bus_layout="uid://ey34lobmeewl"
 
 [autoload]
 
+Settings="*uid://klombs7d3sj4"
 SceneManager="*uid://ik8owkeakwau"
 SignalBus="*uid://b7bihiy3upk1w"
 MusicManager="*uid://g8yr033gwr1y"

@@ -8,9 +8,10 @@ const MUSIC_BUS := &"Music"
 const SFX_BUS := &"SFX"
 const MIN_VOLUME_DB := -80.0
 
-@onready var master_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/master_volume_slider
-@onready var music_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/music_volume_slider
-@onready var sfx_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/sfx_volume_slider
+@onready var master_volume_slider: HSlider = %master_volume_slider
+@onready var music_volume_slider: HSlider = %music_volume_slider
+@onready var sfx_volume_slider: HSlider = %sfx_volume_slider
+@onready var speedrun_toggle: CheckButton = %speedrun_toggle
 
 
 func _ready() -> void:
@@ -20,6 +21,7 @@ func _ready() -> void:
 		if not MusicManager.general_finished.is_connected(MusicManager.start_menu):
 			MusicManager.general_finished.connect(MusicManager.start_menu, Node.CONNECT_ONE_SHOT)
 	
+	speedrun_toggle.button_pressed = Settings.speedrun
 	master_volume_slider.set_value_no_signal(_get_bus_volume_linear(MASTER_BUS))
 	music_volume_slider.set_value_no_signal(_get_bus_volume_linear(MUSIC_BUS))
 	sfx_volume_slider.set_value_no_signal(_get_bus_volume_linear(SFX_BUS))
@@ -28,6 +30,7 @@ func _on_back_button_pressed() -> void:
 	if not menu_scene_path:
 		push_error("no menu_scene_path set!")
 		return
+	Settings.save_persistent_data()
 	SceneManager.change_scene(menu_scene_path)
 
 
@@ -54,3 +57,7 @@ func _get_bus_volume_linear(bus_name: StringName) -> float:
 
 func _linear_to_bus_db(value: float) -> float:
 	return MIN_VOLUME_DB if value <= 0.0 else linear_to_db(value)
+
+
+func _on_speedrun_toggled(toggled_on: bool) -> void:
+	Settings.speedrun = toggled_on

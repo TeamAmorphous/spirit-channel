@@ -32,28 +32,27 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -356.5
-offset_top = -40.0
-offset_right = 356.5
-offset_bottom = 2244.0
+offset_left = -408.0
+offset_top = -150.0
+offset_right = 408.0
+offset_bottom = 3391.0
 grow_horizontal = 2
 
 [node name="MansionClear" type="RichTextLabel" parent="Scrolling/VBoxContainer" unique_id=1125234649]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/outline_size = 32
 theme_override_fonts/normal_font = ExtResource("2_louiv")
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[rainbow][shake level=4][wave amp=50.0 freq=2.0]MANSION CLEARED![/wave][/shake][/rainbow]"
+text = "[rainbow][shake rate=5.0 level=8][wave amp=50.0 freq=2.0]MANSION CLEARED![/wave][/shake][/rainbow]
+"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
-visible_characters = 0
-visible_ratio = 0.0
 
 [node name="Control" type="Control" parent="Scrolling/VBoxContainer" unique_id=1828019583]
 custom_minimum_size = Vector2(0, 400)

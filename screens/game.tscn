@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dedy8ggeocrgb" path="res://entities/enemies/ghosts/rat/rat.tscn" id="4_g7iek"]
 [ext_resource type="PackedScene" uid="uid://i65f0rqjpv0t" path="res://screens/credits/win_screen.tscn" id="4_h1mhi"]
 [ext_resource type="PackedScene" uid="uid://hehs74mvqk1x" path="res://entities/enemies/ghosts/rat_king/rat_king.tscn" id="5_4v2gu"]
+[ext_resource type="Script" uid="uid://ptnvgaxtaw5h" path="res://scripts/speedrun_timer.gd" id="5_hn1xn"]
 [ext_resource type="PackedScene" uid="uid://chuwtkmxhvbg" path="res://map/mansion.tscn" id="6_5kag3"]
 [ext_resource type="PackedScene" uid="uid://cthw4oeyug8hs" path="res://entities/props/pickup/key_green.tscn" id="6_g5ijc"]
 [ext_resource type="PackedScene" uid="uid://bu3j8m5xgyrqc" path="res://entities/enemies/ghosts/mobster/mobster.tscn" id="6_okr7b"]
@@ -29,6 +30,10 @@ script = ExtResource("1_w0xem")
 game_over_scene = ExtResource("2_w4cu3")
 boss_ghosts_scene = ExtResource("19_1vjtm")
 win_scene = ExtResource("4_h1mhi")
+
+[node name="SpeedrunTimer" type="Node" parent="." unique_id=609608942 node_paths=PackedStringArray("pause_menu")]
+script = ExtResource("5_hn1xn")
+pause_menu = NodePath("../PauseMenu")
 
 [node name="GhostManager" type="Node" parent="." unique_id=605552993 node_paths=PackedStringArray("random_ghost_spawns", "player", "red_spawn", "blue_spawn", "yellow_spawn")]
 script = ExtResource("2_5kag3")
@@ -57,10 +62,12 @@ spawn_chance = 0.15
 [node name="Player" parent="." unique_id=265899906 instance=ExtResource("1_6ydpi")]
 position = Vector2(0, -8)
 
-[node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player") instance=ExtResource("2_6nlyh")]
+[node name="HUD" parent="." unique_id=1783848203 node_paths=PackedStringArray("player", "speedrun_timer") instance=ExtResource("2_6nlyh")]
 player = NodePath("../Player")
+speedrun_timer = NodePath("../SpeedrunTimer")
 
 [node name="PauseMenu" parent="." unique_id=1989161602 node_paths=PackedStringArray("hud") instance=ExtResource("3_v0y06")]
+visible = false
 hud = NodePath("../HUD")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2124797603]

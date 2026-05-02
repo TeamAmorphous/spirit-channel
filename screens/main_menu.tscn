@@ -5,16 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://bh3qtik4yuusf" path="res://screens/title.png" id="3_t3bh0"]
 [ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="4_5mnfb"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_5mnfb"]
+[sub_resource type="LabelSettings" id="LabelSettings_wu0qq"]
 font = ExtResource("4_5mnfb")
-font_size = 32
+font_size = 24
 font_color = Color(0.735357, 0.735357, 0.735357, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_wu0qq"]
+[sub_resource type="LabelSettings" id="LabelSettings_5mnfb"]
 font = ExtResource("4_5mnfb")
-font_size = 24
+font_size = 32
 font_color = Color(0.735357, 0.735357, 0.735357, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
@@ -51,6 +51,28 @@ size_flags_vertical = 0
 texture = ExtResource("3_t3bh0")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer" unique_id=282392649]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer3" unique_id=838285686]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "BEST TIME:"
+label_settings = SubResource("LabelSettings_wu0qq")
+horizontal_alignment = 2
+
+[node name="BestTime" type="Label" parent="MarginContainer/VBoxContainer3" unique_id=1118269565]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "--:--:--"
+label_settings = SubResource("LabelSettings_wu0qq")
+horizontal_alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=56621482]
 layout_mode = 2

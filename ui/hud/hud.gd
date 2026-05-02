@@ -12,6 +12,8 @@ extends CanvasLayer
 }
 
 @export var player: Player
+@export var speedrun_timer: SpeedrunTimer
+
 @export var pages: Array[Texture2D]
 
 @onready var logo_anim_player: AnimationPlayer = $Logo/AnimationPlayer
@@ -21,6 +23,7 @@ extends CanvasLayer
 @onready var health_bar: OSDProgressBar = %HealthBar
 @onready var standard_keys: HBoxContainer = %StandardKeys
 @onready var color_keys: HBoxContainer = %ColorKeys
+@onready var timer_label: Label = %SpeedrunTimer
 
 var showing_page: bool = false
 var _page_request_id := 0
@@ -39,6 +42,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if randf() < 0.001 and not logo_anim_player.is_playing():
 		logo_anim_player.play(&"default", 0.25)
+	if speedrun_timer:
+		timer_label.visible = Settings.speedrun
+		timer_label.text = speedrun_timer.get_as_string()
+		if Settings.best_time >= 0.0 and speedrun_timer.time >= Settings.best_time:
+			timer_label.modulate.a = 0.5
 
 
 func _on_player_max_health_changed(max_health: int, _old: int) -> void:

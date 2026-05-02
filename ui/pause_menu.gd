@@ -9,10 +9,10 @@ const MUSIC_BUS := &"Music"
 const SFX_BUS := &"SFX"
 const MIN_VOLUME_DB := -80.0
 
-@onready var master_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/master_volume_slider
-@onready var music_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/music_volume_slider
-@onready var sfx_volume_slider: HSlider = $CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/sfx_volume_slider
-
+@onready var master_volume_slider: HSlider = %master_volume_slider
+@onready var music_volume_slider: HSlider = %music_volume_slider
+@onready var sfx_volume_slider: HSlider = %sfx_volume_slider
+@onready var speedrun_toggle: CheckButton = %speedrun_toggle
 
 var can_pause := true
 
@@ -45,7 +45,7 @@ func pause() -> void:
 func resume() -> void:
 	if not visible:
 		return
-
+	Settings.save_persistent_data()
 	hide()
 	get_tree().paused = false
 
@@ -58,6 +58,7 @@ func _sync_slider_values() -> void:
 	master_volume_slider.set_value_no_signal(_get_bus_volume_linear(MASTER_BUS))
 	music_volume_slider.set_value_no_signal(_get_bus_volume_linear(MUSIC_BUS))
 	sfx_volume_slider.set_value_no_signal(_get_bus_volume_linear(SFX_BUS))
+	speedrun_toggle.button_pressed = Settings.speedrun
 
 
 func _on_resume_button_pressed() -> void:
@@ -87,3 +88,7 @@ func _get_bus_volume_linear(bus_name: StringName) -> float:
 
 func _linear_to_bus_db(value: float) -> float:
 	return MIN_VOLUME_DB if value <= 0.0 else linear_to_db(value)
+
+
+func _on_speedrun_toggled(toggled_on: bool) -> void:
+	Settings.speedrun = toggled_on

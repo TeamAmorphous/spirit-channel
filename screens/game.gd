@@ -39,7 +39,9 @@ func _process(_delta: float) -> void:
 func _on_win() -> void:
 	if win:
 		return
+	Settings.clear_time = $SpeedrunTimer.time
 	win = true
+	$HUD.visible = false
 	player.can_jump = false
 	player.can_interact = false
 	player.can_move = false

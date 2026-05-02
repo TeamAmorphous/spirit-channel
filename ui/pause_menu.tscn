@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cle7e7fe6x3q7"]
 
 [ext_resource type="Script" uid="uid://drnppjq8gnggq" path="res://ui/pause_menu.gd" id="1_6u2xg"]
+[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="2_ejwgg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2j7ri"]
 content_margin_left = 0.0
@@ -18,19 +19,20 @@ expand_margin_right = 10.0
 expand_margin_bottom = 10.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_8lq7v"]
+font = ExtResource("2_ejwgg")
 font_size = 64
 font_color = Color(0.34282136, 0.90070415, 0.929171, 1)
 outline_size = 20
 outline_color = Color(0.17642763, 0.38680488, 0.45416057, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_3wopu"]
+font = ExtResource("2_ejwgg")
 font_size = 32
 font_color = Color(0.9999998, 0.5877061, 0.27305, 1)
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1824415615]
 process_mode = 3
 layer = 10
-visible = false
 script = ExtResource("1_6u2xg")
 
 [node name="Overlay" type="ColorRect" parent="." unique_id=1715017736]
@@ -92,6 +94,7 @@ theme_override_constants/separation = 31
 alignment = 1
 
 [node name="master_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders" unique_id=2118529559]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -101,6 +104,7 @@ step = 0.001
 value = 1.0
 
 [node name="music_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders" unique_id=1173593011]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -110,6 +114,7 @@ step = 0.001
 value = 1.0
 
 [node name="sfx_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders" unique_id=1931578173]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -118,10 +123,25 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
+[node name="Speedrun" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1768818153]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Speedrun" unique_id=220960299]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Speedrun Timer"
+label_settings = SubResource("LabelSettings_3wopu")
+
+[node name="speedrun_toggle" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/Speedrun" unique_id=1673388021]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
 [node name="ResumeButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1477557831]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_ejwgg")
 theme_override_font_sizes/font_size = 32
 text = "RESUME"
 flat = true
@@ -129,4 +149,5 @@ flat = true
 [connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/master_volume_slider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/music_volume_slider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/Content/Sliders/sfx_volume_slider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="toggled" from="CenterContainer/PanelContainer/VBoxContainer/Speedrun/speedrun_toggle" to="." method="_on_speedrun_toggled"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dx7yq2ul3rl8p" path="res://screens/options_menu.gd" id="1_tsaat"]
 [ext_resource type="PackedScene" uid="uid://dfyq1nvm8rvvn" path="res://screens/menu_bg.tscn" id="2_xaejh"]
+[ext_resource type="FontFile" uid="uid://bo57qg27a7vht" path="res://fonts/VCR_OSD_MONO.ttf" id="3_tsaat"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xaejh"]
 content_margin_left = 0.0
@@ -24,7 +25,13 @@ font_color = Color(0.34282136, 0.90070415, 0.929171, 1)
 outline_size = 20
 outline_color = Color(0.17642763, 0.38680488, 0.45416057, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_xaejh"]
+[sub_resource type="LabelSettings" id="LabelSettings_bhdei"]
+font = ExtResource("3_tsaat")
+font_size = 32
+font_color = Color(0.9999998, 0.5877061, 0.27305, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0jdrk"]
+font = ExtResource("3_tsaat")
 font_size = 32
 font_color = Color(0.9999998, 0.5877061, 0.27305, 1)
 
@@ -73,21 +80,23 @@ theme_override_constants/separation = 10
 
 [node name="Labels" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=2126689932]
 layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
 
 [node name="master_volume_slider_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Labels" unique_id=481342203]
 layout_mode = 2
 text = "Master"
-label_settings = SubResource("LabelSettings_xaejh")
+label_settings = SubResource("LabelSettings_bhdei")
 
 [node name="music_volume_slider_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Labels" unique_id=802862342]
 layout_mode = 2
 text = "Music"
-label_settings = SubResource("LabelSettings_xaejh")
+label_settings = SubResource("LabelSettings_bhdei")
 
 [node name="sfx_volume_slider_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Labels" unique_id=1824171837]
 layout_mode = 2
 text = "SFX"
-label_settings = SubResource("LabelSettings_xaejh")
+label_settings = SubResource("LabelSettings_bhdei")
 
 [node name="Sliders" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1229637003]
 layout_mode = 2
@@ -95,6 +104,7 @@ theme_override_constants/separation = 31
 alignment = 1
 
 [node name="master_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders" unique_id=506830536]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -104,6 +114,7 @@ step = 0.001
 value = 1.0
 
 [node name="music_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders" unique_id=256161934]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -113,6 +124,7 @@ step = 0.001
 value = 1.0
 
 [node name="sfx_volume_slider" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders" unique_id=1428735365]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -120,6 +132,20 @@ size_flags_vertical = 4
 max_value = 1.0
 step = 0.001
 value = 1.0
+
+[node name="Speedrun" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1426646895]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Speedrun" unique_id=860224644]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Speedrun Timer"
+label_settings = SubResource("LabelSettings_0jdrk")
+
+[node name="speedrun_toggle" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/Speedrun" unique_id=1225599069]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1928132593]
 layout_mode = 1
@@ -146,4 +172,5 @@ flat = true
 [connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/master_volume_slider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/music_volume_slider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/Sliders/sfx_volume_slider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="toggled" from="CenterContainer/PanelContainer/VBoxContainer/Speedrun/speedrun_toggle" to="." method="_on_speedrun_toggled"]
 [connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

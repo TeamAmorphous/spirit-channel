@@ -21,6 +21,8 @@ func _mouse_entered_area():
 
 func _mouse_exited_area():
 	is_mouse_inside = false
+	last_event_pos2D = null
+	last_event_time = -1.0
 
 
 func _unhandled_input(event):
@@ -61,13 +63,16 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 		event_pos2D.x += 0.5
 		event_pos2D.y += 0.5
 
+		event_pos2D = event_pos2D.clampf(0.0, 1.0)
+
 		# Finally, we convert the position to the following range: 0 -> viewport.size
 		event_pos2D.x *= viewport.size.x
 		event_pos2D.y *= viewport.size.y
 
 	elif last_event_pos2D != null:
 		# Fall back to the last known event position.
-		event_pos2D = last_event_pos2D
+		# event_pos2D = last_event_pos2D
+		return # don't send input state at all
 
 	# Set the event's position and global position.
 	event.position = event_pos2D

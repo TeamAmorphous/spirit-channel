@@ -29,7 +29,6 @@ const CHANNEL_COLORS: Dictionary[Channel, Color] = {
 @onready var sprite: AnimatedSprite2D = $Sprite/AnimatedSprite2D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var contact_damage_area: Area2D = $AttackArea
-@onready var pizza_box: AnimatedSprite2D = %PizzaAttack
 
 @export var decel: float = 800.0
 
@@ -40,10 +39,6 @@ var facing: Vector2
 var shake_intensity: float
 
 var channel_synced: bool = false
-
-
-func _ready() -> void:
-	pizza_box.visible = false
 
 
 func _process(delta: float) -> void:
